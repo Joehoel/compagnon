@@ -41,11 +41,6 @@ function canSendPoll(user_id) {
 	return true
 }
 
-function isAdmin(member) {
-	if (!member.hasPermission("ADMINISTRATOR")) return false
-	return true
-}
-
 module.exports = {
 	name: "poll",
 	triggers: ["poll", "📊"],
@@ -53,10 +48,13 @@ module.exports = {
 		"Ask a polling question. Vote by emoji reaction. Question and options must be wrapped in double quotes. Questions with no provided options are treated as Yes / No / Unsure questions.",
 	usage: "<question> <optional answer A> <optional answer B>",
 	args: true,
-	execute(message) {
+	execute(client, message) {
 		let args = message.content.match(/"(.+?)"/g)
 		if (args) {
-			if (!canSendPoll(message.author.id) && !isAdmin(message.member)) {
+			if (
+				!canSendPoll(message.author.id) &&
+				!message.member.hasPermission("ADMINISTRATOR")
+			) {
 				return message.channel.send(
 					`${message.author} please wait before sending another poll.`
 				)
@@ -66,21 +64,25 @@ module.exports = {
 				pollLog[message.author.id] = {
 					lastPoll: Date.now(),
 				}
+
 				return message.channel
 					.send(
 						new Discord.MessageEmbed()
 							.setColor("#ffc600")
 							.setTitle(question)
+							.setTimestamp()
 							.setFooter(
 								`Poll started by: ${message.author.username}`,
-								`${message.author.avatarURL()}`
+								message.author.displayAvatarURL()
 							)
-							.setTimestamp()
 					)
 					.then(async pollMessage => {
 						await pollMessage.react("👍")
 						await pollMessage.react("👎")
 						await pollMessage.react("🤷‍♀️")
+					})
+					.catch(err => {
+						console.error(err)
 					})
 			} else {
 				// multiple choice
@@ -110,7 +112,7 @@ module.exports = {
 								)
 								.setFooter(
 									`Poll started by: ${message.author.username}`,
-									`${message.author.avatarURL()}`
+									`${message.author.displayAvatarURL()}`
 								)
 								.setTimestamp()
 						)

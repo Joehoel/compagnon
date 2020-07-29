@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports = {
 	name: "ping",
 	description: "Ping!",
-	execute(message) {
+	execute(client, message) {
 		const embed = new Discord.MessageEmbed({
 			title: "Pong",
 			color: "ffc600",
