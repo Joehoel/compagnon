@@ -15,7 +15,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon src/index.js",
-		"lint": "eslint src/",
+		"lint": "eslint .",
 		"start": "node src/index.js"
 	},
 	"keywords": [],
