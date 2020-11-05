@@ -1,10 +1,13 @@
+// Global
 const fs = require("fs");
 require("dotenv").config();
 const { TOKEN, PREFIX } = process.env;
 
+// Discord
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+// Command handler
 client.commands = new Discord.Collection();
 
 const commandFiles = fs
@@ -16,19 +19,26 @@ for (const file of commandFiles) {
 
 	client.commands.set(command.name, command);
 }
-
+// Ready!
 client.once("ready", () => {
 	console.log("Compagnon online!");
 });
 
+// On every message
 client.on("message", message => {
+	// Not a command or author is bot
 	if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
-	const args = message.content.slice(PREFIX.length).trim().split(/ +/);
+	// Command handler
 
+	const args = message.content.slice(PREFIX.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-	if (!client.commands.has(commandName)) return;
+	if (!client.commands.has(commandName)) {
+		return message.channel.send(
+			`Sorry, ${message.author}! that command doesn't exist`
+		);
+	}
 
 	const command = client.commands.get(commandName);
 
@@ -48,11 +58,12 @@ client.on("message", message => {
 		return message.channel.send(reply);
 	}
 
+	// Execute
 	try {
 		command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply("there was an error trying to execute that command!");
+		message.reply("There was an error trying to execute that command!");
 	}
 });
 

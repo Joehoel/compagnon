@@ -5,12 +5,14 @@ module.exports = {
 	admin: true,
 	usage: "<message>",
 	execute(client, message, args) {
-		args.unshift()
+		args.unshift();
 		client.user.setPresence({
 			activity: {
 				name: args.join(" "),
 				type: 0,
 			},
-		})
+		});
+
+		return message.channel.send(`${message.author} `);
 	},
-}
+};

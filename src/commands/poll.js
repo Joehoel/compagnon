@@ -1,4 +1,4 @@
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 
 const options = [
 	"🇦",
@@ -27,18 +27,18 @@ const options = [
 	"🇽",
 	"🇾",
 	"🇿",
-]
+];
 
-const pollLog = {}
+const pollLog = {};
 
 function canSendPoll(user_id) {
 	if (pollLog[user_id]) {
-		const timeSince = Date.now() - pollLog[user_id].lastPoll
+		const timeSince = Date.now() - pollLog[user_id].lastPoll;
 		if (timeSince < 30000) {
-			return false
+			return false;
 		}
 	}
-	return true
+	return true;
 }
 
 module.exports = {
@@ -49,7 +49,7 @@ module.exports = {
 	usage: "<question> <optional answer A> <optional answer B>",
 	args: true,
 	execute(client, message) {
-		let args = message.content.match(/"(.+?)"/g)
+		let args = message.content.match(/"(.+?)"/g);
 		if (args) {
 			if (
 				!canSendPoll(message.author.id) &&
@@ -57,13 +57,13 @@ module.exports = {
 			) {
 				return message.channel.send(
 					`${message.author} please wait before sending another poll.`
-				)
+				);
 			} else if (args.length === 1) {
 				// yes no unsure question
-				const question = args[0].replace(/"/g, "")
+				const question = args[0].replace(/"/g, "");
 				pollLog[message.author.id] = {
 					lastPoll: Date.now(),
-				}
+				};
 
 				return message.channel
 					.send(
@@ -77,26 +77,26 @@ module.exports = {
 							)
 					)
 					.then(async pollMessage => {
-						await pollMessage.react("👍")
-						await pollMessage.react("👎")
-						await pollMessage.react("🤷‍♀️")
+						await pollMessage.react("👍");
+						await pollMessage.react("👎");
+						await pollMessage.react("🤷‍♀️");
 					})
 					.catch(err => {
-						console.error(err)
-					})
+						console.error(err);
+					});
 			} else {
 				// multiple choice
-				args = args.map(a => a.replace(/"/g, ""))
-				const question = args[0]
-				const questionOptions = [...new Set(args.slice(1))]
+				args = args.map(a => a.replace(/"/g, ""));
+				const question = args[0];
+				const questionOptions = [...new Set(args.slice(1))];
 				if (questionOptions.length > 20) {
 					return message.channel.send(
 						`${message.author} Polls are limited to 20 options.`
-					)
+					);
 				} else {
 					pollLog[message.author.id] = {
 						lastPoll: Date.now(),
-					}
+					};
 					return message.channel
 						.send(
 							new Discord.MessageEmbed()
@@ -118,15 +118,15 @@ module.exports = {
 						)
 						.then(async pollMessage => {
 							for (let i = 0; i < questionOptions.length; i++) {
-								await pollMessage.react(options[i])
+								await pollMessage.react(options[i]);
 							}
-						})
+						});
 				}
 			}
 		} else {
 			return message.channel.send(
 				`${message.author} invalid Poll! Question and options should be wrapped in double quotes.`
-			)
+			);
 		}
 	},
-}
+};
