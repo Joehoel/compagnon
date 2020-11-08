@@ -25,7 +25,7 @@ client.once("ready", () => {
 });
 
 // On every message
-client.on("message", message => {
+client.on("message", async message => {
 	// Not a command or author is bot
 	if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
@@ -60,10 +60,12 @@ client.on("message", message => {
 
 	// Execute
 	try {
-		command.execute(client, message, args);
+		await command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply("There was an error trying to execute that command!");
+		await message.reply(
+			"There was an error trying to execute that command!"
+		);
 	}
 });
 
