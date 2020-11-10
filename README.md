@@ -1,7 +1,8 @@
 # Compagnon
-A discrod bot made for personal server 
+
+A discrod bot made for personal server
 
 ## Features
 
-* Polls
-* Ping
+-   Polls
+-   Ping
