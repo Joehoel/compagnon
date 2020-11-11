@@ -27,4 +27,4 @@ jobs:
                   script: cd /home/pi/compagnon && git pull
 
             - name: Restart pm2
-                run: pm2 restart compagnon
+              run: pm2 restart compagnon
