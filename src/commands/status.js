@@ -13,6 +13,6 @@ module.exports = {
 			},
 		});
 
-		return message.channel.send(`${message.author} `);
+		return message.channel.send(`Changed my status ${message.author}!`);
 	},
 };
