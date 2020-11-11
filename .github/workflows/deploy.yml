@@ -33,7 +33,7 @@ jobs:
               uses: appleboy/scp-action@master
               with:
                   host: ${{ secrets.HOST }}
-                  username: ${{ secrets.USER }}
+                  username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
                   rm: true
                   target: /home/pi/actions_test
@@ -43,5 +43,5 @@ jobs:
               with:
                   command: cd /home/pi/compagnon && git pull && pm2 restart compagnon
                   host: ${{ secrets.HOST }}
-                  username: ${{ secrets.USER }}
+                  username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
