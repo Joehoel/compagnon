@@ -24,4 +24,4 @@ jobs:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
-                  script: cd /home/pi/compagnon && git pull && pm2 restart compagnon
+                  script: cd /home/pi/compagnon && git pull && /home/pi/.nvm/versions/node/v12.18.3/bin/pm2 restart compagnon
