@@ -1,8 +1,17 @@
 # Compagnon
 
-A discrod bot made for personal server
+> Author: Joël Kuijper
 
-## Features
+A discord bot made for personal server made with discord.js.
 
--   Polls
--   Ping
+---
+
+## Commands
+
+-   Poll
+-   Clear
+-   Dab
+-   Kick
+-   Ban
+
+---
