@@ -20,12 +20,19 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
 
-            - name: executing remote ssh commands using password
-              uses: appleboy/ssh-action@master
+            # - name: executing remote ssh commands using password
+            #   uses: appleboy/ssh-action@master
+            #   with:
+            #       host: ${{ secrets.HOST }}
+            #       username: ${{ secrets.USERNAME }}
+            #       password: ${{ secrets.PASSWORD }}
+            #       port: ${{ secrets.PORT }}
+            #       script: whoami
+            #       # commend1
+            - name: ls -a via ssh
+              uses: garygrossgarten/github-action-ssh@release
               with:
+                  command: ls -a
                   host: ${{ secrets.HOST }}
-                  username: ${{ secrets.USERNAME }}
+                  username: joel
                   password: ${{ secrets.PASSWORD }}
-                  port: ${{ secrets.PORT }}
-                  script: whoami
-                  # commend1
