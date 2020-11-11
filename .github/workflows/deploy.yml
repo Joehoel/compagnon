@@ -32,7 +32,7 @@ jobs:
             - name: git pull and restart
               uses: garygrossgarten/github-action-ssh@release
               with:
-                  command: cd compagnon && git pull && pm2 restart compagnon
+                  command: cd /home/pi/compagnon && git pull && pm2 restart compagnon
                   host: ${{ secrets.HOST }}
                   username: joel
                   password: ${{ secrets.PASSWORD }}
