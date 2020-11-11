@@ -33,4 +33,4 @@ jobs:
                   SOURCE: "/"
                   REMOTE_HOST: ${{ secrets.HOST }}
                   REMOTE_USER: ${{ secrets.USERNAME }}
-                  TARGET: /pi/remote
+                  TARGET: /pi/joel
