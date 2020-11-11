@@ -29,10 +29,10 @@ jobs:
             #       port: ${{ secrets.PORT }}
             #       script: whoami
             #       # commend1
-            - name: ls -a via ssh
+            - name: git pull and restart
               uses: garygrossgarten/github-action-ssh@release
               with:
-                  command: ls -a
+                  command: cd compagnon && git pull && pm2 restart compagnon
                   host: ${{ secrets.HOST }}
                   username: joel
                   password: ${{ secrets.PASSWORD }}
