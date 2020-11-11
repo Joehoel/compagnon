@@ -32,4 +32,4 @@ jobs:
                   SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
                   REMOTE_HOST: ${{ secrets.HOST }}
                   REMOTE_USER: ${{ secrets.USERNAME }}
-                  TARGET: /joel/remote
+                  # TARGET:
