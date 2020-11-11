@@ -18,18 +18,10 @@ jobs:
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             - uses: actions/checkout@v1
-            - name: Install Node.js
-              uses: actions/setup-node@v1
+            - name: Push to server
+              uses: appleboy/ssh-action@master
               with:
-                  node-version: "10.x"
-            - name: Install npm dependencies
-              run: npm install
-            - name: Run build task
-              run: npm run build --if-present
-            - name: Deploy to Server
-              uses: easingthemes/ssh-deploy@v2.1.5
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-                  REMOTE_HOST: ${{ secrets.HOST }}
-                  REMOTE_USER: ${{ secrets.USERNAME }}
-                  # TARGET:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  script: cd /home/pi/compagnon && git pull
