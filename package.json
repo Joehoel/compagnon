@@ -11,7 +11,8 @@
 	},
 	"devDependencies": {
 		"eslint": "^7.5.0",
-		"nodemon": "^2.0.4"
+		"nodemon": "^2.0.4",
+		"pm2": "^4.5.0"
 	},
 	"scripts": {
 		"dev": "nodemon src/index.js",
