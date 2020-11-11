@@ -29,10 +29,19 @@ jobs:
             #       port: ${{ secrets.PORT }}
             #       script: whoami
             #       # commend1
+            - name: Copying files to server
+              uses: appleboy/scp-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USER }}
+                  password: ${{ secrets.PASSWORD }}
+                  rm: true
+                  target: /home/pi/actions_test
+
             - name: git pull and restart
               uses: garygrossgarten/github-action-ssh@release
               with:
                   command: cd /home/pi/compagnon && git pull && pm2 restart compagnon
                   host: ${{ secrets.HOST }}
-                  username: joel
+                  username: ${{ secrets.USER }}
                   password: ${{ secrets.PASSWORD }}
