@@ -2,6 +2,7 @@ module.exports = {
 	name: "say",
 	description: "Outputs message from user",
 	args: true,
+	admin: true,
 	usage: "<message>",
 	async execute(client, message, args) {
 		message.delete({ timeout: 1000 });
