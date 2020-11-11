@@ -24,4 +24,7 @@ jobs:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
-                  script: cd /home/pi/compagnon && git pull && pm2 restart compagnon
+                  script: cd /home/pi/compagnon && git pull
+
+            - name: Restart pm2
+                run: pm2 restart compagnon
