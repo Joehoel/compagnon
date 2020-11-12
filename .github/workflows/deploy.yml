@@ -4,10 +4,6 @@ on:
     push:
         branches: [master]
 
-strategy:
-    matrix:
-        node-version: [10.16.0]
-
 jobs:
     deploy:
         runs-on: ubuntu-latest
