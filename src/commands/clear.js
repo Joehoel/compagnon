@@ -1,8 +1,11 @@
-module.exports = {
+const Command = require("../utils/Command");
+
+module.exports = new Command({
 	name: "clear",
-	description: "Clears messages",
-	usage: "<amount>",
+	description: "Clears the chat",
+	admin: true,
 	args: true,
+	usage: "<amount>",
 	async execute(client, message, args) {
 		const amount = args[0];
 
@@ -25,4 +28,4 @@ module.exports = {
 				message.channel.bulkDelete(messages);
 			});
 	},
-};
+});

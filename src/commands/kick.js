@@ -1,11 +1,12 @@
-module.exports = {
+const Command = require("../utils/Command");
+
+module.exports = new Command({
 	name: "kick",
-	description: "Kick someone",
-	args: true,
+	description: "Kick a user",
 	admin: true,
+	args: true,
 	usage: "<username> <reason>",
-	execute(client, message) {
-		// TODO: Add kick command
-		console.log(`Kicked @${message.channel.author}`);
+	execute(client, message, args) {
+		// TODO: kick HAMMER
 	},
-};
+});

@@ -1,11 +1,12 @@
-module.exports = {
+const Command = require("../utils/Command");
+
+module.exports = new Command({
 	name: "ban",
-	description: "Ban someone",
-	args: true,
+	description: "Ban a user",
 	admin: true,
+	args: true,
 	usage: "<username> <reason>",
-	execute(client, message) {
-		// TODO: Add ban command
-		console.log(`Banned @${message.channel.author}`);
+	execute(client, message, args) {
+		// TODO: BAN HAMMER
 	},
-};
+});
