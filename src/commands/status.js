@@ -1,9 +1,11 @@
-module.exports = {
+const Command = require("../utils/Command");
+
+module.exports = new Command({
 	name: "status",
-	description: "Sets the bots' status",
+	description: "Updated the bots' status",
 	args: true,
 	admin: true,
-	usage: "<message>",
+	usage: "<status message>",
 	execute(client, message, args) {
 		args.unshift();
 		client.user.setPresence({
@@ -15,4 +17,4 @@ module.exports = {
 
 		return message.channel.send(`Changed my status ${message.author}!`);
 	},
-};
+});

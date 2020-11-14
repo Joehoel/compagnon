@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const Command = require("../utils/Command");
 
 const options = [
 	"🇦",
@@ -31,6 +32,12 @@ const options = [
 
 const pollLog = {};
 
+/**
+ * Returns true or false if the given user hasn't created a poll for more than 30 seconds
+ *
+ * @param {string | number} user_id
+ * @return {boolean}
+ */
 function canSendPoll(user_id) {
 	if (pollLog[user_id]) {
 		const timeSince = Date.now() - pollLog[user_id].lastPoll;
@@ -41,7 +48,7 @@ function canSendPoll(user_id) {
 	return true;
 }
 
-module.exports = {
+module.exports = new Command({
 	name: "poll",
 	triggers: ["poll", "📊"],
 	description:
@@ -129,4 +136,4 @@ module.exports = {
 			);
 		}
 	},
-};
+});

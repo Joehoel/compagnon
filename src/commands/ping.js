@@ -1,8 +1,9 @@
 const Discord = require("discord.js");
+const Command = require("../utils/Command");
 
-module.exports = {
+module.exports = new Command({
 	name: "ping",
-	description: "Ping!",
+	description: "Pong!",
 	execute(client, message) {
 		const embed = new Discord.MessageEmbed({
 			title: "Pong",
@@ -19,4 +20,4 @@ module.exports = {
 			);
 		});
 	},
-};
+});
