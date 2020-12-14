@@ -5,7 +5,7 @@ module.exports = new Command({
 	name: "gif",
 	args: true,
 	usage: "<tag>",
-	description: "Sends a random gif in chat",
+	description: "Sends a random GIF in chat",
 	async execute(client, message, args) {
 		const { url } = await gif(args.join(" "));
 		message.channel.send(url);
