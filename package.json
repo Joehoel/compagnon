@@ -4,15 +4,14 @@
 	"description": "",
 	"main": "src/index.js",
 	"dependencies": {
-		"discord.js": "^12.2.0",
+		"discord.js": "^12.5.1",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"node-fetch": "^2.6.1",
-		"num-words": "^1.2.0"
+		"node-fetch": "^2.6.1"
 	},
 	"devDependencies": {
-		"eslint": "^7.5.0",
-		"nodemon": "^2.0.4",
+		"eslint": "^7.15.0",
+		"nodemon": "^2.0.6",
 		"pm2": "^4.5.0"
 	},
 	"scripts": {
