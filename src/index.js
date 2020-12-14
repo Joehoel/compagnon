@@ -7,6 +7,11 @@ const { TOKEN, PREFIX } = process.env;
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+// Ready!
+client.once("ready", () => {
+	console.log("Compagnon online!");
+});
+
 // Command handler
 client.commands = new Discord.Collection();
 
@@ -17,11 +22,6 @@ for (const file of commandFiles) {
 
 	client.commands.set(command.name, command);
 }
-
-// Ready!
-client.once("ready", () => {
-	console.log("Compagnon online!");
-});
 
 // On every message
 client.on("message", async message => {
