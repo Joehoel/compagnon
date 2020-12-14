@@ -7,22 +7,21 @@ const { TOKEN, PREFIX } = process.env;
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
+// Ready!
+client.once("ready", () => {
+	console.log("Compagnon online!");
+});
+
 // Command handler
 client.commands = new Discord.Collection();
 
-const commandFiles = fs
-	.readdirSync("./src/commands")
-	.filter(file => file.endsWith(".js"));
+const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 
 	client.commands.set(command.name, command);
 }
-// Ready!
-client.once("ready", () => {
-	console.log("Compagnon online!");
-});
 
 // On every message
 client.on("message", async message => {
@@ -35,9 +34,7 @@ client.on("message", async message => {
 	const commandName = args.shift().toLowerCase();
 
 	if (!client.commands.has(commandName)) {
-		return message.channel.send(
-			`Sorry, ${message.author}! that command doesn't exist`
-		);
+		return message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
 	}
 
 	const command = client.commands.get(commandName);
@@ -63,9 +60,7 @@ client.on("message", async message => {
 		await command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		await message.reply(
-			"There was an error trying to execute that command!"
-		);
+		await message.reply("There was an error trying to execute that command!");
 	}
 });
 
