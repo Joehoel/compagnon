@@ -11,6 +11,7 @@ A discord bot made for personal server made with discord.js.
 -   Poll
 -   Clear
 -   Dab
+-   Gif
 -   Kick
 -   Ban
 
