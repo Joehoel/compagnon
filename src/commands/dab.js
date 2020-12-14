@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 /**
  * Fetches a random dab gif from the giphy api
  *
- * @return {*} dab gif url
+ * @return {*} GIF url
  */
 const randomDab = async () => {
 	const url = "https://api.giphy.com/v1/gifs/random?";
