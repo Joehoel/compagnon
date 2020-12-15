@@ -16,3 +16,5 @@ A discord bot made for personal server made with discord.js.
 -   Ban
 
 ---
+
+[TODO](./TODO.md)
