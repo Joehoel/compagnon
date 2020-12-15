@@ -5,8 +5,8 @@ module.exports = new Command({
 	description: "Ban a user",
 	admin: true,
 	args: true,
-	usage: "<username> <reason>",
+	usage: "<username> <days> <reason>",
 	execute(client, message, args) {
-		message.mentions.members.first().ban({ days: 30, reason: args.slice(1) });
+		message.mentions.members.first().ban({ days: args[1], reason: args.slice(2) });
 	},
 });
