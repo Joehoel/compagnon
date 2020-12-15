@@ -7,6 +7,6 @@ module.exports = new Command({
 	args: true,
 	usage: "<username> <reason>",
 	execute(client, message, args) {
-		// TODO: kick HAMMER
+		message.mentions.members.first().kick(args.slice(1));
 	},
 });

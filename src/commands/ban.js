@@ -7,6 +7,6 @@ module.exports = new Command({
 	args: true,
 	usage: "<username> <reason>",
 	execute(client, message, args) {
-		// TODO: BAN HAMMER
+		message.mentions.members.first().ban({ days: 30, reason: args.slice(1) });
 	},
 });
