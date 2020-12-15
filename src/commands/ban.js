@@ -7,10 +7,15 @@ module.exports = new Command({
 	args: true,
 	usage: "<username> <days> <reason>",
 	async execute(client, message, args) {
-		const member = await message.mentions.members
-			.first()
-			.ban({ days: args[1], reason: args.slice(2) });
+		const days = +args[1];
+		const reason = args.slice(2).join(" ");
 
-		message.channel.send(`:wave: ${member.displayName} has successfully been banned.`);
+		const member = await message.mentions.members.first().ban({ days, reason });
+
+		await message.channel.send(
+			`:wave: ${
+				member.displayName
+			} has successfully been banned for ${+args[1]} and reason: ${reason}.`
+		);
 	},
 });
