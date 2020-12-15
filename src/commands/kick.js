@@ -6,7 +6,8 @@ module.exports = new Command({
 	admin: true,
 	args: true,
 	usage: "<username> <reason>",
-	execute(client, message, args) {
-		message.mentions.members.first().kick(args.slice(1));
+	async execute(client, message, args) {
+		const member = await message.mentions.members.first().kick(args.slice(1));
+		await message.channel.send(`:wave: ${member.displayName} has successfully been kicked.`);
 	},
 });

@@ -6,7 +6,11 @@ module.exports = new Command({
 	admin: true,
 	args: true,
 	usage: "<username> <days> <reason>",
-	execute(client, message, args) {
-		message.mentions.members.first().ban({ days: args[1], reason: args.slice(2) });
+	async execute(client, message, args) {
+		const member = await message.mentions.members
+			.first()
+			.ban({ days: args[1], reason: args.slice(2) });
+
+		message.channel.send(`:wave: ${member.displayName} has successfully been banned.`);
 	},
 });
