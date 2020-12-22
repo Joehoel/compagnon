@@ -1,5 +1,6 @@
 // Global
 const fs = require("fs");
+
 require("dotenv").config();
 const { TOKEN, PREFIX } = process.env;
 
@@ -8,7 +9,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 // Ready!
-client.once("ready", () => {
+client.once("ready", async () => {
 	console.log("Compagnon online!");
 });
 
