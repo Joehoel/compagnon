@@ -1,13 +1,13 @@
-const Command = require("../utils/Command");
+import Command from "../utils/Command";
 
-module.exports = new Command({
+export default new Command({
 	name: "kick",
 	description: "Kick a user",
 	admin: true,
 	args: true,
 	usage: "<username> <reason>",
 	async execute(client, message, args) {
-		const member = await message.mentions.members.first().kick(args.slice(1));
+		const member = await message.mentions.members!.first()!.kick(args.slice(1)[0]);
 		await message.channel.send(`:wave: ${member.displayName} has successfully been kicked.`);
 	},
 });

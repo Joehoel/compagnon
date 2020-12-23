@@ -1,5 +1,5 @@
-const Discord = require("discord.js");
-const Command = require("../utils/Command");
+import Discord from "discord.js";
+import Command from "../utils/Command";
 
 const options = [
 	"🇦",
@@ -30,17 +30,11 @@ const options = [
 	"🇿",
 ];
 
-const pollLog = {};
+const pollLog: { [userId: string]: { lastPoll: number } } = {};
 
-/**
- * Returns true or false if the given user hasn't created a poll for more than 30 seconds
- *
- * @param {string | number} user_id
- * @return {boolean}
- */
-function canSendPoll(user_id) {
-	if (pollLog[user_id]) {
-		const timeSince = Date.now() - pollLog[user_id].lastPoll;
+function canSendPoll(userId: string): boolean {
+	if (pollLog[userId]) {
+		const timeSince = Date.now() - pollLog[userId].lastPoll;
 		if (timeSince < 30000) {
 			return false;
 		}
@@ -48,19 +42,19 @@ function canSendPoll(user_id) {
 	return true;
 }
 
-module.exports = new Command({
+export default new Command({
 	name: "poll",
-	triggers: ["poll", "📊"],
 	description:
 		"Ask a polling question. Vote by emoji reaction. Question and options must be wrapped in double quotes. Questions with no provided options are treated as Yes / No / Unsure questions.",
 	usage: "<question> <optional answer A> <optional answer B>",
 	args: true,
+	admin: false,
 	execute(client, message) {
 		let args = message.content.match(/"(.+?)"/g);
 		if (args) {
 			if (
 				!canSendPoll(message.author.id) &&
-				!message.member.hasPermission("ADMINISTRATOR")
+				!message.member!.hasPermission("ADMINISTRATOR")
 			) {
 				return message.channel.send(
 					`${message.author} please wait before sending another poll.`
@@ -111,10 +105,7 @@ module.exports = new Command({
 								.setTitle(question)
 								.setDescription(
 									`${questionOptions
-										.map(
-											(option, i) =>
-												`${options[i]} - ${option}`
-										)
+										.map((option, i) => `${options[i]} - ${option}`)
 										.join("\n")}`
 								)
 								.setFooter(

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const Command = require("../utils/Command");
+import Command from "../utils/Command";
 
-module.exports = new Command({
+export default new Command({
 	name: "ping",
 	description: "Pong!",
 	execute(client, message) {

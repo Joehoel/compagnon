@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"lib": ["esnext", "dom", "esnext.array"],
+		"target": "ES2019",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"strictFunctionTypes": true,
+		"downlevelIteration": true,
+		"skipLibCheck": true,
+		// "types": ["./src/types/*.ts"],
+		"typeRoots": ["./src/types", "node_modules/@types"]
+	},
+	"exclude": ["node_modules"]
+}

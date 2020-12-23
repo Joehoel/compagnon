@@ -1,11 +1,12 @@
 // Global
-const fs = require("fs");
+import fs from "fs";
+import "dotenv/config";
 
-require("dotenv").config();
+import Command from "./utils/Command";
 const { TOKEN, PREFIX } = process.env;
 
 // Discord
-const Discord = require("discord.js");
+import Discord from "discord.js";
 const client = new Discord.Client();
 
 // Ready!
@@ -14,7 +15,7 @@ client.once("ready", async () => {
 });
 
 // Command handler
-client.commands = new Discord.Collection();
+client.commands = new Discord.Collection<string, Command>();
 
 const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
 
@@ -32,15 +33,15 @@ client.on("message", async message => {
 	// Command handler
 
 	const args = message.content.slice(PREFIX.length).trim().split(/ +/);
-	const commandName = args.shift().toLowerCase();
+	const commandName = args.shift()!.toLowerCase();
 
 	if (!client.commands.has(commandName)) {
 		return message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
 	}
 
-	const command = client.commands.get(commandName);
+	const command = client.commands.get(commandName)!;
 
-	if (command.admin && !message.member.hasPermission("ADMINISTRATOR")) {
+	if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
 		return message.channel.send(
 			`Sorry, ${message.author}! You must be an admin to execute this command.`
 		);
