@@ -19,7 +19,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon --files src/index.ts",
-		"start": "tsc && node dist/index.js"
+		"build": "tsc"
 	},
 	"keywords": [],
 	"author": "",
