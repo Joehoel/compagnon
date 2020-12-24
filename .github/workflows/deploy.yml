@@ -16,10 +16,4 @@ jobs:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
-                  script: |
-                      cd /home/pi/compagnon
-                      git pull
-            - uses: actions/setup-node@v2
-                with:
-                    node-version: '12'
-                - run: npm install
+                  script: sh deploy.sh
