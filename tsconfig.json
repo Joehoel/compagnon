@@ -15,7 +15,24 @@
 		"downlevelIteration": true,
 		"skipLibCheck": true,
 		// "types": ["./src/types/*.ts"],
-		"typeRoots": ["./src/types", "node_modules/@types"]
+		"typeRoots": ["./src/typings", "node_modules/@types"]
 	},
 	"exclude": ["node_modules"]
 }
+// {
+// 	"compilerOptions": {
+// 		"module": "commonjs",
+// 		"removeComments": true,
+// 		"preserveConstEnums": true,
+// 		"outDir": "./dist",
+// 		"sourceMap": true,
+// 		"baseUrl": ".",
+// 		"pretty": true,
+// 		"target": "ESNext",
+// 		"esModuleInterop": true,
+// 		"allowSyntheticDefaultImports": true,
+// 		"typeRoots": ["src/typings", "node_modules/@types"]
+// 	},
+// 	"include": ["src/**/*"],
+// 	"exclude": ["node_modules", "**/*.spec.ts"]
+// }

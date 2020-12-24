@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+import Discord from "discord.js";
 import Command from "../utils/Command";
 
 export default new Command({
@@ -16,7 +16,7 @@ export default new Command({
 					title: "Pong",
 					color: "ffc600",
 					description: `${ping}ms`,
-				})
+				}),
 			);
 		});
 	},

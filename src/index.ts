@@ -9,6 +9,8 @@ const { TOKEN, PREFIX } = process.env;
 import Discord from "discord.js";
 const client = new Discord.Client();
 
+import Commands from "./commands";
+
 // Ready!
 client.once("ready", async () => {
 	console.log("Compagnon online!");
@@ -17,12 +19,8 @@ client.once("ready", async () => {
 // Command handler
 client.commands = new Discord.Collection<string, Command>();
 
-const commandFiles = fs.readdirSync("./src/commands").filter(file => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-
-	client.commands.set(command.name, command);
+for (const file in Commands) {
+	client.commands.set(file, Commands[file as keyof typeof Commands]);
 }
 
 // On every message
@@ -43,7 +41,7 @@ client.on("message", async message => {
 
 	if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
 		return message.channel.send(
-			`Sorry, ${message.author}! You must be an admin to execute this command.`
+			`Sorry, ${message.author}! You must be an admin to execute this command.`,
 		);
 	}
 
