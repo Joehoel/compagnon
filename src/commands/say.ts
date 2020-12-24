@@ -1,6 +1,6 @@
-const Command = require("../utils/Command");
+import Command from "../utils/Command";
 
-module.exports = new Command({
+export default new Command({
 	name: "say",
 	description: "Outputs message from user",
 	args: true,

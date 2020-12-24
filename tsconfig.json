@@ -1,0 +1,38 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"lib": ["esnext", "dom", "esnext.array"],
+		"target": "ES2019",
+		"sourceMap": true,
+		"outDir": "./dist",
+		"baseUrl": "./src",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"strictFunctionTypes": true,
+		"downlevelIteration": true,
+		"skipLibCheck": true,
+		// "types": ["./src/types/*.ts"],
+		"typeRoots": ["./src/typings", "node_modules/@types"]
+	},
+	"exclude": ["node_modules"]
+}
+// {
+// 	"compilerOptions": {
+// 		"module": "commonjs",
+// 		"removeComments": true,
+// 		"preserveConstEnums": true,
+// 		"outDir": "./dist",
+// 		"sourceMap": true,
+// 		"baseUrl": ".",
+// 		"pretty": true,
+// 		"target": "ESNext",
+// 		"esModuleInterop": true,
+// 		"allowSyntheticDefaultImports": true,
+// 		"typeRoots": ["src/typings", "node_modules/@types"]
+// 	},
+// 	"include": ["src/**/*"],
+// 	"exclude": ["node_modules", "**/*.spec.ts"]
+// }
