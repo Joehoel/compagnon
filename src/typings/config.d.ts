@@ -3,6 +3,7 @@ declare global {
         interface ProcessEnv {
             TOKEN: string;
             PREFIX: string;
+            API_KEY: string;
         }
     }
 }
