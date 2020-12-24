@@ -9,11 +9,17 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
             - name: Push to server
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   password: ${{ secrets.PASSWORD }}
-                  script: cd /home/pi/compagnon && git pull
+                  script: |
+                      cd /home/pi/compagnon
+                      git pull
+            - uses: actions/setup-node@v2
+                with:
+                    node-version: '12'
+                    - run: npm install
