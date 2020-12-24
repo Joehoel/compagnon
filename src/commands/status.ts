@@ -1,6 +1,6 @@
-const Command = require("../utils/Command");
+import Command from "../utils/Command";
 
-module.exports = new Command({
+export default new Command({
 	name: "status",
 	description: "Updated the bots' status",
 	args: true,
@@ -8,7 +8,7 @@ module.exports = new Command({
 	usage: "<status message>",
 	execute(client, message, args) {
 		args.unshift();
-		client.user.setPresence({
+		client.user!.setPresence({
 			activity: {
 				name: args.join(" "),
 				type: 0,

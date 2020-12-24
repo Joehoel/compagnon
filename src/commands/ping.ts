@@ -1,7 +1,7 @@
-const Discord = require("discord.js");
-const Command = require("../utils/Command");
+import Discord from "discord.js";
+import Command from "../utils/Command";
 
-module.exports = new Command({
+export default new Command({
 	name: "ping",
 	description: "Pong!",
 	execute(client, message) {
@@ -16,7 +16,7 @@ module.exports = new Command({
 					title: "Pong",
 					color: "ffc600",
 					description: `${ping}ms`,
-				})
+				}),
 			);
 		});
 	},
