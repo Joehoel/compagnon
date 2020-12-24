@@ -6,9 +6,9 @@ export default new Command({
     args: true,
     admin: true,
     usage: "<status message>",
-    execute(client, message, args) {
+    async execute(client, message, args) {
         args.unshift();
-        client.user!.setPresence({
+        await client.user!.setPresence({
             activity: {
                 name: args.join(" "),
                 type: 0,
