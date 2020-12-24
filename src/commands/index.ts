@@ -10,16 +10,16 @@ import say from "./say";
 import status from "./status";
 
 const commands = {
-	ban,
-	clear,
-	dab,
-	gif,
-	kick,
-	meme,
-	ping,
-	poll,
-	say,
-	status,
+    ban,
+    clear,
+    dab,
+    gif,
+    kick,
+    meme,
+    ping,
+    poll,
+    say,
+    status,
 };
 
 export default commands;
