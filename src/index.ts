@@ -29,7 +29,6 @@ client.on("message", async (message) => {
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
     // Command handler
-
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift()!.toLowerCase();
 
