@@ -1,6 +1,6 @@
+import { MessageEmbed } from "discord.js";
 import fetch from "node-fetch";
 import Command from "../utils/Command";
-import Discord from "discord.js";
 
 export default new Command({
     name: "meme",
@@ -14,7 +14,7 @@ export default new Command({
 
         const { title, url, created } = data[0].data.children[0].data;
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new MessageEmbed()
             .setColor("#ffc600")
             .setTitle(title)
             .setImage(url)

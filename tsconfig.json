@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "lib": ["esnext", "dom", "esnext.array"],
+        "lib": ["esnext", "esnext.array"],
         "target": "ES2019",
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": "./src",
         "moduleResolution": "node",
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
         "alwaysStrict": true,

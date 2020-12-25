@@ -1,15 +1,12 @@
 // Global
-import fs from "fs";
+import { Client, Collection } from "discord.js";
 import "dotenv/config";
-
 import Commands from "./commands";
 import Command from "./utils/Command";
 
 const { TOKEN, PREFIX } = process.env;
 
-// Discord
-import Discord from "discord.js";
-const client = new Discord.Client();
+const client = new Client();
 
 // Ready!
 client.once("ready", async () => {
@@ -17,7 +14,7 @@ client.once("ready", async () => {
 });
 
 // Command handler
-client.commands = new Discord.Collection<string, Command>();
+client.commands = new Collection<string, Command>();
 
 for (const file in Commands) {
     client.commands.set(file, Commands[file as keyof typeof Commands]);

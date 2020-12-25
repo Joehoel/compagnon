@@ -8,6 +8,7 @@ import ping from "./ping";
 import poll from "./poll";
 import say from "./say";
 import status from "./status";
+import help from "./help";
 
 const commands = {
     ban,
@@ -20,6 +21,7 @@ const commands = {
     poll,
     say,
     status,
+    help,
 };
 
 export default commands;

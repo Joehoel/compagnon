@@ -1,4 +1,4 @@
-import Discord from "discord.js";
+import { MessageEmbed } from "discord.js";
 import Command from "../utils/Command";
 
 const options = [
@@ -68,7 +68,7 @@ export default new Command({
 
                 return message.channel
                     .send(
-                        new Discord.MessageEmbed()
+                        new MessageEmbed()
                             .setColor("#ffc600")
                             .setTitle(question)
                             .setTimestamp()
@@ -100,7 +100,7 @@ export default new Command({
                     };
                     return message.channel
                         .send(
-                            new Discord.MessageEmbed()
+                            new MessageEmbed()
                                 .setColor("#ffc600")
                                 .setTitle(question)
                                 .setDescription(
