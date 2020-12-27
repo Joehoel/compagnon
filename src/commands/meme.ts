@@ -12,13 +12,13 @@ export default new Command({
 
         const data = await response.json();
 
-        const { title, url, created } = data[0].data.children[0].data;
+        const { title, url, created_utc } = data[0].data.children[0].data;
 
         const embed = new MessageEmbed()
             .setColor("#ffc600")
             .setTitle(title)
             .setImage(url)
-            .setTimestamp(new Date(created * 1000));
+            .setTimestamp(new Date(created_utc * 1000));
 
         message.channel.send(embed);
     },
