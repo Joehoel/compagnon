@@ -1,24 +1,21 @@
 import { MessageEmbed } from "discord.js";
-import fetch from "node-fetch";
 import Command from "../utils/Command";
+import { meme } from "../utils/helpers";
 
 export default new Command({
     name: "meme",
     description: "Shows a random lit meme",
     async execute(client, message, args) {
-        const response = await fetch(
-            `https://reddit.com/r/dankmemes/random.json?limit=1`,
-        );
-
-        const data = await response.json();
-
-        const { title, url, created_utc } = data[0].data.children[0].data;
+        const { title, url, date, author, sub, post } = await meme(args[0]);
 
         const embed = new MessageEmbed()
             .setColor("#ffc600")
             .setTitle(title)
+            .setDescription(sub)
+            .setFooter(author)
+            .setURL(post)
             .setImage(url)
-            .setTimestamp(new Date(created_utc * 1000));
+            .setTimestamp(date);
 
         message.channel.send(embed);
     },
