@@ -4,7 +4,9 @@ import { meme } from "../utils/helpers";
 
 export default new Command({
     name: "meme",
-    description: "Shows a random lit meme",
+    description:
+        "Shows a random lit meme from the provided subreddit (defaults to 'r/dankmemes')",
+    usage: "<sub>",
     async execute(client, message, args) {
         const { title, url, date, author, sub, post } = await meme(args[0]);
 
