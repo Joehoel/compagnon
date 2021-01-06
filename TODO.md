@@ -6,3 +6,4 @@
 -   [ ] Add required arguments
 -   [x] Meme command (r/dankmemes, r/memes)
 -   [x] Convert to typescript
+-   [ ] Add channel to count to one million

@@ -1,18 +1,19 @@
+import "cross-fetch";
 import Discord from "discord.js";
-import fetch from "node-fetch";
 import { URLSearchParams } from "url";
 import { GIFResponse, MemeResponse } from "../typings";
-
 import Command from "./Command";
 
 const { API_KEY, PREFIX } = process.env;
 
 export async function gif(tag: string): Promise<GIFResponse> {
     const api = "https://api.giphy.com/v1/gifs/random?";
+
     const params = new URLSearchParams({
         api_key: API_KEY,
         tag,
     });
+
     const res = await fetch(`${api}${params}`);
     const data = await res.json();
     const { url } = data;
@@ -21,7 +22,7 @@ export async function gif(tag: string): Promise<GIFResponse> {
 }
 
 export async function meme(
-    subName: string = "dankmemes",
+    subName: string = "dankmemes"
 ): Promise<MemeResponse> {
     const api = `https://reddit.com/r/${subName}/random.json?`;
     const params = new URLSearchParams({
@@ -39,7 +40,6 @@ export async function meme(
     } = data[0].data.children[0].data;
 
     const date = new Date(created_utc * 1000);
-
     const post = `https://reddit.com${permalink}`;
 
     return { title, url, date, author, sub, post };
@@ -51,7 +51,7 @@ export function formatCommand(command: Command): Discord.EmbedFieldData {
     if (hasUsage) {
         return {
             name: `${PREFIX}${command.name}`,
-            value: `${command.description}\n\`\`\`${command.usage}\`\`\``,
+            value: `${command.description} \`\`\`${command.usage}\`\`\``,
         };
     } else {
         return {
