@@ -30,17 +30,13 @@ client.on("message", async (message) => {
     const commandName = args.shift()!.toLowerCase();
 
     if (!client.commands.has(commandName)) {
-        return message.channel.send(
-            `Sorry, ${message.author}! that command doesn't exist`
-        );
+        return message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
     }
 
     const command = client.commands.get(commandName)!;
 
     if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
-        return message.channel.send(
-            `Sorry, ${message.author}! You must be an admin to execute this command.`
-        );
+        return message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
     }
 
     if (command.args && !args.length) {
@@ -58,9 +54,7 @@ client.on("message", async (message) => {
         await command.execute(client, message, args);
     } catch (error) {
         console.error(error);
-        await message.reply(
-            "There was an error trying to execute that command!"
-        );
+        await message.reply("There was an error trying to execute that command!");
     }
 });
 

@@ -19,8 +19,7 @@ describe("Helpers", () => {
                                         created_utc: now,
                                         author: "John Doe",
                                         subreddit_name_prefixed: "r/dankmemes",
-                                        permalink:
-                                            "/paihdoiwaphwad/alwhdoiwahd",
+                                        permalink: "/paihdoiwaphwad/alwhdoiwahd",
                                     },
                                 },
                             ],
@@ -46,9 +45,7 @@ describe("Helpers", () => {
             });
 
             expect(fetchMock.mock.calls.length).toEqual(1);
-            expect(fetchMock.mock.calls[0][0]).toEqual(
-                "https://reddit.com/r/dankmemes/random.json?limit=1"
-            );
+            expect(fetchMock.mock.calls[0][0]).toEqual("https://reddit.com/r/dankmemes/random.json?limit=1");
         });
         it("Returns a formatted post from 'r/memes'", async () => {
             fetchMock.mockResponseOnce(
@@ -63,8 +60,7 @@ describe("Helpers", () => {
                                         created_utc: now,
                                         author: "John Doe",
                                         subreddit_name_prefixed: "r/memes",
-                                        permalink:
-                                            "/paihdoiwaphwad/alwhdoiwahd",
+                                        permalink: "/paihdoiwaphwad/alwhdoiwahd",
                                     },
                                 },
                             ],
@@ -90,9 +86,7 @@ describe("Helpers", () => {
             });
 
             expect(fetchMock.mock.calls.length).toEqual(2);
-            expect(fetchMock.mock.calls[1][0]).toEqual(
-                "https://reddit.com/r/memes/random.json?limit=1"
-            );
+            expect(fetchMock.mock.calls[1][0]).toEqual("https://reddit.com/r/memes/random.json?limit=1");
         });
     });
 

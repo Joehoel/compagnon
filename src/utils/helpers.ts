@@ -21,23 +21,14 @@ export async function gif(tag: string): Promise<GIFResponse> {
     return url;
 }
 
-export async function meme(
-    subName: string = "dankmemes"
-): Promise<MemeResponse> {
+export async function meme(subName: string = "dankmemes"): Promise<MemeResponse> {
     const api = `https://reddit.com/r/${subName}/random.json?`;
     const params = new URLSearchParams({
         limit: "1",
     });
     const res = await fetch(`${api}${params}`);
     const data = await res.json();
-    const {
-        title,
-        url,
-        created_utc,
-        author,
-        subreddit_name_prefixed: sub,
-        permalink,
-    } = data[0].data.children[0].data;
+    const { title, url, created_utc, author, subreddit_name_prefixed: sub, permalink } = data[0].data.children[0].data;
 
     const date = new Date(created_utc * 1000);
     const post = `https://reddit.com${permalink}`;
