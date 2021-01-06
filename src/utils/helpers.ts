@@ -1,4 +1,6 @@
 import "cross-fetch";
+import fetch from "cross-fetch";
+import { GuildMember } from "discord.js";
 import { EmbedFieldData } from "discord.js";
 import { URLSearchParams } from "url";
 import { GIFResponse, MemeResponse } from "../typings";
@@ -15,7 +17,7 @@ export async function gif(tag: string): Promise<GIFResponse> {
     });
 
     const res = await fetch(`${api}${params}`);
-    const data = await res.json();
+    const { data } = await res.json();
     const { url } = data;
 
     return url;
@@ -50,4 +52,9 @@ export function formatCommand(command: Command): EmbedFieldData {
             value: `${command.description}`,
         };
     }
+}
+
+export function canExecute(member: GuildMember, command: Command): boolean {
+    const memberPerms = member.permissions.toArray();
+    return command.permissions.every((permission) => memberPerms?.includes(permission));
 }

@@ -1,4 +1,6 @@
 // Global
+import { PermissionString } from "discord.js";
+import { BitFieldResolvable } from "discord.js";
 import { Client, Collection } from "discord.js";
 import "dotenv/config";
 import Commands from "./commands";
@@ -37,6 +39,14 @@ client.on("message", async (message) => {
 
     if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
         return message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
+    }
+
+    if (command.permissions.length > 0) {
+        command.permissions.forEach((permission) => {
+            if (!message.member!.hasPermission(permission)) {
+                return message.channel.send(`Sorry, ${message.author}! You must have the permission: ${permission} to execute that command`);
+            }
+        });
     }
 
     if (command.args && !args.length) {

@@ -3,15 +3,11 @@ import Command from "../utils/Command";
 export default new Command({
     name: "kick",
     description: "Kick a user",
-    admin: true,
     args: true,
     usage: "<username> <reason>",
+    permissions: ["KICK_MEMBERS"],
     async execute(client, message, args) {
-        const member = await message.mentions
-            .members!.first()!
-            .kick(args.slice(1)[0]);
-        await message.channel.send(
-            `:wave: ${member.displayName} has successfully been kicked.`,
-        );
+        const member = await message.mentions.members!.first()!.kick(args.slice(1)[0]);
+        await message.channel.send(`:wave: ${member.displayName} has successfully been kicked.`);
     },
 });

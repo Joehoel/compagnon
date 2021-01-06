@@ -4,8 +4,8 @@ export default new Command({
     name: "status",
     description: "Updated the bots' status with the provided status message",
     args: true,
-    admin: true,
     usage: "<status message>",
+    permissions: ["ADMINISTRATOR"],
     async execute(client, message, args) {
         args.unshift();
         await client.user!.setPresence({

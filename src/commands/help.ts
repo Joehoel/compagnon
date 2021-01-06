@@ -1,6 +1,6 @@
 import { MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Command from "../utils/Command";
-import { formatCommand } from "../utils/helpers";
+import { canExecute, formatCommand } from "../utils/helpers";
 
 export default new Command({
     name: "help",
@@ -8,11 +8,9 @@ export default new Command({
     execute(client, message, args) {
         const commands = client.commands
             .array()
-            .filter(
-                (command) =>
-                    !command.admin ||
-                    message.member?.hasPermission("ADMINISTRATOR"),
-            )
+            .filter((command) => {
+                return canExecute(message.member!, command);
+            })
             .map(formatCommand);
 
         const embed = new MessageEmbed({
