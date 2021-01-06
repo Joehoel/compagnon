@@ -1,5 +1,5 @@
 import "cross-fetch";
-import Discord from "discord.js";
+import { EmbedFieldData } from "discord.js";
 import { URLSearchParams } from "url";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
@@ -45,7 +45,7 @@ export async function meme(
     return { title, url, date, author, sub, post };
 }
 
-export function formatCommand(command: Command): Discord.EmbedFieldData {
+export function formatCommand(command: Command): EmbedFieldData {
     const hasUsage = command.usage ? true : false;
 
     if (hasUsage) {

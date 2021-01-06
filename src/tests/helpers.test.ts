@@ -1,4 +1,3 @@
-import { Request } from "node-fetch";
 import ping from "../commands/ping";
 import say from "../commands/say";
 import { MemeResponse } from "../typings";
@@ -98,11 +97,12 @@ describe("Helpers", () => {
     });
 
     describe("Format command function", () => {
-        it("Returns a formatted command", () => {
+        it("Returns a formatted command without usage", () => {
             const pingFormatted = formatCommand(ping);
 
             expect(pingFormatted).toEqual({ name: "!ping", value: "Pong!" });
-
+        });
+        it("Returns a formatted command with usage", () => {
             const sayFormatted = formatCommand(say);
 
             expect(sayFormatted).toEqual({
