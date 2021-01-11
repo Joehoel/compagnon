@@ -4,6 +4,7 @@ declare global {
             TOKEN: string;
             PREFIX: string;
             API_KEY: string;
+            MONGODB_URI: string;
         }
     }
 }
