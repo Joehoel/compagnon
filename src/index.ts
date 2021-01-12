@@ -1,18 +1,20 @@
 // Global
-import { PermissionString } from "discord.js";
-import { BitFieldResolvable } from "discord.js";
+import colors from "colors";
 import { Client, Collection } from "discord.js";
 import "dotenv/config";
 import Commands from "./commands";
 import Command from "./utils/Command";
-
-const { TOKEN, PREFIX } = process.env;
+import { connect } from "./utils/db";
+const { TOKEN, PREFIX, MONGODB_URI } = process.env;
 
 const client = new Client();
 
+// Database
+connect({ db: MONGODB_URI });
+
 // Ready!
 client.once("ready", async () => {
-    console.log("Compagnon online!");
+    console.info("Compagnon" + colors.green.bold(" online!"));
 });
 
 // Command handler
