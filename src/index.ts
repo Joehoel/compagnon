@@ -4,9 +4,13 @@ import { Client, Collection } from "discord.js";
 import "dotenv/config";
 import Commands from "./commands";
 import Command from "./utils/Command";
+import { connect } from "./utils/db";
 const { TOKEN, PREFIX, MONGODB_URI } = process.env;
 
 const client = new Client();
+
+// Database
+connect({ db: MONGODB_URI });
 
 // Ready!
 client.once("ready", async () => {
@@ -30,25 +34,19 @@ client.on("message", async (message) => {
     const commandName = args.shift()!.toLowerCase();
 
     if (!client.commands.has(commandName)) {
-        return message.channel.send(
-            `Sorry, ${message.author}! that command doesn't exist`
-        );
+        return message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
     }
 
     const command = client.commands.get(commandName)!;
 
     if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
-        return message.channel.send(
-            `Sorry, ${message.author}! You must be an admin to execute this command.`
-        );
+        return message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
     }
 
     if (command.permissions.length > 0) {
         command.permissions.forEach((permission) => {
             if (!message.member!.hasPermission(permission)) {
-                return message.channel.send(
-                    `Sorry, ${message.author}! You must have the permission: ${permission} to execute that command`
-                );
+                return message.channel.send(`Sorry, ${message.author}! You must have the permission: ${permission} to execute that command`);
             }
         });
     }
@@ -65,12 +63,10 @@ client.on("message", async (message) => {
 
     // Execute
     try {
-        command.execute(client, message, args);
+        await command.execute(client, message, args);
     } catch (error) {
         console.error(error);
-        await message.reply(
-            "There was an error trying to execute that command!"
-        );
+        await message.reply("There was an error trying to execute that command!");
     }
 });
 

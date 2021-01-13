@@ -1,5 +1,5 @@
+import "cross-fetch";
 import fetch from "cross-fetch";
-// import "cross-fetch";
 import { GuildMember } from "discord.js";
 import { EmbedFieldData } from "discord.js";
 import { URLSearchParams } from "url";
