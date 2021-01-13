@@ -2,6 +2,7 @@ import ping from "../commands/ping";
 import say from "../commands/say";
 import { MemeResponse } from "../typings";
 import { formatCommand, meme } from "../utils/helpers";
+const { PREFIX } = process.env;
 
 describe("Helpers", () => {
     describe("Meme function", () => {
@@ -94,13 +95,13 @@ describe("Helpers", () => {
         it("Returns a formatted command without usage", () => {
             const pingFormatted = formatCommand(ping);
 
-            expect(pingFormatted).toEqual({ name: "!ping", value: "Pong!" });
+            expect(pingFormatted).toEqual({ name: `${PREFIX}ping`, value: "Pong!" });
         });
         it("Returns a formatted command with usage", () => {
             const sayFormatted = formatCommand(say);
 
             expect(sayFormatted).toEqual({
-                name: "!say",
+                name: `${PREFIX}say`,
                 value: "Outputs message from user ```<message>```",
             });
         });

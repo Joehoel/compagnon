@@ -1,0 +1,9 @@
+# Prisma Migrate lockfile v1
+
+20210113110321-create-tables
+20210113110747-remove-unique-contraint-from-leaderboard
+20210113111002-added-image-url-to-game
+20210113111327-add-score-model
+20210113120117-add-score-field
+20210113120252-convert-score-to-string
+20210113125718-database-updates

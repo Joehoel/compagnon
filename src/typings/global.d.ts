@@ -1,1 +1,1 @@
-import "jest-fetch-mock";
+import "cross-fetch";
