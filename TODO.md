@@ -8,4 +8,3 @@
 -   [x] Convert to typescript
 -   [ ] Add useless command
 -   [x] Add testing
--   [ ] Leaderboards!
