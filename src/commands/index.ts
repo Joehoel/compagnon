@@ -9,7 +9,6 @@ import poll from "./poll";
 import say from "./say";
 import status from "./status";
 import help from "./help";
-import leaderboard from "./leaderboard";
 
 const commands = {
     ban,
@@ -23,7 +22,6 @@ const commands = {
     say,
     status,
     help,
-    leaderboard,
 };
 
 export default commands;

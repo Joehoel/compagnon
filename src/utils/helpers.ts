@@ -3,7 +3,7 @@ import fetch from "cross-fetch";
 import { GuildMember } from "discord.js";
 import { EmbedFieldData } from "discord.js";
 import { URLSearchParams } from "url";
-import { GIFResponse, LogoResponse, MemeResponse } from "../typings";
+import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
 
 const { API_KEY, PREFIX } = process.env;
@@ -54,20 +54,7 @@ export function formatCommand(command: Command): EmbedFieldData {
     }
 }
 
-export async function logo(query: string): Promise<string> {
-    const url = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${query}`;
-    const res = await fetch(url);
-    const data: LogoResponse[] = await res.json();
-    const { logo } = data[0];
-
-    return logo;
-}
-
 export function canExecute(member: GuildMember, command: Command): boolean {
     const memberPerms = member.permissions.toArray();
     return command.permissions.every((permission) => memberPerms?.includes(permission));
-}
-
-export function capitalize(string: string) {
-    return string.substr(0, 1).toUpperCase() + string.substr(1, string.length - 1);
 }

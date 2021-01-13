@@ -8,9 +8,3 @@ export interface MemeResponse {
 }
 
 export type GIFResponse = string;
-
-export interface LogoResponse {
-    name: string;
-    domain: string;
-    logo: string;
-}
