@@ -6,6 +6,7 @@ export default new Command({
     args: true,
     usage: "<tag>",
     description: "Sends a random GIF in chat",
+    aliases: ["g"],
     async execute(client, message, args) {
         const url = await gif(args.join(" "));
         message.channel.send(url);

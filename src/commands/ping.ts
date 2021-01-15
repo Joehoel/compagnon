@@ -4,6 +4,7 @@ import Command from "../utils/Command";
 export default new Command({
     name: "ping",
     description: "Pong!",
+    aliases: ["p"],
     execute(client, message) {
         const embed = new MessageEmbed({
             title: "Pong",
@@ -16,7 +17,7 @@ export default new Command({
                     title: "Pong",
                     color: "ffc600",
                     description: `${ping}ms`,
-                }),
+                })
             );
         });
     },

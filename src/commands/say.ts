@@ -6,6 +6,7 @@ export default new Command({
     args: true,
     usage: "<message>",
     permissions: ["ADMINISTRATOR"],
+    aliases: ["s"],
     execute(client, message, args) {
         message.delete({ timeout: 1000 });
         message.channel.send(args.join(" "));

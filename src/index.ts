@@ -4,21 +4,27 @@ import { Client, Collection } from "discord.js";
 import "dotenv/config";
 import Commands from "./commands";
 import Command from "./utils/Command";
-const { TOKEN, PREFIX, MONGODB_URI } = process.env;
+const { TOKEN, PREFIX } = process.env;
 
 const client = new Client();
 
-// Ready!
-client.once("ready", async () => {
-    console.info("Compagnon" + colors.green.bold(" online!"));
-});
-
 // Command handler
 client.commands = new Collection<string, Command>();
+client.aliases = new Collection<string, string>();
 
 for (const file in Commands) {
-    client.commands.set(file, Commands[file as keyof typeof Commands]);
+    const command = Commands[file as keyof typeof Commands];
+
+    client.commands.set(file, command);
+    command.aliases.forEach((alias) => {
+        client.aliases.set(alias, file);
+    });
 }
+
+// Ready!
+client.on("ready", async () => {
+    console.info("Compagnon" + colors.green.bold(" online!"));
+});
 
 // On every message
 client.on("message", async (message) => {
@@ -29,13 +35,15 @@ client.on("message", async (message) => {
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift()!.toLowerCase();
 
-    if (!client.commands.has(commandName)) {
+    if (!client.commands.has(commandName) && !client.aliases.has(commandName)) {
         return message.channel.send(
             `Sorry, ${message.author}! that command doesn't exist`
         );
     }
 
-    const command = client.commands.get(commandName)!;
+    const command =
+        client.commands.get(commandName)! ||
+        client.commands.get(client.aliases.get(commandName)!);
 
     if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
         return message.channel.send(

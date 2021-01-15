@@ -1,6 +1,4 @@
-import { BitFieldResolvable } from "discord.js";
-import { PermissionString } from "discord.js";
-import { Client, Message } from "discord.js";
+import { Client, Message, PermissionString } from "discord.js";
 
 export default class Command {
     public name: string;
@@ -9,6 +7,7 @@ export default class Command {
     public args: boolean;
     public description: string;
     public permissions: PermissionString[];
+    public aliases: string[];
     public execute: (client: Client, message: Message, args: string[]) => void;
 
     constructor({
@@ -19,6 +18,7 @@ export default class Command {
         description,
         execute,
         permissions,
+        aliases,
     }: {
         name: string;
         admin?: boolean;
@@ -26,6 +26,7 @@ export default class Command {
         args?: boolean;
         description: string;
         permissions?: PermissionString[];
+        aliases?: string[];
         execute: (client: Client, message: Message, args: string[]) => void;
     }) {
         this.name = name;
@@ -35,5 +36,6 @@ export default class Command {
         this.description = description;
         this.execute = execute;
         this.permissions = permissions ?? [];
+        this.aliases = aliases ?? [];
     }
 }
