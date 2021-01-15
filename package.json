@@ -4,11 +4,14 @@
     "description": "",
     "main": "src/index.ts",
     "dependencies": {
+        "@discordjs/opus": "^0.3.3",
         "cross-fetch": "^3.0.6",
         "discord-slash-commands-client": "^1.1.1",
         "discord.js": "^12.5.1",
+        "distube": "^2.8.8",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "ffmpeg-static": "^4.2.7",
         "jest": "^26.6.3",
         "node-fetch": "^2.6.1"
     },
