@@ -4,13 +4,12 @@ import Command from "../utils/Command";
 export default new Command({
     name: "ping",
     description: "Pong!",
-    aliases: ["p"],
     execute(client, message) {
         const embed = new MessageEmbed({
             title: "Pong",
             color: "ffc600",
         });
-        message.channel.send(embed).then((m) => {
+        return message.channel.send(embed).then((m) => {
             const ping = m.createdTimestamp - message.createdTimestamp;
             m.edit(
                 new MessageEmbed({

@@ -58,3 +58,9 @@ export function canExecute(member: GuildMember, command: Command): boolean {
     const memberPerms = member.permissions.toArray();
     return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
+
+export function status(queue: any) {
+    return `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${
+        queue.repeatMode ? (queue.repeatMode == 2 ? "All Queue" : "This Song") : "Off"
+    }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+}
