@@ -1,20 +1,20 @@
-import ban from "./ban";
-import clear from "./clear";
+import ban from "./admin/ban";
+import clear from "./admin/clear";
+import kick from "./admin/kick";
+import say from "./admin/say";
+import status from "./admin/status";
 import dab from "./dab";
 import gif from "./gif";
-import kick from "./kick";
+import help from "./help";
 import meme from "./meme";
+import loop from "./music/loop";
+import play from "./music/play";
+import queue from "./music/queue";
+import skip from "./music/skip";
+import stop from "./music/stop";
 import ping from "./ping";
 import poll from "./poll";
-import say from "./say";
-import status from "./status";
-import help from "./help";
-import play from "./play";
-import skip from "./skip";
-import loop from "./loop";
-import stop from "./stop";
-import queue from "./queue";
-// import leaderboard from "./leaderboard";
+import leaderboard from "./leaderboard";
 
 const commands = {
     ban,
@@ -33,7 +33,7 @@ const commands = {
     loop,
     stop,
     queue,
-    // leaderboard,
+    leaderboard,
 };
 
 export default commands;

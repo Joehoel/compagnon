@@ -1,5 +1,5 @@
 import ping from "../commands/ping";
-import say from "../commands/say";
+import say from "../commands/admin/say";
 import { MemeResponse } from "../typings";
 import { formatCommand, meme } from "../utils/helpers";
 

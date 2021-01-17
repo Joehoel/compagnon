@@ -5,7 +5,7 @@
         "target": "ES2019",
         "sourceMap": true,
         "outDir": "./dist",
-        "baseUrl": "./src",
+        "baseUrl": "src",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -15,8 +15,10 @@
         "strictFunctionTypes": true,
         "downlevelIteration": true,
         "skipLibCheck": true,
-        // "types": ["./src/types/*.ts"],
-        "typeRoots": ["./src/typings", "node_modules/@types"]
+        "typeRoots": ["./src/typings", "node_modules/@types"],
+        "paths": {
+            "@/*": ["*"]
+        }
     },
     "exclude": ["node_modules"]
 }

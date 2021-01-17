@@ -2,6 +2,7 @@ import "cross-fetch";
 import fetch from "cross-fetch";
 import { GuildMember } from "discord.js";
 import { EmbedFieldData } from "discord.js";
+import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
@@ -59,7 +60,7 @@ export function canExecute(member: GuildMember, command: Command): boolean {
     return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
 
-export function status(queue: any) {
+export function status(queue: Queue) {
     return `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${
         queue.repeatMode ? (queue.repeatMode == 2 ? "All Queue" : "This Song") : "Off"
     }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
