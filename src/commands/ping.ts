@@ -13,9 +13,8 @@ export default new Command({
             const ping = m.createdTimestamp - message.createdTimestamp;
             m.edit(
                 new MessageEmbed({
-                    title: "Pong",
                     color: "ffc600",
-                    description: `${ping}ms`,
+                    description: `**Pong!** \`${ping}ms\``,
                 })
             );
         });

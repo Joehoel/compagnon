@@ -1,6 +1,6 @@
 import { MessageEmbed, MessageEmbedOptions } from "discord.js";
-import Command from "../utils/Command";
-import { canExecute, formatCommand } from "../utils/helpers";
+import Command from "@/utils/Command";
+import { canExecute, formatCommand } from "@/utils/helpers";
 
 export default new Command({
     name: "help",
