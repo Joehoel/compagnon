@@ -1,13 +1,14 @@
 // Global
 import "dotenv/config";
-import Commands from "./commands";
+import "module-alias/register";
 import music from "@/features/music";
 import Command from "@/utils/Command";
 import colors from "colors";
 import { Client, Collection } from "discord.js";
 import DisTube from "distube";
+import Commands from "./commands";
 import command from "./features/command";
-const { TOKEN, PREFIX } = process.env;
+const { TOKEN } = process.env;
 
 const client = new Client();
 
