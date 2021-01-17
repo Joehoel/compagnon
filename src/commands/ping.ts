@@ -6,8 +6,8 @@ export default new Command({
     description: "Pong!",
     execute(client, message) {
         const embed = new MessageEmbed({
-            title: "Pong",
-            color: "ffc600",
+              color: "ffc600",
+              description: `**Pong!**`,
         });
         return message.channel.send(embed).then((m) => {
             const ping = m.createdTimestamp - message.createdTimestamp;
