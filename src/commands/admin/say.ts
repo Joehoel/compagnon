@@ -5,7 +5,7 @@ export default new Command({
     description: "Outputs message from user",
     args: true,
     usage: "<message>",
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_MESSAGES"],
     aliases: ["s"],
     execute(client, message, args) {
         message.delete({ timeout: 1000 });

@@ -6,7 +6,7 @@ export default new Command({
     description: "Clears the chat",
     args: true,
     usage: "<amount>",
-    permissions: ["ADMINISTRATOR"],
+    permissions: ["MANAGE_MESSAGES"],
     async execute(client, message, args) {
         const amount = parseInt(args[0]);
 

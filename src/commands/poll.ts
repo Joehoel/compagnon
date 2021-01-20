@@ -44,21 +44,15 @@ function canSendPoll(userId: string): boolean {
 
 export default new Command({
     name: "poll",
-    description:
-        "Ask a polling question. Vote by emoji reaction. Question and options must be wrapped in double quotes. Questions with no provided options are treated as Yes / No / Unsure questions.",
+    description: "Create a poll where people can react to vote.",
     usage: "<question> <optional answer A> <optional answer B>",
     args: true,
     admin: false,
     execute(client, message) {
         let args = message.content.match(/"(.+?)"/g);
         if (args) {
-            if (
-                !canSendPoll(message.author.id) &&
-                !message.member!.hasPermission("ADMINISTRATOR")
-            ) {
-                return message.channel.send(
-                    `${message.author} please wait before sending another poll.`,
-                );
+            if (!canSendPoll(message.author.id) && !message.member!.hasPermission("ADMINISTRATOR")) {
+                return message.channel.send(`${message.author} please wait before sending another poll.`);
             } else if (args.length === 1) {
                 // yes no unsure question
                 const question = args[0].replace(/"/g, "");
@@ -72,10 +66,7 @@ export default new Command({
                             .setColor("#ffc600")
                             .setTitle(question)
                             .setTimestamp()
-                            .setFooter(
-                                `Poll started by: ${message.author.username}`,
-                                message.author.displayAvatarURL(),
-                            ),
+                            .setFooter(`Poll started by: ${message.author.username}`, message.author.displayAvatarURL())
                     )
                     .then(async (pollMessage) => {
                         await pollMessage.react("👍");
@@ -91,9 +82,7 @@ export default new Command({
                 const question = args[0];
                 const questionOptions = [...new Set(args.slice(1))];
                 if (questionOptions.length > 20) {
-                    return message.channel.send(
-                        `${message.author} Polls are limited to 20 options.`,
-                    );
+                    return message.channel.send(`${message.author} Polls are limited to 20 options.`);
                 } else {
                     pollLog[message.author.id] = {
                         lastPoll: Date.now(),
@@ -103,19 +92,9 @@ export default new Command({
                             new MessageEmbed()
                                 .setColor("#ffc600")
                                 .setTitle(question)
-                                .setDescription(
-                                    `${questionOptions
-                                        .map(
-                                            (option, i) =>
-                                                `${options[i]} - ${option}`,
-                                        )
-                                        .join("\n")}`,
-                                )
-                                .setFooter(
-                                    `Poll started by: ${message.author.username}`,
-                                    `${message.author.displayAvatarURL()}`,
-                                )
-                                .setTimestamp(),
+                                .setDescription(`${questionOptions.map((option, i) => `${options[i]} - ${option}`).join("\n")}`)
+                                .setFooter(`Poll started by: ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+                                .setTimestamp()
                         )
                         .then(async (pollMessage) => {
                             for (let i = 0; i < questionOptions.length; i++) {
@@ -125,9 +104,7 @@ export default new Command({
                 }
             }
         } else {
-            return message.channel.send(
-                `${message.author} invalid Poll! Question and options should be wrapped in double quotes.`,
-            );
+            return message.channel.send(`${message.author} invalid Poll! Question and options should be wrapped in double quotes.`);
         }
     },
 });
