@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "lib": ["esnext", "esnext.array"],
-        "target": "ES2019",
+        "target": "ES2018",
         "sourceMap": true,
         "outDir": "./dist",
         "baseUrl": "src",
@@ -16,6 +16,8 @@
         "downlevelIteration": true,
         "skipLibCheck": true,
         "typeRoots": ["./src/typings", "node_modules/@types"],
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
         "paths": {
             "@/*": ["*"]
         }

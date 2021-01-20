@@ -19,17 +19,17 @@ export default async (client: Client, message: Message) => {
         return message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
     }
 
-    command.roles.forEach((role) => {
+    for (const role of command.roles) {
         if (!message.member?.roles.cache.find((_role) => _role.id === role)) {
             return message.channel.send(`Sorry, ${message.author}! You are not allowed to execute that command.`);
         }
-    });
+    }
 
-    command.permissions.forEach((permission) => {
+    for (const permission of command.permissions) {
         if (!message.member!.hasPermission(permission)) {
             return message.channel.send(`Sorry, ${message.author}! You are not allowed to execute that command.`);
         }
-    });
+    }
 
     if (command.args && !args.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
@@ -45,7 +45,7 @@ export default async (client: Client, message: Message) => {
     try {
         command.execute(client, message, args);
     } catch (error) {
-        console.error(error);
+        client.logger.error(error);
         await message.reply("There was an error trying to execute that command!");
     }
 };

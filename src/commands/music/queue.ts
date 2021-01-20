@@ -5,7 +5,7 @@ export default new Command({
     name: "queue",
     description: "Show the current queue",
     aliases: ["q"],
-    execute(client, message, args) {
+    execute(client, message) {
         const queue = client.music.getQueue(message);
         const embed = new MessageEmbed({
             title: "Music",
@@ -14,6 +14,7 @@ export default new Command({
                 {
                     name: "Queue",
                     value: queue.songs
+                        .slice(1)
                         .map((song, i) => {
                             return `**${i + 1}**. \`${song.name}\` - \`${song.formattedDuration}\``;
                         })

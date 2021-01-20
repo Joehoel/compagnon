@@ -1,6 +1,8 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
 import { GuildMember } from "discord.js";
+import { MessageEmbedOptions } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { EmbedFieldData } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
@@ -60,8 +62,20 @@ export function canExecute(member: GuildMember, command: Command): boolean {
     return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
 
+export function capitalize(string: string) {
+    return string.substr(0, 1).toUpperCase() + string.substr(1, string.length - 1);
+}
+
 export function status(queue: Queue) {
     return `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${
         queue.repeatMode ? (queue.repeatMode == 2 ? "All Queue" : "This Song") : "Off"
     }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+}
+
+export function embed(options: MessageEmbedOptions, message: Message): MessageEmbed {
+    return new MessageEmbed({
+        ...options,
+        color: "#ffc600",
+        footer: { text: message.author.tag, iconURL: message.author.displayAvatarURL({ format: "png", dynamic: true }) },
+    });
 }

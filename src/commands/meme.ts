@@ -4,12 +4,11 @@ import { meme } from "../utils/helpers";
 
 export default new Command({
     name: "meme",
-    description:
-        "Shows a random lit meme from the provided subreddit (defaults to 'r/dankmemes')",
+    description: "Shows a random lit meme from the provided subreddit (defaults to 'r/dankmemes')",
     usage: "<sub>",
     aliases: ["m"],
-    async execute(client, message, args) {
-        const { title, url, date, author, sub, post } = await meme(args[0]);
+    async execute(client, message, [subreddit]) {
+        const { title, url, date, author, sub, post } = await meme(subreddit);
 
         const embed = new MessageEmbed()
             .setColor("#ffc600")

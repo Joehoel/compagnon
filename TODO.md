@@ -9,3 +9,8 @@
 -   [ ] Add useless command
 -   [x] Add testing
 -   [ ] Alias commands
+
+### Music commands
+
+-   [ ] Multipage queue
+-   [ ] Move command

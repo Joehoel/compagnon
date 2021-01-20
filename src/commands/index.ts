@@ -15,6 +15,7 @@ import stop from "./music/stop";
 import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
+import typo from "./typo";
 
 const commands = {
     ban,
@@ -34,6 +35,7 @@ const commands = {
     stop,
     queue,
     leaderboard,
+    typo,
 };
 
 export default commands;

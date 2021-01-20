@@ -8,7 +8,9 @@ import { Client, Collection } from "discord.js";
 import DisTube from "distube";
 import Commands from "./commands";
 import command from "./features/command";
+import { createConnection } from "typeorm";
 const { TOKEN } = process.env;
+import consola from "consola";
 
 const client = new Client();
 
@@ -16,6 +18,7 @@ const client = new Client();
 client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
+client.logger = consola;
 
 for (const file in Commands) {
     const command = Commands[file as keyof typeof Commands];
@@ -29,9 +32,17 @@ for (const file in Commands) {
 
 // Ready!
 client.on("ready", async () => {
-    // Music handler
-    music(client.music);
-    console.info("Compagnon" + colors.green.bold(" online!"));
+    try {
+        await createConnection();
+        client.logger.success("Database" + colors.green.bold(" connected!"));
+
+        // Music handler
+        music(client.music);
+
+        client.logger.success("Compagnon" + colors.green.bold(" online!"));
+    } catch (error) {
+        client.logger.error(error);
+    }
 });
 
 // On every message
