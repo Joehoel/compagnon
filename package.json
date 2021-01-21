@@ -41,7 +41,7 @@
     "scripts": {
         "dev": "nodemon --files src/index.ts",
         "build": "tsc",
-        "start": "ts-node src/index.ts",
+        "start": "node dist/index.js",
         "test": "jest --watch",
         "coverage": "jest --coverage",
         "typeorm": "ts-node ./node_modules/typeorm/cli.js"
