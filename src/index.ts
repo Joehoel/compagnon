@@ -50,8 +50,7 @@ client.on("ready", async () => {
         client.logger.success("Compagnon" + colors.green.bold(" online!"));
 
         // Database connection
-        const connection = await createConnection();
-        console.log(connection.options);
+        await createConnection();
         client.logger.success("Database" + colors.green.bold(" connected!"));
     } catch (error) {
         client.logger.error(error);

@@ -1,28 +1,29 @@
-import { MessageEmbed } from "discord.js";
 import Command from "@/utils/Command";
+import { FieldsEmbed } from "discord-paginationembed";
+import { TextChannel } from "discord.js";
 
 export default new Command({
     name: "queue",
     description: "Show the current queue",
     aliases: ["q"],
-    execute(client, message) {
+    async execute(client, message) {
         const queue = client.music.getQueue(message);
-        const embed = new MessageEmbed({
-            title: "Music",
-            color: "#ffc600",
-            fields: [
-                {
-                    name: "Queue",
-                    value: queue.songs
-                        .slice(1)
-                        .map((song, i) => {
-                            return `**${i + 1}**. \`${song.name}\` - \`${song.formattedDuration}\``;
-                        })
-                        .slice(0, 10)
-                        .join("\n"),
-                },
-            ],
+        const formattedQueue = queue.songs.slice(1).map((song, i) => {
+            return `**${i + 1}**. \`${song.name}\` - \`${song.formattedDuration}\``;
         });
-        return message.channel.send(embed);
+
+        const paginatedEmbed = new FieldsEmbed()
+            .setArray(formattedQueue)
+            .setElementsPerPage(10)
+            .setDisabledNavigationEmojis(["delete"])
+            .setChannel(message.channel as TextChannel)
+            .formatField("Queue", (el) => el);
+
+        paginatedEmbed.embed
+            .setColor("#ffc600")
+            .setTitle("Music")
+            .setFooter(`${queue.songs.length} songs in queue | ${queue.formattedDuration} total length`);
+
+        await paginatedEmbed.build();
     },
 });

@@ -1986,6 +1986,11 @@ diff@^4.0.1:
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
 
+discord-paginationembed@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/discord-paginationembed/-/discord-paginationembed-2.1.0.tgz#76fde11650645262301cb5cf0ce080e76cd8d989"
+  integrity sha512-a89oag1wm42MNiwwMO2U/NCOh3TFd8VkL3duUB18g4dTIqG6leXIKmgze8ZOALfdpXsvFyhC7Ox45CUa1TIsFA==
+
 discord-slash-commands-client@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/discord-slash-commands-client/-/discord-slash-commands-client-1.1.1.tgz#719eb5509645adff4bed1e1bb40042d327af67b8"

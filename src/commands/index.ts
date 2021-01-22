@@ -12,6 +12,10 @@ import play from "./music/play";
 import queue from "./music/queue";
 import skip from "./music/skip";
 import stop from "./music/stop";
+import remove from "./music/remove";
+import shuffle from "./music/shuffle";
+import volume from "./music/volume";
+import move from "./music/move";
 import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
@@ -36,6 +40,10 @@ const commands = {
     queue,
     leaderboard,
     typo,
+    remove,
+    shuffle,
+    move,
+    volume,
 };
 
 export default commands;
