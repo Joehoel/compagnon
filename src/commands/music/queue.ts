@@ -8,7 +8,7 @@ export default new Command({
     aliases: ["q"],
     async execute(client, message) {
         const queue = client.music.getQueue(message);
-        const formattedQueue = queue.songs.slice(1).map((song, i) => {
+        const formattedQueue = queue.songs.map((song, i) => {
             return `**${i + 1}**. \`${song.name}\` - \`${song.formattedDuration}\``;
         });
 
