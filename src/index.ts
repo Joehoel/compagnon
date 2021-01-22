@@ -2,6 +2,8 @@
 import "dotenv/config";
 import "module-alias/register";
 
+import path from "path";
+
 // Handlers
 import music from "@/features/music";
 import command from "./features/command";
@@ -48,7 +50,8 @@ client.on("ready", async () => {
         client.logger.success("Compagnon" + colors.green.bold(" online!"));
 
         // Database connection
-        await createConnection();
+        const connection = await createConnection();
+        console.log(connection.options);
         client.logger.success("Database" + colors.green.bold(" connected!"));
     } catch (error) {
         client.logger.error(error);

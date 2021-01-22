@@ -1,4 +1,4 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, Index, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Leaderboard } from "./Leaderboard";
 
 @Entity("games")
@@ -6,6 +6,7 @@ export class Game extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Index()
     @Column({ unique: true })
     name: string;
 
