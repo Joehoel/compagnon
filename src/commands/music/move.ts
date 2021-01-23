@@ -3,6 +3,7 @@ import Command from "../../utils/Command";
 export default new Command({
     name: "move",
     description: "Move a song to another position in the queue",
+    aliases: ["mv"],
     execute(client, message, args) {
         const queue = client.music.getQueue(message);
         if (!queue) throw new Error("NotPlaying");

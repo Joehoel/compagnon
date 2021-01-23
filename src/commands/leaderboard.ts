@@ -110,16 +110,21 @@ export default new Command({
                             embed(
                                 {
                                     title: capitalize(leaderboardName),
-                                    fields: scores.sort().map((score, i) => {
-                                        return {
-                                            name: i + 1 + ".",
-                                            value: `Score: \`${score.score}\`\n Username: ${
-                                                score.user
-                                            }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
-                                                score.proof ? `${score.proof}` : ""
-                                            }`,
-                                        };
-                                    }),
+                                    fields: scores
+                                        .sort((a, b) => {
+                                            if (a.score < b.score) return -1;
+                                            return 1;
+                                        })
+                                        .map((score, i) => {
+                                            return {
+                                                name: i + 1 + ".",
+                                                value: `Score: \`${score.score}\`\n Username: ${
+                                                    score.user
+                                                }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
+                                                    score.proof ? `${score.proof}` : ""
+                                                }`,
+                                            };
+                                        }),
                                 },
                                 message
                             )
