@@ -8,9 +8,15 @@
 -   [x] Convert to typescript
 -   [ ] Add useless command
 -   [x] Add testing
--   [ ] Alias commands
+-   [x] Alias commands
+-   [ ] Level system (f\*ck MEE6)
 
 ### Music commands
 
--   [ ] Multipage queue
--   [ ] Move command
+-   [x] Multipage queue
+-   [ ] Fix move command
+-   [ ] Now playing command
+-   [ ] Fix DJ role
+-   [ ] Vote skip
+-   [ ] Only .play when in voice channel
+-   [ ] Lyrics command
