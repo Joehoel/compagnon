@@ -43,8 +43,11 @@ export async function meme(subName: string = "dankmemes"): Promise<MemeResponse>
 
 export function formatCommand(command: Command): EmbedFieldData {
     return {
-        name: command.aliases ? `${command.name} \`(${command.aliases.join(", ")})\`` : `${command.name}`,
-        value: command.description,
+        name:
+            command.aliases.length >= 1
+                ? `**${command.name}** \`(${command.aliases.join(", ")})\``
+                : `**${command.name}**`,
+        value: command.description + "\n",
     };
 }
 

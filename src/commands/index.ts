@@ -3,6 +3,7 @@ import clear from "./admin/clear";
 import kick from "./admin/kick";
 import say from "./admin/say";
 import status from "./admin/status";
+import reactionrole from "./admin/reactionrole";
 import dab from "./dab";
 import gif from "./gif";
 import help from "./help";
@@ -45,6 +46,7 @@ const commands = {
     now,
     shuffle,
     move,
+    reactionrole,
     volume,
 };
 

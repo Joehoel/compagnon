@@ -1,4 +1,4 @@
-import { MessageEmbed, MessageEmbedOptions, TextChannel } from "discord.js";
+import { EmbedFieldData, MessageEmbed, MessageEmbedOptions, TextChannel } from "discord.js";
 import Command from "@/utils/Command";
 import { canExecute, formatCommand, embed } from "../utils/helpers";
 import { FieldsEmbed } from "discord-paginationembed";
@@ -58,10 +58,10 @@ export default new Command({
 
         const paginatedEmbed = new FieldsEmbed()
             .setArray(commands)
-            .setElementsPerPage(5)
+            .setElementsPerPage(8)
             .setDisabledNavigationEmojis(["delete"])
             .setChannel(message.channel as TextChannel)
-            .formatField("Commands", (el) => el);
+            .formatField("Commands", (el: any) => `${el.name}\n${el.value}`);
 
         paginatedEmbed.embed.setColor("#ffc600").setTitle("Help");
 
