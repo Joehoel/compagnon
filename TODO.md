@@ -14,8 +14,8 @@
 ### Music commands
 
 -   [x] Multipage queue
--   [ ] Fix move command
--   [ ] Now playing command
+-   [x] Fix move command
+-   [x] Now playing command
 -   [ ] Fix DJ role
 -   [ ] Vote skip
 -   [ ] Only .play when in voice channel

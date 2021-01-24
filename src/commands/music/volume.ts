@@ -6,6 +6,7 @@ export default new Command({
     aliases: ["sound", "vol", "v"],
     roles: ["521378616429248527"],
     execute(client, message, args) {
+        if (!message.member?.voice.channel) throw new Error("NotInVoice");
         client.music.setVolume(message, parseInt(args[0]));
     },
 });

@@ -1,4 +1,5 @@
 import Command from "@/utils/Command";
+import { embed } from "../../utils/helpers";
 
 export default new Command({
     name: "play",
@@ -7,6 +8,8 @@ export default new Command({
     usage: "<song>",
     aliases: ["p"],
     execute(client, message, args) {
+        if (!message.member?.voice.channel) throw new Error("NotInVoice");
+
         client.music.play(message, args.join(" "));
     },
 });

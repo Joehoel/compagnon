@@ -7,6 +7,7 @@ export default new Command({
     args: true,
     usage: "<song number(s)>",
     execute(client, message, args) {
+        if (!message.member?.voice.channel) throw new Error("NotInVoice");
         const indeces = args.map((arg) => parseInt(arg));
         const songs = client.music.getQueue(message).songs;
 

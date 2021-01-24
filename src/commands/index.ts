@@ -16,6 +16,7 @@ import remove from "./music/remove";
 import shuffle from "./music/shuffle";
 import volume from "./music/volume";
 import move from "./music/move";
+import now from "./music/now";
 import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
@@ -41,6 +42,7 @@ const commands = {
     leaderboard,
     typo,
     remove,
+    now,
     shuffle,
     move,
     volume,

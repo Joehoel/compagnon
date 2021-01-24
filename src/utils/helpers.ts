@@ -42,19 +42,10 @@ export async function meme(subName: string = "dankmemes"): Promise<MemeResponse>
 }
 
 export function formatCommand(command: Command): EmbedFieldData {
-    const hasUsage = command.usage ? true : false;
-
-    if (hasUsage) {
-        return {
-            name: `${PREFIX}${command.name}`,
-            value: `${command.description} \`\`\`${command.usage}\`\`\``,
-        };
-    } else {
-        return {
-            name: `${PREFIX}${command.name}`,
-            value: `${command.description}`,
-        };
-    }
+    return {
+        name: command.aliases ? `${command.name} \`(${command.aliases.join(", ")})\`` : `${command.name}`,
+        value: command.description,
+    };
 }
 
 export function canExecute(member: GuildMember, command: Command): boolean {
@@ -76,6 +67,9 @@ export function embed(options: MessageEmbedOptions, message: Message): MessageEm
     return new MessageEmbed({
         ...options,
         color: "#ffc600",
-        footer: { text: message.author.tag, iconURL: message.author.displayAvatarURL({ format: "png", dynamic: true }) },
+        footer: {
+            text: message.author.tag,
+            iconURL: message.author.displayAvatarURL({ format: "png", dynamic: true }),
+        },
     });
 }

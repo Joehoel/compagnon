@@ -6,6 +6,7 @@ export default new Command({
     name: "loop",
     description: "Loops the current playing song",
     execute(client, message, args) {
+        if (!message.member?.voice.channel) throw new Error("NotInVoice");
         client.music.setRepeatMode(message, +args[0]);
         const embed = new MessageEmbed({
             title: "Music",

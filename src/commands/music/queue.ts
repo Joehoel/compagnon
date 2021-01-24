@@ -8,6 +8,7 @@ export default new Command({
     aliases: ["q"],
     async execute(client, message) {
         const queue = client.music.getQueue(message);
+        const playing = queue.songs.shift();
         const formattedQueue = queue.songs.map((song, i) => {
             return `**${i + 1}**. \`${song.name}\` - \`${song.formattedDuration}\``;
         });
@@ -23,6 +24,8 @@ export default new Command({
             .setColor("#ffc600")
             .setTitle("Music")
             .setFooter(`${queue.songs.length} songs in queue | ${queue.formattedDuration} total length`);
+
+        queue.songs.unshift(playing!);
 
         await paginatedEmbed.build();
     },
