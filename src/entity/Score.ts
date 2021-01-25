@@ -1,5 +1,13 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, Index, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Game } from "./Game";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Leaderboard } from "./Leaderboard";
 
 @Entity("scores")
@@ -14,7 +22,7 @@ export class Score extends BaseEntity {
     @Column()
     score: string;
 
-    @Column({ nullable: true })
+    @Column({ default: "N/A" })
     proof: string;
 
     @ManyToOne(() => Leaderboard, (leaderboard) => leaderboard.scores)
