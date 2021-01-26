@@ -9,7 +9,7 @@
 -   [ ] Add useless command
 -   [x] Add testing
 -   [x] Alias commands
--   [ ] Level system (f\*ck MEE6)
+-   [ ] Level system (f\*ck MEE6, DEATH TO MEE6!)
 
 ### Music commands
 
@@ -20,3 +20,4 @@
 -   [ ] Vote skip
 -   [ ] Only .play when in voice channel
 -   [ ] Lyrics command
+-   [ ] Pause/unpause command
