@@ -25,3 +25,4 @@
 -   [ ] .playtop command
 -   [ ] .random / .shuffle command
 -   [ ] .autoplay command to disable it
+-   [ ] User can use music command like .leave or .play when not in voice chat
