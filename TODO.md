@@ -21,3 +21,8 @@
 -   [ ] Only .play when in voice channel
 -   [ ] Lyrics command
 -   [ ] Pause/unpause command
+-   [ ] Show number in queue when adding a song to the queue with .play or when you use .move
+-   [ ] .playtop command
+-   [ ] .random / .shuffle command
+-   [ ] .autoplay command to disable it
+-   [ ] User can use music command like .leave or .play when not in voice chat
