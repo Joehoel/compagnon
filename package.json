@@ -5,6 +5,8 @@
     "main": "src/index.ts",
     "dependencies": {
         "@discordjs/opus": "^0.3.3",
+        "axios": "^0.21.1",
+        "cheerio": "^1.0.0-rc.5",
         "consola": "^2.15.0",
         "cross-fetch": "^3.0.6",
         "discord-paginationembed": "^2.1.0",
@@ -20,16 +22,20 @@
         "mysql": "^2.14.1",
         "node-fetch": "^2.6.1",
         "pg": "^8.5.1",
+        "puppeteer": "^6.0.0",
         "reflect-metadata": "^0.1.10",
         "sqlite": "^4.0.19",
-        "typeorm": "0.2.29"
+        "typeorm": "0.2.29",
+        "waait": "^1.0.5"
     },
     "devDependencies": {
+        "@types/cheerio": "^0.22.23",
         "@types/colors": "^1.2.1",
         "@types/jest": "^26.0.19",
         "@types/mongoose": "^5.10.3",
         "@types/node": "^8.0.29",
         "@types/node-fetch": "^2.5.7",
+        "@types/puppeteer": "^5.4.2",
         "jest-fetch-mock": "^3.0.3",
         "nodemon": "^2.0.6",
         "pm2": "^4.5.0",

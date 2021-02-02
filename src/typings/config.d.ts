@@ -5,6 +5,7 @@ declare global {
             PREFIX: string;
             API_KEY: string;
             MONGO_URI: string;
+            COOKIE: string;
         }
     }
 }

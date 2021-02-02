@@ -18,6 +18,8 @@ import shuffle from "./music/shuffle";
 import volume from "./music/volume";
 import move from "./music/move";
 import now from "./music/now";
+import lyrics from "./music/lyrics";
+import playtop from "./music/playtop";
 import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
@@ -25,6 +27,7 @@ import typo from "./typo";
 
 const commands = {
     ban,
+    lyrics,
     clear,
     dab,
     gif,
@@ -47,6 +50,7 @@ const commands = {
     shuffle,
     move,
     reactionrole,
+    playtop,
     volume,
 };
 

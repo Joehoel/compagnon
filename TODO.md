@@ -16,9 +16,9 @@
 -   [x] Multipage queue
 -   [x] Fix move command
 -   [x] Now playing command
--   [ ] Fix DJ role
--   [ ] Vote skip
--   [ ] Only .play when in voice channel
+-   [x] Fix DJ role
+-   [x] Vote skip
+-   [x] Only .play when in voice channel
 -   [ ] Lyrics command
 -   [ ] Pause/unpause command
 -   [ ] Show number in queue when adding a song to the queue with .play or when you use .move

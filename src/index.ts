@@ -18,12 +18,13 @@ import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { createConnection } from "typeorm";
+import { getJson, getLyricPath, getLyrics, getSongId, search } from "./utils/lyrics";
 
 // Environment variables
 const { TOKEN } = process.env;
 
 // Register new discord client
-const client = new Client();
+const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 
 client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();

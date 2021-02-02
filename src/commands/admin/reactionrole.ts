@@ -1,7 +1,5 @@
-import { Message } from "discord.js";
 import { MessageEmbed, RoleResolvable } from "discord.js";
 import Command from "../../utils/Command";
-import { embed } from "../../utils/helpers";
 
 export default new Command({
     name: "reactionrole",
@@ -9,7 +7,7 @@ export default new Command({
     permissions: ["MANAGE_ROLES"],
     aliases: ["rr"],
     async execute(client, message) {
-        const channel = "447101212094103552";
+        const channel = "521379692163366921";
         const memberRole = message.guild!.roles.cache.find((role) => role.id === "737240291089711175");
 
         const memberEmoji = "🙋‍♂️";
