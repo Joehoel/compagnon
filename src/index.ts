@@ -2,8 +2,6 @@
 import "dotenv/config";
 import "module-alias/register";
 
-import path from "path";
-
 // Handlers
 import music from "@/features/music";
 import command from "./features/command";
@@ -18,7 +16,6 @@ import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { createConnection } from "typeorm";
-import { getJson, getLyricPath, getLyrics, getSongId, search } from "./utils/lyrics";
 
 // Environment variables
 const { TOKEN } = process.env;
