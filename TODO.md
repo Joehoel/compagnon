@@ -19,7 +19,7 @@
 -   [x] Fix DJ role
 -   [x] Vote skip
 -   [x] Only .play when in voice channel
--   [ ] Lyrics command
+-   [x] Lyrics command
 -   [ ] Pause/unpause command
 -   [ ] Show number in queue when adding a song to the queue with .play or when you use .move
 -   [ ] .playtop command

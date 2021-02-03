@@ -71,7 +71,7 @@ export function embed(options: MessageEmbedOptions, message: Message): MessageEm
         ...options,
         color: "#ffc600",
         footer: {
-            text: message.author.tag,
+            text: `Requested by ${message.author.username}${options.footer ? "|" + options.footer.text : ""}`,
             iconURL: message.author.displayAvatarURL({ format: "png", dynamic: true }),
         },
     });

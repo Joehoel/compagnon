@@ -20,12 +20,7 @@ export default new Command({
         }
 
         try {
-            // const songs = await search(song);
-            // if (!songs.length) {
-            //     return message.channel.send(embed({ title: "Couldn't find any lyrics for that song :(" }, message));
-            // }
             const { lyrics, name, artist } = await getLyrics(song);
-            console.log(name);
             if (lyrics.trim().length) {
                 return await message.channel.send(
                     embed({ title: `${name} - ${artist}`, description: lyrics }, message)
@@ -36,5 +31,3 @@ export default new Command({
         }
     },
 });
-
-// Jesse was here

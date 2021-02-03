@@ -20,6 +20,7 @@ import move from "./music/move";
 import now from "./music/now";
 import lyrics from "./music/lyrics";
 import playtop from "./music/playtop";
+import autoplay from "./music/autoplay";
 import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
@@ -35,6 +36,7 @@ const commands = {
     meme,
     ping,
     poll,
+    autoplay,
     say,
     status,
     help,

@@ -22,7 +22,6 @@
         "mysql": "^2.14.1",
         "node-fetch": "^2.6.1",
         "pg": "^8.5.1",
-        "puppeteer": "^6.0.0",
         "reflect-metadata": "^0.1.10",
         "sqlite": "^4.0.19",
         "typeorm": "0.2.29",

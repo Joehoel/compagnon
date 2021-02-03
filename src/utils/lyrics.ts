@@ -2,9 +2,8 @@ import axios from "axios";
 import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 
-const { COOKIE } = process.env;
+const { COOKIE, GENIUS_TOKEN } = process.env;
 const base = "https://api.genius.com";
-const token = "mMJ2ajaoUIm-6ieOFxIWLqx7w2fyRs8_DcYpWjiTHBoXRBFYTu1lOrxVoTU1whr1";
 
 export async function getSongId(artistId: number) {
     let currentPage = 1;
@@ -72,7 +71,7 @@ export async function getLyricPath(songId: number) {
 
 export async function getJson(path: string, params: Record<string, any> = {}, headers: Record<string, any> = {}) {
     const url = [base, path].join("/");
-    const bearer = `Bearer ${token}`;
+    const bearer = `Bearer ${GENIUS_TOKEN}`;
     if (headers) {
         headers["Authorization"] = bearer;
     } else {

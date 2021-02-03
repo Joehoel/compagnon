@@ -6,6 +6,7 @@ declare global {
             API_KEY: string;
             MONGO_URI: string;
             COOKIE: string;
+            GENIUS_TOKEN: string;
         }
     }
 }
