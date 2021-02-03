@@ -9,7 +9,7 @@ export default new Command({
     execute(client, message) {
         const queue = client.music.getQueue(message);
         const song = queue.songs[0];
-        if (song)
+        if (song && queue)
             return message.channel.send(
                 new MessageEmbed({
                     title: "Music",
