@@ -25,13 +25,13 @@ import ping from "./ping";
 import poll from "./poll";
 import leaderboard from "./leaderboard";
 import typo from "./typo";
-import todo from "./todo";
+// import todo from "./todo";
 
 const commands = {
     ban,
     lyrics,
     clear,
-    todo,
+    // todo,
     dab,
     gif,
     kick,
