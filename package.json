@@ -23,6 +23,7 @@
         "node-fetch": "^2.6.1",
         "pg": "^8.5.1",
         "reflect-metadata": "^0.1.10",
+        "snoowrap": "^1.22.0",
         "sqlite": "^4.0.19",
         "typeorm": "0.2.29",
         "waait": "^1.0.5"

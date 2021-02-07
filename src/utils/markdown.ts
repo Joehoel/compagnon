@@ -1,7 +1,9 @@
-const { readFile } = require("fs/promises");
+import fs from "fs";
 const path = "./TODO.md";
 
-export async function getTodos() {
-    const data = await readFile(path, { encoding: "utf8" });
-    return data;
+export async function getTodos(): Promise<void> {
+    fs.readFile(path, { encoding: "utf-8" }, (err, data) => {
+        if (err) throw new Error(err.message);
+        if (data) return data;
+    });
 }

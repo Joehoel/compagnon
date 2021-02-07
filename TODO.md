@@ -11,6 +11,7 @@
 -   [x] Alias commands
 -   [ ] Level system (f%ck MEE6, DEATH TO MEE6!)
 -   [x] Jamaro stinkt
+-   [ ] Fix clear command
 
 ### Music commands
 
