@@ -8,7 +8,7 @@ export default new Command({
     usage: "<amount>",
     permissions: ["MANAGE_MESSAGES"],
     async execute(client, message, args) {
-        const amount = parseInt(args[0]);
+        const amount = parseInt(args[0]) + 1;
 
         if (isNaN(amount)) {
             return message.reply("The amount parameter isn`t a number!");
