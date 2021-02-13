@@ -27,3 +27,5 @@
 -   [x] .random / .shuffle command
 -   [x] .autoplay command to disable it
 -   [x] User can use music command like .leave or .play when not in voice chat
+-   [ ] Clear queue command
+-   [ ] Return a message on shuffle command
