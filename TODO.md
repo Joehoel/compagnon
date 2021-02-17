@@ -11,6 +11,8 @@
 -   [x] Alias commands
 -   [ ] Level system (f%ck MEE6, DEATH TO MEE6!)
 -   [x] Jamaro stinkt
+-   [ ] Create leaderboards API
+-   [ ] Create GUI and Web App for leaderboards
 
 ### Music commands
 
