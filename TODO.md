@@ -12,6 +12,8 @@
 -   [ ] Level system (f%ck MEE6, DEATH TO MEE6!)
 -   [x] Jamaro stinkt
 -   [ ] Fix clear command
+-   [ ] Create leaderboards API
+-   [ ] Create GUI and Web App for leaderboards
 
 ### Music commands
 
@@ -28,3 +30,5 @@
 -   [x] .random / .shuffle command
 -   [x] .autoplay command to disable it
 -   [x] User can use music command like .leave or .play when not in voice chat
+-   [ ] Clear queue command
+-   [ ] Return a message on shuffle command
