@@ -1,10 +1,6 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { GuildMember } from "discord.js";
-import { MessageEmbedOptions } from "discord.js";
-import { Message, MessageEmbed } from "discord.js";
-import { Guild } from "discord.js";
-import { EmbedFieldData } from "discord.js";
+import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
 import redis from "../lib/redis";
@@ -77,6 +73,10 @@ export function embed(options: MessageEmbedOptions, message: Message): MessageEm
             iconURL: message.author.displayAvatarURL({ format: "png", dynamic: true }),
         },
     });
+}
+
+export function distinctArrayByKey<T>(array: T[], key: keyof T): T[] {
+    return [...new Map(array.map((item: T) => [item[key], item])).values()];
 }
 
 export const getRole = (guild: Guild, roleName: string) => {

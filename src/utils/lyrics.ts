@@ -1,5 +1,4 @@
 import axios from "axios";
-import puppeteer from "puppeteer";
 import cheerio from "cheerio";
 
 const { COOKIE, GENIUS_TOKEN } = process.env;
@@ -38,28 +37,28 @@ export async function getSongId(artistId: number) {
     return songs;
 }
 
-export async function getLyrics(songName: string) {
-    // const path = await getLyricPath(songId);
+export async function getLyrics(songId: number) {
+    const path = await getLyricPath(songId);
 
-    // const url = `http://genius.com${path}`;
-    // const { data: page } = await axios.get(url);
+    const url = `http://genius.com${path}`;
+    const { data: page } = await axios.get(url);
 
-    // // const browser = await puppeteer.launch({ headless: false });
-    // // const page = await browser.newPage();
-    // // await page.goto(url);
-    // // await page.waitForSelector(".lyrics");
-    // // const lyrics = await page.evaluate(() => {
-    // //     return document.querySelector(".lyrics")!.innerHTML;
-    // // });
+    // const browser = await puppeteer.launch({ headless: false });
+    // const page = await browser.newPage();
+    // await page.goto(url);
+    // await page.waitForSelector(".lyrics");
+    // const lyrics = await page.evaluate(() => {
+    //     return document.querySelector(".lyrics")!.innerHTML;
+    // });
 
-    // // await browser.close();
-    // const $ = cheerio.load(page, { ignoreWhitespace: true });
-    // const lyrics = $(".lyrics").text();
-    // return lyrics as string;
-    const { data } = await axios.get(`https://api.ksoft.si/lyrics/search?q=${encodeURI(songName)}&limit=1`, {
-        headers: { cookie: COOKIE },
-    });
-    return data.data[0];
+    // await browser.close();
+    const $ = cheerio.load(page, { ignoreWhitespace: true });
+    const lyrics = $(".lyrics").text().trim();
+    return lyrics as string;
+    // const { data } = await axios.get(`https://api.ksoft.si/lyrics/search?q=${encodeURI(songName)}&limit=1`, {
+    //     headers: { cookie: COOKIE },
+    // });
+    // return data.data[0];
 }
 
 export async function getLyricPath(songId: number) {
@@ -85,7 +84,13 @@ export async function getJson(path: string, params: Record<string, any> = {}, he
     }
 }
 
-export async function search(term: string) {
+interface Song {
+    id: number;
+    title: string;
+    url: string;
+}
+
+export async function search(term: string): Promise<Song> {
     const q = encodeURI(term);
     const url = `https://genius.com/api/search/multi?per_page=1&q=${q}`;
 
@@ -102,7 +107,12 @@ export async function search(term: string) {
             title: hit.result.title,
             url: hit.result.url,
         };
-    });
+    })[0];
 
     return data;
 }
+
+(async () => {
+    const { id } = await search("Wellerman");
+    console.log(await getLyrics(id));
+})();

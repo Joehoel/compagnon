@@ -3,7 +3,7 @@ import { MessageEmbed } from "discord.js";
 import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import { capitalize, embed } from "../utils/helpers";
+import { capitalize, embed, distinctArrayByKey } from "../utils/helpers";
 
 export default new Command({
     name: "leaderboard",
@@ -105,12 +105,11 @@ export default new Command({
                             { relations: ["game"] }
                         );
                         const scores = await Score.find({ where: { leaderboard: lb } });
-
                         return message.channel.send(
                             embed(
                                 {
                                     title: capitalize(leaderboardName),
-                                    fields: scores
+                                    fields: distinctArrayByKey(scores, "user")
                                         .sort((a, b) => {
                                             if (a.score < b.score) return -1;
                                             return 1;

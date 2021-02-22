@@ -1,7 +1,6 @@
 // Global
 import "dotenv/config";
 import "module-alias/register";
-import "./lib/reddit";
 
 // Handlers
 import music from "@/features/music";

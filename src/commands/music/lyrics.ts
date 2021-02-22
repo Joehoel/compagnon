@@ -20,12 +20,12 @@ export default new Command({
         }
 
         try {
-            const { lyrics, name, artist } = await getLyrics(song);
-            if (lyrics.trim().length) {
-                return await message.channel.send(
-                    embed({ title: `${name} - ${artist}`, description: lyrics }, message)
-                );
-            }
+            // const { lyrics, name, artist } = await search(song);
+            // if (lyrics.trim().length) {
+            //     return await message.channel.send(
+            //         embed({ title: `${name} - ${artist}`, description: lyrics }, message)
+            //     );
+            // }
         } catch (error) {
             client.logger.error(error);
         }
