@@ -3,13 +3,15 @@ import fetch from "cross-fetch";
 import { GuildMember } from "discord.js";
 import { MessageEmbedOptions } from "discord.js";
 import { Message, MessageEmbed } from "discord.js";
+import { Guild } from "discord.js";
 import { EmbedFieldData } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
+import redis from "../lib/redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
 
-const { API_KEY, PREFIX } = process.env;
+const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
 export async function gif(tag: string): Promise<GIFResponse> {
     const api = "https://api.giphy.com/v1/gifs/random?";
@@ -76,3 +78,40 @@ export function embed(options: MessageEmbedOptions, message: Message): MessageEm
         },
     });
 }
+
+export const getRole = (guild: Guild, roleName: string) => {
+    return guild.roles.cache.find((role) => role.name === roleName);
+};
+
+export const giveRole = (member: GuildMember, roleName: string) => {
+    const role = getRole(member.guild, roleName);
+    if (role) {
+        member.roles.add(role);
+    }
+};
+
+export const removeRole = (member: GuildMember, roleName: string) => {
+    const role = getRole(member.guild, roleName);
+    if (role) {
+        member.roles.remove(role);
+    }
+};
+
+export const onJoin = async (member: GuildMember) => {
+    const { id, guild } = member;
+
+    const redisClient = await redis();
+    try {
+        redisClient.get(`${REDIS_KEY_PREFIX}${id}-${guild.id}`, (err, result) => {
+            if (err) {
+                console.error("Redis GET error:", err);
+            } else if (result) {
+                giveRole(member, "Muted");
+            } else {
+                console.log("The user is not muted");
+            }
+        });
+    } finally {
+        redisClient.quit();
+    }
+};

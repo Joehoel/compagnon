@@ -7,6 +7,8 @@ declare global {
             MONGO_URI: string;
             COOKIE: string;
             GENIUS_TOKEN: string;
+            REDIS_PATH: string;
+            REDIS_KEY_PREFIX: string;
         }
     }
 }

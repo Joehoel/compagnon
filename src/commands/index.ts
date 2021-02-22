@@ -4,6 +4,7 @@ import kick from "./admin/kick";
 import say from "./admin/say";
 import status from "./admin/status";
 import reactionrole from "./admin/reactionrole";
+import mute from "./admin/mute";
 import dab from "./dab";
 import gif from "./gif";
 import help from "./help";
@@ -56,6 +57,7 @@ const commands = {
     reactionrole,
     playtop,
     volume,
+    mute,
 };
 
 export default commands;
