@@ -19,7 +19,7 @@ import shuffle from "./music/shuffle";
 import volume from "./music/volume";
 import move from "./music/move";
 import now from "./music/now";
-import lyrics from "./music/lyrics";
+// import lyrics from "./music/lyrics";
 import playtop from "./music/playtop";
 import autoplay from "./music/autoplay";
 import ping from "./ping";
@@ -30,7 +30,7 @@ import todo from "./todo";
 
 const commands = {
     ban,
-    lyrics,
+    // lyrics,
     clear,
     todo,
     dab,
