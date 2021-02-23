@@ -1,8 +1,8 @@
 {
     "name": "compagnon",
     "version": "1.0.0",
-    "description": "",
-    "main": "src/index.ts",
+    "description": "Discord bot",
+    "main": "dist/index.js",
     "dependencies": {
         "@discordjs/opus": "^0.3.3",
         "axios": "^0.21.1",
