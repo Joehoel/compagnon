@@ -1,5 +1,6 @@
 import axios from "axios";
 import cheerio from "cheerio";
+import { LyricsAPI } from "../typings";
 
 const { COOKIE, GENIUS_TOKEN } = process.env;
 const base = "https://api.genius.com";
@@ -37,7 +38,7 @@ export async function getSongId(artistId: number) {
     return songs;
 }
 
-export async function getLyrics(songName: string) {
+export async function getLyrics(songName: string): Promise<LyricsAPI> {
     // const path = await getLyricPath(songId);
 
     // const url = `http://genius.com${path}`;

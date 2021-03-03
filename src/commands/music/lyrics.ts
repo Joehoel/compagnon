@@ -20,10 +20,18 @@ export default new Command({
         }
 
         try {
-            const { lyrics, name, artist } = await getLyrics(song);
+            const { lyrics, name, artist, album_art, url } = await getLyrics(song);
             if (lyrics.trim().length) {
                 return await message.channel.send(
-                    embed({ title: `${name} - ${artist}`, description: lyrics }, message)
+                    embed(
+                        {
+                            title: `${name} - ${artist}`,
+                            description: lyrics,
+                            thumbnail: { url: album_art },
+                            url,
+                        },
+                        message
+                    )
                 );
             }
         } catch (error) {
