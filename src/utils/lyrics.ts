@@ -37,11 +37,11 @@ export async function getSongId(artistId: number) {
     return songs;
 }
 
-export async function getLyrics(songId: number) {
-    const path = await getLyricPath(songId);
+export async function getLyrics(songName: string) {
+    // const path = await getLyricPath(songId);
 
-    const url = `http://genius.com${path}`;
-    const { data: page } = await axios.get(url);
+    // const url = `http://genius.com${path}`;
+    // const { data: page } = await axios.get(url);
 
     // const browser = await puppeteer.launch({ headless: false });
     // const page = await browser.newPage();
@@ -52,13 +52,13 @@ export async function getLyrics(songId: number) {
     // });
 
     // await browser.close();
-    const $ = cheerio.load(page, { ignoreWhitespace: true });
-    const lyrics = $(".lyrics").text().trim();
-    return lyrics as string;
-    // const { data } = await axios.get(`https://api.ksoft.si/lyrics/search?q=${encodeURI(songName)}&limit=1`, {
-    //     headers: { cookie: COOKIE },
-    // });
-    // return data.data[0];
+    // const $ = cheerio.load(page, { ignoreWhitespace: true });
+    // const lyrics = $(".lyrics").text().trim();
+    // return lyrics as string;
+    const { data } = await axios.get(`https://api.ksoft.si/lyrics/search?q=${encodeURI(songName)}&limit=1`, {
+        headers: { cookie: COOKIE },
+    });
+    return data.data[0];
 }
 
 export async function getLyricPath(songId: number) {
@@ -90,29 +90,29 @@ interface Song {
     url: string;
 }
 
-export async function search(term: string): Promise<Song> {
-    const q = encodeURI(term);
-    const url = `https://genius.com/api/search/multi?per_page=1&q=${q}`;
+// export async function search(term: string): Promise<Song> {
+//     const q = encodeURI(term);
+//     const url = `https://genius.com/api/search/multi?per_page=1&q=${q}`;
 
-    const { data: raw } = await axios.get(url, {
-        headers: {
-            "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-        },
-    });
+//     const { data: raw } = await axios.get(url, {
+//         headers: {
+//             "User-Agent":
+//                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+//         },
+//     });
 
-    const data = raw.response.sections[1].hits.map((hit: any) => {
-        return {
-            id: hit.result.id,
-            title: hit.result.title,
-            url: hit.result.url,
-        };
-    })[0];
+//     const data = raw.response.sections[1].hits.map((hit: any) => {
+//         return {
+//             id: hit.result.id,
+//             title: hit.result.title,
+//             url: hit.result.url,
+//         };
+//     })[0];
 
-    return data;
-}
+//     return data;
+// }
 
-(async () => {
-    const { id } = await search("Wellerman");
-    console.log(await getLyrics(id));
-})();
+// (async () => {
+//     const { id } = await search("Wellerman");
+//     console.log(await getLyrics(id));
+// })();
