@@ -8,7 +8,7 @@ import command from "./features/command";
 
 // Command related
 import Command from "@/utils/Command";
-import Commands from "./commands";
+import * as commands from "./commands";
 
 // Other
 import colors from "colors";
@@ -29,8 +29,8 @@ client.aliases = new Collection<string, string>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 
-for (const file in Commands) {
-  const command = Commands[file as keyof typeof Commands];
+for (const file in commands) {
+  const command = commands[file as keyof typeof commands];
 
   // Register command
   client.commands.set(file, command);

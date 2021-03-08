@@ -1,5 +1,5 @@
 import { Collection } from "discord.js";
-import Command from "../utils/Command";
+import Command from "../Command";
 import DisTube from "distube";
 import { Consola } from "consola";
 

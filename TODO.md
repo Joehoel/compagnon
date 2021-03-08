@@ -11,10 +11,10 @@
 - [x] Alias commands
 - [ ] Level system (f%ck MEE6, DEATH TO MEE6!)
 - [x] Jamaro stinkt
-- [ ] Fix clear command
+- [x] Fix clear command
 - [ ] Create leaderboards API
 - [ ] Create GUI and Web App for leaderboards
-- [ ] Bad words filter
+- [x] Bad words filter
 
 ### Music commands
 
@@ -25,7 +25,7 @@
 - [x] Vote skip
 - [x] Only .play when in voice channel
 - [x] Lyrics command
-- [ ] Pause/unpause command
+- [x] Pause/unpause command
 - [ ] Show number in queue when adding a song to the queue with .play or when you use .move
 - [ ] .playtop command
 - [x] .random / .shuffle command

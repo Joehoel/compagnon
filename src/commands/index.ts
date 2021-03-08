@@ -1,63 +1,35 @@
-import ban from "./admin/ban";
-import clear from "./admin/clear";
-import kick from "./admin/kick";
-import say from "./admin/say";
-import status from "./admin/status";
-import reactionrole from "./admin/reactionrole";
-import mute from "./admin/mute";
-import dab from "./dab";
-import gif from "./gif";
-import help from "./help";
-import meme from "./meme";
-import loop from "./music/loop";
-import play from "./music/play";
-import queue from "./music/queue";
-import skip from "./music/skip";
-import stop from "./music/stop";
-import remove from "./music/remove";
-import shuffle from "./music/shuffle";
-import volume from "./music/volume";
-import move from "./music/move";
-import now from "./music/now";
-import lyrics from "./music/lyrics";
-import playtop from "./music/playtop";
-import autoplay from "./music/autoplay";
-import ping from "./ping";
-import poll from "./poll";
-import leaderboard from "./leaderboard";
-import typo from "./typo";
-import todo from "./todo";
+// Admin commands
+export { default as ban } from "./admin/ban";
+export { default as clear } from "./admin/clear";
+export { default as kick } from "./admin/kick";
+export { default as say } from "./admin/say";
+export { default as status } from "./admin/status";
+export { default as reactionrole } from "./admin/reactionrole";
+export { default as mute } from "./admin/mute";
 
-const commands = {
-    ban,
-    lyrics,
-    clear,
-    todo,
-    dab,
-    gif,
-    kick,
-    meme,
-    ping,
-    poll,
-    autoplay,
-    say,
-    status,
-    help,
-    play,
-    skip,
-    loop,
-    stop,
-    queue,
-    leaderboard,
-    typo,
-    remove,
-    now,
-    shuffle,
-    move,
-    reactionrole,
-    playtop,
-    volume,
-    mute,
-};
+// Music commands
+export { default as loop } from "./music/loop";
+export { default as play } from "./music/play";
+export { default as queue } from "./music/queue";
+export { default as skip } from "./music/skip";
+export { default as stop } from "./music/stop";
+export { default as remove } from "./music/remove";
+export { default as shuffle } from "./music/shuffle";
+export { default as volume } from "./music/volume";
+export { default as move } from "./music/move";
+export { default as now } from "./music/now";
+export { default as lyrics } from "./music/lyrics";
+export { default as playtop } from "./music/playtop";
+export { default as autoplay } from "./music/autoplay";
+export { default as empty } from "./music/empty";
 
-export default commands;
+// Normal commands
+export { default as ping } from "./ping";
+export { default as poll } from "./poll";
+export { default as leaderboard } from "./leaderboard";
+export { default as typo } from "./typo";
+export { default as todo } from "./todo";
+export { default as dab } from "./dab";
+export { default as gif } from "./gif";
+export { default as help } from "./help";
+export { default as meme } from "./meme";

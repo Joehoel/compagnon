@@ -15,7 +15,7 @@
     "strictFunctionTypes": true,
     "downlevelIteration": true,
     "skipLibCheck": true,
-    "typeRoots": ["./src/typings", "node_modules/@types"],
+    "typeRoots": ["src/utils/typings", "node_modules/@types"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "paths": {
