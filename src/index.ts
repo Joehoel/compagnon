@@ -16,6 +16,7 @@ import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { createConnection } from "typeorm";
+import filter from "./features/filter";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -29,36 +30,37 @@ client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true }
 client.logger = consola;
 
 for (const file in Commands) {
-    const command = Commands[file as keyof typeof Commands];
+  const command = Commands[file as keyof typeof Commands];
 
-    // Register command
-    client.commands.set(file, command);
+  // Register command
+  client.commands.set(file, command);
 
-    // Register all command aliases
-    command.aliases.forEach((alias: string) => {
-        client.aliases.set(alias, file);
-    });
+  // Register all command aliases
+  command.aliases.forEach((alias: string) => {
+    client.aliases.set(alias, file);
+  });
 }
 
 // Ready!
 client.on("ready", async () => {
-    try {
-        // Music handler
-        music(client.music);
-        client.logger.success("Compagnon" + colors.green.bold(" online!"));
+  try {
+    // Music handler
+    music(client.music);
+    client.logger.success("Compagnon" + colors.green.bold(" online!"));
 
-        // Database connection
-        await createConnection();
-        client.logger.success("Database" + colors.green.bold(" connected!"));
-    } catch (error) {
-        client.logger.error(error);
-    }
+    // Database connection
+    await createConnection();
+    client.logger.success("Database" + colors.green.bold(" connected!"));
+  } catch (error) {
+    client.logger.error(error);
+  }
 });
 
 // On every message
 client.on("message", async (message) => {
-    // Command handler
-    command(client, message);
+  // Command handler
+  filter(client, message);
+  command(client, message);
 });
 
 // Login
