@@ -1,6 +1,5 @@
 import axios from "axios";
-import cheerio from "cheerio";
-import { LyricsAPI } from "./typings";
+import { LyricsAPI } from "../typings";
 
 const { COOKIE, GENIUS_TOKEN } = process.env;
 const base = "https://api.genius.com";

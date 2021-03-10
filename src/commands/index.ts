@@ -5,7 +5,7 @@ export { default as kick } from "./admin/kick";
 export { default as say } from "./admin/say";
 export { default as status } from "./admin/status";
 export { default as reactionrole } from "./admin/reactionrole";
-export { default as mute } from "./admin/mute";
+// export { default as mute } from "./admin/mute";
 
 // Music commands
 export { default as loop } from "./music/loop";
@@ -33,3 +33,4 @@ export { default as dab } from "./dab";
 export { default as gif } from "./gif";
 export { default as help } from "./help";
 export { default as meme } from "./meme";
+export { default as user } from "./user";

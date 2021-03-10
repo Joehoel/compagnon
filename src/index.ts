@@ -3,11 +3,11 @@ import "dotenv/config";
 import "module-alias/register";
 
 // Handlers
-import music from "@/features/music";
+import music from "./features/music";
 import command from "./features/command";
 
 // Command related
-import Command from "@/utils/Command";
+import Command from "./utils/Command";
 import * as commands from "./commands";
 
 // Other

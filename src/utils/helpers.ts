@@ -1,10 +1,11 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions, User } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
+import { Fucks } from "../entity/Fucks";
 import redis from "../lib/redis";
-import { GIFResponse, MemeResponse } from "./typings";
+import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
@@ -73,25 +74,25 @@ export function distinctArrayByKey<T>(array: T[], key: keyof T): T[] {
   return [...new Map(array.map((item: T) => [item[key], item])).values()];
 }
 
-export const getRole = (guild: Guild, roleName: string) => {
+export function getRole(guild: Guild, roleName: string) {
   return guild.roles.cache.find((role) => role.name === roleName);
-};
+}
 
-export const giveRole = (member: GuildMember, roleName: string) => {
+export function giveRole(member: GuildMember, roleName: string) {
   const role = getRole(member.guild, roleName);
   if (role) {
     member.roles.add(role);
   }
-};
+}
 
-export const removeRole = (member: GuildMember, roleName: string) => {
+export function removeRole(member: GuildMember, roleName: string) {
   const role = getRole(member.guild, roleName);
   if (role) {
     member.roles.remove(role);
   }
-};
+}
 
-export const onJoin = async (member: GuildMember) => {
+export async function onJoin(member: GuildMember) {
   const { id, guild } = member;
 
   const redisClient = await redis();
@@ -108,4 +109,25 @@ export const onJoin = async (member: GuildMember) => {
   } finally {
     redisClient.quit();
   }
-};
+}
+
+export async function fuck(from: User, to: User) {
+  const toFuck = await Fucks.findOne({ where: { user: to.toString() } });
+  const fromFuck = await Fucks.findOne({ where: { user: from.toString() } });
+  if (!toFuck) {
+    const newToFuck = new Fucks({ user: to.toString(), gotFucked: 1 });
+    await newToFuck.save();
+  }
+  if (!fromFuck) {
+    const newFromFuck = new Fucks({ user: from.toString(), fucksGiven: 1 });
+    await newFromFuck.save();
+  }
+  if (toFuck) {
+    toFuck.gotFucked++;
+    await toFuck.save();
+  }
+  if (fromFuck) {
+    fromFuck.fucksGiven++;
+    await fromFuck.save();
+  }
+}

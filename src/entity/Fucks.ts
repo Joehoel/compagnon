@@ -10,11 +10,11 @@ export class Fucks extends BaseEntity {
   user: string;
 
   @Index()
-  @Column()
+  @Column({ default: 0 })
   fucksGiven: number;
 
   @Index()
-  @Column()
+  @Column({ default: 0 })
   gotFucked: number;
 
   @CreateDateColumn()
