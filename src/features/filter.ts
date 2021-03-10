@@ -7,9 +7,9 @@ const { PREFIX } = process.env;
 export default async (client: Client, message: Message) => {
   if (message.content.startsWith(PREFIX) || message.author.bot) return;
   const text = message.content.toLowerCase();
-  if (text.includes("fuck") && message?.mentions?.members?.first()?.user) {
-    fuck(message.author, message.mentions.members?.first()!.user);
-  }
+  // if (text.includes("fuck") && message?.mentions?.members?.first()?.user) {
+  //   fuck(message.author, message.mentions.members?.first()!.user);
+  // }
 
   const filter = new Filter();
   const lists = {
