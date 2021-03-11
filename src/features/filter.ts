@@ -1,20 +1,18 @@
 import Filter from "bad-words";
 import { Client, Message } from "discord.js";
 import fs from "fs";
-import { fuck } from "../utils/helpers";
+import { Swear } from "../entity/Swear";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
   if (message.content.startsWith(PREFIX) || message.author.bot) return;
   const text = message.content.toLowerCase();
-  // if (text.includes("fuck") && message?.mentions?.members?.first()?.user) {
-  //   fuck(message.author, message.mentions.members?.first()!.user);
-  // }
 
   const filter = new Filter();
   const lists = {
     nl: "./src/features/scheldwoorden-nl.txt",
     en: "./src/features/scheldwoorden-en.txt",
+    extra: "./src/features/scheldwoorden.txt",
   };
 
   Object.values(lists).forEach((path) => {
@@ -23,8 +21,19 @@ export default async (client: Client, message: Message) => {
     filter.addWords(...words);
   });
 
-  if (filter.isProfane(message.content)) {
-    client.commands.get("mute")?.execute(client, message, [message.author.toString(), "1", "m"]);
+  if (filter.isProfane(text)) {
+    const user = message.author.toString();
+    client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
+
+    const swear = await Swear.findOne({ where: { user } });
+    if (swear) {
+      swear.swears++;
+      await swear.save();
+    } else {
+      const newSwear = new Swear({ user });
+      await newSwear.save();
+    }
+
     return message.reply("Ga je mond wassen! 🧼");
   }
 };

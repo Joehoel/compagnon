@@ -1,9 +1,8 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions, User } from "discord.js";
+import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
-import { Fucks } from "../entity/Fucks";
 import redis from "../lib/redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
@@ -108,26 +107,5 @@ export async function onJoin(member: GuildMember) {
     });
   } finally {
     redisClient.quit();
-  }
-}
-
-export async function fuck(from: User, to: User) {
-  const toFuck = await Fucks.findOne({ where: { user: to.toString() } });
-  const fromFuck = await Fucks.findOne({ where: { user: from.toString() } });
-  if (!toFuck) {
-    const newToFuck = new Fucks({ user: to.toString(), gotFucked: 1 });
-    await newToFuck.save();
-  }
-  if (!fromFuck) {
-    const newFromFuck = new Fucks({ user: from.toString(), fucksGiven: 1 });
-    await newFromFuck.save();
-  }
-  if (toFuck) {
-    toFuck.gotFucked++;
-    await toFuck.save();
-  }
-  if (fromFuck) {
-    fromFuck.fucksGiven++;
-    await fromFuck.save();
   }
 }

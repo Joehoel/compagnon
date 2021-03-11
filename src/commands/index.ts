@@ -33,4 +33,4 @@ export { default as dab } from "./dab";
 export { default as gif } from "./gif";
 export { default as help } from "./help";
 export { default as meme } from "./meme";
-export { default as user } from "./user";
+export { default as swears } from "./swears";

@@ -1,7 +1,7 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity("fucks")
-export class Fucks extends BaseEntity {
+@Entity("swears")
+export class Swear extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,11 +11,7 @@ export class Fucks extends BaseEntity {
 
   @Index()
   @Column({ default: 0 })
-  fucksGiven: number;
-
-  @Index()
-  @Column({ default: 0 })
-  gotFucked: number;
+  swears: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -23,7 +19,7 @@ export class Fucks extends BaseEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  constructor(model?: Partial<Fucks>) {
+  constructor(model?: Partial<Swear>) {
     super();
     Object.assign(this, model);
   }
