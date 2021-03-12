@@ -45,7 +45,7 @@ A discord bot built with discord.js
 
 :heavy_check_mark: Music commands;\
 :heavy_check_mark: Admin commands;\
-:heavy_check_mark: Leaderboard system;
+:heavy_check_mark: Leaderboard system;\
 :heavy_check_mark: Language filtering;
 
 ## :rocket: Technologies ##
