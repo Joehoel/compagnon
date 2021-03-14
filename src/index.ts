@@ -22,6 +22,7 @@ const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 
 client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
+client.snipes = new Collection<string, any>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 

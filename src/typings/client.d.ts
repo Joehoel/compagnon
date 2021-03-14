@@ -7,6 +7,7 @@ declare module "discord.js" {
   interface Client {
     commands: Collection<string, Command>;
     aliases: Collection<string, string>;
+    snipes: Collection<string, Snipe>;
     music: DisTube;
     logger: Consola;
   }

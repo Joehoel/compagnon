@@ -34,3 +34,4 @@ export { default as gif } from "./gif";
 export { default as help } from "./help";
 export { default as meme } from "./meme";
 export { default as swears } from "./swears";
+export { default as snipe } from "./snipe";

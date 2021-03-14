@@ -1,7 +1,7 @@
 import colors from "colors";
 import { Client } from "discord.js";
 import { createConnection } from "typeorm";
-import music from "../features/music";
+import { music } from "../features";
 
 export default async (client: Client) => {
   try {
