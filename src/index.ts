@@ -2,21 +2,17 @@
 import "dotenv/config";
 import "module-alias/register";
 
-// Handlers
-import music from "./features/music";
-import command from "./features/command";
+// Events
+import * as events from "./events";
 
 // Command related
 import Command from "./utils/Command";
 import * as commands from "./commands";
 
 // Other
-import colors from "colors";
 import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
-import { createConnection } from "typeorm";
-import filter from "./features/filter";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -43,24 +39,17 @@ for (const file in commands) {
 
 // Ready!
 client.on("ready", async () => {
-  try {
-    // Music handler
-    music(client.music);
-    client.logger.success("Compagnon" + colors.green.bold(" online!"));
-
-    // Database connection
-    await createConnection();
-    client.logger.success("Database" + colors.green.bold(" connected!"));
-  } catch (error) {
-    client.logger.error(error);
-  }
+  await events.ready(client);
 });
 
 // On every message
 client.on("message", async (message) => {
-  // Command handler
-  filter(client, message);
-  command(client, message);
+  await events.message(client, message);
+});
+
+// When a message is deleted
+client.on("messageDelete", async (message) => {
+  await events.messageDelete(client, message);
 });
 
 // Login
