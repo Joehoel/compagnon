@@ -15,6 +15,7 @@
 - [ ] Create leaderboards API
 - [ ] Create GUI and Web App for leaderboards
 - [x] Bad words filter
+- [ ] Snipe command
 
 ### Music commands
 
