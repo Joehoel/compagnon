@@ -9,7 +9,6 @@ export default async (client: Client, message: Message) => {
   const text = message.content.toLowerCase();
 
   const filter = new Filter();
-  filter.removeWords("lol", "hoe", "hoor");
 
   const lists = {
     nl: "./src/features/scheldwoorden-nl.txt",
@@ -22,6 +21,8 @@ export default async (client: Client, message: Message) => {
     const words = file.split(", ").map((word) => word.toLowerCase().trim());
     filter.addWords(...words);
   });
+
+  filter.removeWords("lol", "hoe", "hoor");
 
   if (filter.isProfane(text)) {
     const user = message.author.toString();
