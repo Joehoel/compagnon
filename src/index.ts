@@ -54,5 +54,13 @@ client.on("messageDelete", async (message) => {
   await events.messageDelete(client, message);
 });
 
+client.on("messageReactionAdd", async (reaction, user) => {
+  await events.messageReactionAdd(client, reaction, user);
+});
+
+client.on("messageReactionRemove", async (reaction, user) => {
+  await events.messageReactionRemove(client, reaction, user);
+});
+
 // Login
 client.login(TOKEN);
