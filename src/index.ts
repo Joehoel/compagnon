@@ -13,6 +13,7 @@ import * as commands from "./commands";
 import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
+import { Snipe } from "./typings";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -22,7 +23,7 @@ const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 
 client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
-client.snipes = new Collection<string, any>();
+client.snipes = new Collection<string, Snipe>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 

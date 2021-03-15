@@ -2,6 +2,7 @@ import { Collection } from "discord.js";
 import Command from "../utils/Command";
 import DisTube from "distube";
 import { Consola } from "consola";
+import { Snipe } from "./";
 
 declare module "discord.js" {
   interface Client {
