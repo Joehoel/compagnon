@@ -9,6 +9,8 @@ export default async (client: Client, message: Message) => {
   const text = message.content.toLowerCase();
 
   const filter = new Filter();
+  filter.removeWords("lol", "hoe", "hoor");
+
   const lists = {
     nl: "./src/features/scheldwoorden-nl.txt",
     en: "./src/features/scheldwoorden-en.txt",
