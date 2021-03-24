@@ -1,10 +1,12 @@
 import { Client, Message } from "discord.js";
-import { command, filter } from "../features";
+import * as features from "../features";
 
 export default async (client: Client, message: Message) => {
   try {
-    await filter(client, message);
-    await command(client, message);
+    client.emojis();
+    await features.filter(client, message);
+    await features.command(client, message);
+    await features.polls(client, message);
   } catch (error) {
     client.logger.error(error);
   }

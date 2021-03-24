@@ -48,7 +48,7 @@ export default new Command({
   usage: "<question> <optional answer A> <optional answer B>",
   args: true,
   admin: false,
-  execute(client, message) {
+  async execute(client, message) {
     let args = message.content.match(/"(.+?)"/g);
     if (args) {
       if (!canSendPoll(message.author.id) && !message.member!.hasPermission("ADMINISTRATOR")) {
@@ -59,12 +59,13 @@ export default new Command({
         pollLog[message.author.id] = {
           lastPoll: Date.now(),
         };
-
+        const id = `#${question.toUpperCase()?.substr(0, 1) + Math.floor(Math.random() * 100)}`;
+        await message.delete();
         return message.channel
           .send(
             new MessageEmbed()
               .setColor("#ffc600")
-              .setTitle(question)
+              .setTitle(`${question} ${id}`)
               .setTimestamp()
               .setFooter(`Poll started by: ${message.author.username}`, message.author.displayAvatarURL())
           )
@@ -80,6 +81,7 @@ export default new Command({
         // multiple choice
         args = args.map((a) => a.replace(/"/g, ""));
         const question = args[0];
+        const id = `#${question.toUpperCase()?.substr(0, 1) + Math.floor(Math.random() * 100)}`;
         const questionOptions = [...new Set(args.slice(1))];
         if (questionOptions.length > 20) {
           return message.channel.send(`${message.author} Polls are limited to 20 options.`);
@@ -87,11 +89,12 @@ export default new Command({
           pollLog[message.author.id] = {
             lastPoll: Date.now(),
           };
+          await message.delete();
           return message.channel
             .send(
               new MessageEmbed()
                 .setColor("#ffc600")
-                .setTitle(question)
+                .setTitle(`${question} ${id}`)
                 .setDescription(`${questionOptions.map((option, i) => `${options[i]} - ${option}`).join("\n")}`)
                 .setFooter(`Poll started by: ${message.author.username}`, `${message.author.displayAvatarURL()}`)
                 .setTimestamp()

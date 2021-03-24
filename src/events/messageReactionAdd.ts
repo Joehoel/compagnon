@@ -1,10 +1,8 @@
 import { Client, MessageReaction, PartialUser, RoleResolvable, User } from "discord.js";
-import { MEMBER_EMOJI, MEMBER_ROLE_ID, REACTION_ROLE_CHANNEL } from "../utils/constants";
+import { EMOJIS, GUILD_ID, REACTION_ROLE_CHANNEL, ROLES } from "../utils/constants";
 
 export default async (client: Client, reaction: MessageReaction, user: User | PartialUser) => {
-  const memberRole = client.guilds.cache
-    .get("447097993850781696")
-    ?.roles.cache.find((role) => role.id === MEMBER_ROLE_ID);
+  const memberRole = client.guilds.cache.get(GUILD_ID)?.roles.cache.find((role) => role.id === ROLES.MEMBER);
 
   try {
     if (reaction.message.partial) await reaction.message.fetch();
@@ -13,7 +11,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
     if (!reaction.message.guild) return;
 
     if (reaction.message.channel.id == REACTION_ROLE_CHANNEL) {
-      if (reaction.emoji.name === MEMBER_EMOJI) {
+      if (reaction.emoji.name === EMOJIS.MEMBER) {
         await reaction.message.guild.members.cache.get(user.id)!.roles.add(memberRole as RoleResolvable);
       }
     }
