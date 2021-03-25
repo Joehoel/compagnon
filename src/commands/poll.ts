@@ -1,5 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import Command from "../utils/Command";
+import { ROLES } from "../utils/constants";
 
 const options = [
   "🇦",
@@ -46,6 +47,7 @@ export default new Command({
   name: "poll",
   description: "Create a poll where people can react to vote.",
   usage: "<question> <optional answer A> <optional answer B>",
+  roles: [ROLES.POLLER],
   args: true,
   admin: false,
   async execute(client, message) {
