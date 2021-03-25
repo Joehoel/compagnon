@@ -1,5 +1,6 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
+import { User } from "discord.js";
 import { Role } from "discord.js";
 import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
@@ -7,6 +8,7 @@ import { URLSearchParams } from "url";
 import redis from "../lib/redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "./Command";
+import { ROLES } from "./constants";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -74,25 +76,21 @@ export function distinctArrayByKey<T>(array: T[], key: keyof T): T[] {
   return [...new Map(array.map((item: T) => [item[key], item])).values()];
 }
 
-export function getRole(guild: Guild, roleId: string): Role | undefined;
-export function getRole(guild: Guild, roleName: string): Role | undefined {
-  if (typeof parseInt(roleName) == "number") {
-    return guild.roles.cache.find((role) => role.id === roleName);
-  }
-  return guild.roles.cache.find((role) => role.name === roleName);
+export function getRole(guild: Guild, roleId: string) {
+  return guild.roles.cache.find((role) => role.id === roleId);
 }
 
-export function giveRole(member: GuildMember, roleName: string) {
-  const role = getRole(member.guild, roleName);
+export function giveRole(member: GuildMember, roleId: string) {
+  const role = getRole(member.guild, roleId);
   if (role) {
-    member.roles.add(role);
+    return member.roles.add(role);
   }
 }
 
-export function removeRole(member: GuildMember, roleName: string) {
-  const role = getRole(member.guild, roleName);
+export function removeRole(member: GuildMember, roleId: string) {
+  const role = getRole(member.guild, roleId);
   if (role) {
-    member.roles.remove(role);
+    return member.roles.remove(role);
   }
 }
 
@@ -105,7 +103,7 @@ export async function onJoin(member: GuildMember) {
       if (err) {
         console.error("Redis GET error:", err);
       } else if (result) {
-        giveRole(member, "Muted");
+        giveRole(member, ROLES.MUTED);
       } else {
         console.log("The user is not muted");
       }

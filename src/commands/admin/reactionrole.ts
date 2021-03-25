@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import Command from "../../utils/Command";
-import { ROLES } from "../../utils/constants";
+import { EMOJIS } from "../../utils/constants";
 
 export default new Command({
   name: "reactionrole",
@@ -15,6 +15,8 @@ export default new Command({
         color: "#ffc600",
       })
     );
-    await msg.react(ROLES.MEMBER);
+    await msg.react(EMOJIS.MEMBER);
+    await msg.react(EMOJIS.SPEEDRUNNER);
+    await msg.react(EMOJIS.POLLER);
   },
 });
