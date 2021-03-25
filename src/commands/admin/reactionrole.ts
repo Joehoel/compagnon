@@ -11,7 +11,7 @@ export default new Command({
     const msg = await message.channel.send(
       new MessageEmbed({
         title: "Welkom",
-        description: "Klik op de emoji om toegang te krijgen tot de rest van server.",
+        description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n`,
         color: "#ffc600",
       })
     );
