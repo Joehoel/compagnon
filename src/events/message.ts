@@ -3,7 +3,6 @@ import * as features from "../features";
 
 export default async (client: Client, message: Message) => {
   try {
-    client.emojis();
     await features.filter(client, message);
     await features.command(client, message);
     await features.polls(client, message);

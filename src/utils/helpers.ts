@@ -1,5 +1,6 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
+import { Role } from "discord.js";
 import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
@@ -73,7 +74,11 @@ export function distinctArrayByKey<T>(array: T[], key: keyof T): T[] {
   return [...new Map(array.map((item: T) => [item[key], item])).values()];
 }
 
-export function getRole(guild: Guild, roleName: string) {
+export function getRole(guild: Guild, roleId: string): Role | undefined;
+export function getRole(guild: Guild, roleName: string): Role | undefined {
+  if (typeof parseInt(roleName) == "number") {
+    return guild.roles.cache.find((role) => role.id === roleName);
+  }
   return guild.roles.cache.find((role) => role.name === roleName);
 }
 
