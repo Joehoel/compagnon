@@ -1,6 +1,7 @@
 import Command from "../../utils/Command";
 import redis, { expire } from "../../lib/redis";
 import { getRole, giveRole, removeRole } from "../../utils/helpers";
+import { ROLES } from "../../utils/constants";
 
 const redisKeyPrefix = process.env.REDIS_KEY_PREFIX;
 
@@ -21,8 +22,8 @@ export default new Command({
         const guild = client.guilds.cache.get(guildId);
         const member = guild!.members.cache.get(memberId);
 
-        removeRole(member!, "Muted");
-        giveRole(member!, "Member");
+        removeRole(member!, ROLES.MUTED);
+        giveRole(member!, ROLES.MEMBER);
       }
     });
 
@@ -54,8 +55,8 @@ export default new Command({
 
     const targetMember = message.member?.guild.members.cache.get(id);
     if (targetMember) {
-      giveRole(targetMember, "Muted");
-      removeRole(targetMember, "Member");
+      giveRole(targetMember, ROLES.MUTED);
+      removeRole(targetMember, ROLES.MEMBER);
     }
 
     const redisClient = await redis();

@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import Command from "../../utils/Command";
-import { MEMBER_EMOJI } from "../../utils/constants";
+import { EMOJIS } from "../../utils/constants";
 
 export default new Command({
   name: "reactionrole",
@@ -11,10 +11,12 @@ export default new Command({
     const msg = await message.channel.send(
       new MessageEmbed({
         title: "Welkom",
-        description: "Klik op de emoji om toegang te krijgen tot de rest van server.",
+        description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n`,
         color: "#ffc600",
       })
     );
-    await msg.react(MEMBER_EMOJI);
+    await msg.react(EMOJIS.MEMBER);
+    await msg.react(EMOJIS.SPEEDRUNNER);
+    await msg.react(EMOJIS.POLLER);
   },
 });
