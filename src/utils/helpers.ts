@@ -1,7 +1,5 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { User } from "discord.js";
-import { Role } from "discord.js";
 import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
@@ -69,6 +67,7 @@ export function embed(options: MessageEmbedOptions, message: Message): MessageEm
   return new MessageEmbed({
     ...options,
     color: "#ffc600",
+    timestamp: Date.now(),
   });
 }
 

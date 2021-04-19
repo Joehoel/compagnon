@@ -6,6 +6,7 @@ export default async (client: Client, message: Message) => {
     await features.filter(client, message);
     await features.command(client, message);
     await features.polls(client, message);
+    await features.xp(client, message);
   } catch (error) {
     client.logger.error(error);
   }

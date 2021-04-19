@@ -1,9 +1,11 @@
 import Command from "@/utils/Command";
+import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";
 import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import { capitalize, embed, distinctArrayByKey } from "../utils/helpers";
+import { GUILD_ID } from "../utils/constants";
+import { capitalize, distinctArrayByKey, embed } from "../utils/helpers";
 
 export default new Command({
   name: "leaderboard",
@@ -133,6 +135,35 @@ export default new Command({
               embed({ title: "Something went wrong!", description: "Couldn't find that leaderboard" }, message)
             );
           }
+        }
+        if (gameName == "ranks") {
+          const rawLeaderboard = await Levels.fetchLeaderboard(GUILD_ID, 10); // We grab top 10 users with most xp in the current server.
+
+          if (rawLeaderboard.length < 1) return message.reply("Nobody's in leaderboard yet.");
+
+          const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
+
+          const lb = leaderboard.map(
+            (e: LeaderboardUser) => `${e.position}. ${e.username}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`
+          ); // We map the outputs.
+
+          message.channel.send(
+            embed(
+              {
+                title: "Ranks",
+                fields: leaderboard.map((user: LeaderboardUser, i: number) => {
+                  return {
+                    name: user.position + ".",
+                    value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(
+                      user.level + 1
+                    )}\``,
+                  };
+                }),
+              },
+              message
+            )
+          );
+          return;
         }
         break;
 

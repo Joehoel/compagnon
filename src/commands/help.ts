@@ -37,7 +37,7 @@ export default new Command({
                 },
                 {
                   name: "Usage",
-                  value: command.args
+                  value: command.usage
                     ? `\`${PREFIX}${command.name} ${command.usage}\``
                     : "This command doesn't have any arguments",
                 },
