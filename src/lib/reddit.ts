@@ -1,4 +1,15 @@
 import axios from "axios";
+import { RedditResponse } from "../typings";
+
+interface RedditPost {
+  id: string;
+  title: string;
+  author: string;
+  url: string;
+  date: number;
+  link: string;
+  sub: string;
+}
 
 export class Reddit {
   constructor(private sub: string = "dankmemes") {}
@@ -6,16 +17,16 @@ export class Reddit {
   public async getHot() {
     const url = `https://www.reddit.com/r/${this.sub}/hot.json?`;
 
-    const { data: response } = await axios.get(url);
-    // const { title, url, created_utc, author, subreddit_name_prefixed: sub, permalink } = data[0].data.children[0].data;
-    const data = response.data.children.map(({ data }: any) => {
+    const { data: response } = await axios.get<RedditResponse>(url);
+
+    const data = response.data.children.map(({ data }) => {
       return {
         id: data.id,
         title: data.title,
         author: data.author,
         url: data.url_overridden_by_dest,
-        created_utc: data.created_utc,
-        permalink: data.permalink,
+        date: new Date(data.created_utc * 1000),
+        link: `https://reddit.com${data.permalink}`,
         sub: data.subreddit_name_prefixed,
       };
     });
@@ -25,19 +36,8 @@ export class Reddit {
   public async getRandomHotPost() {
     const hot = await this.getHot();
     const post = hot[Math.floor(Math.random() * hot.length)];
-    const date = new Date(post.created_utc * 1000);
-    const link = `https://reddit.com${post.permalink}`;
-    return {
-      title: post.title,
-      url: link,
-      date,
-      author: post.author,
-      sub: post.sub,
-    };
+    return post;
   }
 }
-// (async () => {
-//     const reddit = new Reddit();
-//     console.log(await reddit.getRandomHotPost());
-//     // console.log(await reddit.getHot());
-// })();
+
+export default new Reddit();
