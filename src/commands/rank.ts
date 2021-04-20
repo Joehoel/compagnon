@@ -21,7 +21,7 @@ export default new Command({
           title: "Rank",
           description: `**${target.username}** is currently level \`${user.level}\` \`(${user.xp}/${Levels.xpFor(
             user.level + 1
-          )}\`)`,
+          )})\``,
         },
         message
       )
