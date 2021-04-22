@@ -40,4 +40,4 @@ export class Reddit {
   }
 }
 
-export default new Reddit();
+export default Reddit; 

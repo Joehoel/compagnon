@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import reddit from "../lib/reddit";
+import Reddit from "../lib/reddit";
 import Command from "../utils/Command";
 import { meme } from "../utils/helpers";
 
@@ -9,6 +9,7 @@ export default new Command({
   usage: "<sub>",
   aliases: ["m"],
   async execute(client, message, [subreddit]) {
+    const reddit = new Reddit(subreddit);
     // const { title, url, date, author, sub, post } = await meme(subreddit);
     const { title, url, date, author, sub, link } = await reddit.getRandomHotPost();
 
