@@ -16,6 +16,7 @@
 - [ ] Create GUI and Web App for leaderboards
 - [x] Bad words filter
 - [x] Snipe command
+- [ ] `Ik ben` feature
 
 ### Music commands
 
