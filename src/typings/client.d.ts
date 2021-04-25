@@ -9,6 +9,8 @@ declare module "discord.js" {
     commands: Collection<string, Command>;
     aliases: Collection<string, string>;
     snipes: Collection<string, Snipe>;
+    events: Collection<string, any>;
+    features: Collection<string, any>;
     music: DisTube;
     logger: Consola;
   }

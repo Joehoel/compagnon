@@ -48,7 +48,8 @@ export function formatCommand(command: Command): EmbedFieldData {
   };
 }
 
-export function canExecute(member: GuildMember, command: Command): boolean {
+export function canExecute(member: GuildMember, command: Command) {
+  if (!command.permissions) return;
   const memberPerms = member.permissions.toArray();
   return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
