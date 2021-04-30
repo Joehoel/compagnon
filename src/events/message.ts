@@ -8,6 +8,7 @@ export default async (client: Client, message: Message) => {
     await features.polls(client, message);
     await features.xp(client, message);
     await features.dad(client, message);
+    await features.quiz(client, message);
   } catch (error) {
     client.logger.error(error);
   }

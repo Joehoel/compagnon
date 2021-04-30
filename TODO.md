@@ -17,6 +17,7 @@
 - [x] Bad words filter
 - [x] Snipe command
 - [ ] `Ik ben` feature
+- [ ] Quiz feature
 
 ### Music commands
 
