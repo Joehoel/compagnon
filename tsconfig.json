@@ -6,7 +6,6 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./src",
-    "rootDir": "./src",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
