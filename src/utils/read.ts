@@ -2,6 +2,8 @@ import fs from "fs";
 import { join } from "path";
 
 export async function read<T>(dir: string): Promise<T[]> {
+  console.log(`Loading commands \`${dir}\``);
+
   const commands: T[] = [];
 
   const files = fs.readdirSync(join(__dirname, dir));
