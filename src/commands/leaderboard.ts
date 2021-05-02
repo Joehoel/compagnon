@@ -143,15 +143,11 @@ export default new Command({
 
           const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
 
-          const lb = leaderboard.map(
-            (e: LeaderboardUser) => `${e.position}. ${e.username}\nLevel: ${e.level}\nXP: ${e.xp.toLocaleString()}`
-          ); // We map the outputs.
-
           message.channel.send(
             embed(
               {
                 title: "Ranks",
-                fields: leaderboard.map((user: LeaderboardUser, i: number) => {
+                fields: leaderboard?.map((user: LeaderboardUser) => {
                   return {
                     name: user.position + ".",
                     value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(

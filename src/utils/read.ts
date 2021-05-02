@@ -11,7 +11,7 @@ export async function read<T>(dir: string): Promise<T[]> {
     if (stat.isDirectory()) {
       const nestedCommands = await read<T>(join(dir, file));
       commands.push(...nestedCommands);
-    } else if (file !== "index.ts") {
+    } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
       const command = await import(join(__dirname, dir, file));
       commands.push(command.default);
     }

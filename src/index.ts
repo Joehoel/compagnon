@@ -14,6 +14,7 @@ import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { Snipe } from "./typings";
 import { read } from "./utils/read";
+import { join, resolve } from "path";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -32,18 +33,22 @@ client.logger = consola;
 
 // Ready!
 client.on("ready", async () => {
-  const commands = await read<Command>("../commands");
-  for (const command of commands) {
-    // Register command
-    client.commands.set(command.name, command);
+  try {
+    const commands = await read<Command>("../commands");
+    for (const command of commands) {
+      // Register command
+      client.commands.set(command.name, command);
 
-    // Register all command aliases
-    if (!command.aliases) return;
-    command.aliases.forEach((alias: string) => {
-      client.aliases.set(alias, command.name);
-    });
+      // Register all command aliases
+      if (!command.aliases) return;
+      command.aliases.forEach((alias: string) => {
+        client.aliases.set(alias, command.name);
+      });
+    }
+    events.ready(client);
+  } catch (error) {
+    client.logger.error(error);
   }
-  events.ready(client);
 });
 
 // On every message
