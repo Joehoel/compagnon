@@ -26,7 +26,7 @@ export default async (client: Client, message: Message) => {
 
   if (filter.isProfane(text)) {
     const user = message.author.toString();
-    client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
+    // client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
 
     const swear = await Swear.findOne({ where: { user } });
     if (swear) {

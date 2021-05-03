@@ -13,7 +13,6 @@ import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { Snipe } from "./typings";
-import { read } from "./utils/read";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -33,17 +32,6 @@ client.logger = consola;
 // Ready!
 client.on("ready", async () => {
   try {
-    const commands = await read<Command>("../commands");
-    for (const command of commands) {
-      // Register command
-      client.commands.set(command.name, command);
-
-      // Register all command aliases
-      if (!command.aliases) return;
-      command.aliases.forEach((alias: string) => {
-        client.aliases.set(alias, command.name);
-      });
-    }
     events.ready(client);
   } catch (error) {
     client.logger.error(error);

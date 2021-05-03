@@ -1,3 +1,5 @@
+import { PartialMessage } from "discord.js";
+import { Client } from "discord.js";
 import { GuildMember } from "discord.js";
 
 export interface MemeResponse {
@@ -345,3 +347,9 @@ export enum SuggestedSort {
 export enum Kind {
   T3 = "t3",
 }
+
+export type Event = (
+  client: Client,
+  message: Message | PartialMessage | MessageReaction,
+  user?: User | PartialUser
+) => Promise<any>;
