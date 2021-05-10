@@ -2,7 +2,7 @@
 
 - [x] Add kick and ban commands
 - [x] Fix @ bug when using `!status` command
-- [ ] Add status on startup
+- [x] Add status on startup
 - [x] Add required arguments
 - [x] Meme command (r/dankmemes, r/memes)
 - [x] Convert to typescript
@@ -16,8 +16,9 @@
 - [ ] Create GUI and Web App for leaderboards
 - [x] Bad words filter
 - [x] Snipe command
-- [ ] `Ik ben` feature
-- [ ] Quiz feature
+- [x] `Ik ben` feature
+- [x] Quiz feature
+- [ ] Fix chad feature
 
 ### Music commands
 
