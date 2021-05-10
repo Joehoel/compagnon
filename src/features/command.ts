@@ -65,5 +65,7 @@ export default async (client: Client, message: Message) => {
     }
     client.logger.error(error);
     await message.reply("There was an error trying to execute that command!");
+  } finally {
+    client.logger.info(`${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`);
   }
 };

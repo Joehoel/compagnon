@@ -24,9 +24,7 @@
     "pg": "^8.5.1",
     "redis": "^3.0.2",
     "reflect-metadata": "^0.1.10",
-    "sqlite": "^4.0.19",
-    "typeorm": "0.2.29",
-    "waait": "^1.0.5"
+    "typeorm": "0.2.29"
   },
   "devDependencies": {
     "@types/bad-words": "^3.0.0",
