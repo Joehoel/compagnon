@@ -5,7 +5,6 @@
   "main": "src/index.ts",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
-    "ascii-table": "^0.0.9",
     "axios": "^0.21.1",
     "bad-words": "^3.0.4",
     "consola": "^2.15.0",

@@ -1,5 +1,5 @@
-import { Client, Message, TextChannel } from "discord.js";
-import { CHANNELS, GUILD_ID, USERS } from "../utils/constants";
+import { Client, Message } from "discord.js";
+import { CHANNELS, USERS } from "../utils/constants";
 import { embed } from "../utils/helpers";
 
 const { PREFIX } = process.env;

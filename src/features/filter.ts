@@ -4,7 +4,7 @@ import fs from "fs";
 import { Swear } from "../entity/Swear";
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (_: Client, message: Message) => {
   if (message.content.startsWith(PREFIX) || message.author.bot) return;
   const text = message.content.toLowerCase();
 

@@ -1,10 +1,5 @@
 import fs from "fs";
-import Table from "ascii-table";
 import { join } from "path";
-
-const table = new Table("Commands");
-
-table.setHeading("Name", "Status");
 
 export async function read<T>(dir: string): Promise<T[]> {
   // console.log(`Loading commands \`${dir}\``);

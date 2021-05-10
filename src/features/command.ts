@@ -11,6 +11,9 @@ export default async (client: Client, message: Message) => {
   const args = message.content.slice(PREFIX.length).trim().split(/ +/);
   const commandName = args.shift()!.toLowerCase();
 
+  // Check if the message is just '.'
+  if (commandName === ".") return;
+
   // Check if command exists
   if (!client.commands.has(commandName) && !client.aliases.has(commandName)) {
     await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);

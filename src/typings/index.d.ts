@@ -1,6 +1,4 @@
-import { PartialMessage } from "discord.js";
-import { Client } from "discord.js";
-import { GuildMember } from "discord.js";
+import { Client, GuildMember, PartialMessage } from "discord.js";
 
 export interface MemeResponse {
   url: string;
