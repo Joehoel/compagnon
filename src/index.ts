@@ -1,6 +1,7 @@
 // Global
 import "dotenv/config";
 import "module-alias/register";
+import "./lib/ExtendedMessage";
 
 // Events
 import * as events from "./events";
@@ -31,11 +32,7 @@ client.logger = consola;
 
 // Ready!
 client.on("ready", async () => {
-  try {
-    events.ready(client);
-  } catch (error) {
-    client.logger.error(error);
-  }
+  await events.ready(client);
 });
 
 // On every message
@@ -48,12 +45,24 @@ client.on("messageDelete", async (message) => {
   await events.messageDelete(client, message);
 });
 
+// When a reaction is added to message
 client.on("messageReactionAdd", async (reaction, user) => {
   await events.messageReactionAdd(client, reaction, user);
 });
 
+// When a reaction is removed to message
 client.on("messageReactionRemove", async (reaction, user) => {
   await events.messageReactionRemove(client, reaction, user);
+});
+
+// On warning
+client.on("warn", (args) => {
+  events.warn(client, args);
+});
+
+// On error
+client.on("error", (args) => {
+  events.error(client, args);
 });
 
 // Login

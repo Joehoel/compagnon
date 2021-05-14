@@ -1,4 +1,4 @@
-import redis, { Callback, RedisClient } from "redis";
+import redis, { RedisClient } from "redis";
 const { REDIS_PATH } = process.env;
 
 export default async (): Promise<RedisClient> => {

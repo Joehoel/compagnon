@@ -5,11 +5,13 @@
   "main": "src/index.ts",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
+    "@joehoel/discord-reply": "^1.0.3",
     "axios": "^0.21.1",
     "bad-words": "^3.0.4",
     "consola": "^2.15.0",
     "cross-fetch": "^3.0.6",
     "discord-paginationembed": "^2.1.0",
+    "discord-reply": "^0.1.2",
     "discord-xp": "^1.1.14",
     "discord.js": "^12.5.1",
     "distube": "^2.8.8",

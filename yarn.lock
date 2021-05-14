@@ -547,6 +547,13 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@joehoel/discord-reply@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@joehoel/discord-reply/-/discord-reply-1.0.3.tgz#2151584d4bc02d8da9ebd8aeb2720770a87066c3"
+  integrity sha512-aPkAiXYsurbQKyMGdp4WQK2Maes+njyB1QRAbYWO+2ptGga/01iHaJF+xVkXfPB3mWaJt1Nlu3oklUrPNzyjCw==
+  dependencies:
+    discord.js "^12.5.3"
+
 "@opencensus/core@0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@opencensus/core/-/core-0.0.9.tgz#b16f775435ee309433e4126af194d37313fc93b3"
@@ -2020,6 +2027,13 @@ discord-paginationembed@^2.1.0:
   resolved "https://registry.yarnpkg.com/discord-paginationembed/-/discord-paginationembed-2.1.0.tgz#76fde11650645262301cb5cf0ce080e76cd8d989"
   integrity sha512-a89oag1wm42MNiwwMO2U/NCOh3TFd8VkL3duUB18g4dTIqG6leXIKmgze8ZOALfdpXsvFyhC7Ox45CUa1TIsFA==
 
+discord-reply@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/discord-reply/-/discord-reply-0.1.2.tgz#4249de4cbc86743f8095172fe4c40597f48a3cc6"
+  integrity sha512-4XAFjJrhrmxsnDSPOQPqtjH534tx92KNFOW1uGZvxlKnPHcdCvbkrd8U/9vm/JQl5xDcbQQFUNoXs2k8kC8BKg==
+  dependencies:
+    discord.js "^12.5.1"
+
 discord-xp@^1.1.14:
   version "1.1.14"
   resolved "https://registry.yarnpkg.com/discord-xp/-/discord-xp-1.1.14.tgz#d3f53d7628c9dac75bea71e93862076c18e9160e"
@@ -2040,6 +2054,20 @@ discord.js@^12.5.1:
     setimmediate "^1.0.5"
     tweetnacl "^1.0.3"
     ws "^7.3.1"
+
+discord.js@^12.5.3:
+  version "12.5.3"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.3.tgz#56820d473c24320871df9ea0bbc6b462f21cf85c"
+  integrity sha512-D3nkOa/pCkNyn6jLZnAiJApw2N9XrIsXUAdThf01i7yrEuqUmDGc7/CexVWwEcgbQR97XQ+mcnqJpmJ/92B4Aw==
+  dependencies:
+    "@discordjs/collection" "^0.1.6"
+    "@discordjs/form-data" "^3.0.1"
+    abort-controller "^3.0.0"
+    node-fetch "^2.6.1"
+    prism-media "^1.2.9"
+    setimmediate "^1.0.5"
+    tweetnacl "^1.0.3"
+    ws "^7.4.4"
 
 distube@^2.8.8:
   version "2.8.8"
@@ -4968,6 +4996,11 @@ prism-media@^1.2.2, prism-media@^1.2.3:
   resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-1.2.3.tgz#37bbb11726674a73fe56a2df4de76aa91d2141b7"
   integrity sha512-fSrR66n0l6roW9Rx4rSLMyTPTjRTiXy5RVqDOurACQ6si1rKHHKDU5gwBJoCsIV0R3o9gi+K50akl/qyw1C74A==
 
+prism-media@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-1.2.9.tgz#8d4f97b36efdfc82483eb8d3db64020767866f36"
+  integrity sha512-UHCYuqHipbTR1ZsXr5eg4JUmHER8Ss4YEb9Azn+9zzJ7/jlTtD1h0lc4g6tNx3eMlB8Mp6bfll0LPMAV4R6r3Q==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -6585,6 +6618,11 @@ ws@^7.2.3, ws@^7.3.1:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
   integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
+
+ws@^7.4.4:
+  version "7.4.5"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
+  integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
 
 ws@~7.2.0:
   version "7.2.5"

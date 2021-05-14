@@ -1,8 +1,11 @@
-import { Collection } from "discord.js";
-import Command from "../utils/Command";
-import DisTube from "distube";
 import { Consola } from "consola";
+import "discord.js";
+import DisTube from "distube";
+import Command from "../utils/Command";
 import { Snipe } from "./";
+
+type Content = APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions;
+type Options = (MessageOptions & { split?: false }) | MessageAdditions;
 
 declare module "discord.js" {
   interface Client {
@@ -14,13 +17,8 @@ declare module "discord.js" {
     music: DisTube;
     logger: Consola;
   }
+  interface Message {
+    inlineReply(content: Content, options?: Options): Promise<Message | Message[]>;
+    edit(content: Content, options?: Options): Promise<Message>;
+  }
 }
-
-// declare module "discord-slash" {
-//   interface Client {
-//     commands: Collection<string, Command>;
-//     aliases: Collection<string, string>;
-//     music: DisTube;
-//     logger: Consola;
-//   }
-// }
