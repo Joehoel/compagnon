@@ -12,8 +12,8 @@ export default async (_: Client, message: Message) => {
 
   if (match) {
     const words = text.split(" ");
-    const index = words.indexOf(match[0].split(" ")[0]) + 2;
+    const index = words.indexOf(match[match.length - 1].split(" ")[1]) + 1;
     const name = words.slice(index).join(" ");
-    message.channel.send(`Hallo ${name}, Ik ben compagnon :wave:`);
+    message.inlineReply(`Hallo ${name}, ik ben compagnon :wave:`);
   }
 };

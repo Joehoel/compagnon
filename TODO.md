@@ -18,7 +18,7 @@
 - [x] Snipe command
 - [x] `Ik ben` feature
 - [x] Quiz feature
-- [ ] Fix chad feature
+- [x] Fix chad feature
 
 ### Music commands
 
