@@ -2,25 +2,12 @@ import colors from "colors";
 import { Client } from "discord.js";
 import { createConnection } from "typeorm";
 import { music } from "../features";
-import Command from "../utils/Command";
 import { GUILD_ID } from "../utils/constants";
-import { read } from "../utils/read";
+import Event from "../utils/Event";
 
-export default async (client: Client) => {
-  try {
-    // Register all commands
-    const commands = await read<Command>("../commands");
-    for (const command of commands) {
-      // Register command
-      client.commands.set(command.name, command);
-
-      // Register all command aliases
-      if (!command.aliases) return;
-      command.aliases.forEach((alias: string) => {
-        client.aliases.set(alias, command.name);
-      });
-    }
-
+export default new Event({
+  name: "ready",
+  async run(client: Client) {
     // Music handler
     music(client.music);
     client.logger.success("Compagnon" + colors.green.bold(" online!"));
@@ -33,7 +20,5 @@ export default async (client: Client) => {
       status: "online",
       activity: { name: `with my ${client.guilds.cache.get(GUILD_ID)!.memberCount} nerds` },
     });
-  } catch (error) {
-    client.logger.error(error);
-  }
-};
+  },
+});

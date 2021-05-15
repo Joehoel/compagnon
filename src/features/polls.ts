@@ -3,7 +3,7 @@ import { CHANNELS } from "../utils/constants";
 
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (_: Client, message: Message) => {
   if (message.channel.id == CHANNELS.POLLS) {
     if (!message.content.startsWith(`${PREFIX}poll`) && !message.author.bot) {
       await message.delete();

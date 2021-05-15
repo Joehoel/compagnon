@@ -2,6 +2,7 @@ import { Consola } from "consola";
 import "discord.js";
 import DisTube from "distube";
 import Command from "../utils/Command";
+import Event from "../utils/Event";
 import { Snipe } from "./";
 
 type Content = APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions;
@@ -12,7 +13,7 @@ declare module "discord.js" {
     commands: Collection<string, Command>;
     aliases: Collection<string, string>;
     snipes: Collection<string, Snipe>;
-    events: Collection<string, any>;
+    events: Collection<string, Event>;
     features: Collection<string, any>;
     music: DisTube;
     logger: Consola;

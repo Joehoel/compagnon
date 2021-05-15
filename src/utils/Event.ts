@@ -1,10 +1,11 @@
-import { Client, Message } from "discord.js";
+import { Client } from "discord.js";
 
 export default class Event {
   public name: string;
-  public do: (client: Client, message: Message, args: string[]) => void;
+  run: (client: Client, ...args: any) => Promise<void>;
 
-  constructor({ name }: { name: string }) {
+  constructor({ name, run }: { name: string; run: (client: Client, ...args: any) => Promise<void> }) {
     this.name = name;
+    this.run = run;
   }
 }

@@ -3,17 +3,16 @@ import "dotenv/config";
 import "module-alias/register";
 import "./lib/ExtendedMessage";
 
-// Events
-import * as events from "./events";
-
-// Command related
+// Command and Event classes
 import Command from "./utils/Command";
+import Event from "./utils/Event";
 
 // Other
 import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { Snipe } from "./typings";
+import { registerCommands, registerEvents } from "./utils/registry";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -25,45 +24,17 @@ const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
 client.snipes = new Collection<string, Snipe>();
-client.features = new Collection<string, any>();
-client.events = new Collection<string, any>();
+client.events = new Collection<string, Event>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 
-// Ready!
-client.on("ready", async () => {
-  await events.ready(client);
-});
-
-// On every message
-client.on("message", async (message) => {
-  await events.message(client, message);
-});
-
-// When a message is deleted
-client.on("messageDelete", async (message) => {
-  await events.messageDelete(client, message);
-});
-
-// When a reaction is added to message
-client.on("messageReactionAdd", async (reaction, user) => {
-  await events.messageReactionAdd(client, reaction, user);
-});
-
-// When a reaction is removed to message
-client.on("messageReactionRemove", async (reaction, user) => {
-  await events.messageReactionRemove(client, reaction, user);
-});
-
-// On warning
-client.on("warn", (args) => {
-  events.warn(client, args);
-});
-
-// On error
-client.on("error", (args) => {
-  events.error(client, args);
-});
-
-// Login
-client.login(TOKEN);
+(async () => {
+  try {
+    // Register commands and events
+    await registerCommands(client, "../commands");
+    await registerEvents(client, "../events");
+    await client.login(TOKEN);
+  } catch (error) {
+    client.logger.error(error);
+  }
+})();
