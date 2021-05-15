@@ -60,7 +60,7 @@ export default async (client: Client, message: Message) => {
   } catch (error) {
     if (error.message === "NotInVoice") {
       return message.channel.send(
-        embed({ title: "Error", description: "You must be in a voice channel to execute that command!" }, message)
+        embed({ title: "Error", description: "You must be in a voice channel to execute that command!" })
       );
     }
     client.logger.error(error);

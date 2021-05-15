@@ -13,6 +13,9 @@ import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { Snipe } from "./typings";
 import { registerCommands, registerEvents } from "./utils/registry";
+import { music } from "./features";
+import { createConnection } from "typeorm";
+import colors from "colors";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -33,7 +36,17 @@ client.logger = consola;
     // Register commands and events
     await registerCommands(client, "../commands");
     await registerEvents(client, "../events");
+
+    // Music handler
+    music(client.music);
+
+    // Database connection
+    await createConnection();
+    client.logger.success("Database" + colors.green.bold(" connected!"));
+
+    // Log bot in
     await client.login(TOKEN);
+    client.logger.success("Compagnon" + colors.green.bold(" online!"));
   } catch (error) {
     client.logger.error(error);
   }

@@ -20,14 +20,11 @@ export default async (_: Client, message: Message) => {
     if (sent.get(message.author.toString())) return;
 
     await message.channel.send(
-      embed(
-        {
-          title: "Congratulations",
-          description: `You have reached \`42069\` xp\nYou now have one of the biggest dicks in this server! 🍆 \nAs a reward you have been promoted to <@&${ROLES.CHAD}>`,
-          thumbnail: { url: "https://media.tenor.com/images/111a73396501d1621a54bd26e4db5ed8/tenor.gif" },
-        },
-        message
-      )
+      embed({
+        title: "Congratulations",
+        description: `You have reached \`42069\` xp\nYou now have one of the biggest dicks in this server! 🍆 \nAs a reward you have been promoted to <@&${ROLES.CHAD}>`,
+        thumbnail: { url: "https://media.tenor.com/images/111a73396501d1621a54bd26e4db5ed8/tenor.gif" },
+      })
     );
 
     giveRole(message.member!, ROLES.CHAD);

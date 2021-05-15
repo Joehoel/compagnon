@@ -64,7 +64,7 @@ export function status(queue: Queue) {
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 }
 
-export function embed(options: MessageEmbedOptions, message: Message): MessageEmbed {
+export function embed(options: MessageEmbedOptions): MessageEmbed {
   return new MessageEmbed({
     ...options,
     color: "#ffc600",
