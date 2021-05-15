@@ -7,7 +7,3 @@ export default new Event({
     client.logger.warn(args);
   },
 });
-
-// export default async (client: Client, args: string) => {
-//   client.logger.warn(args);
-// };

@@ -1,4 +1,3 @@
-
 <h1 align="center">Compagnon</h1>
 
 <p align="center">
@@ -37,18 +36,21 @@
 
 <br>
 
-## :dart: About ##
+## :dart: About
 
 A discord bot built with discord.js
 
-## :sparkles: Features ##
+## :sparkles: Features
 
-:heavy_check_mark: Music commands;\
-:heavy_check_mark: Admin commands;\
-:heavy_check_mark: Leaderboard system;\
-:heavy_check_mark: Language filtering;
+:musical_note: Music commands\
+:tophat: Admin commands\
+:clipboard: Leaderboard system\
+:open_mouth: Language filtering\
+:arrow_up: Leveling system\
 
-## :rocket: Technologies ##
+And some secret features to find out for yourself :P
+
+## :rocket: Technologies
 
 The following tools were used in this project:
 
@@ -57,11 +59,12 @@ The following tools were used in this project:
 - [Discord.js](https://discord.js.org/#/)
 - [TypeORM](https://typeorm.io/#/)
 
-## :white_check_mark: Requirements ##
+## :white_check_mark: Requirements
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
 Create a `.env` file with the following content.
+
 ```env
 PREFIX=!
 TOKEN=bot-token
@@ -71,7 +74,7 @@ REDIS_PATH=redis-labs-path
 REDIS_KEY_PREFIX="muted-"
 ```
 
-## :checkered_flag: Starting ##
+## :checkered_flag: Starting
 
 ```bash
 # Clone this project
@@ -87,10 +90,9 @@ $ yarn
 $ yarn dev
 ```
 
-## :memo: License ##
+## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE) file.
-
 
 Made with :heart: by <a href="https://github.com/Joehoel" target="_blank">Joël Kuijper</a>
 
