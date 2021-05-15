@@ -38,6 +38,6 @@ export default async (_: Client, message: Message) => {
   const randomAmountOfXp = Math.floor(Math.random() * 29) + 1;
   const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
   if (hasLeveledUp) {
-    message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level}**. :tada:`);
+    message.channel.send(`${message.author}, congratulations! You have leveled up to **${user.level + 1}**. :tada:`);
   }
 };
