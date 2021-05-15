@@ -1,4 +1,3 @@
-import { Client } from "discord.js";
 import Event from "../utils/Event";
 
 export default new Event({
@@ -7,7 +6,3 @@ export default new Event({
     client.logger.error(args);
   },
 });
-
-// export default async (client: Client, args: Error) => {
-//   client.logger.error(args);
-// };
