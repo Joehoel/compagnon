@@ -9,7 +9,7 @@ export default new Command({
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     const mode = client.music.toggleAutoplay(message);
     return message.channel.send(
-      embed({ title: "Music", description: "Set autoplay mode to `" + (mode ? "On" : "Off") + "`" }, message)
+      embed({ title: "Music", description: "Set autoplay mode to `" + (mode ? "On" : "Off") + "`" })
     );
   },
 });

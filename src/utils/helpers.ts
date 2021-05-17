@@ -112,3 +112,44 @@ export async function onJoin(member: GuildMember) {
     redisClient.quit();
   }
 }
+
+/**
+ * Get a random number between min and max (inclusive)
+ * @param min Minimum value of the random number
+ * @param max Maximum value of the random number
+ * @param float Whether to return a float instead of an integer
+ * @returns Random number between min and max
+ */
+export function random(min: number, max: number, float?: true): number;
+
+/**
+ * Get a random entry from an array
+ * @param array Array to get a random entry from
+ * @returns Random entry from array
+ */
+export function random<T>(array: T[]): T;
+
+/**
+ * Get a number of random items from an array
+ * @param array Array to get random entries from
+ * @param count Number of random entries to get
+ * @returns A random slice from the input array
+ */
+export function random<T>(array: T[], count: number): T[];
+
+export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: true): T[] | T | number {
+  if (Array.isArray(arrOrMin)) {
+    if (countOrMax == undefined) return arrOrMin[Math.floor(Math.random() * arrOrMin.length)];
+
+    const copy = arrOrMin.slice(0, arrOrMin.length);
+
+    const selected: T[] = [];
+    for (let i = 0; i < countOrMax; i++) {
+      selected.push(copy.splice(random(0, copy.length - 1), 1)[0]);
+    }
+    return selected;
+  } else {
+    const x = Math.random() * (countOrMax! - arrOrMin);
+    return float ? arrOrMin + x : arrOrMin + Math.round(x);
+  }
+}

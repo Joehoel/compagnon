@@ -108,31 +108,28 @@ export default new Command({
             );
             const scores = await Score.find({ where: { leaderboard: lb } });
             return message.channel.send(
-              embed(
-                {
-                  title: capitalize(leaderboardName),
-                  fields: distinctArrayByKey(scores, "user")
-                    .sort((a, b) => {
-                      if (a.score < b.score) return -1;
-                      return 1;
-                    })
-                    .map((score, i) => {
-                      return {
-                        name: i + 1 + ".",
-                        value: `Score: \`${score.score}\`\n Username: ${
-                          score.user
-                        }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
-                          score.proof ? `${score.proof}` : ""
-                        }`,
-                      };
-                    }),
-                },
-                message
-              )
+              embed({
+                title: capitalize(leaderboardName),
+                fields: distinctArrayByKey(scores, "user")
+                  .sort((a, b) => {
+                    if (a.score < b.score) return -1;
+                    return 1;
+                  })
+                  .map((score, i) => {
+                    return {
+                      name: i + 1 + ".",
+                      value: `Score: \`${score.score}\`\n Username: ${
+                        score.user
+                      }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
+                        score.proof ? `${score.proof}` : ""
+                      }`,
+                    };
+                  }),
+              })
             );
           } catch (error) {
             return message.channel.send(
-              embed({ title: "Something went wrong!", description: "Couldn't find that leaderboard" }, message)
+              embed({ title: "Something went wrong!", description: "Couldn't find that leaderboard" })
             );
           }
         }
@@ -144,20 +141,17 @@ export default new Command({
           const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
 
           message.channel.send(
-            embed(
-              {
-                title: "Ranks",
-                fields: leaderboard?.map((user: LeaderboardUser) => {
-                  return {
-                    name: user.position + ".",
-                    value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(
-                      user.level + 1
-                    )}\``,
-                  };
-                }),
-              },
-              message
-            )
+            embed({
+              title: "Ranks",
+              fields: leaderboard?.map((user: LeaderboardUser) => {
+                return {
+                  name: user.position + ".",
+                  value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(
+                    user.level + 1
+                  )}\``,
+                };
+              }),
+            })
           );
           return;
         }
