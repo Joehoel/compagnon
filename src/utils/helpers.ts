@@ -1,6 +1,6 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import { EmbedFieldData, Guild, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
 import redis from "../lib/redis";
@@ -40,6 +40,13 @@ export async function meme(subName: string = "dankmemes"): Promise<MemeResponse>
   return { title, url, date, author, sub, post };
 }
 
+/**
+ * Format a discord command to for embed usage
+ *
+ * @export
+ * @param {Command} command Command
+ * @return {EmbedFieldData} Embed field
+ */
 export function formatCommand(command: Command): EmbedFieldData {
   return {
     name:
@@ -49,13 +56,28 @@ export function formatCommand(command: Command): EmbedFieldData {
   };
 }
 
-export function canExecute(member: GuildMember, command: Command) {
-  if (!command.permissions) return;
+/**
+ * Given a discord member and command check if that member can execute that command
+ *
+ * @export
+ * @param {GuildMember} member
+ * @param {Command} command
+ * @return {boolean}
+ */
+export function canExecute(member: GuildMember, command: Command): boolean {
+  if (!command.permissions) return true;
   const memberPerms = member.permissions.toArray();
   return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
 
-export function capitalize(string: string) {
+/**
+ * Capitalize a string
+ *
+ * @export
+ * @param {string} string
+ * @return {string} capitalized string
+ */
+export function capitalize(string: string): string {
   return string.substr(0, 1).toUpperCase() + string.substr(1, string.length - 1);
 }
 
@@ -65,6 +87,13 @@ export function status(queue: Queue) {
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 }
 
+/**
+ * Generate a discord embed with default color and timestamp
+ *
+ * @export
+ * @param {MessageEmbedOptions} options
+ * @return {MessageEmbed} Embed
+ */
 export function embed(options: MessageEmbedOptions): MessageEmbed {
   return new MessageEmbed({
     ...options,
