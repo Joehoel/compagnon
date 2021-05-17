@@ -45,6 +45,7 @@ export function formatCommand(command: Command): EmbedFieldData {
     name:
       command.aliases.length >= 1 ? `**${command.name}** \`(${command.aliases.join(", ")})\`` : `**${command.name}**`,
     value: command.description + "\n",
+    inline: true,
   };
 }
 

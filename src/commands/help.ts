@@ -58,7 +58,7 @@ export default new Command({
       .setElementsPerPage(8)
       .setDisabledNavigationEmojis(["delete"])
       .setChannel(message.channel as TextChannel)
-      .formatField("Commands", (el: any) => `${el.name}\n${el.value}`);
+      .formatField("Commands", (el: any) => `${el.name}\n${el.value}`, true);
 
     paginatedEmbed.embed.setColor("#ffc600").setTitle("Help");
 

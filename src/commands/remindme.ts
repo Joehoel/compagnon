@@ -20,10 +20,12 @@ export default new Command({
             {
               name: "Message",
               value: msg.join(" "),
+              inline: true,
             },
             {
               name: "Link",
               value: `[Message](${message.url})`,
+              inline: true,
             },
           ],
           timestamp: new Date(Date.now() - time),

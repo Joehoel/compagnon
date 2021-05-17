@@ -29,18 +29,15 @@ export default new Command({
           });
 
           return message.channel.send(
-            embed(
-              {
-                title: "Game created",
-                fields: [
-                  {
-                    name: "Game",
-                    value: capitalize(game.name),
-                  },
-                ],
-              },
-              message
-            )
+            embed({
+              title: "Game created",
+              fields: [
+                {
+                  name: "Game",
+                  value: capitalize(game.name),
+                },
+              ],
+            })
           );
         }
 
@@ -51,23 +48,20 @@ export default new Command({
             await lb.save();
 
             return message.channel.send(
-              embed(
-                {
-                  title: "Leaderboard created",
-                  fields: [
-                    {
-                      name: "Game",
-                      value: `\`${foundGame.name}\``,
-                    },
-                    {
-                      name: "Leaderboard",
-                      value: `\`${lb.name}\``,
-                    },
-                  ],
-                  timestamp: Date.now(),
-                },
-                message
-              )
+              embed({
+                title: "Leaderboard created",
+                fields: [
+                  {
+                    name: "Game",
+                    value: `\`${foundGame.name}\``,
+                  },
+                  {
+                    name: "Leaderboard",
+                    value: `\`${lb.name}\``,
+                  },
+                ],
+                timestamp: Date.now(),
+              })
             );
           } else {
             const game = new Game({ name: gameName });
@@ -76,23 +70,20 @@ export default new Command({
             await lb.save();
 
             return message.channel.send(
-              embed(
-                {
-                  title: "Leaderboard created",
-                  fields: [
-                    {
-                      name: "Game",
-                      value: game.name,
-                    },
-                    {
-                      name: "Leaderboard",
-                      value: lb.name,
-                    },
-                  ],
-                  timestamp: Date.now(),
-                },
-                message
-              )
+              embed({
+                title: "Leaderboard created",
+                fields: [
+                  {
+                    name: "Game",
+                    value: game.name,
+                  },
+                  {
+                    name: "Leaderboard",
+                    value: lb.name,
+                  },
+                ],
+                timestamp: Date.now(),
+              })
             );
           }
         }

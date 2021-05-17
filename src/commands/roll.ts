@@ -5,7 +5,7 @@ export default new Command({
   name: "roll",
   description: "Roll dice / choose a random item in a list",
   aliases: ["random", "choice", "choose", "kies", "kopofmunt", "coinpagnon", "robbeldebobbelsteen"],
-  async execute(client, message, args) {
+  async execute(_, message, args) {
     if (args.length == 0) {
       const coin = random(["Kop", "Munt"]);
       return message.channel.send(embed({ title: "Rolled", description: coin }));
