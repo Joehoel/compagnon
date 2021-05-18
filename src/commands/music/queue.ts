@@ -36,7 +36,12 @@ export default new Command({
         client.logger.error(error);
       }
     } else {
-      return message.channel.send(embed({ title: "Music", description: "Queue is empty 🐱" }));
+      return message.channel.send(
+        embed({
+          title: "Music",
+          description: "Queue is empty 🐱",
+        })
+      );
     }
   },
 });

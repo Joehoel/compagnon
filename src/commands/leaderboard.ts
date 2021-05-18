@@ -176,7 +176,6 @@ export default new Command({
             return message.channel.send("Couldn't find that leaderboard");
           }
         }
-      default:
         break;
     }
   },

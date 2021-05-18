@@ -29,6 +29,6 @@ export const expire = (callback: any) => {
   };
 
   const pub = redis.createClient({ url: REDIS_PATH });
-  //@ts-ignore
+  // @ts-ignore
   pub.send_command("config", ["set", "notify-keyspace-events", "Ex"], expired());
 };

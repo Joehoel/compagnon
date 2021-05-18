@@ -9,7 +9,7 @@ export default new Command({
     return message.channel.send(
       embed({
         author: { name: msg?.author?.toString(), iconURL: msg?.member?.user.displayAvatarURL() },
-        description: msg?.content!,
+        description: msg!.content!,
         footer: { text: "🎯 Get sniped lol" },
         timestamp: Date.now(),
       })

@@ -3,7 +3,7 @@ import Command from "./Command";
 import Event from "./Event";
 import { read } from "./read";
 
-export async function registerCommands(client: Client, dir: string = "") {
+export async function registerCommands(client: Client, dir = "") {
   const commands = await read<Command>(dir);
 
   for (const command of commands) {
@@ -18,7 +18,7 @@ export async function registerCommands(client: Client, dir: string = "") {
   }
 }
 
-export async function registerEvents(client: Client, dir: string = "") {
+export async function registerEvents(client: Client, dir = "") {
   const events = await read<Event>(dir);
   for (const event of events) {
     client.events.set(event.name, event);
