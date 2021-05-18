@@ -6,7 +6,7 @@ export default new Command({
   args: true,
   usage: "<username> <days> <reason>",
   permissions: ["BAN_MEMBERS"],
-  async execute(client, message, args) {
+  async execute(_, message, args) {
     const days = parseInt(args[1]);
 
     const reason = args.slice(2).join(" ");

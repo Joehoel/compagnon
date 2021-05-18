@@ -25,7 +25,7 @@ export async function gif(tag: string): Promise<GIFResponse> {
   return url;
 }
 
-export async function meme(subName: string = "dankmemes"): Promise<MemeResponse> {
+export async function meme(subName = "dankmemes"): Promise<MemeResponse> {
   const api = `https://reddit.com/r/${subName}/random.json?`;
   const params = new URLSearchParams({
     limit: "1",

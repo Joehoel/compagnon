@@ -27,14 +27,11 @@ export default new Command({
       case Type.SET:
         Levels.setLevel(target.id, GUILD_ID, parseInt(lvl));
         return message.channel.send(
-          embed(
-            {
-              title: "Level",
-              description: `Successfully updated ${target}'s level to **${Math.floor(parseInt(lvl))}**`,
-              timestamp: Date.now(),
-            },
-            message
-          )
+          embed({
+            title: "Level",
+            description: `Successfully updated ${target}'s level to **${Math.floor(parseInt(lvl))}**`,
+            timestamp: Date.now(),
+          })
         );
 
       default:

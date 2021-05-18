@@ -287,8 +287,6 @@ export enum LinkFlairCSSClass {
   Pulse = "pulse",
 }
 
-export interface MediaEmbed {}
-
 export enum WhitelistStatus {
   NoAds = "no_ads",
 }
