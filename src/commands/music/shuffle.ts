@@ -10,6 +10,7 @@ export default new Command({
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     client.music.shuffle(message);
     queue.execute(client, message, args);
-    return message.channel.send(embed({ title: "Toggled shuffle" }, message));
+    return message.channel.send(embed({ title: "Toggled shuffle"
+));
   },
 });
