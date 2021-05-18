@@ -18,8 +18,10 @@ export default new Command({
     } else {
       const votesRequired = Math.ceil(members.size * 0.6);
       const msg = await message.channel.send(
-        embed({ title: "Music", description: `Votes required to skip: ${votesRequired}`
-)
+        embed({
+          title: "Music",
+          description: `Votes required to skip: ${votesRequired}`,
+        })
       );
       await msg.react("👍");
       await msg.react("👎");

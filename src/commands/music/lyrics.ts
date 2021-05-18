@@ -23,15 +23,12 @@ export default new Command({
       const { lyrics, name, artist, album_art, url } = await getLyrics(song);
       if (lyrics.trim().length) {
         return await message.channel.send(
-          embed(
-            {
-              title: `${name} - ${artist}`,
-              description: lyrics,
-              thumbnail: { url: album_art },
-              url,
-            },
-            message
-          )
+          embed({
+            title: `${name} - ${artist}`,
+            description: lyrics,
+            thumbnail: { url: album_art },
+            url,
+          })
         );
       }
     } catch (error) {

@@ -7,7 +7,10 @@ export default new Command({
   args: true,
   usage: "<time>",
   execute(_, message, args) {
-    return message.channel.send(embed({ title: "Work in progress"
-));
+    return message.channel.send(
+      embed({
+        title: "Work in progress",
+      })
+    );
   },
 });

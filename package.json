@@ -41,7 +41,7 @@
     "eslint": "^7.26.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
-    "husky": "6.0.0",
+    "husky": "^6.0.0",
     "jest-fetch-mock": "^3.0.3",
     "lint-staged": "11.0.0",
     "nodemon": "^2.0.6",
@@ -59,7 +59,8 @@
     "test": "jest --watch",
     "coverage": "jest --coverage",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "lint": "eslint --fix \"./src/**/*.ts\""
+    "lint": "eslint --fix \"./src/**/*.ts\"",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
