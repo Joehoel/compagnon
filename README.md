@@ -46,7 +46,7 @@ A discord bot built with discord.js
 :tophat: Admin commands\
 :clipboard: Leaderboard system\
 :open_mouth: Language filtering\
-:arrow_up: Leveling system\
+:arrow_up: Leveling system
 
 And some secret features to find out for yourself :P
 
