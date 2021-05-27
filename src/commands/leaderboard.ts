@@ -1,11 +1,11 @@
-import Command from "@/utils/Command";
-import Levels, { LeaderboardUser } from "discord-xp";
-import { MessageEmbed } from "discord.js";
 import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import { GUILD_ID } from "../utils/constants";
+import Command from "../lib/Command";
 import { capitalize, distinctArrayByKey, embed } from "../utils/helpers";
+import Levels, { LeaderboardUser } from "discord-xp";
+import { MessageEmbed } from "discord.js";
+import { GUILD_ID } from "../globals";
 
 export default new Command({
   name: "leaderboard",

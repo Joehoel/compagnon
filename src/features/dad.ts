@@ -1,9 +1,8 @@
 import { Client, Message } from "discord.js";
-
-const { PREFIX } = process.env;
+import { CONFIG } from "../globals";
 
 export default async (_: Client, message: Message) => {
-  if (message.content.startsWith(PREFIX) || message.author.bot) return;
+  if (message.content.startsWith(CONFIG.prefix) || message.author.bot) return;
   const text = message.content.toLowerCase();
 
   const tests = ["ik ben", "i am"];

@@ -1,5 +1,5 @@
 import { Client, MessageReaction, PartialUser, User } from "discord.js";
-import { EMOJIS, EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, ROLES } from "../utils/constants";
+import { EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, EMOJIS, ROLES } from "../globals";
 import { giveRole, removeRole } from "../utils/helpers";
 
 export default async (client: Client, reaction: MessageReaction, user: User | PartialUser, event: EVENTS) => {

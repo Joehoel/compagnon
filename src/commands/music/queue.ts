@@ -1,4 +1,4 @@
-import Command from "@/utils/Command";
+import Command from "../../lib/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
 import Song from "distube/typings/Song";

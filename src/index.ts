@@ -4,8 +4,7 @@ import "module-alias/register";
 import "./lib/ExtendedMessage";
 
 // Command and Event classes
-import Command from "./utils/Command";
-import Event from "./utils/Event";
+import Command from "./lib/Command";
 
 // Other
 import consola from "consola";

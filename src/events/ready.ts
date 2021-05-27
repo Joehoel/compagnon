@@ -1,9 +1,6 @@
-import colors from "colors";
 import { Client } from "discord.js";
-import { createConnection } from "typeorm";
-import { music } from "../features";
-import { GUILD_ID } from "../utils/constants";
-import Event from "../utils/Event";
+import { GUILD_ID } from "../globals";
+import Event from "../lib/Event";
 
 export default new Event({
   name: "ready",

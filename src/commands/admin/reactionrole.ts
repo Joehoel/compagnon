@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../../utils/Command";
-import { EMOJIS } from "../../utils/constants";
+import { EMOJIS } from "../../globals";
+import Command from "../../lib/Command";
 
 export default new Command({
   name: "reactionrole",

@@ -1,12 +1,12 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild, GuildMember, Message, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import { EmbedFieldData, Guild, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
+import { ROLES } from "../globals";
 import redis from "../lib/redis";
 import { GIFResponse, MemeResponse } from "../typings";
-import Command from "./Command";
-import { ROLES } from "./constants";
+import Command from "../lib/Command";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 

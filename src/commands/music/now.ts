@@ -1,6 +1,6 @@
+import Command from "../../lib/Command";
+import { status } from "../../utils/helpers";
 import { MessageEmbed } from "discord.js";
-import Command from "../../utils/Command";
-import { embed, status } from "../../utils/helpers";
 
 export default new Command({
   name: "now",

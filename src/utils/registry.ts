@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
-import Command from "./Command";
-import Event from "./Event";
+import Command from "../lib/Command";
+import Event from "../lib/Event";
 import { read } from "./read";
 
 export async function registerCommands(client: Client, dir = "") {

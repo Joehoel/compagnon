@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import Event from "../utils/Event";
+import Event from "../lib/Event";
 
 export default new Event({
   name: "warn",

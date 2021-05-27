@@ -1,6 +1,6 @@
 import { Client, Message } from "discord.js";
 import * as features from "../features";
-import Event from "../utils/Event";
+import Event from "../lib/Event";
 
 export default new Event({
   name: "message",
