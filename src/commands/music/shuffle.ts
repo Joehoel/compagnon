@@ -1,4 +1,4 @@
-import Command from "../../utils/Command";
+import Command from "../../lib/Command";
 import { embed } from "../../utils/helpers";
 import queue from "./queue";
 

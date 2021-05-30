@@ -1,6 +1,6 @@
 import Levels from "discord-xp";
 import { Client, Message } from "discord.js";
-import { ROLES } from "../utils/constants";
+import { ROLES } from "../globals";
 import { embed, giveRole } from "../utils/helpers";
 
 const { MONGO_URI } = process.env;

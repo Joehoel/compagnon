@@ -18,9 +18,7 @@
     "typeRoots": ["./src/typings", "node_modules/@types"],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "paths": {
-      "@/*": ["*"]
-    }
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"]
 }

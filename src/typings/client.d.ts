@@ -1,7 +1,7 @@
 import { Consola } from "consola";
 import "discord.js";
 import DisTube from "distube";
-import Command from "../utils/Command";
+import Command from "../lib/Command";
 import Event from "../utils/Event";
 import { Snipe } from "./";
 

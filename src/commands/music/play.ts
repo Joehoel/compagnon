@@ -1,5 +1,4 @@
-import Command from "@/utils/Command";
-import { embed } from "../../utils/helpers";
+import Command from "../../lib/Command";
 
 export default new Command({
   name: "play",

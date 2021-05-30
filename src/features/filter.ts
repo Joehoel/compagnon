@@ -22,7 +22,7 @@ export default async (_: Client, message: Message) => {
     filter.addWords(...words);
   });
 
-  filter.removeWords("lol", "hoe", "hoor", "kunt", "hardcore");
+  filter.removeWords("lol", "hoe", "hoor", "kunt", "hardcore", "kaas");
 
   if (filter.isProfane(text)) {
     const user = message.author.toString();

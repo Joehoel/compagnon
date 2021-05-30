@@ -1,7 +1,7 @@
-import Command from "../../utils/Command";
+import { ROLES } from "../../globals";
+import Command from "../../lib/Command";
 import redis, { expire } from "../../lib/redis";
-import { getRole, giveRole, removeRole } from "../../utils/helpers";
-import { ROLES } from "../../utils/constants";
+import { removeRole, giveRole } from "../../utils/helpers";
 
 const redisKeyPrefix = process.env.REDIS_KEY_PREFIX;
 

@@ -1,4 +1,4 @@
-import Command from "../../utils/Command";
+import Command from "../../lib/Command";
 import move from "./move";
 
 export default new Command({

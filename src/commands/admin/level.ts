@@ -1,6 +1,6 @@
 import Levels from "discord-xp";
-import Command from "../../utils/Command";
-import { GUILD_ID } from "../../utils/constants";
+import { GUILD_ID } from "../../globals";
+import Command from "../../lib/Command";
 import { embed } from "../../utils/helpers";
 
 enum Type {

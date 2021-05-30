@@ -1,3 +1,7 @@
+import { Config } from "./config/config";
+
+export const CONFIG = Config.getConfig();
+
 export enum ROLES {
   MEMBER = "813361178587430934",
   SPEEDRUNNER = "670183692445941781",

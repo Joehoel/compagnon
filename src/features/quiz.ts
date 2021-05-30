@@ -1,11 +1,10 @@
 import { Client, Message } from "discord.js";
-import { CHANNELS, USERS } from "../utils/constants";
+import { CHANNELS, CONFIG, USERS } from "../globals";
 import { embed } from "../utils/helpers";
 
-const { PREFIX } = process.env;
-
 export default async (client: Client, message: Message) => {
-  if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
+  if (message.content.startsWith(CONFIG.prefix) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot)
+    return;
   const member = await client.users.fetch(USERS.JESSE);
   await member.send(
     embed({
