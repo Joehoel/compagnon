@@ -1,11 +1,11 @@
 import Filter from "bad-words";
 import { Client, Message } from "discord.js";
-import fs from "fs";
+import { readFileSync } from "fs";
 import { Swear } from "../entity/Swear";
-const { PREFIX } = process.env;
+import { CONFIG } from "../globals";
 
 export default async (_: Client, message: Message) => {
-  if (message.content.startsWith(PREFIX) || message.author.bot) return;
+  if (message.content.startsWith(CONFIG.prefix) || message.author.bot) return;
   const text = message.content.toLowerCase();
 
   const filter = new Filter();
@@ -17,7 +17,7 @@ export default async (_: Client, message: Message) => {
   };
 
   Object.values(lists).forEach((path) => {
-    const file = fs.readFileSync(path, { encoding: "utf-8" });
+    const file = readFileSync(path, { encoding: "utf-8" });
     const words = file.split(", ").map((word) => word.toLowerCase().trim());
     filter.addWords(...words);
   });
