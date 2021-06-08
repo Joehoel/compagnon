@@ -4,14 +4,15 @@ import "module-alias/register";
 import "./lib/ExtendedMessage";
 
 // Command and Event classes
-import Command from "./lib/Command";
+import Command from "./modules/Command";
+import Event from "./modules/Event";
 
 // Other
 import consola from "consola";
 import DisTube from "distube";
 import { Client, Collection } from "discord.js";
 import { Snipe } from "./typings";
-import { registerCommands, registerEvents } from "./utils/registry";
+import { registerCommands, registerEvents } from "./lib/registry";
 import { music } from "./features";
 import { createConnection } from "typeorm";
 import colors from "colors";

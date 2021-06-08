@@ -2,10 +2,10 @@ import Filter from "bad-words";
 import { Client, Message } from "discord.js";
 import { readFileSync } from "fs";
 import { Swear } from "../entity/Swear";
-import { CONFIG } from "../globals";
+import config from "../../config.json";
 
 export default async (_: Client, message: Message) => {
-  if (message.content.startsWith(CONFIG.prefix) || message.author.bot) return;
+  if (message.content.startsWith(config.prefix) || message.author.bot) return;
   const text = message.content.toLowerCase();
 
   const filter = new Filter();

@@ -1,9 +1,10 @@
 import { Client, Message } from "discord.js";
-import { CHANNELS, CONFIG } from "../globals";
+import config from "../../config.json";
+import { CHANNELS } from "../lib/contants";
 
 export default async (_: Client, message: Message) => {
   if (message.channel.id == CHANNELS.POLLS) {
-    if (!message.content.startsWith(`${CONFIG.prefix}poll`) && !message.author.bot) {
+    if (!message.content.startsWith(`${config.prefix}poll`) && !message.author.bot) {
       await message.delete();
     }
     //  const messages = await message.channel.messages.fetch({ limit: 1 });

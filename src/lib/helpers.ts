@@ -3,10 +3,11 @@ import fetch from "cross-fetch";
 import { EmbedFieldData, Guild, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
-import { ROLES } from "../globals";
-import redis from "../lib/redis";
+import { ROLES } from "./contants";
+import redis from "./redis";
 import { GIFResponse, MemeResponse } from "../typings";
-import Command from "../lib/Command";
+import Command from "../modules/Command";
+import config from "../../config.json";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -67,7 +68,7 @@ export function status(queue: Queue) {
 export function embed(options: MessageEmbedOptions): MessageEmbed {
   return new MessageEmbed({
     ...options,
-    color: "#ffc600",
+    color: config.color,
     timestamp: Date.now(),
   });
 }

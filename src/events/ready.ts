@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
-import { GUILD_ID } from "../globals";
-import Event from "../lib/Event";
+import { GUILD_ID } from "../lib/contants";
+import Event from "../modules/Event";
 
 export default new Event({
   name: "ready",

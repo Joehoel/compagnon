@@ -1,6 +1,6 @@
 import { Client, MessageReaction, PartialUser, User } from "discord.js";
-import { EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, EMOJIS, ROLES } from "../globals";
-import { giveRole, removeRole } from "../utils/helpers";
+import { EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, EMOJIS, ROLES } from "../lib/contants";
+import { giveRole, removeRole } from "../lib/helpers";
 
 export default async (client: Client, reaction: MessageReaction, user: User | PartialUser, event: EVENTS) => {
   const member = client.guilds.cache.get(GUILD_ID)!.members.cache.get(user.id);

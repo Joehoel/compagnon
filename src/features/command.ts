@@ -1,11 +1,11 @@
 import { Client, Message } from "discord.js";
-import { CONFIG } from "../globals";
-import { embed } from "../utils/helpers";
+import config from "../../config.json";
+import { embed } from "../lib/helpers";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
   // Not a command or author is bot
-  if (!message.content.startsWith(CONFIG.prefix) || message.author.bot) return;
+  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
   // Command handler
 
   // Parse args from message content
