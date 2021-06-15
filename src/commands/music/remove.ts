@@ -1,4 +1,4 @@
-import Command from "../../lib/Command";
+import Command from "../../modules/Command";
 
 export default new Command({
   name: "remove",
@@ -6,6 +6,7 @@ export default new Command({
   aliases: ["delete", "del"],
   args: true,
   usage: "<song number(s)>",
+  exclusive: true,
   execute(client, message, args) {
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     const indeces = args.map((arg) => parseInt(arg));

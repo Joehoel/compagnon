@@ -1,6 +1,7 @@
 import { Consola } from "consola";
 import "discord.js";
 import DisTube from "distube";
+import { Collection } from "mongoose";
 import Command from "../modules/Command";
 import Event from "../modules/Event";
 import { Snipe } from "./";
@@ -15,6 +16,7 @@ declare module "discord.js" {
     snipes: Collection<string, Snipe>;
     events: Collection<string, Event>;
     features: Collection<string, any>;
+    prefixes: Collection<string, string>;
     music: DisTube;
     logger: Consola;
   }

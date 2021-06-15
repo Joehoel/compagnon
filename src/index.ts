@@ -1,7 +1,7 @@
 // Global
 import "dotenv/config";
 import "module-alias/register";
-import "./lib/ExtendedMessage";
+import "./modules/ExtendedMessage";
 
 // Command and Event classes
 import Command from "./modules/Command";
@@ -28,6 +28,7 @@ client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
 client.snipes = new Collection<string, Snipe>();
 client.events = new Collection<string, Event>();
+client.prefixes = new Collection<string, string>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 

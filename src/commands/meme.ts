@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../lib/Command";
+import Command from "../modules/Command";
 import Reddit from "../lib/reddit";
 
 export default new Command({

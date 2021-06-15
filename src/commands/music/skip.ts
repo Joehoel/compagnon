@@ -1,12 +1,13 @@
-import Command from "../../lib/Command";
+import Command from "../../modules/Command";
 import { MessageReaction, User } from "discord.js";
-import { embed } from "../../utils/helpers";
+import { embed } from "../../lib/helpers";
 
 export default new Command({
   name: "skip",
   description: "Skip a song",
   aliases: ["jump"],
   usage: "<song number>",
+  exclusive: true,
   async execute(client, message, args) {
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
 

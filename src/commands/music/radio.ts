@@ -1,5 +1,5 @@
 import axios from "axios";
-import Command from "../../lib/Command";
+import Command from "../../modules/Command";
 
 interface Station {
   id: number;
@@ -11,6 +11,7 @@ export default new Command({
   name: "radio",
   description: "Play a radio station to your liking",
   usage: "<station>",
+  exclusive: true,
   async execute(client, message, args) {
     let id = 66;
     if (args.length) {

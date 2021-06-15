@@ -1,11 +1,11 @@
 import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import Command from "../lib/Command";
-import { capitalize, distinctArrayByKey, embed } from "../utils/helpers";
+import Command from "../modules/Command";
+import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
 import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";
-import { GUILD_ID } from "../globals";
+import { GUILD_ID } from "../lib/contants";
 
 export default new Command({
   name: "leaderboard",
@@ -13,6 +13,7 @@ export default new Command({
   usage: "<show / create / score> <game> <leaderboard> <score> <proof>",
   args: true,
   description: "Leaderboard command",
+  exclusive: true,
   async execute(client, message, args) {
     const [type, gameName, leaderboardName, score, proof] = args.map((arg, i) => {
       if (i !== args.length - 1) return arg.toLowerCase();

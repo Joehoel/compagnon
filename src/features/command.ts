@@ -1,19 +1,21 @@
 import { Client, Message } from "discord.js";
-import config from "../../config.json";
+import { GUILD_ID } from "../lib/contants";
 import { embed } from "../lib/helpers";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
+  const prefix = client.prefixes.get(message.guild!.id) || PREFIX;
+
   // Not a command or author is bot
-  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
   // Command handler
 
   // Parse args from message content
-  const args = message.content.slice(PREFIX.length).trim().split(/ +/);
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
   const commandName = args.shift()!.toLowerCase();
 
   // Check if the message is just '.'
-  if (commandName === ".") return;
+  if (commandName === prefix) return;
 
   // Check if command exists
   if (!client.commands.has(commandName) && !client.aliases.has(commandName)) {
@@ -23,6 +25,11 @@ export default async (client: Client, message: Message) => {
 
   // Get command from collection
   const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
+
+  if (command.exclusive == (message.guild!.id !== GUILD_ID)) {
+    await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
+    return;
+  }
 
   // Check if user is admin for command
   if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
@@ -47,7 +54,7 @@ export default async (client: Client, message: Message) => {
     let reply = `You didn't provide any arguments, ${message.author}!`;
 
     if (command.usage) {
-      reply += `\nThe proper usage would be: \`${PREFIX}${command.name} ${command.usage}\``;
+      reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
     }
 
     await message.channel.send(reply);

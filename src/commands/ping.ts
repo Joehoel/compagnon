@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../lib/Command";
+import Command from "../modules/Command";
 
 export default new Command({
   name: "ping",

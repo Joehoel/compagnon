@@ -1,7 +1,7 @@
 import Levels from "discord-xp";
-import { GUILD_ID } from "../../globals";
-import Command from "../../lib/Command";
-import { embed } from "../../utils/helpers";
+import { GUILD_ID } from "../../lib/contants";
+import Command from "../../modules/Command";
+import { embed } from "../../lib/helpers";
 
 enum Type {
   SET = "set",

@@ -1,11 +1,12 @@
-import Command from "../../lib/Command";
-import { status } from "../../utils/helpers";
+import Command from "../../modules/Command";
+import { status } from "../../lib/helpers";
 import { MessageEmbed } from "discord.js";
 
 export default new Command({
   name: "now",
   description: "Shows the current playing song",
   aliases: ["np", "nowplaying"],
+  exclusive: true,
   execute(client, message) {
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     const queue = client.music.getQueue(message);
