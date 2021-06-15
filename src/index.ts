@@ -16,6 +16,7 @@ import { registerCommands, registerEvents } from "./lib/registry";
 import { music } from "./features";
 import { createConnection } from "typeorm";
 import colors from "colors";
+import { Config } from "./entity/Config";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -28,7 +29,7 @@ client.commands = new Collection<string, Command>();
 client.aliases = new Collection<string, string>();
 client.snipes = new Collection<string, Snipe>();
 client.events = new Collection<string, Event>();
-client.prefixes = new Collection<string, string>();
+client.config = new Collection<string, Partial<Config>>();
 client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 client.logger = consola;
 

@@ -4,7 +4,7 @@ import { embed } from "../lib/helpers";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
-  const prefix = client.prefixes.get(message.guild!.id) || PREFIX;
+  const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
   // Not a command or author is bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -26,7 +26,7 @@ export default async (client: Client, message: Message) => {
   // Get command from collection
   const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
 
-  if (command.exclusive == (message.guild!.id !== GUILD_ID)) {
+  if (command.exclusive && message.guild!.id !== GUILD_ID) {
     await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
     return;
   }

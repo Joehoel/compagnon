@@ -22,6 +22,9 @@ export class Config extends BaseEntity {
   @Column({ default: "!" })
   prefix: string;
 
+  @Column({ default: "#ffc600" })
+  color: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

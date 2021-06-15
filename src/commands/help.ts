@@ -10,7 +10,7 @@ export default new Command({
   usage: "<command>",
   aliases: ["h", "?"],
   async execute(client, message, args) {
-    const prefix = client.prefixes.get(message.guild!.id);
+    const prefix = client.config.get(message.guild!.id)?.prefix;
 
     const [commandName] = args.map((arg) => arg.toLowerCase());
 

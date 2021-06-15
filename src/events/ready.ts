@@ -7,7 +7,7 @@ export default new Event({
   name: "ready",
   async run(client: Client) {
     client.guilds.cache.forEach(async (guild) => {
-      const foundGuild = await Config.findOne({
+      const config = await Config.findOne({
         where: {
           guild: {
             id: guild.id,
@@ -15,8 +15,8 @@ export default new Event({
         },
       });
 
-      if (foundGuild) {
-        client.prefixes.set(guild.id, foundGuild?.prefix);
+      if (config) {
+        client.config.set(guild.id, config);
       }
     });
 
