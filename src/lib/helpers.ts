@@ -7,7 +7,6 @@ import { ROLES } from "./contants";
 import redis from "./redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "../modules/Command";
-import config from "../../config.json";
 import { Guild } from "../entity/Guild";
 import { Config } from "../entity/Config";
 
@@ -70,7 +69,7 @@ export function status(queue: Queue) {
 export function embed(options: MessageEmbedOptions): MessageEmbed {
   return new MessageEmbed({
     ...options,
-    color: config.color,
+    color: "#ffc600",
     timestamp: Date.now(),
   });
 }

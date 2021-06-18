@@ -1,10 +1,13 @@
 import { Client, Message } from "discord.js";
-import config from "../../config.json";
 import { CHANNELS } from "../lib/contants";
 
-export default async (_: Client, message: Message) => {
+const { PREFIX } = process.env;
+
+export default async (client: Client, message: Message) => {
+  const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
+
   if (message.channel.id == CHANNELS.POLLS) {
-    if (!message.content.startsWith(`${config.prefix}poll`) && !message.author.bot) {
+    if (!message.content.startsWith(`${prefix}poll`) && !message.author.bot) {
       await message.delete();
     }
     //  const messages = await message.channel.messages.fetch({ limit: 1 });

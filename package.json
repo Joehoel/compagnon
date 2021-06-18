@@ -74,6 +74,9 @@
       "git add"
     ]
   },
+  "_moduleAliases": {
+    "@": "dist"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

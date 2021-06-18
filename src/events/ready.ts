@@ -20,9 +20,11 @@ export default new Event({
       }
     });
 
+    const totalMembers = client.guilds.cache.reduce((acc, val) => acc + val.memberCount, 0);
+
     client.user?.setPresence({
       status: "online",
-      activity: { name: `with my ${client.guilds.cache.get(GUILD_ID)!.memberCount} nerds` },
+      activity: { name: `with my ${totalMembers} nerds` },
     });
   },
 });
