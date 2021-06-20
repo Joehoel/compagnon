@@ -1,11 +1,12 @@
 import { Swear } from "../entity/Swear";
-import Command from "../lib/Command";
-import { embed } from "../utils/helpers";
+import Command from "../modules/Command";
+import { embed } from "../lib/helpers";
 
 export default new Command({
   name: "swears",
   description: "Display swear counter",
   usage: "<@>",
+  exclusive: true,
   async execute(_, message) {
     const target = message.mentions.members?.first() || message.author;
     const swear = await Swear.findOne({ where: { user: target?.toString() } });

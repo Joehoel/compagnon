@@ -1,6 +1,6 @@
 import Levels from "discord-xp";
-import Command from "../lib/Command";
-import { embed } from "../utils/helpers";
+import Command from "../modules/Command";
+import { embed } from "../lib/helpers";
 
 export default new Command({
   name: "rank",

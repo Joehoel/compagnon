@@ -1,12 +1,13 @@
 import { MessageEmbed } from "discord.js";
-import { EMOJIS } from "../../globals";
-import Command from "../../lib/Command";
+import { EMOJIS } from "../../lib/contants";
+import Command from "../../modules/Command";
 
 export default new Command({
   name: "reactionrole",
   description: "Create an embed to make give users roles",
   permissions: ["MANAGE_ROLES"],
   aliases: ["rr"],
+  exclusive: true,
   async execute(client, message) {
     const msg = await message.channel.send(
       new MessageEmbed({

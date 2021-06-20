@@ -1,7 +1,7 @@
-import { ROLES } from "../../globals";
-import Command from "../../lib/Command";
+import { ROLES } from "../../lib/contants";
+import Command from "../../modules/Command";
 import redis, { expire } from "../../lib/redis";
-import { removeRole, giveRole } from "../../utils/helpers";
+import { removeRole, giveRole } from "../../lib/helpers";
 
 const redisKeyPrefix = process.env.REDIS_KEY_PREFIX;
 
@@ -11,6 +11,7 @@ export default new Command({
   args: true,
   permissions: ["MUTE_MEMBERS"],
   usage: "<@> <duration> <m, h, d or life>",
+  exclusive: true,
   async execute(client, message, args) {
     expire((message: string) => {
       if (message.startsWith(redisKeyPrefix)) {

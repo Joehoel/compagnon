@@ -1,7 +1,7 @@
 import ping from "../commands/ping";
 import say from "../commands/admin/say";
 import { MemeResponse } from "../typings";
-import { formatCommand, meme } from "../utils/helpers";
+import { formatCommand, meme } from "../lib/helpers";
 
 describe("Helpers", () => {
   describe("Meme function", () => {

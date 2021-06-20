@@ -1,4 +1,4 @@
-import Command from "../../lib/Command";
+import Command from "@/modules/Command";
 
 export default new Command({
   name: "status",
@@ -6,6 +6,7 @@ export default new Command({
   args: true,
   usage: "<status message>",
   permissions: ["ADMINISTRATOR"],
+  exclusive: true,
   async execute(client, message, args) {
     args.unshift();
     await client.user!.setPresence({
