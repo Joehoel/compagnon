@@ -1,3 +1,5 @@
+require("module-alias/register");
+
 const rootDir = process.env.NODE_ENV === "development" ? "src" : "dist";
 
 module.exports = {
