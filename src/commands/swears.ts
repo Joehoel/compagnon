@@ -1,23 +1,26 @@
 import { Swear } from "../entity/Swear";
-import Command from "../modules/Command";
-import { embed } from "../lib/helpers";
+import { embed } from "@/lib/helpers";
+import Command from "@/modules/Command";
 
 export default new Command({
   name: "swears",
   description: "Display swear counter",
   usage: "<@>",
   exclusive: true,
-  async execute(_, message) {
+  async execute(client, message, args) {
     const target = message.mentions.members?.first() || message.author;
-    const swear = await Swear.findOne({ where: { user: target?.toString() } });
+    console.log("id", target.id);
+    const swear = await Swear.findOneOrFail({ where: { user: `<@${target.id}>` } });
 
     const user = message.mentions.members?.first()?.user || message.author;
 
-    return message.channel.send(
+    // console.log(await Swear.find({}));
+
+    return await message.channel.send(
       embed({
         title: "Swears",
         author: { name: user.username, iconURL: user.displayAvatarURL() },
-        description: `\`${swear?.swears}\``,
+        description: `\`${swear?.swears ?? "None"}\``,
       })
     );
   },
