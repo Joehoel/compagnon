@@ -18,3 +18,4 @@ export default new Command({
     });
   },
 });
+// Command that send a random cat picture from the internet to the user
