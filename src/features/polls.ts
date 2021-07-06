@@ -4,6 +4,7 @@ import { CHANNELS } from "../lib/contants";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
+  if (message.channel.type == "dm") return;
   const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
   if (message.channel.id == CHANNELS.POLLS) {

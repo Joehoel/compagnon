@@ -6,6 +6,7 @@ import { Swear } from "../entity/Swear";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
+  if (message.channel.type == "dm") return;
   const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
   if (message.content.startsWith(prefix) || message.author.bot) return;
@@ -26,7 +27,6 @@ export default async (client: Client, message: Message) => {
   });
 
   filter.removeWords("lol", "hoe", "hoor", "kunt", "hardcore", "kaas");
-
   if (filter.isProfane(text)) {
     const user = message.author.toString();
     // client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
