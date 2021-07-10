@@ -1,13 +1,13 @@
-<h1 align="center">Compagnon</h1>
+<h1 align="center">Compagnon <span></span></h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/Joehoel/compagnon?color=FFC600">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/Joehoel/compagnon?color=0288D1">
 
   <img alt="Github language count" src="https://img.shields.io/github/languages/count/Joehoel/compagnon?color=FFC600">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Joehoel/compagnon?color=FFC600">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Joehoel/compagnon?color=8BC34A">
 
-  <img alt="License" src="https://img.shields.io/github/license/Joehoel/compagnon?color=FFC600">
+  <img alt="License" src="https://img.shields.io/github/license/Joehoel/compagnon?color=FF9800">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/Joehoel/compagnon?color=FFC600" /> -->
 
@@ -15,14 +15,6 @@
 
   <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/Joehoel/compagnon?color=FFC600" /> -->
 </p>
-
-<!-- Status -->
-
-<!-- <h4 align="center">
-	🚧  Compagnon 🚀 Under construction...  🚧
-</h4>
-
-<hr> -->
 
 <p align="center">
   <a href="#dart-about">About</a> &#xa0; | &#xa0;
@@ -35,6 +27,8 @@
 </p>
 
 <br>
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/joehoel/compagnon)
 
 ## :dart: About
 
@@ -75,6 +69,8 @@ REDIS_KEY_PREFIX="muted-"
 ```
 
 ## :checkered_flag: Starting
+
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/joehoel/compagnon)
 
 ```bash
 # Clone this project
