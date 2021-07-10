@@ -1,4 +1,4 @@
-import Event from "../utils/Event";
+import Event from "../modules/Event";
 
 export default new Event({
   name: "error",

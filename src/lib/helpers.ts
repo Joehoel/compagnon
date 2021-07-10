@@ -1,12 +1,14 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import { EmbedFieldData, Guild as Server, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
-import redis from "../lib/redis";
+import { ROLES } from "./contants";
+import redis from "./redis";
 import { GIFResponse, MemeResponse } from "../typings";
-import Command from "./Command";
-import { ROLES } from "./constants";
+import Command from "../modules/Command";
+import { Guild } from "../entity/Guild";
+import { Config } from "../entity/Config";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -106,7 +108,7 @@ export function distinctArrayByKey<T>(array: T[], key: keyof T): T[] {
   return [...new Map(array.map((item: T) => [item[key], item])).values()];
 }
 
-export function getRole(guild: Guild, roleId: string) {
+export function getRole(guild: Server, roleId: string) {
   return guild.roles.cache.find((role) => role.id === roleId);
 }
 
@@ -182,4 +184,19 @@ export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: t
     const x = Math.random() * (countOrMax! - arrOrMin);
     return float ? arrOrMin + x : arrOrMin + Math.round(x);
   }
+}
+
+export async function createGuildConfig(guild: Server) {
+  const newGuild = new Guild({
+    id: guild.id,
+    ownerId: guild.ownerID,
+  });
+  await newGuild.save();
+
+  const newConfig = new Config({
+    guild: newGuild,
+  });
+  await newConfig.save();
+
+  return newConfig;
 }

@@ -1,7 +1,7 @@
 import Levels from "discord-xp";
 import { Client, Message } from "discord.js";
-import { ROLES } from "../utils/constants";
-import { embed, giveRole } from "../utils/helpers";
+import { ROLES } from "../lib/contants";
+import { embed, giveRole } from "../lib/helpers";
 
 const { MONGO_URI } = process.env;
 const sent = new Map<string, boolean>();

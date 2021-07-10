@@ -1,12 +1,17 @@
 import { Client, Message } from "discord.js";
-import { CHANNELS, USERS } from "../utils/constants";
-import { embed } from "../utils/helpers";
+import { CHANNELS, USERS } from "../lib/contants";
+import { embed } from "../lib/helpers";
 
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
-  if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
+  if (message.channel.type == "dm") return;
+  const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
+
+  if (message.content.startsWith(prefix) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
+
   const member = await client.users.fetch(USERS.JESSE);
+
   await member.send(
     embed({
       description: message.content,
@@ -17,5 +22,5 @@ export default async (client: Client, message: Message) => {
     })
   );
   await message.reply("Answer successfully submitted! ✅");
-  await message.delete({ timeout: 1000 });
+  await message.delete({ timeout: 500 });
 };

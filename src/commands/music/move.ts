@@ -1,9 +1,10 @@
-import Command from "../../utils/Command";
+import Command from "../../modules/Command";
 
 export default new Command({
   name: "move",
   description: "Move a song to another position in the queue",
   aliases: ["mv"],
+  exclusive: true,
   execute(client, message, args) {
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     const queue = client.music.getQueue(message);

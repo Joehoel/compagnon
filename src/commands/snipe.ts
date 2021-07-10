@@ -1,5 +1,5 @@
-import Command from "../utils/Command";
-import { embed } from "../utils/helpers";
+import Command from "../modules/Command";
+import { embed } from "../lib/helpers";
 
 export default new Command({
   name: "snipe",

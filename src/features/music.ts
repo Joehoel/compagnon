@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import DisTube from "distube";
-import { status } from "../utils/helpers";
+import { status } from "../lib/helpers";
 
 export default (music: DisTube) => {
   music

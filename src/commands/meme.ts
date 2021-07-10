@@ -1,7 +1,6 @@
 import { MessageEmbed } from "discord.js";
+import Command from "../modules/Command";
 import Reddit from "../lib/reddit";
-import Command from "../utils/Command";
-import { meme } from "../utils/helpers";
 
 export default new Command({
   name: "meme",

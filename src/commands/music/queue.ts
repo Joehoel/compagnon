@@ -1,13 +1,14 @@
-import Command from "@/utils/Command";
+import Command from "../../modules/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
 import Song from "distube/typings/Song";
-import { embed } from "../../utils/helpers";
+import { embed } from "../../lib/helpers";
 
 export default new Command({
   name: "queue",
   description: "Show the current queue",
   aliases: ["q"],
+  exclusive: true,
   async execute(client, message) {
     const queue = client.music.getQueue(message);
     const playing = queue?.songs.shift();

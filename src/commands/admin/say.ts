@@ -1,4 +1,4 @@
-import Command from "@/utils/Command";
+import Command from "../../modules/Command";
 
 export default new Command({
   name: "say",

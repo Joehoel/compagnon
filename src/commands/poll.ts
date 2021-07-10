@@ -1,6 +1,6 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../utils/Command";
-import { ROLES } from "../utils/constants";
+import { ROLES } from "../lib/contants";
+import Command from "../modules/Command";
 
 const options = [
   "🇦",

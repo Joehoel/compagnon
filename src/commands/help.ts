@@ -1,8 +1,8 @@
-import Command from "@/utils/Command";
+import Command from "../modules/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
-import { canExecute, embed, formatCommand } from "../utils/helpers";
-const { PREFIX } = process.env;
+import { canExecute, embed, formatCommand } from "../lib/helpers";
+import { GUILD_ID } from "../lib/contants";
 
 export default new Command({
   name: "help",
@@ -10,11 +10,14 @@ export default new Command({
   usage: "<command>",
   aliases: ["h", "?"],
   async execute(client, message, args) {
+    const prefix = client.config.get(message.guild!.id)?.prefix;
+
     const [commandName] = args.map((arg) => arg.toLowerCase());
 
     if (commandName) {
       const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
-      if (command) {
+      const isAllowed = command.exclusive == (message.guild!.id == GUILD_ID);
+      if (command && isAllowed) {
         return message.channel.send(
           embed({
             title: "Help",
@@ -37,7 +40,7 @@ export default new Command({
               {
                 name: "Usage",
                 value: command.usage
-                  ? `\`${PREFIX}${command.name} ${command.usage}\``
+                  ? `\`${prefix}${command.name} ${command.usage}\``
                   : "This command doesn't have any arguments",
               },
             ],
@@ -49,7 +52,8 @@ export default new Command({
     const commands = client.commands
       .array()
       .filter((command) => {
-        return canExecute(message.member!, command);
+        const isAllowed = command.exclusive == (message.guild!.id == GUILD_ID);
+        return canExecute(message.member!, command) && isAllowed;
       })
       .map(formatCommand);
 

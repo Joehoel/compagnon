@@ -1,12 +1,13 @@
 import { MessageEmbed } from "discord.js";
-import Command from "@/utils/Command";
-import { status } from "@/utils/helpers";
+import Command from "../../modules/Command";
+import { status } from "../../lib/helpers";
 
 export default new Command({
   name: "stop",
   description: "Stops the current playing music",
   aliases: ["leave", "fuckoff", "krijgdetering", "optyfen", "opgetyfet", "getthefuckoutofmyroomimplayingminecraft"],
-  execute(client, message, args) {
+  exclusive: true,
+  execute(client, message) {
     const embed = new MessageEmbed({
       title: "Music",
       color: "#ffc600",

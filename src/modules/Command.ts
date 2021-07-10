@@ -9,6 +9,7 @@ export default class Command {
   public permissions: PermissionString[];
   public aliases: string[];
   public roles: string[];
+  public exclusive: boolean;
   public execute: (client: Client, message: Message, args: string[]) => void;
 
   constructor({
@@ -21,6 +22,7 @@ export default class Command {
     permissions,
     aliases,
     roles,
+    exclusive,
   }: {
     name: string;
     admin?: boolean;
@@ -30,6 +32,7 @@ export default class Command {
     permissions?: PermissionString[];
     aliases?: string[];
     roles?: string[];
+    exclusive?: boolean;
     execute: (client: Client, message: Message, args: string[]) => void;
   }) {
     this.name = name;
@@ -41,5 +44,6 @@ export default class Command {
     this.permissions = permissions ?? [];
     this.aliases = aliases ?? [];
     this.roles = roles ?? [];
+    this.exclusive = exclusive ?? false;
   }
 }

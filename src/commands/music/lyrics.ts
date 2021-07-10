@@ -1,11 +1,12 @@
-import Command from "../../utils/Command";
-import { embed } from "../../utils/helpers";
-import { getLyrics } from "../../utils/lyrics";
+import Command from "../../modules/Command";
+import { embed } from "../../lib/helpers";
+import { getLyrics } from "../../lib/lyrics";
 
 export default new Command({
   name: "lyrics",
   description: "Search for the song lyrics",
   usage: "<song - artist>",
+  exclusive: true,
   async execute(client, message, args) {
     let song = "";
     const queue = client.music.getQueue(message);
