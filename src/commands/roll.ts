@@ -1,5 +1,5 @@
-import Command from "../utils/Command";
-import { embed, random } from "../utils/helpers";
+import { embed, random } from "@/lib/helpers";
+import Command from "@/modules/Command";
 
 export default new Command({
   name: "roll",
