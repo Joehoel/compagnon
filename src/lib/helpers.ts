@@ -3,7 +3,7 @@ import fetch from "cross-fetch";
 import { EmbedFieldData, Guild as Server, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
-import { ROLES } from "./contants";
+import { GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "../modules/Command";
@@ -52,7 +52,7 @@ export async function meme(subName = "dankmemes"): Promise<MemeResponse> {
 export function formatCommand(command: Command): EmbedFieldData {
   return {
     name:
-      command.aliases.length >= 1 ? `**${command.name}** \`(${command.aliases.join(", ")})\`` : `**${command.name}**`,
+      command.aliases?.length >= 1 ? `**${command.name}** \`(${command.aliases.join(", ")})\`` : `**${command.name}**`,
     value: command.description + "\n",
     inline: true,
   };
@@ -199,4 +199,20 @@ export async function createGuildConfig(guild: Server) {
   await newConfig.save();
 
   return newConfig;
+}
+
+/**
+ * Check if the given command is exclusive and allowed in the current server
+ *
+ * @export
+ * @param {Command} command
+ * @param {string} guildId
+ * @return {boolean}
+ */
+export function isAllowed(command: Command, guildId: string): boolean {
+  if (command.exclusive) {
+    return guildId === GUILD_ID;
+  } else {
+    return true;
+  }
 }
