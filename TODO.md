@@ -19,7 +19,7 @@
 - [x] `Ik ben` feature
 - [x] Quiz feature
 - [x] Fix chad feature
-- [ ] Multi server support
+- [x] Multi server support
 
 ### Music commands
 
