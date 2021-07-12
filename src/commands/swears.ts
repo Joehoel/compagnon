@@ -9,7 +9,6 @@ export default new Command({
   exclusive: true,
   async execute(client, message, args) {
     const target = message.mentions.members?.first() || message.author;
-    console.log("id", target.id);
     const swear = await Swear.findOneOrFail({ where: { user: `<@${target.id}>` } });
 
     const user = message.mentions.members?.first()?.user || message.author;
