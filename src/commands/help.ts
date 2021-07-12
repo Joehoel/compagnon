@@ -1,7 +1,7 @@
 import Command from "../modules/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
-import { canExecute, embed, formatCommand } from "../lib/helpers";
+import { canExecute, embed, formatCommand, isAllowed } from "../lib/helpers";
 import { GUILD_ID } from "../lib/contants";
 
 export default new Command({
@@ -16,8 +16,8 @@ export default new Command({
 
     if (commandName) {
       const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
-      const isAllowed = command.exclusive == (message.guild!.id == GUILD_ID);
-      if (command && isAllowed) {
+
+      if (command && isAllowed(command, message.guild!.id)) {
         return message.channel.send(
           embed({
             title: "Help",
@@ -52,8 +52,7 @@ export default new Command({
     const commands = client.commands
       .array()
       .filter((command) => {
-        const isAllowed = command.exclusive == (message.guild!.id == GUILD_ID);
-        return canExecute(message.member!, command) && isAllowed;
+        return canExecute(message.member!, command) && isAllowed(command, message.guild!.id);
       })
       .map(formatCommand);
 
@@ -62,7 +61,7 @@ export default new Command({
       .setElementsPerPage(8)
       .setDisabledNavigationEmojis(["delete"])
       .setChannel(message.channel as TextChannel)
-      .formatField("Commands", (el: any) => `${el.name}\n${el.value}`);
+      .formatField("Commands", (el: any) => `${el.name}\n${el.value}`, true);
 
     paginatedEmbed.embed.setColor("#ffc600").setTitle("Help");
 

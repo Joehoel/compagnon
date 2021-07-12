@@ -1,6 +1,6 @@
 import { Client, Message } from "discord.js";
 import { GUILD_ID } from "../lib/contants";
-import { embed } from "../lib/helpers";
+import { embed, isAllowed } from "../lib/helpers";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
@@ -27,7 +27,9 @@ export default async (client: Client, message: Message) => {
   // Get command from collection
   const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
 
-  if (command.exclusive && message.guild!.id !== GUILD_ID) {
+  console.log("allowed", isAllowed(command, message.guild!.id));
+
+  if (!isAllowed(command, message.guild!.id)) {
     await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
     return;
   }

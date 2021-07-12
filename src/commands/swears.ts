@@ -14,8 +14,6 @@ export default new Command({
 
     const user = message.mentions.members?.first()?.user || message.author;
 
-    // console.log(await Swear.find({}));
-
     return await message.channel.send(
       embed({
         title: "Swears",

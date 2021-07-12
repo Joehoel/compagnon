@@ -3,7 +3,7 @@ import fetch from "cross-fetch";
 import { EmbedFieldData, Guild as Server, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
-import { ROLES } from "./contants";
+import { GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
 import { GIFResponse, MemeResponse } from "../typings";
 import Command from "../modules/Command";
@@ -42,21 +42,44 @@ export async function meme(subName = "dankmemes"): Promise<MemeResponse> {
   return { title, url, date, author, sub, post };
 }
 
+/**
+ * Format a discord command to for embed usage
+ *
+ * @export
+ * @param {Command} command Command
+ * @return {EmbedFieldData} Embed field
+ */
 export function formatCommand(command: Command): EmbedFieldData {
   return {
     name:
-      command.aliases.length >= 1 ? `**${command.name}** \`(${command.aliases.join(", ")})\`` : `**${command.name}**`,
+      command.aliases?.length >= 1 ? `**${command.name}** \`(${command.aliases.join(", ")})\`` : `**${command.name}**`,
     value: command.description + "\n",
+    inline: true,
   };
 }
 
-export function canExecute(member: GuildMember, command: Command) {
+/**
+ * Given a discord member and command check if that member can execute that command
+ *
+ * @export
+ * @param {GuildMember} member
+ * @param {Command} command
+ * @return {boolean}
+ */
+export function canExecute(member: GuildMember, command: Command): boolean {
   if (!command.permissions) return true;
   const memberPerms = member.permissions.toArray();
   return command.permissions.every((permission) => memberPerms?.includes(permission));
 }
 
-export function capitalize(string: string) {
+/**
+ * Capitalize a string
+ *
+ * @export
+ * @param {string} string
+ * @return {string} capitalized string
+ */
+export function capitalize(string: string): string {
   return string.substr(0, 1).toUpperCase() + string.substr(1, string.length - 1);
 }
 
@@ -66,6 +89,13 @@ export function status(queue: Queue) {
   }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 }
 
+/**
+ * Generate a discord embed with default color and timestamp
+ *
+ * @export
+ * @param {MessageEmbedOptions} options
+ * @return {MessageEmbed} Embed
+ */
 export function embed(options: MessageEmbedOptions): MessageEmbed {
   return new MessageEmbed({
     ...options,
@@ -115,6 +145,47 @@ export async function onJoin(member: GuildMember) {
   }
 }
 
+/**
+ * Get a random number between min and max (inclusive)
+ * @param min Minimum value of the random number
+ * @param max Maximum value of the random number
+ * @param float Whether to return a float instead of an integer
+ * @returns Random number between min and max
+ */
+export function random(min: number, max: number, float?: true): number;
+
+/**
+ * Get a random entry from an array
+ * @param array Array to get a random entry from
+ * @returns Random entry from array
+ */
+export function random<T>(array: T[]): T;
+
+/**
+ * Get a number of random items from an array
+ * @param array Array to get random entries from
+ * @param count Number of random entries to get
+ * @returns A random slice from the input array
+ */
+export function random<T>(array: T[], count: number): T[];
+
+export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: true): T[] | T | number {
+  if (Array.isArray(arrOrMin)) {
+    if (countOrMax == undefined) return arrOrMin[Math.floor(Math.random() * arrOrMin.length)];
+
+    const copy = arrOrMin.slice(0, arrOrMin.length);
+
+    const selected: T[] = [];
+    for (let i = 0; i < countOrMax; i++) {
+      selected.push(copy.splice(random(0, copy.length - 1), 1)[0]);
+    }
+    return selected;
+  } else {
+    const x = Math.random() * (countOrMax! - arrOrMin);
+    return float ? arrOrMin + x : arrOrMin + Math.round(x);
+  }
+}
+
 export async function createGuildConfig(guild: Server) {
   const newGuild = new Guild({
     id: guild.id,
@@ -128,4 +199,20 @@ export async function createGuildConfig(guild: Server) {
   await newConfig.save();
 
   return newConfig;
+}
+
+/**
+ * Check if the given command is exclusive and allowed in the current server
+ *
+ * @export
+ * @param {Command} command
+ * @param {string} guildId
+ * @return {boolean}
+ */
+export function isAllowed(command: Command, guildId: string): boolean {
+  if (command.exclusive) {
+    return guildId === GUILD_ID;
+  } else {
+    return true;
+  }
 }

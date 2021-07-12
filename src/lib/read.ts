@@ -1,6 +1,14 @@
 import fs from "fs";
 import { join } from "path";
 
+/**
+ * Given a directory read all the files in that directory and give them the correct type
+ *
+ * @export
+ * @template T Class that all files are an instance of
+ * @param {string} dir Directory relative to 'utils/read.ts'
+ * @return {Promise<T[]>} Array of instances of T read from the given directory
+ */
 export async function read<T>(dir: string): Promise<T[]> {
   // console.log(`Loading commands \`${dir}\``);
 
