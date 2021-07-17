@@ -71,9 +71,6 @@
     "lint": "eslint --fix \"./src/**/*.ts\"",
     "prepare": "husky install"
   },
-  "eslintConfig": {
-    "extends": "@joehoel/eslint-config"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm lint-staged"
