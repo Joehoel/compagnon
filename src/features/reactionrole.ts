@@ -34,6 +34,13 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             await removeRole(member!, ROLES.SPEEDRUNNER);
           }
           break;
+        case EMOJIS.CONTESTANT:
+          if (event == EVENTS.REACTION_ADD) {
+            await giveRole(member!, ROLES.CONTESTANT);
+          } else {
+            await removeRole(member!, ROLES.CONTESTANT);
+          }
+          break;
 
         default:
           break;

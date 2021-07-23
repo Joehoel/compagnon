@@ -1,6 +1,6 @@
-import { MessageEmbed } from "discord.js";
-import { EMOJIS } from "../../lib/contants";
-import Command from "../../modules/Command";
+import { embed } from "@/lib/helpers";
+import { EMOJIS } from "@/lib/contants";
+import Command from "@/modules/Command";
 
 export default new Command({
   name: "reactionrole",
@@ -8,16 +8,17 @@ export default new Command({
   permissions: ["MANAGE_ROLES"],
   aliases: ["rr"],
   exclusive: true,
-  async execute(client, message) {
+  async execute(_, message) {
     const msg = await message.channel.send(
-      new MessageEmbed({
+      embed({
         title: "Welkom",
-        description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n`,
-        color: "#ffc600",
+        description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n\n ${EMOJIS.CONTESTANT} - **Contestant**\n\n`,
+        timestamp: undefined,
       })
     );
     await msg.react(EMOJIS.MEMBER);
     await msg.react(EMOJIS.SPEEDRUNNER);
     await msg.react(EMOJIS.POLLER);
+    await msg.react(EMOJIS.CONTESTANT);
   },
 });
