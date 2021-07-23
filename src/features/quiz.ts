@@ -8,7 +8,7 @@ export default async (client: Client, message: Message) => {
   if (message.channel.type == "dm") return;
   const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
-  if (message.content.startsWith(prefix) || message.channel.id != CHANNELS.BOT_COMMANDS || message.author.bot) return;
+  if (message.content.startsWith(prefix) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
 
   const member = await client.users.fetch(USERS.JESSE);
 
