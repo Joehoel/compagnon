@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
 import { Config } from "../entity/Config";
-import { GUILD_ID } from "../lib/contants";
-import Event from "../modules/Event";
+import Event from "@/modules/Event";
+import colors from "colors";
 
 export default new Event({
   name: "ready",
@@ -26,5 +26,7 @@ export default new Event({
       status: "online",
       activity: { name: `with my ${totalMembers} nerds` },
     });
+
+    client.logger.success("Compagnon" + colors.green.bold(" online!"));
   },
 });
