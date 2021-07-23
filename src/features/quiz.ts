@@ -21,6 +21,14 @@ export default async (client: Client, message: Message) => {
       },
     })
   );
+
+  await message.author.send(
+    embed({
+      title: "Antwoord",
+      description: message.content,
+    })
+  );
+
   await message.reply("Answer successfully submitted! ✅");
   await message.delete({ timeout: 500 });
 };
