@@ -4,6 +4,7 @@ export enum ROLES {
   POLLER = "824017327485485138",
   MUTED = "813348811728486420",
   CHAD = "834023222131425340",
+  CONTESTANT = "868226976014540820",
 }
 
 export enum USERS {
@@ -15,6 +16,7 @@ export enum EMOJIS {
   MEMBER = "🙋‍♂️",
   SPEEDRUNNER = "💨",
   POLLER = "📋",
+  CONTESTANT = "❓",
 }
 
 export enum CHANNELS {
