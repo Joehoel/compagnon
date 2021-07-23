@@ -48,7 +48,6 @@ client.logger = consola;
 
     // Log bot in
     await client.login(TOKEN);
-    client.logger.success("Compagnon" + colors.green.bold(" online!"));
   } catch (error) {
     client.logger.error(error);
   }
