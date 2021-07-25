@@ -46,7 +46,7 @@ client.logger = consola;
     await createConnection();
     client.logger.success("Database" + colors.green.bold(" connected!"));
 
-    // Log bot in
+    // Login bot
     await client.login(TOKEN);
   } catch (error) {
     client.logger.error(error);
