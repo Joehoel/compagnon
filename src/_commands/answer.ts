@@ -23,7 +23,7 @@ export default new SlashCommand({
     interaction.reply({ ephemeral: true, content: answer });
 
     // TODO: Change to USERS.JESSE
-    const member = await interaction.client.users.fetch(USERS.JOEL);
+    const member = await interaction.client.users.fetch(USERS.JESSE);
 
     // Send answer to Jesse
     await member.send({
