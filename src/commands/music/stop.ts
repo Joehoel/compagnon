@@ -22,7 +22,7 @@ export default new Command({
         },
       ],
     });
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
     return client.music.stop(message);
   },
 });

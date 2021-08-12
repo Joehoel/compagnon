@@ -9,6 +9,7 @@ import { GIFResponse, MemeResponse } from "../typings";
 import Command from "../modules/Command";
 import { Guild } from "../entity/Guild";
 import { Config } from "../entity/Config";
+import { promisify } from "util";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -189,7 +190,7 @@ export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: t
 export async function createGuildConfig(guild: Server) {
   const newGuild = new Guild({
     id: guild.id,
-    ownerId: guild.ownerID,
+    ownerId: guild.ownerId,
   });
   await newGuild.save();
 
@@ -216,3 +217,5 @@ export function isAllowed(command: Command, guildId: string): boolean {
     return true;
   }
 }
+
+export const wait = promisify(setTimeout);

@@ -18,39 +18,40 @@ export default new Command({
       const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
 
       if (command && isAllowed(command, message.guild!.id)) {
-        return message.channel.send(
-          embed({
-            title: "Help",
-            fields: [
-              {
-                name: "Name",
-                value: `\`${command.name}\``,
-              },
-              {
-                name: "Aliases",
-                value:
-                  command.aliases.length >= 1
-                    ? `\`${command.aliases.join(", ")}\``
-                    : "This command doesn't have any aliases",
-              },
-              {
-                name: "Description",
-                value: `\`${command.description}\``,
-              },
-              {
-                name: "Usage",
-                value: command.usage
-                  ? `\`${prefix}${command.name} ${command.usage}\``
-                  : "This command doesn't have any arguments",
-              },
-            ],
-          })
-        );
+        return message.channel.send({
+          embeds: [
+            embed({
+              title: "Help",
+              fields: [
+                {
+                  name: "Name",
+                  value: `\`${command.name}\``,
+                },
+                {
+                  name: "Aliases",
+                  value:
+                    command.aliases.length >= 1
+                      ? `\`${command.aliases.join(", ")}\``
+                      : "This command doesn't have any aliases",
+                },
+                {
+                  name: "Description",
+                  value: `\`${command.description}\``,
+                },
+                {
+                  name: "Usage",
+                  value: command.usage
+                    ? `\`${prefix}${command.name} ${command.usage}\``
+                    : "This command doesn't have any arguments",
+                },
+              ],
+            }),
+          ],
+        });
       }
     }
 
     const commands = client.commands
-      .array()
       .filter((command) => {
         return canExecute(message.member!, command) && isAllowed(command, message.guild!.id);
       })

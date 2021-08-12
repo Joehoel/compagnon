@@ -24,7 +24,7 @@ export default new Event({
 
     client.user?.setPresence({
       status: "online",
-      activity: { name: `with my ${totalMembers} nerds` },
+      activities: [{ name: `with my ${totalMembers} nerds` }],
     });
 
     client.logger.success("Compagnon" + colors.green.bold(" online!"));

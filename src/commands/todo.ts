@@ -6,13 +6,15 @@ export default new Command({
   name: "todo",
   description: "Add a new todo",
   exclusive: true,
-  async execute(client, message, args) {
+  async execute(_, message) {
     const todos = await getTodos();
-    return message.channel.send(
-      embed({
-        title: "Todo's",
-        description: `\`\`\`md\n${todos}\`\`\`\n`,
-      })
-    );
+    return message.channel.send({
+      embeds: [
+        embed({
+          title: "Todo's",
+          description: `\`\`\`md\n${todos}\`\`\`\n`,
+        }),
+      ],
+    });
   },
 });

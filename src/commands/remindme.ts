@@ -10,26 +10,28 @@ export default new Command({
   async execute(_, message, [t, ...msg]) {
     const time = ms(t);
     // const user = message.mentions.members?.first()?.user || message.author;
-    message.channel.send(embed({ title: "Reminder has been set" }));
+    message.channel.send({ embeds: [embed({ title: "Reminder has been set" })] });
     setTimeout(() => {
-      return message.channel.send(
-        embed({
-          title: "Reminder",
-          fields: [
-            {
-              name: "Message",
-              value: msg.join(" "),
-              inline: true,
-            },
-            {
-              name: "Link",
-              value: `[Message](${message.url})`,
-              inline: true,
-            },
-          ],
-          timestamp: new Date(Date.now() - time),
-        })
-      );
+      return message.channel.send({
+        embeds: [
+          embed({
+            title: "Reminder",
+            fields: [
+              {
+                name: "Message",
+                value: msg.join(" "),
+                inline: true,
+              },
+              {
+                name: "Link",
+                value: `[Message](${message.url})`,
+                inline: true,
+              },
+            ],
+            timestamp: new Date(Date.now() - time),
+          }),
+        ],
+      });
     }, time);
   },
 });

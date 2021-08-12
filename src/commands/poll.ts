@@ -52,7 +52,7 @@ export default new Command({
   admin: false,
   async execute(client, message) {
     let args = message.content.match(/"(.+?)"/g)!;
-    if (!canSendPoll(message.author.id) && !message.member!.hasPermission("ADMINISTRATOR")) {
+    if (!canSendPoll(message.author.id) && !message.member!.permissions.has("ADMINISTRATOR")) {
       return message.channel.send(`${message.author} please wait before sending another poll.`);
     } else if (args.length === 1) {
       // yes no unsure question
@@ -63,13 +63,15 @@ export default new Command({
       const id = `#${question.toUpperCase()?.substr(0, 1) + Math.floor(Math.random() * 100)}`;
       await message.delete();
       return message.channel
-        .send(
-          new MessageEmbed()
-            .setColor("#ffc600")
-            .setTitle(`${question}`)
-            .setTimestamp()
-            .setFooter(`Poll started by: ${message.author.username}`, message.author.displayAvatarURL())
-        )
+        .send({
+          embeds: [
+            new MessageEmbed()
+              .setColor("#ffc600")
+              .setTitle(`${question}`)
+              .setTimestamp()
+              .setFooter(`Poll started by: ${message.author.username}`, message.author.displayAvatarURL()),
+          ],
+        })
         .then(async (pollMessage) => {
           await pollMessage.react("👍");
           await pollMessage.react("👎");
@@ -92,14 +94,16 @@ export default new Command({
         };
         await message.delete();
         return message.channel
-          .send(
-            new MessageEmbed()
-              .setColor("#ffc600")
-              .setTitle(`${question} ${id}`)
-              .setDescription(`${questionOptions.map((option, i) => `${options[i]} - ${option}`).join("\n")}`)
-              .setFooter(`Poll started by: ${message.author.username}`, `${message.author.displayAvatarURL()}`)
-              .setTimestamp()
-          )
+          .send({
+            embeds: [
+              new MessageEmbed()
+                .setColor("#ffc600")
+                .setTitle(`${question} ${id}`)
+                .setDescription(`${questionOptions.map((option, i) => `${options[i]} - ${option}`).join("\n")}`)
+                .setFooter(`Poll started by: ${message.author.username}`, `${message.author.displayAvatarURL()}`)
+                .setTimestamp(),
+            ],
+          })
           .then(async (pollMessage) => {
             for (let i = 0; i < questionOptions.length; i++) {
               await pollMessage.react(options[i]);

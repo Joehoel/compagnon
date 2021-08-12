@@ -13,12 +13,14 @@ export default new Command({
 
     const user = message.mentions.members?.first()?.user || message.author;
 
-    return await message.channel.send(
-      embed({
-        title: "Swears",
-        author: { name: user.username, iconURL: user.displayAvatarURL() },
-        description: `\`${swear?.swears ?? "None"}\``,
-      })
-    );
+    return await message.channel.send({
+      embeds: [
+        embed({
+          title: "Swears",
+          author: { name: user.username, iconURL: user.displayAvatarURL() },
+          description: `\`${swear?.swears ?? "None"}\``,
+        }),
+      ],
+    });
   },
 });

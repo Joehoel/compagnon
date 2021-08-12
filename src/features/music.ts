@@ -15,7 +15,7 @@ export default (music: DisTube) => {
           },
           {
             name: "Requested by",
-            value: song.user,
+            value: song.user.username,
           },
           {
             name: "Status",
@@ -23,7 +23,7 @@ export default (music: DisTube) => {
           },
         ],
       });
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     })
     .on("addSong", (message, queue, song) => {
       const embed = new MessageEmbed({
@@ -36,7 +36,7 @@ export default (music: DisTube) => {
           },
           {
             name: "Requested by",
-            value: song.user,
+            value: song.user.username,
           },
           {
             name: "Status",
@@ -44,7 +44,7 @@ export default (music: DisTube) => {
           },
         ],
       });
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     })
     .on("playList", (message, queue, playlist, song) => {
       const embed = new MessageEmbed({
@@ -57,7 +57,7 @@ export default (music: DisTube) => {
           },
           {
             name: "Requested by",
-            value: song.user,
+            value: song.user.username,
           },
           {
             name: "Now playing",
@@ -70,7 +70,7 @@ export default (music: DisTube) => {
         ],
       });
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     })
     .on("addList", (message, queue, playlist) => {
       const embed = new MessageEmbed({
@@ -83,7 +83,7 @@ export default (music: DisTube) => {
           },
           {
             name: "Requested by",
-            value: playlist.user,
+            value: playlist.user.username,
           },
 
           {
@@ -93,7 +93,7 @@ export default (music: DisTube) => {
         ],
       });
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     })
 
     .on("error", (message, e) => {
@@ -105,10 +105,10 @@ export default (music: DisTube) => {
         fields: [
           {
             name: "An error encountered",
-            value: e,
+            value: e.message,
           },
         ],
       });
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     });
 };

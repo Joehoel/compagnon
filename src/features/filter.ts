@@ -6,7 +6,7 @@ import { Swear } from "../entity/Swear";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
-  if (message.channel.type == "dm") return;
+  if (message.channel.type == "DM") return;
   const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
   if (message.content.startsWith(prefix) || message.author.bot) return;

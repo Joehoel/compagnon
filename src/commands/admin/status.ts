@@ -9,11 +9,8 @@ export default new Command({
   exclusive: true,
   async execute(client, message, args) {
     args.unshift();
-    await client.user!.setPresence({
-      activity: {
-        name: args.join(" "),
-        type: 0,
-      },
+    client.user!.setPresence({
+      activities: [{ name: args[0], type: 0 }],
     });
 
     return message.channel.send(`Changed my status ${message.author}!`);
