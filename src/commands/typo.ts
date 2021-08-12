@@ -8,6 +8,6 @@ export default new Command({
   exclusive: true,
   execute(client, message, args) {
     const target = message.mentions.users.first();
-    message.channel.send(embed({ description: `${target}` }));
+    message.channel.send({ embeds: [embed({ description: `${target}` })] });
   },
 });

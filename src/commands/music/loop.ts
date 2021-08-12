@@ -19,6 +19,6 @@ export default new Command({
         },
       ],
     });
-    return message.channel.send(embed);
+    return message.channel.send({ embeds: [embed] });
   },
 });

@@ -29,17 +29,19 @@ export default new Command({
             return message.channel.send(`Game ${game.name} already exists`);
           });
 
-          return message.channel.send(
-            embed({
-              title: "Game created",
-              fields: [
-                {
-                  name: "Game",
-                  value: capitalize(game.name),
-                },
-              ],
-            })
-          );
+          return message.channel.send({
+            embeds: [
+              embed({
+                title: "Game created",
+                fields: [
+                  {
+                    name: "Game",
+                    value: capitalize(game.name),
+                  },
+                ],
+              }),
+            ],
+          });
         }
 
         if (gameName && leaderboardName) {
@@ -48,44 +50,48 @@ export default new Command({
             const lb = new Leaderboard({ name: leaderboardName, game: foundGame });
             await lb.save();
 
-            return message.channel.send(
-              embed({
-                title: "Leaderboard created",
-                fields: [
-                  {
-                    name: "Game",
-                    value: `\`${foundGame.name}\``,
-                  },
-                  {
-                    name: "Leaderboard",
-                    value: `\`${lb.name}\``,
-                  },
-                ],
-                timestamp: Date.now(),
-              })
-            );
+            return message.channel.send({
+              embeds: [
+                embed({
+                  title: "Leaderboard created",
+                  fields: [
+                    {
+                      name: "Game",
+                      value: `\`${foundGame.name}\``,
+                    },
+                    {
+                      name: "Leaderboard",
+                      value: `\`${lb.name}\``,
+                    },
+                  ],
+                  timestamp: Date.now(),
+                }),
+              ],
+            });
           } else {
             const game = new Game({ name: gameName });
             await game.save();
             const lb = new Leaderboard({ name: leaderboardName, game });
             await lb.save();
 
-            return message.channel.send(
-              embed({
-                title: "Leaderboard created",
-                fields: [
-                  {
-                    name: "Game",
-                    value: game.name,
-                  },
-                  {
-                    name: "Leaderboard",
-                    value: lb.name,
-                  },
-                ],
-                timestamp: Date.now(),
-              })
-            );
+            return message.channel.send({
+              embeds: [
+                embed({
+                  title: "Leaderboard created",
+                  fields: [
+                    {
+                      name: "Game",
+                      value: game.name,
+                    },
+                    {
+                      name: "Leaderboard",
+                      value: lb.name,
+                    },
+                  ],
+                  timestamp: Date.now(),
+                }),
+              ],
+            });
           }
         }
         break;
@@ -99,30 +105,32 @@ export default new Command({
               { relations: ["game"] }
             );
             const scores = await Score.find({ where: { leaderboard: lb } });
-            return message.channel.send(
-              embed({
-                title: capitalize(leaderboardName),
-                fields: distinctArrayByKey(scores, "user")
-                  .sort((a, b) => {
-                    if (a.score < b.score) return -1;
-                    return 1;
-                  })
-                  .map((score, i) => {
-                    return {
-                      name: i + 1 + ".",
-                      value: `Score: \`${score.score}\`\n Username: ${
-                        score.user
-                      }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
-                        score.proof ? `${score.proof}` : ""
-                      }`,
-                    };
-                  }),
-              })
-            );
+            return message.channel.send({
+              embeds: [
+                embed({
+                  title: capitalize(leaderboardName),
+                  fields: distinctArrayByKey(scores, "user")
+                    .sort((a, b) => {
+                      if (a.score < b.score) return -1;
+                      return 1;
+                    })
+                    .map((score, i) => {
+                      return {
+                        name: i + 1 + ".",
+                        value: `Score: \`${score.score}\`\n Username: ${
+                          score.user
+                        }\n  Date: \`${score.createdAt.toLocaleString()}\`\n Proof: ${
+                          score.proof ? `${score.proof}` : ""
+                        }`,
+                      };
+                    }),
+                }),
+              ],
+            });
           } catch (error) {
-            return message.channel.send(
-              embed({ title: "Something went wrong!", description: "Couldn't find that leaderboard" })
-            );
+            return message.channel.send({
+              embeds: [embed({ title: "Something went wrong!", description: "Couldn't find that leaderboard" })],
+            });
           }
         }
         if (gameName == "ranks") {
@@ -132,19 +140,21 @@ export default new Command({
 
           const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
 
-          message.channel.send(
-            embed({
-              title: "Ranks",
-              fields: leaderboard?.map((user: LeaderboardUser) => {
-                return {
-                  name: user.position + ".",
-                  value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(
-                    user.level + 1
-                  )}\``,
-                };
+          message.channel.send({
+            embeds: [
+              embed({
+                title: "Ranks",
+                fields: leaderboard?.map((user: LeaderboardUser) => {
+                  return {
+                    name: user.position + ".",
+                    value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${user.xp}/${Levels.xpFor(
+                      user.level + 1
+                    )}\``,
+                  };
+                }),
               }),
-            })
-          );
+            ],
+          });
           return;
         }
         break;
@@ -166,12 +176,14 @@ export default new Command({
               user: message.author.toString(),
             });
             await newScore.save();
-            return message.channel.send(
-              new MessageEmbed({
-                title: "Successfully submitted score!",
-                color: "#ffc600",
-              })
-            );
+            return message.channel.send({
+              embeds: [
+                new MessageEmbed({
+                  title: "Successfully submitted score!",
+                  color: "#ffc600",
+                }),
+              ],
+            });
           } else {
             // Leaderboard doesn't exist
             return message.channel.send("Couldn't find that leaderboard");

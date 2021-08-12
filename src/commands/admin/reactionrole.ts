@@ -9,13 +9,15 @@ export default new Command({
   aliases: ["rr"],
   exclusive: true,
   async execute(_, message) {
-    const msg = await message.channel.send(
-      embed({
-        title: "Welkom",
-        description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n\n ${EMOJIS.CONTESTANT} - **Contestant**\n\n`,
-        timestamp: undefined,
-      })
-    );
+    const msg = await message.channel.send({
+      embeds: [
+        embed({
+          title: "Welkom",
+          description: `Reageer op dit bericht om jezelf een role te geven\n\n ${EMOJIS.MEMBER} - **Member**\n\n ${EMOJIS.SPEEDRUNNER} - **Speedrunner**\n\n ${EMOJIS.POLLER} - **Poller**\n\n ${EMOJIS.CONTESTANT} - **Contestant**\n\n`,
+          timestamp: undefined,
+        }),
+      ],
+    });
     await msg.react(EMOJIS.MEMBER);
     await msg.react(EMOJIS.SPEEDRUNNER);
     await msg.react(EMOJIS.POLLER);

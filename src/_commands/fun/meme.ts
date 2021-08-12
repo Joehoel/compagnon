@@ -1,15 +1,15 @@
+import Reddit from "@/lib/reddit";
+import SlashCommand, { CommandType } from "@/modules/SlashCommand";
 import { MessageEmbed } from "discord.js";
-import Command from "../modules/Command";
-import Reddit from "../lib/reddit";
 
-export default new Command({
+export default new SlashCommand({
   name: "meme",
   description: "Shows a random lit meme from the provided subreddit (defaults to 'r/dankmemes')",
-  usage: "<sub>",
-  aliases: ["m"],
-  async execute(_, message, [subreddit]) {
+  options: [{ name: "sub", description: "subreddit", type: CommandType.STRING, required: false }],
+  async execute(interaction) {
+    const subreddit = interaction.options.getString("sub") ?? "dankmemes";
+
     const reddit = new Reddit(subreddit);
-    // const { title, url, date, author, sub, post } = await meme(subreddit);
     const { title, url, date, author, sub, link } = await reddit.getRandomHotPost();
 
     const embed = new MessageEmbed()
@@ -21,6 +21,6 @@ export default new Command({
       .setImage(url)
       .setTimestamp(date);
 
-    return message.channel.send({ embeds: [embed] });
+    return interaction.reply({ embeds: [embed] });
   },
 });

@@ -18,12 +18,14 @@ export default new Command({
       return client.music.skip(message);
     } else {
       const votesRequired = Math.ceil(members.size * 0.6);
-      const msg = await message.channel.send(
-        embed({
-          title: "Music",
-          description: `Votes required to skip: ${votesRequired}`,
-        })
-      );
+      const msg = await message.channel.send({
+        embeds: [
+          embed({
+            title: "Music",
+            description: `Votes required to skip: ${votesRequired}`,
+          }),
+        ],
+      });
       await msg.react("👍");
       await msg.react("👎");
 
@@ -31,18 +33,19 @@ export default new Command({
         if (user.bot) return false;
         const { channel } = message.guild!.members.cache.get(user.id)!.voice;
         if (channel) {
-          return ["👍"].includes(reaction.emoji.name);
+          return ["👍"].includes(reaction.emoji.name!);
         } else {
           return false;
         }
       };
 
       try {
-        const reactions = await msg.awaitReactions(filter, {
-          max: votesRequired,
-          time: 10000,
-          errors: ["time"],
-        });
+        // const reactions = await msg.awaitReactions(filter, {
+        //   max: votesRequired,
+        //   time: 10000,
+        //   errors: ["time"],
+        // });
+        const reactions = await msg.awaitReactions({ max: votesRequired, time: 10000, errors: ["time"], filter });
         const totalVotes = reactions.get("👍")!.users.cache.filter((u) => !u.bot);
         if (totalVotes.size >= votesRequired) {
           return client.music.skip(message);

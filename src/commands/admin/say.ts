@@ -7,8 +7,8 @@ export default new Command({
   usage: "<message>",
   permissions: ["MANAGE_MESSAGES"],
   aliases: ["s"],
-  execute(client, message, args) {
-    message.delete({ timeout: 1000 });
+  execute(_, message, args) {
+    message.delete();
     message.channel.send(args.join(" "));
   },
 });

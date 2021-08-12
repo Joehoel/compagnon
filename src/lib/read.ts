@@ -29,6 +29,7 @@ export async function read<T>(dir: string): Promise<T[]> {
         // table.addRow(file, "✅");
         commands.push(command);
       } catch (error) {
+        console.error(error);
         // table.addRow(file, `❌ - ${error}`);
       }
     }

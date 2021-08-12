@@ -1,6 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     TOKEN: string;
+    CLIENT_ID: string;
     PREFIX: string;
     PORT: number;
     API_KEY: string;

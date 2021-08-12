@@ -3,7 +3,7 @@ import { embed, isAllowed } from "../lib/helpers";
 const { PREFIX } = process.env;
 
 export default async (client: Client, message: Message) => {
-  if (message.channel.type == "dm") return;
+  if (message.channel.type == "DM") return;
   const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
   // Not a command or author is bot
@@ -32,7 +32,7 @@ export default async (client: Client, message: Message) => {
   }
 
   // Check if user is admin for command
-  if (command.admin && !message.member!.hasPermission("ADMINISTRATOR")) {
+  if (command.admin && !message.member!.permissions.has("ADMINISTRATOR")) {
     await message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
     return;
   }
@@ -44,7 +44,7 @@ export default async (client: Client, message: Message) => {
   }
 
   // Check if user has the correct permissions te execute command
-  if (command.permissions.some((permission) => !message.member!.hasPermission(permission))) {
+  if (command.permissions.some((permission) => !message.member!.permissions.has(permission))) {
     await message.channel.send(`Sorry, ${message.author}! You are not allowed to execute that command.`);
     return;
   }
@@ -67,9 +67,9 @@ export default async (client: Client, message: Message) => {
     return;
   } catch (error) {
     if (error.message === "NotInVoice") {
-      return message.channel.send(
-        embed({ title: "Error", description: "You must be in a voice channel to execute that command!" })
-      );
+      return message.channel.send({
+        embeds: [embed({ title: "Error", description: "You must be in a voice channel to execute that command!" })],
+      });
     }
     client.logger.error(error);
     await message.reply("There was an error trying to execute that command!");

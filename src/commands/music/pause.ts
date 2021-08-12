@@ -8,6 +8,6 @@ export default new Command({
   execute(client, message) {
     if (!message.member?.voice.channel) throw new Error("NotInVoice");
     client.music.pause(message);
-    return message.channel.send(embed({ title: "Music paused/resumed" }));
+    return message.channel.send({ embeds: [embed({ title: "Music paused/resumed" })] });
   },
 });

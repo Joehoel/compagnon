@@ -12,25 +12,27 @@ export default new Command({
     const queue = client.music.getQueue(message);
     const song = queue.songs[0];
     if (song && queue)
-      return message.channel.send(
-        new MessageEmbed({
-          title: "Music",
-          color: "#ffc600",
-          fields: [
-            {
-              name: "Playing",
-              value: `\`${song.name}\` - \`${song.formattedDuration}\``,
-            },
-            {
-              name: "Requested by",
-              value: song.user,
-            },
-            {
-              name: "Status",
-              value: status(queue),
-            },
-          ],
-        })
-      );
+      return message.channel.send({
+        embeds: [
+          new MessageEmbed({
+            title: "Music",
+            color: "#ffc600",
+            fields: [
+              {
+                name: "Playing",
+                value: `\`${song.name}\` - \`${song.formattedDuration}\``,
+              },
+              {
+                name: "Requested by",
+                value: song.user.username,
+              },
+              {
+                name: "Status",
+                value: status(queue),
+              },
+            ],
+          }),
+        ],
+      });
   },
 });

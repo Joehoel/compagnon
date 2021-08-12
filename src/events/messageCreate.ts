@@ -4,7 +4,7 @@ import * as features from "../features";
 import Event from "../modules/Event";
 
 export default new Event({
-  name: "message",
+  name: "messageCreate",
   async run(client: Client, message: Message) {
     try {
       await features.filter(client, message);
@@ -14,17 +14,19 @@ export default new Event({
       await features.dad(client, message);
       await features.quiz(client, message);
     } catch (error) {
-      await message.channel.send(
-        embed({
-          title: "Something went wrong!",
-          fields: [
-            {
-              name: "Error",
-              value: error,
-            },
-          ],
-        })
-      );
+      await message.channel.send({
+        embeds: [
+          embed({
+            title: "Something went wrong!",
+            fields: [
+              {
+                name: "Error",
+                value: error,
+              },
+            ],
+          }),
+        ],
+      });
 
       throw error;
     }
