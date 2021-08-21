@@ -5,8 +5,17 @@ export default class Event {
     public once: boolean;
     run: (client: Client, ...args: any) => Promise<void>;
 
-    constructor({ name, run }: { name: keyof ClientEvents; run: (client: Client, ...args: any) => Promise<void> }) {
+    constructor({
+        name,
+        run,
+        once,
+    }: {
+        name: keyof ClientEvents;
+        run: (client: Client, ...args: any) => Promise<void>;
+        once?: boolean;
+    }) {
         this.name = name;
+        this.once = once ?? false;
         this.run = run;
     }
 }
