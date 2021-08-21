@@ -4,8 +4,8 @@ import { EVENTS } from "@/lib/contants";
 import Event from "@/modules/Event";
 
 export default new Event({
-  name: "messageReactionAdd",
-  async run(client: Client, reaction: MessageReaction, user: User | PartialUser) {
-    await reactionrole(client, reaction, user, EVENTS.REACTION_ADD);
-  },
+    name: "messageReactionAdd",
+    async run(client: Client, reaction: MessageReaction, user: User | PartialUser) {
+        await reactionrole(client, reaction, user, EVENTS.REACTION_ADD);
+    },
 });

@@ -10,15 +10,15 @@ import Event from "../modules/Event";
 import { Snipe } from "./";
 
 declare module "discord.js" {
-  interface Client {
-    commands: Collection<string, Command>;
-    slashCommands: Collection<string, SlashCommand>;
-    aliases: Collection<string, string>;
-    snipes: Collection<string, Snipe>;
-    events: Collection<string, Event>;
-    features: Collection<string, any>;
-    config: Collection<string, Partial<Config>>;
-    music: DisTube;
-    logger: Consola;
-  }
+    interface Client {
+        commands: Collection<string, Command>;
+        slashCommands: Collection<string, SlashCommand>;
+        aliases: Collection<string, string>;
+        snipes: Collection<string, Snipe>;
+        events: Collection<string, Event>;
+        features: Collection<string, any>;
+        config: Collection<string, Partial<Config>>;
+        music: DisTube;
+        logger: Consola;
+    }
 }
