@@ -32,7 +32,7 @@ export async function registerSlashCommands(client: Client, dir = "../_commands"
     client.slashCommands.set(slashCommand.name, slashCommand);
   }
 
-  await rest.put(Routes.applicationGuildCommands(CLIENT_ID!, GUILD_ID!), {
+  await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
     body: slashCommands,
   });
 }

@@ -22,16 +22,9 @@ import { Config } from "./entity/Config";
 // Environment variables
 const { TOKEN } = process.env;
 
-// Register REST client
-
 // Register new discord client
 const client = new Client({
-  intents: [
-    Intents.FLAGS.DIRECT_MESSAGES,
-    Intents.FLAGS.GUILDS,
-    // Intents.FLAGS.GUILD_MEMBERS,
-    Intents.FLAGS.GUILD_MESSAGES,
-  ],
+    intents: [Intents.FLAGS.DIRECT_MESSAGES, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
 // Client properties for easy acces
@@ -45,24 +38,24 @@ client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true }
 client.logger = consola;
 
 (async () => {
-  try {
-    // Register commands and events
-    await registerCommands(client, "../commands");
-    await registerEvents(client, "../events");
-    await registerSlashCommands(client, "../_commands");
+    try {
+        // Database connection
+        await createConnection();
+        client.logger.success("Database" + colors.green.bold(" connected!"));
 
-    // Music handler
-    music(client.music);
+        // Register commands and events
+        await registerCommands(client, "../commands");
+        await registerEvents(client, "../events");
+        await registerSlashCommands(client, "../_commands");
 
-    // Database connection
-    await createConnection();
-    client.logger.success("Database" + colors.green.bold(" connected!"));
+        // Music handler
+        music(client.music);
 
-    // Login bot
-    await client.login(TOKEN);
-  } catch (error) {
-    client.logger.error(error);
-  }
+        // Login bot
+        await client.login(TOKEN);
+    } catch (error) {
+        client.logger.error(error);
+    }
 })();
 
 process.on("uncaughtException", (error) => client.logger.error(error));

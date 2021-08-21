@@ -1,6 +1,5 @@
-import { ToAPIApplicationCommandOptions } from "@discordjs/builders";
-import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
-import { ApplicationCommandOptionTypes } from "discord.js/typings/enums";
+import { APIApplicationCommandOptionChoice } from "discord-api-types/v9";
+import { CommandInteraction } from "discord.js";
 
 export enum CommandType {
   SUB_COMMAND = 1,
@@ -20,6 +19,7 @@ interface Option {
   name: string;
   description: string;
   required?: boolean;
+  choices?: APIApplicationCommandOptionChoice[];
 }
 
 export default class SlashCommand {

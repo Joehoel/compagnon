@@ -4,7 +4,7 @@ import { Message } from "discord.js";
 
 export default new SlashCommand({
   name: "ping",
-  description: "Pong!",
+  description: "Pong!!!",
   async execute(interaction) {
     const message = (await interaction.reply({
       embeds: [
