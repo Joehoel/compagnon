@@ -14,7 +14,7 @@ import DisTube from "distube";
 import { Client, Collection, Intents } from "discord.js";
 import { Snipe } from "./typings";
 import { registerCommands, registerEvents, registerSlashCommands } from "./lib/registry";
-import { music } from "./features";
+import { music, quiz } from "./features";
 import { createConnection } from "typeorm";
 import colors from "colors";
 import { Config } from "./entity/Config";
@@ -58,6 +58,8 @@ client.logger = consola;
 
         // Login bot
         await client.login(TOKEN);
+
+        quiz(client);
     } catch (error) {
         client.logger.error(error);
     }
