@@ -3,8 +3,6 @@ import { CronJob } from "cron";
 import { Client, TextChannel } from "discord.js";
 import { Question } from "../entity/Question";
 
-const { PREFIX } = process.env;
-
 const id = "880154232886550609";
 
 const getDate = () => {

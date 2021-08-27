@@ -18,6 +18,7 @@ import { music, quiz } from "./features";
 import { createConnection } from "typeorm";
 import colors from "colors";
 import { Config } from "./entity/Config";
+import { GUILD_ID } from "./lib/contants";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -29,7 +30,9 @@ const client = new Client({
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     ],
+    partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 
 // Client properties for easy acces

@@ -14,19 +14,20 @@ export default new Event({
             await features.dad(client, message);
             await features.answers(client, message);
         } catch (error) {
-            await message.channel.send({
-                embeds: [
-                    embed({
-                        title: "Something went wrong!",
-                        fields: [
-                            {
-                                name: "Error",
-                                value: error,
-                            },
-                        ],
-                    }),
-                ],
-            });
+            console.error(error);
+            // await message.channel.send({
+            //     embeds: [
+            //         embed({
+            //             title: "Something went wrong!",
+            //             fields: [
+            //                 {
+            //                     name: "Error",
+            //                     value: error ?? "unknown error",
+            //                 },
+            //             ],
+            //         }),
+            //     ],
+            // });
 
             throw error;
         }
