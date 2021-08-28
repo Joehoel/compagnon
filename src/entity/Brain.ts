@@ -1,13 +1,15 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity("iqs")
-export class IQ extends BaseEntity {
+@Entity("brains")
+export class Brain extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Index()
+    @Column({ unique: true, nullable: false })
     user: string;
 
+    @Index()
     @Column({ default: 0 })
     score: number;
 
@@ -17,7 +19,7 @@ export class IQ extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    constructor(model?: Partial<IQ>) {
+    constructor(model?: Partial<Brain>) {
         super();
         Object.assign(this, model);
     }

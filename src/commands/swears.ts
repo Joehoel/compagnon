@@ -7,7 +7,7 @@ export default new Command({
     description: "Display swear counter",
     usage: "<@>",
     exclusive: true,
-    async execute(client, message, args) {
+    async execute(_, message) {
         const target = message.mentions.members?.first() || message.author;
         const swear = await Swear.findOneOrFail({ where: { user: `<@${target.id}>` } });
 

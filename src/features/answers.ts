@@ -1,6 +1,6 @@
 import { CHANNELS, USERS } from "@/lib/contants";
 import { embed } from "@/lib/helpers";
-import { Client, Message, MessageReaction, ReactionCollector, User } from "discord.js";
+import { Client, Message } from "discord.js";
 
 const { PREFIX } = process.env;
 
@@ -34,9 +34,4 @@ export default async (client: Client, message: Message) => {
 
     await msg.react("✅");
     await msg.react("❌");
-
-    // const filter = (reaction: MessageReaction, user: User) => {
-    //     console.log("HERE");
-    //     return ["✅", "❌"].includes(reaction.emoji.name!);
-    // };
 };

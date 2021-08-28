@@ -18,7 +18,8 @@ import { music, quiz } from "./features";
 import { createConnection } from "typeorm";
 import colors from "colors";
 import { Config } from "./entity/Config";
-import { GUILD_ID } from "./lib/contants";
+import { GUILD_ID, ROLES } from "./lib/contants";
+import { Brain } from "./entity/Brain";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -49,6 +50,7 @@ client.logger = consola;
     try {
         // Database connection
         await createConnection();
+
         client.logger.success("Database" + colors.green.bold(" connected!"));
 
         // Register commands and events
@@ -61,6 +63,57 @@ client.logger = consola;
 
         // Login bot
         await client.login(TOKEN);
+
+        // Insert users into `brains`
+        // const users = [
+        //     {
+        //         id: "688798592873398355",
+        //         score: 54,
+        //     },
+        //     {
+        //         id: "272388777257730048",
+        //         score: 52,
+        //     },
+        //     {
+        //         id: "249946621456941056",
+        //         score: 51,
+        //     },
+        //     {
+        //         id: "764872419088924742",
+        //         score: 51,
+        //     },
+        //     {
+        //         id: "690630673836539987",
+        //         score: 27,
+        //     },
+        //     {
+        //         id: "279521224143667203",
+        //         score: 24,
+        //     },
+        //     {
+        //         id: "267717489138335744",
+        //         score: 23,
+        //     },
+        //     {
+        //         id: "180975824273408000",
+        //         score: 8,
+        //     },
+
+        //     // "180975824273408000",
+        //     // "764872419088924742",
+        //     // "690630673836539987",
+        //     // "249946621456941056",
+        //     // "272388777257730048",
+        //     // "279521224143667203",
+        //     // "267717489138335744",
+        // ];
+
+        // users.forEach(async (user) => {
+        //     await new Brain({
+        //         user: `<@${user.id}>`,
+        //         score: user.score,
+        //     }).save();
+        // });
 
         quiz(client);
     } catch (error) {
