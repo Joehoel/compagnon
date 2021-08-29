@@ -1,6 +1,7 @@
 import { Brain } from "../entity/Brain";
-import { EVENTS, GUILD_ID } from "@/lib/contants";
-import { Client, MessageReaction, PartialUser, User } from "discord.js";
+import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "@/lib/contants";
+import { Client, MessageReaction, PartialUser, TextChannel, User } from "discord.js";
+import { scoreboard } from "../lib/helpers";
 
 export default async (client: Client, reaction: MessageReaction, user: User | PartialUser, event: EVENTS) => {
     if (reaction.message.partial) await reaction.message.fetch();
@@ -11,29 +12,31 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
 
     const score = await Brain.findOne({ where: { user: member?.toString() } });
 
-    switch (reaction.emoji.name) {
-        case "✅":
-            if (event == EVENTS.REACTION_ADD) {
-                if (!score) {
-                    const newIQ = new Brain({ user: member?.toString() });
-                    await newIQ.save();
-                } else {
-                    const newScore = new Brain({ score: score.score + 1 });
-                    await Brain.update({ user: member?.toString() }, newScore);
-                }
+    if (reaction.emoji.name == "✅") {
+        if (event == EVENTS.REACTION_ADD) {
+            if (!score) {
+                const newIQ = new Brain({ user: member?.toString() });
+                await newIQ.save();
             } else {
-                const newScore = new Brain({ score: score!.score - 1 });
+                const newScore = new Brain({ score: score.score + 1 });
                 await Brain.update({ user: member?.toString() }, newScore);
             }
-            console.log(score);
-            break;
+        } else {
+            const newScore = new Brain({ score: score!.score - 1 });
+            await Brain.update({ user: member?.toString() }, newScore);
+        }
 
-        case "❌":
-            console.log("Incorrect");
-            break;
+        // Update the scoreboard
+        const channel = (await client.guilds.cache
+            .get(GUILD_ID)
+            ?.channels.cache.get(CHANNELS.REGELS_EN_LEADERBOARD)
+            ?.fetch()) as TextChannel;
 
-        default:
-            console.log(reaction.emoji.name);
-            break;
+        const messages = await channel.messages.fetch({
+            around: SCOREBOARD_MESSAGE_ID,
+            limit: 1,
+        });
+        const message = messages.first();
+        await message?.edit({ content: await scoreboard() });
     }
 };
