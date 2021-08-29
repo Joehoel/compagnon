@@ -2,25 +2,25 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedCo
 
 @Entity("swears")
 export class Swear extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Index()
-  @Column()
-  user: string;
+    @Index()
+    @Column()
+    user: string;
 
-  @Index()
-  @Column({ default: 0 })
-  swears: number;
+    @Index()
+    @Column({ default: 0 })
+    swears: number;
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-  constructor(model?: Partial<Swear>) {
-    super();
-    Object.assign(this, model);
-  }
+    constructor(model?: Partial<Swear>) {
+        super();
+        Object.assign(this, model);
+    }
 }

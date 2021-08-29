@@ -1,8 +1,16 @@
 import { Interaction } from "discord.js";
 
 export default async (interaction: Interaction) => {
-  if (!interaction.isCommand()) return;
+    if (!interaction.isCommand()) return;
 
-  const command = interaction.client.slashCommands.get(interaction.commandName);
-  return command?.execute(interaction);
+    const command = interaction.client.slashCommands.get(interaction.commandName);
+
+    try {
+        command?.execute(interaction);
+    } catch (error) {
+        interaction.client.logger.error(error);
+    } finally {
+        const author = interaction.user;
+        interaction.client.logger.info(`${author.tag} (${author.id}) ran a command: '${command?.name}'`);
+    }
 };

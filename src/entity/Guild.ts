@@ -2,21 +2,21 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, Upd
 
 @Entity("guilds")
 export class Guild extends BaseEntity {
-  @PrimaryColumn()
-  id: string;
+    @PrimaryColumn()
+    id: string;
 
-  @Index()
-  @Column({ nullable: false })
-  ownerId: string;
+    @Index()
+    @Column({ nullable: false })
+    ownerId: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-  constructor(model?: Partial<Guild>) {
-    super();
-    Object.assign(this, model);
-  }
+    constructor(model?: Partial<Guild>) {
+        super();
+        Object.assign(this, model);
+    }
 }

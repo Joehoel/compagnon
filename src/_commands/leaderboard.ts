@@ -1,24 +1,63 @@
-import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import Command from "../modules/Command";
-import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
+import SlashCommand, { CommandType } from "@/modules/SlashCommand";
 import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";
-import { GUILD_ID } from "../lib/contants";
+import { Game } from "../entity/Game";
+import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
 
-export default new Command({
+type Action = "show" | "create" | "score";
+
+const { GUILD_ID } = process.env;
+
+export default new SlashCommand({
     name: "leaderboard",
-    aliases: ["lb"],
-    usage: "<show / create / score> <game> <leaderboard> <score> <proof>",
-    args: true,
     description: "Leaderboard command",
-    exclusive: true,
-    async execute(client, message, args) {
-        const [type, gameName, leaderboardName, score, proof] = args.map((arg, i) => {
-            if (i !== args.length - 1) return arg.toLowerCase();
-            return arg;
-        });
+    options: [
+        {
+            name: "action",
+            description: "action to take",
+            type: CommandType.STRING,
+            required: true,
+            choices: [
+                { name: "show", value: "show" },
+                { name: "create", value: "create" },
+                { name: "score", value: "score" },
+            ],
+        },
+        {
+            name: "category",
+            description: "leaderboard category",
+            required: true,
+            type: CommandType.STRING,
+        },
+        {
+            name: "leaderboard",
+            description: "leaderboard name",
+            required: true,
+            type: CommandType.STRING,
+        },
+        {
+            name: "score",
+            description: "score",
+            required: false,
+            type: CommandType.STRING,
+        },
+        {
+            name: "proof",
+            description: "proof",
+            required: false,
+            type: CommandType.STRING,
+        },
+    ],
+    async execute({ options, channel, client, user: author, deferReply, editReply }) {
+        const type = options.getString("action") as Action;
+        const gameName = options.getString("category")!;
+        const leaderboardName = options.getString("leaderboard")!;
+        const score = options.getString("score")!;
+        const proof = options.getString("proof")!;
+
+        if (!channel) return;
 
         switch (type) {
             case "create":
@@ -26,10 +65,10 @@ export default new Command({
                     const game = new Game({ name: gameName });
                     await game.save().catch((err) => {
                         console.error(err);
-                        return message.channel.send(`Game ${game.name} already exists`);
+                        return editReply(`Game ${game.name} already exists`);
                     });
-
-                    return message.channel.send({
+                    await deferReply();
+                    return editReply({
                         embeds: [
                             embed({
                                 title: "Game created",
@@ -50,7 +89,8 @@ export default new Command({
                         const lb = new Leaderboard({ name: leaderboardName, game: foundGame });
                         await lb.save();
 
-                        return message.channel.send({
+                        await deferReply();
+                        return editReply({
                             embeds: [
                                 embed({
                                     title: "Leaderboard created",
@@ -74,7 +114,8 @@ export default new Command({
                         const lb = new Leaderboard({ name: leaderboardName, game });
                         await lb.save();
 
-                        return message.channel.send({
+                        await deferReply();
+                        return editReply({
                             embeds: [
                                 embed({
                                     title: "Leaderboard created",
@@ -105,7 +146,8 @@ export default new Command({
                             { relations: ["game"] }
                         );
                         const scores = await Score.find({ where: { leaderboard: lb } });
-                        return message.channel.send({
+                        await deferReply();
+                        return editReply({
                             embeds: [
                                 embed({
                                     title: capitalize(leaderboardName),
@@ -128,7 +170,7 @@ export default new Command({
                             ],
                         });
                     } catch (error) {
-                        return message.channel.send({
+                        return editReply({
                             embeds: [
                                 embed({
                                     title: "Something went wrong!",
@@ -141,11 +183,14 @@ export default new Command({
                 if (gameName == "ranks") {
                     const rawLeaderboard = await Levels.fetchLeaderboard(GUILD_ID, 10); // We grab top 10 users with most xp in the current server.
 
-                    if (rawLeaderboard.length < 1) return message.reply("Nobody's in leaderboard yet.");
+                    if (rawLeaderboard.length < 1) {
+                        await deferReply();
+                        return editReply("Nobody's in leaderboard yet.");
+                    }
 
                     const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
-
-                    message.channel.send({
+                    await deferReply();
+                    return editReply({
                         embeds: [
                             embed({
                                 title: "Ranks",
@@ -160,12 +205,11 @@ export default new Command({
                             }),
                         ],
                     });
-                    return;
                 }
                 break;
 
             case "score":
-                if (args.length > 3) {
+                if (score && proof) {
                     const game = await Game.findOne({ name: gameName });
 
                     const leaderboard = await Leaderboard.findOne({
@@ -178,10 +222,11 @@ export default new Command({
                             score,
                             proof,
                             leaderboard,
-                            user: message.author.toString(),
+                            user: author.toString(),
                         });
                         await newScore.save();
-                        return message.channel.send({
+                        await deferReply();
+                        return editReply({
                             embeds: [
                                 new MessageEmbed({
                                     title: "Successfully submitted score!",
@@ -191,7 +236,8 @@ export default new Command({
                         });
                     } else {
                         // Leaderboard doesn't exist
-                        return message.channel.send("Couldn't find that leaderboard");
+                        await deferReply();
+                        return editReply("Couldn't find that leaderboard");
                     }
                 }
                 break;

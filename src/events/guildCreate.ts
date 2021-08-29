@@ -3,8 +3,8 @@ import { createGuildConfig } from "@/lib/helpers";
 import Event from "@/modules/Event";
 
 export default new Event({
-  name: "guildCreate",
-  async run(_, guild: Server) {
-    await createGuildConfig(guild);
-  },
+    name: "guildCreate",
+    async run(_, guild: Server) {
+        await createGuildConfig(guild);
+    },
 });
