@@ -30,6 +30,7 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
     ],
+    partials: ["MESSAGE", "REACTION", "GUILD_MEMBER"],
 });
 
 // Client properties for easy acces

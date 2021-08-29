@@ -33,6 +33,6 @@ export default async (client: Client, message: Message) => {
         ],
     });
 
-    await message.reply("Answer successfully submitted! ✅");
+    await message.channel.send(`<@${message.author.id}>, Answer successfully submitted! ✅`);
     await message.delete();
 };
