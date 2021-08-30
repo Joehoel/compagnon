@@ -1,5 +1,7 @@
+import { ROLES } from "@/lib/contants";
+import { GuildMember } from "discord.js";
 import { Brain } from "../../entity/Brain";
-import SlashCommand, { CommandType } from "../../modules/SlashCommand";
+import SlashCommand, { CommandType, PermissionType } from "../../modules/SlashCommand";
 
 export default new SlashCommand({
     name: "score",
@@ -18,7 +20,18 @@ export default new SlashCommand({
             required: true,
         },
     ],
+    permissions: [
+        {
+            id: ROLES.MODERATOR,
+            type: PermissionType.ROLE,
+            permission: true,
+        },
+    ],
     async execute(interaction) {
+        const member = interaction.member as GuildMember;
+        if (!member.permissions.has("MANAGE_MESSAGES")) {
+            return interaction.reply({ content: "Sorry, you are not allowed to execute that command!" });
+        }
         const user = interaction.options.getUser("user")!;
         const value = interaction.options.getNumber("value")!;
 

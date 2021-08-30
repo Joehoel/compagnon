@@ -1,10 +1,10 @@
 import { ROLES } from "../../lib/contants";
-import { scoreboard } from "../../lib/helpers";
+import { sendQuestion } from "../../lib/helpers";
 import SlashCommand, { PermissionType } from "../../modules/SlashCommand";
 
 export default new SlashCommand({
-    name: "scoreboard",
-    description: "Gets the scoreboard",
+    name: "question",
+    description: "Manually send the daily question",
     permissions: [
         {
             id: ROLES.MODERATOR,
@@ -13,8 +13,6 @@ export default new SlashCommand({
         },
     ],
     async execute(interaction) {
-        return interaction.channel?.send({
-            content: await scoreboard(),
-        });
+        return sendQuestion(interaction.client);
     },
 });
