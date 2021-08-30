@@ -1,6 +1,6 @@
 import { USERS } from "@/lib/contants";
 import { embed } from "@/lib/helpers";
-import SlashCommand, { CommandType } from "@/modules/SlashCommand";
+import SlashCommand, { OptionType } from "@/modules/SlashCommand";
 
 export default new SlashCommand({
     name: "answer",
@@ -9,7 +9,7 @@ export default new SlashCommand({
         {
             name: "answer",
             description: "The answer to the question",
-            type: CommandType.STRING,
+            type: OptionType.STRING,
             required: true,
         },
     ],

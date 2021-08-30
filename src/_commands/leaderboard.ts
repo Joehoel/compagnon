@@ -1,6 +1,6 @@
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import SlashCommand, { CommandType } from "@/modules/SlashCommand";
+import SlashCommand, { OptionType } from "@/modules/SlashCommand";
 import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";
 import { Game } from "../entity/Game";
@@ -17,7 +17,7 @@ export default new SlashCommand({
         {
             name: "action",
             description: "action to take",
-            type: CommandType.STRING,
+            type: OptionType.STRING,
             required: true,
             choices: [
                 { name: "show", value: "show" },
@@ -29,25 +29,25 @@ export default new SlashCommand({
             name: "category",
             description: "leaderboard category",
             required: true,
-            type: CommandType.STRING,
+            type: OptionType.STRING,
         },
         {
             name: "leaderboard",
             description: "leaderboard name",
             required: true,
-            type: CommandType.STRING,
+            type: OptionType.STRING,
         },
         {
             name: "score",
             description: "score",
             required: false,
-            type: CommandType.STRING,
+            type: OptionType.STRING,
         },
         {
             name: "proof",
             description: "proof",
             required: false,
-            type: CommandType.STRING,
+            type: OptionType.STRING,
         },
     ],
     async execute({ options, channel, client, user: author, deferReply, editReply }) {

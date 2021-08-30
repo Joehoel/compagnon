@@ -1,7 +1,7 @@
 import { ROLES } from "@/lib/contants";
 import { GuildMember } from "discord.js";
 import { Brain } from "../../entity/Brain";
-import SlashCommand, { CommandType, PermissionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
 
 export default new SlashCommand({
     name: "score",
@@ -10,13 +10,13 @@ export default new SlashCommand({
         {
             name: "user",
             description: "The user to update the score from",
-            type: CommandType.USER,
+            type: OptionType.USER,
             required: true,
         },
         {
             name: "value",
             description: "Value to update the score to",
-            type: CommandType.NUMBER,
+            type: OptionType.NUMBER,
             required: true,
         },
     ],

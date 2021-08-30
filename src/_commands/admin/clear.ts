@@ -1,6 +1,6 @@
 import { ROLES } from "../../lib/contants";
 import { wait } from "../../lib/helpers";
-import SlashCommand, { CommandType, PermissionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
 import { GuildMember, Message, TextChannel } from "discord.js";
 
 export default new SlashCommand({
@@ -9,7 +9,7 @@ export default new SlashCommand({
     options: [
         {
             name: "amount",
-            type: CommandType.NUMBER,
+            type: OptionType.NUMBER,
             required: true,
             description: "Amount of messages to clear from the chat",
         },

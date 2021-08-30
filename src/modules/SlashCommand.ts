@@ -1,7 +1,7 @@
 import { APIApplicationCommandOptionChoice } from "discord-api-types/v9";
 import { CommandInteraction } from "discord.js";
 
-export enum CommandType {
+export enum OptionType {
     SUB_COMMAND = 1,
     SUB_COMMAND_GROUP = 2,
     STRING = 3,
@@ -15,7 +15,7 @@ export enum CommandType {
 }
 
 interface Option {
-    type: CommandType;
+    type: OptionType;
     name: string;
     description: string;
     required?: boolean;

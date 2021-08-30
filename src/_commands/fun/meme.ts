@@ -1,11 +1,11 @@
 import Reddit from "@/lib/reddit";
-import SlashCommand, { CommandType } from "@/modules/SlashCommand";
+import SlashCommand, { OptionType } from "@/modules/SlashCommand";
 import { MessageEmbed } from "discord.js";
 
 export default new SlashCommand({
     name: "meme",
     description: "Shows a random lit meme from the provided subreddit (defaults to 'r/dankmemes')",
-    options: [{ name: "sub", description: "subreddit", type: CommandType.STRING, required: false }],
+    options: [{ name: "sub", description: "subreddit", type: OptionType.STRING, required: false }],
     async execute(interaction) {
         const subreddit = interaction.options.getString("sub") ?? "dankmemes";
 
