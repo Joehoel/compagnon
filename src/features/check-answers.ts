@@ -8,7 +8,8 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
     if (reaction.partial) await reaction.fetch();
     if (user.bot || reaction.message.channel.type != "DM") return;
 
-    const member = client.guilds.cache.get(GUILD_ID)!.members.cache.get(user.id);
+    const author = reaction.message.embeds[0].author;
+    const member = client.guilds.cache.get(GUILD_ID)!.members.cache.find((m) => m.user.username == author?.name);
 
     const score = await Brain.findOne({ where: { user: member?.toString() } });
 
@@ -28,7 +29,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             }
 
             await answersChannel.send({
-                content: `${member} Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
+                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
                     dateStyle: "medium",
                 }).format(new Date())} is goedgekeurd!`,
             });
@@ -36,7 +37,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             const newScore = new Brain({ score: score!.score - 1 });
             await Brain.update({ user: member?.toString() }, newScore);
             await answersChannel.send({
-                content: `${member} Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
+                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
                     dateStyle: "medium",
                 }).format(new Date())} is bij nader inzien afgekeurd!`,
             });
