@@ -1,14 +1,24 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import { EmbedFieldData, Guild as Server, GuildMember, MessageEmbed, MessageEmbedOptions } from "discord.js";
+import {
+    Client,
+    EmbedFieldData,
+    Guild as Server,
+    GuildMember,
+    MessageEmbed,
+    MessageEmbedOptions,
+    TextChannel,
+} from "discord.js";
 import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
 import { promisify } from "util";
+import { Brain } from "../entity/Brain";
 import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
+import { Question } from "../entity/Question";
 import Command from "../modules/Command";
 import { GIFResponse, MemeResponse } from "../typings";
-import { GUILD_ID, ROLES } from "./contants";
+import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
@@ -221,3 +231,41 @@ export function isAllowed(command: Command, guildId: string): boolean {
 }
 
 export const wait = promisify(setTimeout);
+
+export const scoreboard = async () => {
+    const found = await Brain.find({});
+    const scores = found
+        .map((brain) => {
+            return {
+                user: brain.user,
+                score: brain.score,
+            };
+        })
+        .sort((a, b) => {
+            return a.score > b.score ? 1 : -1;
+        })
+        .reverse();
+
+    return `========================================  Biggest of brains  ========================================\n${scores
+        .map((score, i) => `${i + 1}. ${score.user} - ${score.score}`)
+        .join(
+            "\n"
+        )}\n======================================== Smallest of brains ========================================\n(Last updated: ${new Intl.DateTimeFormat(
+        "nl-NL",
+        { dateStyle: "long", timeStyle: "medium" }
+    ).format(new Date())})`;
+};
+
+const getDate = () => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0, 0).toUTCString();
+};
+
+export const sendQuestion = async (client: Client) => {
+    const question = await Question.findOne({ where: { date: getDate() } });
+    const channel = (await client.channels.fetch(CHANNELS.VRAGEN, {
+        cache: true,
+        force: true,
+    })) as TextChannel;
+    return channel.send(`<@&${ROLES.CONTESTANT}> ${question!.text}`);
+};

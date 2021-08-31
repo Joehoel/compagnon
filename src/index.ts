@@ -1,23 +1,18 @@
-// Global
 import "dotenv/config";
 import "module-alias/register";
-// import "./modules/ExtendedMessage";
-
-// Command and Event classes
-import SlashCommand from "./modules/SlashCommand";
+import colors from "colors";
+import consola from "consola";
+import { Client, Collection, Intents } from "discord.js";
+import DisTube from "distube";
+import { createConnection } from "typeorm";
+import { Config } from "./entity/Config";
+import { music, quiz } from "./features";
+import playground from "./features/playground";
+import { registerCommands, registerEvents, registerSlashCommands } from "./lib/registry";
 import Command from "./modules/Command";
 import Event from "./modules/Event";
-
-// Other
-import consola from "consola";
-import DisTube from "distube";
-import { Client, Collection, Intents } from "discord.js";
+import SlashCommand from "./modules/SlashCommand";
 import { Snipe } from "./typings";
-import { registerCommands, registerEvents, registerSlashCommands } from "./lib/registry";
-import { music } from "./features";
-import { createConnection } from "typeorm";
-import colors from "colors";
-import { Config } from "./entity/Config";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -29,8 +24,9 @@ const client = new Client({
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
     ],
-    partials: ["MESSAGE", "REACTION", "GUILD_MEMBER"],
+    partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 
 // Client properties for easy acces
@@ -47,6 +43,7 @@ client.logger = consola;
     try {
         // Database connection
         await createConnection();
+
         client.logger.success("Database" + colors.green.bold(" connected!"));
 
         // Register commands and events
@@ -59,6 +56,9 @@ client.logger = consola;
 
         // Login bot
         await client.login(TOKEN);
+
+        quiz(client);
+        playground(client);
     } catch (error) {
         client.logger.error(error);
     }

@@ -1,6 +1,7 @@
-import { wait } from "@/lib/helpers";
-import SlashCommand, { CommandType } from "@/modules/SlashCommand";
-import { Message, TextChannel } from "discord.js";
+import { ROLES } from "../../lib/contants";
+import { wait } from "../../lib/helpers";
+import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
+import { GuildMember, Message, TextChannel } from "discord.js";
 
 export default new SlashCommand({
     name: "clear",
@@ -8,12 +9,24 @@ export default new SlashCommand({
     options: [
         {
             name: "amount",
-            type: CommandType.NUMBER,
+            type: OptionType.NUMBER,
             required: true,
             description: "Amount of messages to clear from the chat",
         },
     ],
+    permissions: [
+        {
+            id: ROLES.MODERATOR,
+            type: PermissionType.ROLE,
+            permission: true,
+        },
+    ],
     async execute(interaction) {
+        const member = interaction.member as GuildMember;
+        if (!member.permissions.has("MANAGE_MESSAGES")) {
+            return interaction.reply({ content: "Sorry, you are not allowed to execute that command!" });
+        }
+
         const amount = interaction.options.getNumber("amount")!;
 
         if (amount > 101) {
