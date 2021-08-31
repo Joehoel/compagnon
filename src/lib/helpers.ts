@@ -263,6 +263,9 @@ const getDate = () => {
 
 export const sendQuestion = async (client: Client) => {
     const question = await Question.findOne({ where: { date: getDate() } });
-    const channel = (await client.channels.fetch(CHANNELS.VRAGEN, { cache: true, force: true })) as TextChannel;
+    const channel = (await client.channels.fetch(CHANNELS.VRAGEN, {
+        cache: true,
+        force: true,
+    })) as TextChannel;
     return channel.send(`<@&${ROLES.CONTESTANT}> ${question!.text}`);
 };

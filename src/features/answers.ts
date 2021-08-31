@@ -7,9 +7,9 @@ const { PREFIX } = process.env;
 export default async (client: Client, message: Message) => {
     // const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
-    if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.TEST_CHANNEL || message.author.bot) return;
+    if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
 
-    const member = await client.users.fetch(USERS.JOEL);
+    const member = await client.users.fetch(USERS.JESSE);
     const msg = await member.send({
         embeds: [
             embed({
@@ -21,14 +21,14 @@ export default async (client: Client, message: Message) => {
             }),
         ],
     });
-    await message.author.send({
-        embeds: [
-            embed({
-                title: "Antwoord",
-                description: message.content,
-            }),
-        ],
-    });
+    // await message.author.send({
+    //     embeds: [
+    //         embed({
+    //             title: "Antwoord",
+    //             description: message.content,
+    //         }),
+    //     ],
+    // });
     await message.channel.send({ content: `${message.author}, Answer successfully submitted! ✅` });
     await message.delete();
 

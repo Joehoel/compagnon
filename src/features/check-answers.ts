@@ -12,6 +12,11 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
 
     const score = await Brain.findOne({ where: { user: member?.toString() } });
 
+    const answersChannel = (await client.guilds.cache
+        .get(GUILD_ID)
+        ?.channels.cache.get(CHANNELS.ANTWOORDEN)
+        ?.fetch()) as TextChannel;
+
     if (reaction.emoji.name == "✅") {
         if (event == EVENTS.REACTION_ADD) {
             if (!score) {
@@ -21,18 +26,29 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
                 const newScore = new Brain({ score: score.score + 1 });
                 await Brain.update({ user: member?.toString() }, newScore);
             }
+
+            await answersChannel.send({
+                content: `${member} Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
+                    dateStyle: "medium",
+                }).format(new Date())} is goedgekeurd!`,
+            });
         } else {
             const newScore = new Brain({ score: score!.score - 1 });
             await Brain.update({ user: member?.toString() }, newScore);
+            await answersChannel.send({
+                content: `${member} Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
+                    dateStyle: "medium",
+                }).format(new Date())} is bij nader inzien afgekeurd!`,
+            });
         }
 
         // Update the scoreboard
-        const channel = (await client.guilds.cache
+        const scoreboardChannel = (await client.guilds.cache
             .get(GUILD_ID)
             ?.channels.cache.get(CHANNELS.REGELS_EN_LEADERBOARD)
             ?.fetch()) as TextChannel;
 
-        const messages = await channel.messages.fetch({
+        const messages = await scoreboardChannel.messages.fetch({
             around: SCOREBOARD_MESSAGE_ID,
             limit: 1,
         });

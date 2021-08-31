@@ -1,5 +1,6 @@
-import { ROLES } from "@/lib/contants";
-import { GuildMember } from "discord.js";
+import { CHANNELS, GUILD_ID, ROLES, SCOREBOARD_MESSAGE_ID } from "../../lib/contants";
+import { scoreboard } from "../../lib/helpers";
+import { GuildMember, TextChannel } from "discord.js";
 import { Brain } from "../../entity/Brain";
 import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
 
@@ -28,6 +29,8 @@ export default new SlashCommand({
         },
     ],
     async execute(interaction) {
+        const { client } = interaction;
+
         const member = interaction.member as GuildMember;
         if (!member.permissions.has("MANAGE_MESSAGES")) {
             return interaction.reply({ content: "Sorry, you are not allowed to execute that command!" });
@@ -38,6 +41,21 @@ export default new SlashCommand({
         const brain = await Brain.findOne({ where: { user: user?.toString() } });
         if (brain) {
             await Brain.update({ user: brain.user }, { score: value });
+
+            // TODO: Functie van maken
+            // Update scoreboard
+            const scoreboardChannel = (await client.guilds.cache
+                .get(GUILD_ID)
+                ?.channels.cache.get(CHANNELS.REGELS_EN_LEADERBOARD)
+                ?.fetch()) as TextChannel;
+
+            const messages = await scoreboardChannel.messages.fetch({
+                around: SCOREBOARD_MESSAGE_ID,
+                limit: 1,
+            });
+            const message = messages.first();
+            await message?.edit({ content: await scoreboard() });
+
             return interaction.reply({ content: `Successfully updated score to: ${value}` });
         }
     },
