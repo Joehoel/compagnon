@@ -1,7 +1,7 @@
 import { Brain } from "../entity/Brain";
 import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "@/lib/contants";
 import { Client, MessageReaction, PartialUser, TextChannel, User } from "discord.js";
-import { scoreboard } from "../lib/helpers";
+import { getQuestion, scoreboard } from "../lib/helpers";
 
 export default async (client: Client, reaction: MessageReaction, user: User | PartialUser, event: EVENTS) => {
     if (reaction.message.partial) await reaction.message.fetch();
@@ -12,6 +12,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
     const member = client.guilds.cache.get(GUILD_ID)!.members.cache.find((m) => m.user.username == author?.name);
 
     const score = await Brain.findOne({ where: { user: member?.toString() } });
+    const question = await getQuestion();
 
     const answersChannel = (await client.guilds.cache
         .get(GUILD_ID)
@@ -31,7 +32,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             await answersChannel.send({
                 content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
                     dateStyle: "medium",
-                }).format(new Date())} is goedgekeurd!`,
+                }).format(question?.date)} is goedgekeurd!`,
             });
         } else {
             const newScore = new Brain({ score: score!.score - 1 });
@@ -39,7 +40,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             await answersChannel.send({
                 content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
                     dateStyle: "medium",
-                }).format(new Date())} is bij nader inzien afgekeurd!`,
+                }).format(question?.date)} is bij nader inzien afgekeurd!`,
             });
         }
 
