@@ -42,21 +42,24 @@ export default new SlashCommand({
         if (brain) {
             await Brain.update({ user: brain.user }, { score: value });
 
-            // TODO: Functie van maken
-            // Update scoreboard
-            const scoreboardChannel = (await client.guilds.cache
-                .get(GUILD_ID)
-                ?.channels.cache.get(CHANNELS.REGELS_EN_LEADERBOARD)
-                ?.fetch()) as TextChannel;
-
-            const messages = await scoreboardChannel.messages.fetch({
-                around: SCOREBOARD_MESSAGE_ID,
-                limit: 1,
-            });
-            const message = messages.first();
-            await message?.edit({ content: await scoreboard() });
-
-            return interaction.reply({ content: `Successfully updated score to: ${value}` });
+            interaction.reply({ content: `Successfully updated score to: ${value}` });
+        } else {
+            await new Brain({ score: value, user: user.toString() }).save();
+            interaction.reply({ content: `Successfully created new score for ${user}: ${value}` });
         }
+
+        // TODO: Functie van maken
+        // Update scoreboard
+        const scoreboardChannel = (await client.guilds.cache
+            .get(GUILD_ID)
+            ?.channels.cache.get(CHANNELS.REGELS_EN_LEADERBOARD)
+            ?.fetch()) as TextChannel;
+
+        const messages = await scoreboardChannel.messages.fetch({
+            around: SCOREBOARD_MESSAGE_ID,
+            limit: 1,
+        });
+        const message = messages.first();
+        await message?.edit({ content: await scoreboard() });
     },
 });

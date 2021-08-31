@@ -10,7 +10,7 @@ export class Brain extends BaseEntity {
     user: string;
 
     @Index()
-    @Column({ default: 0 })
+    @Column({ default: 1 })
     score: number;
 
     @CreateDateColumn()
