@@ -15,24 +15,24 @@ import { Score } from "./Score";
 @Entity("leaderboards")
 export class Leaderboard extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Index()
     @Column()
-    name: string;
+    name!: string;
 
     @Index()
     @ManyToOne(() => Game, (game) => game.leaderboards)
-    game: Game;
+    game!: Game;
 
     @OneToMany(() => Score, (score) => score.leaderboard)
-    scores: Score[];
+    scores!: Score[];
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 
     constructor(model?: Partial<Leaderboard>) {
         super();

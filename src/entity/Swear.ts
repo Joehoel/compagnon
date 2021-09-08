@@ -3,21 +3,21 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedCo
 @Entity("swears")
 export class Swear extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Index()
     @Column()
-    user: string;
+    user!: string;
 
     @Index()
     @Column({ default: 0 })
-    swears: number;
+    swears!: number;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 
     constructor(model?: Partial<Swear>) {
         super();

@@ -3,21 +3,21 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedCo
 @Entity("brains")
 export class Brain extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Index()
     @Column({ unique: true, nullable: false })
-    user: string;
+    user!: string;
 
     @Index()
     @Column({ default: 1 })
-    score: number;
+    score!: number;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 
     constructor(model?: Partial<Brain>) {
         super();

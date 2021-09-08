@@ -6,7 +6,7 @@ export default new Command({
     description: "Call when a user makes a typo.",
     aliases: ["tp"],
     exclusive: true,
-    execute(client, message, args) {
+    execute(_, message) {
         const target = message.mentions.users.first();
         message.channel.send({ embeds: [embed({ description: `${target}` })] });
     },
