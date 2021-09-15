@@ -80,7 +80,7 @@ export async function getJson(path: string, params: Record<string, any> = {}, he
         const { data } = await axios.get(url, { params, headers });
         return data;
     } catch (error) {
-        throw new Error(error);
+        // throw new Error(error);
     }
 }
 

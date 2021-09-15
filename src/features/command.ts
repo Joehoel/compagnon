@@ -1,3 +1,4 @@
+import { NotInVoice } from "@/lib/errors";
 import { Client, Message } from "discord.js";
 import { embed, isAllowed } from "../lib/helpers";
 const { PREFIX } = process.env;
@@ -66,7 +67,7 @@ export default async (client: Client, message: Message) => {
         command.execute(client, message, args);
         return;
     } catch (error) {
-        if (error.message === "NotInVoice") {
+        if (error instanceof NotInVoice && error.message === "NotInVoice") {
             return message.channel.send({
                 embeds: [
                     embed({ title: "Error", description: "You must be in a voice channel to execute that command!" }),
