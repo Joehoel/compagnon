@@ -1,3 +1,4 @@
+import { Answer } from "../entity/Answer";
 import "cross-fetch";
 import fetch from "cross-fetch";
 import {
@@ -256,9 +257,13 @@ export const scoreboard = async () => {
     ).format(new Date())})`;
 };
 
-const getDate = () => {
+const getQuestionDate = () => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0, 0).toUTCString();
+};
+const getAnswerDate = () => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 11, 0, 0, 0).toUTCString();
 };
 
 export const sendQuestion = async (client: Client) => {
@@ -271,5 +276,18 @@ export const sendQuestion = async (client: Client) => {
 };
 
 export const getQuestion = async () => {
-    return await Question.findOne({ where: { date: getDate() } });
+    return await Question.findOne({ where: { date: getQuestionDate() } });
+};
+
+export const sendAnswer = async (client: Client) => {
+    const answer = await getAnswer();
+    const channel = (await client.channels.fetch(CHANNELS.VRAGEN, {
+        cache: true,
+        force: true,
+    })) as TextChannel;
+    return channel.send(`||${answer!.text}||`);
+};
+
+export const getAnswer = async () => {
+    return await Answer.findOne({ where: { date: getAnswerDate() } });
 };

@@ -3,17 +3,17 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, Upd
 @Entity("guilds")
 export class Guild extends BaseEntity {
     @PrimaryColumn()
-    id: string;
+    id!: string;
 
     @Index()
     @Column({ nullable: false })
-    ownerId: string;
+    ownerId!: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 
     constructor(model?: Partial<Guild>) {
         super();

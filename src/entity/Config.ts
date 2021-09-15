@@ -13,20 +13,20 @@ import { Guild } from "./Guild";
 @Entity("configs")
 export class Config extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @OneToOne(() => Guild)
     @JoinColumn()
-    guild: Guild;
+    guild!: Guild;
 
     @Column({ default: "!" })
-    prefix: string;
+    prefix!: string;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 
     constructor(model?: Partial<Config>) {
         super();

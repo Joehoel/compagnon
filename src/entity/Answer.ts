@@ -1,7 +1,7 @@
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity("questions")
-export class Question extends BaseEntity {
+@Entity("answers")
+export class Answer extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -17,7 +17,7 @@ export class Question extends BaseEntity {
     @UpdateDateColumn()
     updatedAt!: Date;
 
-    constructor(model?: Partial<Question>) {
+    constructor(model?: Partial<Answer>) {
         super();
         Object.assign(this, model);
     }
