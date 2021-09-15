@@ -1,4 +1,4 @@
-import { Answer } from "@/entity/Answer";
+import { Answer } from "../entity/Answer";
 import "cross-fetch";
 import fetch from "cross-fetch";
 import {
@@ -289,5 +289,5 @@ export const sendAnswer = async (client: Client) => {
 };
 
 export const getAnswer = async () => {
-    return await Answer.findOne({ where: { data: getAnswerDate() } });
+    return await Answer.findOne({ where: { date: getAnswerDate() } });
 };
