@@ -1,10 +1,10 @@
+import { status } from "@/lib/helpers";
 import { MessageEmbed } from "discord.js";
 import DisTube from "distube";
-import { status } from "../lib/helpers";
 
 export default (music: DisTube) => {
     music
-        .on("playSong", (message, queue, song) => {
+        .on("playSong", (queue, song) => {
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -15,7 +15,7 @@ export default (music: DisTube) => {
                     },
                     {
                         name: "Requested by",
-                        value: song.user.username,
+                        value: song.user!.username,
                     },
                     {
                         name: "Status",
@@ -23,9 +23,9 @@ export default (music: DisTube) => {
                     },
                 ],
             });
-            message.channel.send({ embeds: [embed] });
+            queue.textChannel?.send({ embeds: [embed] });
         })
-        .on("addSong", (message, queue, song) => {
+        .on("addSong", (queue, song) => {
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -36,7 +36,7 @@ export default (music: DisTube) => {
                     },
                     {
                         name: "Requested by",
-                        value: song.user.username,
+                        value: song.user!.username,
                     },
                     {
                         name: "Status",
@@ -44,35 +44,9 @@ export default (music: DisTube) => {
                     },
                 ],
             });
-            message.channel.send({ embeds: [embed] });
+            queue.textChannel?.send({ embeds: [embed] });
         })
-        .on("playList", (message, queue, playlist, song) => {
-            const embed = new MessageEmbed({
-                title: "Music",
-                color: "#ffc600",
-                fields: [
-                    {
-                        name: "Playing",
-                        value: `\`${playlist.name}\` playlist (${playlist.songs.length} songs)`,
-                    },
-                    {
-                        name: "Requested by",
-                        value: song.user.username,
-                    },
-                    {
-                        name: "Now playing",
-                        value: `\`${song.name}\` - \`${song.formattedDuration}\``,
-                    },
-                    {
-                        name: "Status",
-                        value: status(queue),
-                    },
-                ],
-            });
-
-            message.channel.send({ embeds: [embed] });
-        })
-        .on("addList", (message, queue, playlist) => {
+        .on("addList", (queue, playlist) => {
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -83,7 +57,7 @@ export default (music: DisTube) => {
                     },
                     {
                         name: "Requested by",
-                        value: playlist.user.username,
+                        value: playlist.user!.username,
                     },
 
                     {
@@ -93,10 +67,10 @@ export default (music: DisTube) => {
                 ],
             });
 
-            message.channel.send({ embeds: [embed] });
+            queue.textChannel?.send({ embeds: [embed] });
         })
 
-        .on("error", (message, e) => {
+        .on("error", (channel, e) => {
             console.error(e);
 
             const embed = new MessageEmbed({
@@ -109,6 +83,6 @@ export default (music: DisTube) => {
                     },
                 ],
             });
-            message.channel.send({ embeds: [embed] });
+            channel.send({ embeds: [embed] });
         });
 };

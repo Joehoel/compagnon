@@ -18,7 +18,7 @@ export default new Command({
                 },
                 {
                     name: "Status",
-                    value: status(client.music.getQueue(message)),
+                    value: status(client.music.getQueue(message)!),
                 },
             ],
         });

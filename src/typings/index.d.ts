@@ -1,4 +1,10 @@
-import { Client, GuildMember, PartialMessage } from "discord.js";
+import { Client, GuildMember, PartialMessage, TextChannel } from "discord.js";
+
+declare module "discord-player" {
+    interface Queue {
+        metadata?: TextChannel;
+    }
+}
 
 export interface MemeResponse {
     url: string;

@@ -1,8 +1,8 @@
 import Command from "../../modules/Command";
-import { FieldsEmbed } from "discord-paginationembed";
-import { TextChannel } from "discord.js";
-import Song from "distube/typings/Song";
-import { embed } from "../../lib/helpers";
+import { Embeds } from "discord-paginationembed";
+import { MessageEmbed, TextChannel } from "discord.js";
+import { chunk, embed } from "../../lib/helpers";
+import { sendPaginatedEmbeds } from "discord.js-embed-pagination";
 
 export default new Command({
     name: "queue",
@@ -11,40 +11,44 @@ export default new Command({
     exclusive: true,
     async execute(client, message) {
         const queue = client.music.getQueue(message);
-        const playing = queue?.songs.shift();
 
         if (queue && queue.songs.length > 1) {
-            try {
-                const formattedQueue = queue?.songs?.map((song: Song, i) => {
-                    return `**${i + 1}**. \`${song?.name}\` - \`${song?.formattedDuration}\``;
-                });
-                const paginatedEmbed = new FieldsEmbed()
-                    .setArray(formattedQueue)
-                    .setElementsPerPage(10)
-                    .setDisabledNavigationEmojis(["delete"])
-                    .setChannel(message.channel as TextChannel)
-                    .formatField("Queue", (el) => el);
-
-                paginatedEmbed.embed
-                    .setColor("#ffc600")
-                    .setTitle("Music")
-                    .setFooter(`${queue?.songs.length} songs in queue | ${queue?.formattedDuration} total length`);
-
-                queue?.songs.unshift(playing!);
-
-                await paginatedEmbed.build();
-            } catch (error) {
-                client.logger.error(error);
-            }
-        } else {
-            return message.channel.send({
-                embeds: [
-                    embed({
-                        title: "Music",
-                        description: "Queue is empty 🐱",
-                    }),
-                ],
+            const formattedQueue = queue.songs.map((song, i) => {
+                return `**${i}**. \`${song?.name}\` - \`${song?.formattedDuration}\``;
             });
+
+            const playing = formattedQueue.shift()?.split(".")[1];
+
+            const embeds = chunk(formattedQueue, 10).map((chunk) => {
+                const content = chunk.join("\n");
+                return new MessageEmbed({
+                    title: "Music",
+                    footer: {
+                        text: `${queue?.songs.length} song(s) in queue | ${queue?.formattedDuration} total length`,
+                    },
+                    color: "#ffc600",
+                    fields: [
+                        {
+                            name: "Now playing",
+                            value: playing!,
+                            inline: true,
+                        },
+                        {
+                            name: "Queue",
+                            value: content,
+                        },
+                    ],
+                });
+            });
+
+            const paginatedEmbed = new Embeds()
+                .setArray(embeds)
+                .setDisabledNavigationEmojis(["delete"])
+                .setChannel(message.channel as TextChannel);
+
+            await paginatedEmbed.build();
+        } else {
+            return message.channel.send("🗑 | Queue is empty ");
         }
     },
 });

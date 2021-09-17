@@ -1,6 +1,8 @@
 import Command from "../../modules/Command";
 import { embed } from "../../lib/helpers";
-import { getLyrics } from "../../lib/lyrics";
+import { init } from "../../lib/lyrics";
+
+const { GENIUS_TOKEN } = process.env;
 
 export default new Command({
     name: "lyrics",
@@ -8,10 +10,12 @@ export default new Command({
     usage: "<song - artist>",
     exclusive: true,
     async execute(client, message, args) {
+        const { search } = init(GENIUS_TOKEN);
         let song = "";
         const queue = client.music.getQueue(message);
-        if (queue?.songs.length) {
-            song = queue.songs[0].name;
+
+        if (queue?.songs) {
+            song = queue.songs[0].name!;
         }
 
         if (args.length >= 1) {
@@ -20,22 +24,18 @@ export default new Command({
             song = song.split("(")[0];
         }
 
-        try {
-            const { lyrics, name, artist, album_art, url } = await getLyrics(song);
-            if (lyrics.trim().length) {
-                return await message.channel.send({
-                    embeds: [
-                        embed({
-                            title: `${name} - ${artist}`,
-                            description: lyrics,
-                            thumbnail: { url: album_art },
-                            url,
-                        }),
-                    ],
-                });
-            }
-        } catch (error) {
-            client.logger.error(error);
+        const { lyrics, title, artist, thumbnail, url } = await search(song);
+        if (lyrics?.trim().length) {
+            return await message.channel.send({
+                embeds: [
+                    embed({
+                        title: `${title} - ${artist.name}`,
+                        description: lyrics,
+                        thumbnail: { url: thumbnail },
+                        url,
+                    }),
+                ],
+            });
         }
     },
 });

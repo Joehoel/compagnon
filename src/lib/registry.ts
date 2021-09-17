@@ -36,6 +36,7 @@ export async function registerCommands(client: Client, dir = "") {
             client.aliases.set(alias, command.name);
         });
     }
+    client.logger.success("Successfully reloaded commands.");
 }
 
 export async function registerSlashCommands(client: Client, dir = "../_commands") {
@@ -56,6 +57,7 @@ export async function registerSlashCommands(client: Client, dir = "../_commands"
             });
         }
     }
+    client.logger.success("Successfully reloaded application [/] commands.");
 }
 
 export async function registerEvents(client: Client, dir = "") {
@@ -72,4 +74,6 @@ export async function registerEvents(client: Client, dir = "") {
             client.logger.error(error);
         }
     }
+
+    client.logger.success("Successfully reloaded events");
 }

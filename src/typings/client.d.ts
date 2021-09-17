@@ -1,6 +1,7 @@
 import SlashCommand from "@/modules/SlashCommand";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Consola } from "consola";
+import { Player } from "discord-player";
 import "discord.js";
 import { Collection } from "discord.js";
 import DisTube from "distube";
@@ -19,6 +20,7 @@ declare module "discord.js" {
         features: Collection<string, any>;
         config: Collection<string, Partial<Config>>;
         music: DisTube;
+        player: Player;
         logger: Consola;
     }
 }

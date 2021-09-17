@@ -14,9 +14,9 @@ export default new Command({
         if (from > to) {
             queue.songs.splice(to, 0, queue.songs[from]);
             queue.songs.splice(from + 1, 1);
+        } else {
+            queue.songs.splice(to + 1, 0, queue.songs[from]);
+            queue.songs.splice(from - 1, 1);
         }
-
-        queue.songs.splice(to + 1, 0, queue.songs[from]);
-        queue.songs.splice(from - 1, 1);
     },
 });
