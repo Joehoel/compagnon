@@ -7,6 +7,6 @@ export default new Command({
     exclusive: true,
     execute(client, message) {
         if (!message.member?.voice.channel) throw new Error("NotInVoice");
-        client.music.getQueue(message).songs.length = 0;
+        client.music.getQueue(message)!.songs.length = 0;
     },
 });

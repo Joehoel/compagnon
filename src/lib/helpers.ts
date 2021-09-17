@@ -10,7 +10,6 @@ import {
     MessageEmbedOptions,
     TextChannel,
 } from "discord.js";
-import Queue from "distube/typings/Queue";
 import { URLSearchParams } from "url";
 import { promisify } from "util";
 import { Brain } from "../entity/Brain";
@@ -21,6 +20,7 @@ import Command from "../modules/Command";
 import { GIFResponse, MemeResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
+import { Queue } from "distube";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -97,11 +97,23 @@ export function capitalize(string: string): string {
     return string.substr(0, 1).toUpperCase() + string.substr(1, string.length - 1);
 }
 
-export function status(queue: Queue) {
-    return `Volume: \`${queue.volume}%\` | Filter: \`${queue.filter || "Off"}\` | Loop: \`${
-        queue.repeatMode ? (queue.repeatMode == 2 ? "All Queue" : "This Song") : "Off"
-    }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
+/**
+ * Chunk an array in to more arrays
+ *
+ * @export
+ * @template T
+ * @param {T[]} arr
+ * @param {number} size
+ * @return {*}  {T[][]}
+ */
+export function chunk<T>(arr: T[], size: number): T[][] {
+    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size));
 }
+
+export const status = (queue: Queue) =>
+    `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(", ") || "Off"}\` | Loop: \`${
+        queue.repeatMode ? (queue.repeatMode === 2 ? "All Queue" : "This Song") : "Off"
+    }\` | Autoplay: \`${queue.autoplay ? "On" : "Off"}\``;
 
 /**
  * Generate a discord embed with default color and timestamp

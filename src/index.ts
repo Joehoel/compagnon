@@ -3,7 +3,7 @@ import "module-alias/register";
 import colors from "colors";
 import consola from "consola";
 import { Client, Collection, Intents } from "discord.js";
-import DisTube from "distube";
+import { DisTube } from "distube";
 import { createConnection } from "typeorm";
 import { Config } from "./entity/Config";
 import { music, quiz } from "./features";
@@ -13,6 +13,9 @@ import Command from "./modules/Command";
 import Event from "./modules/Event";
 import SlashCommand from "./modules/SlashCommand";
 import { Snipe } from "./typings";
+import { Player } from "discord-player";
+import SpotifyPlugin from "@distube/spotify";
+import player from "./features/player";
 
 // Environment variables
 const { TOKEN } = process.env;
@@ -25,6 +28,7 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
         Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_VOICE_STATES,
     ],
     partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
@@ -36,7 +40,13 @@ client.aliases = new Collection<string, string>();
 client.snipes = new Collection<string, Snipe>();
 client.events = new Collection<string, Event>();
 client.config = new Collection<string, Partial<Config>>();
-client.music = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
+client.music = new DisTube(client, {
+    emitNewSongOnly: true,
+    leaveOnEmpty: true,
+    searchSongs: 0,
+    plugins: [new SpotifyPlugin()],
+});
+client.player = new Player(client);
 client.logger = consola;
 
 (async () => {
@@ -53,6 +63,7 @@ client.logger = consola;
 
         // Music handler
         music(client.music);
+        player(client);
 
         // Login bot
         await client.login(TOKEN);

@@ -15,7 +15,7 @@ export default new Command({
             fields: [
                 {
                     name: "Status",
-                    value: status(client.music.getQueue(message)),
+                    value: status(client.music.getQueue(message)!),
                 },
             ],
         });
