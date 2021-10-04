@@ -1,5 +1,5 @@
 import { ROLES } from "../../lib/contants";
-import { sendQuestion } from "../../lib/helpers";
+import { sendAnswer, sendQuestion } from "../../lib/helpers";
 import SlashCommand, { PermissionType } from "../../modules/SlashCommand";
 
 export default new SlashCommand({
@@ -13,6 +13,8 @@ export default new SlashCommand({
         },
     ],
     async execute(interaction) {
-        return sendQuestion(interaction.client);
+        sendAnswer(interaction.client);
+        sendQuestion(interaction.client);
+        return interaction.reply({ ephemeral: true, content: "Successfully send answer and question" });
     },
 });
