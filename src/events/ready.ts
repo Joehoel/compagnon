@@ -2,7 +2,7 @@ import { Client, TextChannel } from "discord.js";
 import { Config } from "../entity/Config";
 import Event from "@/modules/Event";
 import colors from "colors";
-import { CHANNELS, GUILD_ID } from "@/lib/contants";
+import { CHANNELS } from "@/lib/contants";
 
 export default new Event({
     name: "ready",

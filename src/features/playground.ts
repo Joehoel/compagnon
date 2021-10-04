@@ -1,8 +1,5 @@
-import { Answer } from "../entity/Answer";
+import { Brain } from "../entity/Brain";
 import { Client } from "discord.js";
-import { readdirSync, readFileSync } from "fs";
-import { join } from "path";
-import { sendAnswer } from "../lib/helpers";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async (client: Client) => {
