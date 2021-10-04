@@ -260,7 +260,7 @@ export const scoreboard = async () => {
         .reverse();
 
     return `========================================  Biggest of brains  ========================================\n${scores
-        .map((score, i) => `${i + 1}. ${score.user} - ${score.score}`)
+        .map((score, i) => `${i + 1}. <@${score.user}> - ${score.score}`)
         .join(
             "\n"
         )}\n======================================== Smallest of brains ========================================\n(Last updated: ${new Intl.DateTimeFormat(

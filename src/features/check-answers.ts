@@ -11,7 +11,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
     const author = reaction.message.embeds[0].author;
     const member = client.guilds.cache.get(GUILD_ID)!.members.cache.find((m) => m.user.username == author?.name);
 
-    const score = await Brain.findOne({ where: { user: member?.toString() } });
+    const score = await Brain.findOne({ where: { user: member?.id } });
     const question = await getQuestion();
 
     const answersChannel = (await client.guilds.cache
@@ -22,11 +22,11 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
     if (reaction.emoji.name == "✅") {
         if (event == EVENTS.REACTION_ADD) {
             if (!score) {
-                const newIQ = new Brain({ user: member?.toString() });
+                const newIQ = new Brain({ user: member?.id });
                 await newIQ.save();
             } else {
                 const newScore = new Brain({ score: score.score + 1 });
-                await Brain.update({ user: member?.toString() }, newScore);
+                await Brain.update({ user: member?.id }, newScore);
             }
 
             await answersChannel.send({
@@ -36,7 +36,7 @@ export default async (client: Client, reaction: MessageReaction, user: User | Pa
             });
         } else {
             const newScore = new Brain({ score: score!.score - 1 });
-            await Brain.update({ user: member?.toString() }, newScore);
+            await Brain.update({ user: member?.id }, newScore);
             await answersChannel.send({
                 content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
                     dateStyle: "medium",
