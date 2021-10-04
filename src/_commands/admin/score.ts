@@ -38,13 +38,13 @@ export default new SlashCommand({
         const user = interaction.options.getUser("user")!;
         const value = interaction.options.getNumber("value")!;
 
-        const brain = await Brain.findOne({ where: { user: user?.toString() } });
+        const brain = await Brain.findOne({ where: { user: user?.id } });
         if (brain) {
             await Brain.update({ user: brain.user }, { score: value });
 
             interaction.reply({ content: `Successfully updated score to: ${value}` });
         } else {
-            await new Brain({ score: value, user: user.toString() }).save();
+            await new Brain({ score: value, user: user.id }).save();
             interaction.reply({ content: `Successfully created new score for ${user}: ${value}` });
         }
 
