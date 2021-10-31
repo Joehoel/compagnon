@@ -271,7 +271,7 @@ export const scoreboard = async () => {
 
 const getQuestionDate = () => {
     const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0, 0).toUTCString();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 9, 0, 0, 0).toUTCString();
 };
 const getAnswerDate = () => {
     const now = new Date();
