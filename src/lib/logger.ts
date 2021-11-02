@@ -24,10 +24,10 @@ const logger = createLogger({
                 })
             ),
         }),
-        new transports.File({
-            filename: join(__dirname, "../../logs/error.log"),
-            level: "info",
-        }),
+        // new transports.File({
+        //     filename: join(__dirname, "../../logs/error.log"),
+        //     level: "info",
+        // }),
     ],
 });
 
