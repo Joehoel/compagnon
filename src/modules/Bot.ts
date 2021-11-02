@@ -25,6 +25,13 @@ type SlashCommandResponse = {
     options: Object[];
 }[];
 
+/**
+ * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
+ *
+ * @export
+ * @class Bot
+ * @extends {Client}
+ */
 export default class Bot extends Client {
     public commands = new Collection<string, Command>();
     public slashCommands = new Collection<string, SlashCommand>();
