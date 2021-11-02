@@ -1,4 +1,5 @@
 import { NotInVoice } from "@/lib/errors";
+import logger from "@/lib/logger";
 import { Client, Message } from "discord.js";
 import { embed, isAllowed } from "../lib/helpers";
 const { PREFIX } = process.env;
@@ -74,9 +75,9 @@ export default async (client: Client, message: Message) => {
                 ],
             });
         }
-        client.logger.error(error);
+        logger.error(error);
         await message.reply("There was an error trying to execute that command!");
     } finally {
-        client.logger.info(`${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`);
+        logger.info(`${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`);
     }
 };

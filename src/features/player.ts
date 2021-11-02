@@ -1,3 +1,4 @@
+import logger from "@/lib/logger";
 import { Client, TextChannel } from "discord.js";
 
 export default async (client: Client) => {
@@ -22,6 +23,6 @@ export default async (client: Client) => {
     });
 
     player.on("error", (_, error) => {
-        client.logger.error(error);
+        logger.error(error);
     });
 };

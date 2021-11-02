@@ -9,3 +9,4 @@ export { default as interaction } from "./interaction";
 export { default as answers } from "./answers";
 export { default as checkAnswers } from "./check-answers";
 export { default as reactionrole } from "./reactionrole";
+export { default as playground } from "./playground";
