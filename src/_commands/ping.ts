@@ -1,5 +1,5 @@
-import { embed } from "@/lib/helpers";
-import SlashCommand from "@/modules/SlashCommand";
+import { embed } from "../lib/helpers";
+import SlashCommand from "../modules/SlashCommand";
 import { Message } from "discord.js";
 
 export default new SlashCommand({

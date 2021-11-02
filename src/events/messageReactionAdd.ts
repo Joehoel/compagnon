@@ -1,5 +1,5 @@
 import { checkAnswers, reactionrole } from "../features";
-import { EVENTS } from "@/lib/contants";
+import { EVENTS } from "../lib/contants";
 import { Client, MessageReaction, PartialUser, User } from "discord.js";
 import Event from "../modules/Event";
 

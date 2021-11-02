@@ -1,4 +1,4 @@
-import logger from "@/lib/logger";
+import logger from "../lib/logger";
 import { Client } from "discord.js";
 import Event from "../modules/Event";
 

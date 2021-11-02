@@ -1,4 +1,4 @@
-import SlashCommand, { OptionType } from "@/modules/SlashCommand";
+import SlashCommand, { OptionType } from "../modules/SlashCommand";
 
 export default new SlashCommand({
     name: "avatar",

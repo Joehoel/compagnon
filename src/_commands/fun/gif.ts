@@ -1,5 +1,5 @@
-import { gif } from "@/lib/helpers";
-import SlashCommand, { OptionType } from "@/modules/SlashCommand";
+import { gif } from "../../lib/helpers";
+import SlashCommand, { OptionType } from "../../modules/SlashCommand";
 
 export default new SlashCommand({
     name: "gif",

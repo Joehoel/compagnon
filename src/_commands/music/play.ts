@@ -1,4 +1,4 @@
-import SlashCommand, { OptionType } from "@/modules/SlashCommand";
+import SlashCommand, { OptionType } from "../../modules/SlashCommand";
 import { Guild, GuildMember, VoiceChannel } from "discord.js";
 
 export default new SlashCommand({

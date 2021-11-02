@@ -1,6 +1,6 @@
 import { Swear } from "../entity/Swear";
-import { embed } from "@/lib/helpers";
-import Command from "@/modules/Command";
+import { embed } from "../lib/helpers";
+import Command from "../modules/Command";
 
 export default new Command({
     name: "swears",

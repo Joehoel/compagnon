@@ -1,4 +1,4 @@
-import { status } from "@/lib/helpers";
+import { status } from "../lib/helpers";
 import { MessageEmbed } from "discord.js";
 import DisTube from "distube";
 

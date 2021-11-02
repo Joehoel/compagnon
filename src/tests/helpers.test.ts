@@ -1,4 +1,4 @@
-import { capitalize, embed } from "@/lib/helpers";
+import { capitalize, embed } from "../lib/helpers";
 import { MessageEmbed } from "discord.js";
 
 describe("Helpers", () => {

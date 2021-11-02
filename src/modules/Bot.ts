@@ -1,3 +1,4 @@
+import { ROOT } from "../lib/contants";
 import { REST } from "@discordjs/rest";
 import SpotifyPlugin from "@distube/spotify";
 import { Routes } from "discord-api-types/v9";
@@ -97,7 +98,7 @@ export default class Bot extends Client {
             logger.error(error);
         }
     }
-    private async registerSlashCommands(dir = `${process.cwd()}/src/_commands`) {
+    private async registerSlashCommands(dir = `${process.cwd()}/${ROOT}/_commands`) {
         const slashCommands = await read<SlashCommand>(dir);
 
         await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
@@ -121,7 +122,7 @@ export default class Bot extends Client {
         logger.info(`Loaded ${slashCommands.length} [/] commands`);
     }
 
-    private async registerCommands(dir = `${process.cwd()}/src/commands`) {
+    private async registerCommands(dir = `${process.cwd()}/${ROOT}/commands`) {
         const commands = await read<Command>(dir);
 
         for (const command of commands) {
@@ -137,7 +138,7 @@ export default class Bot extends Client {
         logger.info(`Loaded ${commands.length} commands`);
     }
 
-    private async registerEvents(dir = `${process.cwd()}/src/events`) {
+    private async registerEvents(dir = `${process.cwd()}/${ROOT}/events`) {
         const events = await read<Event<never>>(dir);
         for (const event of events) {
             this.events.set(event.name, event);

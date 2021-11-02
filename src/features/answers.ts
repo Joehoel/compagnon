@@ -1,5 +1,5 @@
-import { CHANNELS, USERS } from "@/lib/contants";
-import { embed } from "@/lib/helpers";
+import { CHANNELS, USERS } from "../lib/contants";
+import { embed } from "../lib/helpers";
 import { Client, Message } from "discord.js";
 
 const { PREFIX } = process.env;

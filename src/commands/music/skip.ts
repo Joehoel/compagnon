@@ -1,7 +1,7 @@
 import Command from "../../modules/Command";
 import { MessageReaction, User } from "discord.js";
 import { embed } from "../../lib/helpers";
-import logger from "@/lib/logger";
+import logger from "../../lib/logger";
 
 export default new Command({
     name: "skip",

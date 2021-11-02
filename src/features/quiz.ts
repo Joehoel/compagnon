@@ -1,4 +1,4 @@
-import { sendAnswer, sendQuestion } from "@/lib/helpers";
+import { sendAnswer, sendQuestion } from "../lib/helpers";
 import { CronJob } from "cron";
 import { Client } from "discord.js";
 
