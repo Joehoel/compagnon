@@ -1,6 +1,7 @@
 import Command from "../../modules/Command";
 import { MessageReaction, User } from "discord.js";
 import { embed } from "../../lib/helpers";
+import logger from "@/lib/logger";
 
 export default new Command({
     name: "skip",
@@ -56,7 +57,7 @@ export default new Command({
                     return client.music.skip(message);
                 }
             } catch (err) {
-                client.logger.error(err);
+                logger.error(err);
             }
         }
 

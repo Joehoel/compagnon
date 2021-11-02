@@ -1,12 +1,13 @@
-import { Client, TextChannel } from "discord.js";
-import { Config } from "../entity/Config";
-import Event from "@/modules/Event";
 import colors from "colors";
-import { CHANNELS } from "@/lib/contants";
+import { TextChannel } from "discord.js";
+import { Config } from "../entity/Config";
+import { CHANNELS } from "../lib/contants";
+import logger from "../lib/logger";
+import Event from "../modules/Event";
 
 export default new Event({
     name: "ready",
-    async run(client: Client) {
+    async run(client) {
         // Cache for reactions
         const channel = client.channels.cache.get(CHANNELS.WELCOME) as TextChannel;
         channel?.messages.cache.get("878717402878185493");
@@ -32,6 +33,6 @@ export default new Event({
             activities: [{ name: `with my ${totalMembers} nerds` }],
         });
 
-        client.logger.success("Compagnon" + colors.green.bold(" online!"));
+        logger.info("Compagnon" + colors.green.bold(" online!"));
     },
 });

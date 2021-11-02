@@ -1,3 +1,4 @@
+import logger from "@/lib/logger";
 import { Interaction } from "discord.js";
 
 export default async (interaction: Interaction) => {
@@ -12,9 +13,9 @@ export default async (interaction: Interaction) => {
     try {
         command?.execute(interaction);
     } catch (error) {
-        interaction.client.logger.error(error);
+        logger.error(error);
     } finally {
         const author = interaction.user;
-        interaction.client.logger.info(`${author.tag} (${author.id}) ran a (/) command: '${command?.name}'`);
+        logger.info(`${author.tag} (${author.id}) ran a (/) command: '${command?.name}'`);
     }
 };

@@ -1,9 +1,14 @@
+import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "../lib/contants";
+import { Client, MessageReaction, PartialMessageReaction, PartialUser, TextChannel, User } from "discord.js";
 import { Brain } from "../entity/Brain";
-import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "@/lib/contants";
-import { Client, MessageReaction, PartialUser, TextChannel, User } from "discord.js";
 import { getQuestion, scoreboard } from "../lib/helpers";
 
-export default async (client: Client, reaction: MessageReaction, user: User | PartialUser, event: EVENTS) => {
+export default async (
+    client: Client,
+    reaction: MessageReaction | PartialMessageReaction,
+    user: User | PartialUser,
+    event: EVENTS
+) => {
     if (reaction.message.partial) await reaction.message.fetch();
     if (reaction.partial) await reaction.fetch();
     if (user.bot || reaction.message.channel.type != "DM") return;
