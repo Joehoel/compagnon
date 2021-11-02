@@ -1,5 +1,5 @@
-import { NotInVoice } from "@/lib/errors";
-import logger from "@/lib/logger";
+import { NotInVoice } from "../lib/errors";
+import logger from "../lib/logger";
 import { Client, Message } from "discord.js";
 import { embed, isAllowed } from "../lib/helpers";
 const { PREFIX } = process.env;

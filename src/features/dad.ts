@@ -1,4 +1,4 @@
-import { CHANNELS } from "@/lib/contants";
+import { CHANNELS } from "../lib/contants";
 import { Client, Message } from "discord.js";
 
 const { PREFIX } = process.env;

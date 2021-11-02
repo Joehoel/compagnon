@@ -1,6 +1,6 @@
-import { USERS } from "@/lib/contants";
-import { embed } from "@/lib/helpers";
-import SlashCommand, { OptionType } from "@/modules/SlashCommand";
+import { USERS } from "../lib/contants";
+import { embed } from "../lib/helpers";
+import SlashCommand, { OptionType } from "../modules/SlashCommand";
 
 export default new SlashCommand({
     name: "answer",

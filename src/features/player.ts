@@ -1,4 +1,4 @@
-import logger from "@/lib/logger";
+import logger from "../lib/logger";
 import { Client, TextChannel } from "discord.js";
 
 export default async (client: Client) => {

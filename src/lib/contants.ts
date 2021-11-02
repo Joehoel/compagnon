@@ -46,3 +46,5 @@ export const SCOREBOARD_MESSAGE_ID = "881505307040305162";
 export const questions = readFileSync("./src/data/vragen.txt", "utf-8")
     .split("\n")
     .map((question) => question.trim());
+
+export const ROOT = process.env.NODE_ENV === "development" ? "src" : "dist";

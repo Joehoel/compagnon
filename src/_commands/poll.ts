@@ -1,5 +1,5 @@
-import { embed } from "@/lib/helpers";
-import SlashCommand, { OptionType } from "@/modules/SlashCommand";
+import { embed } from "../lib/helpers";
+import SlashCommand, { OptionType } from "../modules/SlashCommand";
 import { SlashCommandOptionBase } from "@discordjs/builders/dist/interactions/slashCommands/mixins/CommandOptionBase";
 import { Interaction, Message } from "discord.js";
 

@@ -2,7 +2,7 @@ import { ROLES } from "../../lib/contants";
 import Command from "../../modules/Command";
 import redis, { expire } from "../../lib/redis";
 import { removeRole, giveRole } from "../../lib/helpers";
-import logger from "@/lib/logger";
+import logger from "../../lib/logger";
 
 const redisKeyPrefix = process.env.REDIS_KEY_PREFIX;
 

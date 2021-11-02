@@ -1,4 +1,4 @@
-import logger from "@/lib/logger";
+import logger from "../lib/logger";
 import Event from "../modules/Event";
 
 export default new Event({

@@ -1,4 +1,4 @@
-import logger from "@/lib/logger";
+import logger from "../lib/logger";
 import { Client, MessageReaction, PartialMessageReaction, PartialUser, User } from "discord.js";
 import { EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, EMOJIS, ROLES } from "../lib/contants";
 import { giveRole, removeRole } from "../lib/helpers";

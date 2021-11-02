@@ -1,4 +1,4 @@
-import SlashCommand from "@/modules/SlashCommand";
+import SlashCommand from "../modules/SlashCommand";
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { Consola } from "consola";
 import { Player } from "discord-player";

@@ -1,5 +1,5 @@
-import { gif } from "@/lib/helpers";
-import Command from "@/modules/Command";
+import { gif } from "../lib/helpers";
+import Command from "../modules/Command";
 
 export default new Command({
     name: "gif",
