@@ -60,12 +60,13 @@ Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) an
 Create a `.env` file with the following content.
 
 ```env
-PREFIX=!
-TOKEN=bot-token
-DATABASE_URL=pg-database-url
-NODE_TLS_REJECT_UNAUTHORIZED=0
-REDIS_PATH=redis-labs-path
-REDIS_KEY_PREFIX="muted-"
+TOKEN=
+PREFIX=
+MONGO_URI=
+DATABASE_URL=
+NODE_TLS_REJECT_UNAUTHORIZED=
+REDIS_PATH=
+REDIS_KEY_PREFIX=
 ```
 
 ## :checkered_flag: Starting
