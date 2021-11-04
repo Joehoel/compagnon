@@ -1,5 +1,5 @@
 import Reddit from "../../lib/reddit";
-import SlashCommand, { OptionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType } from "../../structures/SlashCommand";
 import { MessageEmbed } from "discord.js";
 
 export default new SlashCommand({

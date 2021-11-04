@@ -1,5 +1,5 @@
 import { EVENTS } from "../lib/contants";
-import Event from "../modules/Event";
+import Event from "../structures/Event";
 import { checkAnswers, reactionrole } from "../features";
 
 export default new Event({

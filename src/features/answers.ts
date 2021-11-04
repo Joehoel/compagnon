@@ -1,10 +1,11 @@
+import { Message } from "discord.js";
 import { CHANNELS, USERS } from "../lib/contants";
 import { embed } from "../lib/helpers";
-import { Client, Message } from "discord.js";
+import Bot from "../structures/Bot";
 
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (client: Bot, message: Message) => {
     // const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
     if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;

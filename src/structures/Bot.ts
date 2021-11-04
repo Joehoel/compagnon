@@ -2,7 +2,7 @@ import { ROOT } from "../lib/contants";
 import { REST } from "@discordjs/rest";
 import SpotifyPlugin from "@distube/spotify";
 import { Routes } from "discord-api-types/v9";
-import { BitFieldResolvable, Client, Collection, IntentsString, PartialTypes } from "discord.js";
+import { BitFieldResolvable, Client, ClientOptions, Collection, IntentsString, PartialTypes } from "discord.js";
 import DisTube from "distube";
 import { Config } from "../entity/Config";
 import { music, playground, quiz } from "../features";
@@ -12,6 +12,7 @@ import { Snipe } from "../typings";
 import Command from "./Command";
 import Event from "./Event";
 import SlashCommand from "./SlashCommand";
+import Module from "./Module";
 
 type SlashCommandResponse = {
     id: string;
@@ -28,8 +29,6 @@ type SlashCommandResponse = {
 
 /**
  * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
- *
- * @export
  * @class Bot
  * @extends {Client}
  */
@@ -37,10 +36,17 @@ export default class Bot extends Client {
     public commands = new Collection<string, Command>();
     public slashCommands = new Collection<string, SlashCommand>();
     public events = new Collection<string, Event<never>>();
+    public modules = new Collection<string, Module<never>>();
     public aliases = new Collection<string, string>();
     public config = new Collection<string, Partial<Config>>();
     public snipes = new Collection<string, Snipe>();
-    public prefix: string | undefined = "!";
+
+    private commandsFolder: string;
+    private eventsFolder: string;
+    private slashCommandsFolder: string;
+    private modulesFolder: string;
+
+    public prefix: string;
     public music: DisTube;
 
     private app = new REST({ version: "9" });
@@ -49,31 +55,35 @@ export default class Bot extends Client {
 
     constructor({
         token,
-        intents,
-        partials,
         commandsFolder,
         slashCommandsFolder,
         eventsFolder,
+        modulesFolder,
         prefix,
         clientId,
         guildId,
-    }: {
+        ...options
+    }: ClientOptions & {
         token: string;
-        intents: BitFieldResolvable<IntentsString, number>;
-        partials?: PartialTypes[] | undefined;
         commandsFolder?: string;
         eventsFolder?: string;
         slashCommandsFolder?: string;
+        modulesFolder?: string;
         prefix?: string;
         clientId: string;
         guildId: string;
     }) {
-        super({ intents, partials });
+        super(options);
 
         this.token = token;
         this.clientId = clientId;
         this.guildId = guildId;
-        this.prefix = prefix;
+        this.prefix = prefix ?? "!";
+
+        this.commandsFolder = commandsFolder ?? "commands";
+        this.eventsFolder = eventsFolder ?? "events";
+        this.slashCommandsFolder = slashCommandsFolder ?? "_commands";
+        this.modulesFolder = modulesFolder ?? "modules";
 
         this.app.setToken(token);
 
@@ -85,9 +95,10 @@ export default class Bot extends Client {
         });
 
         try {
-            this.registerCommands(commandsFolder);
-            this.registerEvents(eventsFolder);
-            this.registerSlashCommands(slashCommandsFolder);
+            this.registerCommands(this.commandsFolder);
+            this.registerEvents(this.eventsFolder);
+            this.registerSlashCommands(this.slashCommandsFolder);
+            this.registerModules(this.modulesFolder);
 
             music(this.music);
             quiz(this);
@@ -98,7 +109,7 @@ export default class Bot extends Client {
             logger.error(error);
         }
     }
-    private async registerSlashCommands(dir = `${process.cwd()}/${ROOT}/_commands`) {
+    private async registerSlashCommands(dir: string) {
         const slashCommands = await read<SlashCommand>(dir);
 
         await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
@@ -122,7 +133,7 @@ export default class Bot extends Client {
         logger.info(`Loaded ${slashCommands.length} [/] commands`);
     }
 
-    private async registerCommands(dir = `${process.cwd()}/${ROOT}/commands`) {
+    private async registerCommands(dir: string) {
         const commands = await read<Command>(dir);
 
         for (const command of commands) {
@@ -138,7 +149,7 @@ export default class Bot extends Client {
         logger.info(`Loaded ${commands.length} commands`);
     }
 
-    private async registerEvents(dir = `${process.cwd()}/${ROOT}/events`) {
+    private async registerEvents(dir: string) {
         const events = await read<Event<never>>(dir);
         for (const event of events) {
             this.events.set(event.name, event);
@@ -153,5 +164,21 @@ export default class Bot extends Client {
             }
         }
         logger.info(`Loaded ${events.length} events`);
+    }
+
+    private async registerModules(dir: string) {
+        const modules = await read<Module<never>>(dir);
+
+        for (const module of modules) {
+            this.modules.set(module.name, module);
+
+            try {
+                this.on(module.event, module.run.bind(module, this));
+            } catch (error) {
+                logger.error(error);
+            }
+        }
+
+        logger.info(`Loaded ${modules.length} modules`);
     }
 }

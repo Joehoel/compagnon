@@ -1,4 +1,4 @@
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 import { status } from "../../lib/helpers";
 import { MessageEmbed } from "discord.js";
 

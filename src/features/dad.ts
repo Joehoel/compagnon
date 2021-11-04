@@ -1,9 +1,10 @@
+import { Message } from "discord.js";
 import { CHANNELS } from "../lib/contants";
-import { Client, Message } from "discord.js";
+import Bot from "../structures/Bot";
 
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (client: Bot, message: Message) => {
     if (message.channel.type == "DM" || message.channel.id === CHANNELS.ANTWOORDEN) return;
     const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 

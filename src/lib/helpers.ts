@@ -16,7 +16,7 @@ import { Brain } from "../entity/Brain";
 import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
-import Command from "../modules/Command";
+import Command from "../structures/Command";
 import { GIFResponse, MemeResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";

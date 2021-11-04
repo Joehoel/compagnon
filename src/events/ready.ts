@@ -3,7 +3,7 @@ import { TextChannel } from "discord.js";
 import { Config } from "../entity/Config";
 import { CHANNELS } from "../lib/contants";
 import logger from "../lib/logger";
-import Event from "../modules/Event";
+import Event from "../structures/Event";
 
 export default new Event({
     name: "ready",

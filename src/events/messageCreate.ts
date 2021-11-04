@@ -1,10 +1,9 @@
-import { Client, Message } from "discord.js";
 import * as features from "../features";
-import Event from "../modules/Event";
+import Event from "../structures/Event";
 
 export default new Event({
     name: "messageCreate",
-    async run(client: Client, message: Message) {
+    async run(client, message) {
         await features.filter(client, message);
         await features.command(client, message);
         await features.polls(client, message);

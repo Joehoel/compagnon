@@ -1,9 +1,9 @@
-// import SlashCommand from "../modules/SlashCommand";
+// import SlashCommand from "../structures/SlashCommand";
 // import { REST } from "@discordjs/rest";
 // import { Routes } from "discord-api-types/v9";
 // import { Client } from "discord.js";
-// import Command from "../modules/Command";
-// import Event from "../modules/Event";
+// import Command from "../structures/Command";
+// import Event from "../structures/Event";
 // import logger from "./logger";
 // import { read } from "./read";
 

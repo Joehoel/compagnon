@@ -1,4 +1,4 @@
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 import { embed } from "../../lib/helpers";
 
 export default new Command({

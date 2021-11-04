@@ -1,6 +1,6 @@
 import { embed } from "../../lib/helpers";
 import { EMOJIS } from "../../lib/contants";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 
 export default new Command({
     name: "reactionrole",

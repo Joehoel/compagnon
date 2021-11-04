@@ -1,6 +1,6 @@
 import { ROLES } from "../../lib/contants";
 import { sendAnswer, sendQuestion } from "../../lib/helpers";
-import SlashCommand, { PermissionType } from "../../modules/SlashCommand";
+import SlashCommand, { PermissionType } from "../../structures/SlashCommand";
 
 export default new SlashCommand({
     name: "question",

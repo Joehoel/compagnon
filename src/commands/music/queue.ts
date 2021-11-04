@@ -1,4 +1,4 @@
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 import { Embeds } from "discord-paginationembed";
 import { MessageEmbed, TextChannel } from "discord.js";
 import { chunk, embed } from "../../lib/helpers";

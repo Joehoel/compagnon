@@ -1,5 +1,6 @@
 import fs from "fs";
 import { join } from "path";
+import { ROOT } from "./contants";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type
@@ -14,9 +15,9 @@ export async function read<T>(dir: string): Promise<T[]> {
 
     const commands: T[] = [];
 
-    const files = fs.readdirSync(join(dir));
+    const files = fs.readdirSync(join(process.cwd(), ROOT, dir));
     for (const file of files) {
-        const stat = fs.lstatSync(join(dir, file));
+        const stat = fs.lstatSync(join(process.cwd(), ROOT, dir, file));
 
         if (stat.isDirectory()) {
             const nestedCommands = await read<T>(join(dir, file));
@@ -25,7 +26,7 @@ export async function read<T>(dir: string): Promise<T[]> {
         } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
             // console.log(`Importing command ${join(__dirname, dir, file)}`);
             try {
-                const command: T = await import(join(dir, file)).then((value) => value.default);
+                const command: T = await import(join(process.cwd(), ROOT, dir, file)).then((value) => value.default);
                 // table.addRow(file, "✅");
                 commands.push(command);
             } catch (error) {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 
 interface Station {
     id: number;

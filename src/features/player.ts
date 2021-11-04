@@ -1,7 +1,8 @@
+import { TextChannel } from "discord.js";
 import logger from "../lib/logger";
-import { Client, TextChannel } from "discord.js";
+import Bot from "../structures/Bot";
 
-export default async (client: Client) => {
+export default async (client: Bot) => {
     const player = client.player;
 
     player.on("trackStart", (queue, track) => {

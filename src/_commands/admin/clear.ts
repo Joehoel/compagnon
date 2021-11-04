@@ -1,6 +1,6 @@
 import { ROLES } from "../../lib/contants";
 import { wait } from "../../lib/helpers";
-import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType, PermissionType } from "../../structures/SlashCommand";
 import { GuildMember, Message, TextChannel } from "discord.js";
 
 export default new SlashCommand({

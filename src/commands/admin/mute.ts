@@ -1,5 +1,5 @@
 import { ROLES } from "../../lib/contants";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 import redis, { expire } from "../../lib/redis";
 import { removeRole, giveRole } from "../../lib/helpers";
 import logger from "../../lib/logger";
