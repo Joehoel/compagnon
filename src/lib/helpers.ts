@@ -212,7 +212,13 @@ export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: t
     }
 }
 
-export async function createGuildConfig(guild: Server) {
+/**
+ * Create a config in the database for the given guild.
+ * @export
+ * @param {Server} guild
+ * @return {Promise<Config>}
+ */
+export async function createGuildConfig(guild: Server): Promise<Config> {
     const newGuild = new Guild({
         id: guild.id,
         ownerId: guild.ownerId,
