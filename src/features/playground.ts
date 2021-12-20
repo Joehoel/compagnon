@@ -1,8 +1,7 @@
-import { Brain } from "../entity/Brain";
-import { Client } from "discord.js";
+import Bot from "../structures/Bot";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async (client: Client) => {
+export default async (client: Bot) => {
     // * playground
     // const answers = readFileSync(join(__dirname, "../data/antwoorden.txt"), "utf-8")
     //     .split("\n")

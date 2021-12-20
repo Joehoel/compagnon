@@ -1,5 +1,5 @@
 import { Client, Message, PartialMessage } from "discord.js";
-import Event from "../modules/Event";
+import Event from "../structures/Event";
 
 export default new Event({
     name: "messageDelete",

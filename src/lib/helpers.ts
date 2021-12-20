@@ -16,7 +16,7 @@ import { Brain } from "../entity/Brain";
 import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
-import Command from "../modules/Command";
+import Command from "../structures/Command";
 import { GIFResponse, MemeResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
@@ -212,7 +212,13 @@ export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: t
     }
 }
 
-export async function createGuildConfig(guild: Server) {
+/**
+ * Create a config in the database for the given guild.
+ * @export
+ * @param {Server} guild
+ * @return {Promise<Config>}
+ */
+export async function createGuildConfig(guild: Server): Promise<Config> {
     const newGuild = new Guild({
         id: guild.id,
         ownerId: guild.ownerId,

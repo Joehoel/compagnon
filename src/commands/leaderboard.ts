@@ -1,7 +1,7 @@
 import { Game } from "../entity/Game";
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
-import Command from "../modules/Command";
+import Command from "../structures/Command";
 import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
 import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";

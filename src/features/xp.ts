@@ -1,7 +1,8 @@
 import Levels from "discord-xp";
-import { Client, Message } from "discord.js";
+import { Message } from "discord.js";
 import { ROLES } from "../lib/contants";
 import { embed, giveRole } from "../lib/helpers";
+import Bot from "../structures/Bot";
 
 const { MONGO_URI } = process.env;
 const sent = new Map<string, boolean>();
@@ -9,7 +10,7 @@ const sent = new Map<string, boolean>();
 Levels.setURL(MONGO_URI);
 
 // Level system using discord-xp
-export default async (_: Client, message: Message) => {
+export default async (_: Bot, message: Message) => {
     if (!message.guild) return;
     if (message.author.bot) return;
 

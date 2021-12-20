@@ -1,6 +1,6 @@
 import { MessageActionRow, MessageComponentInteraction } from "discord.js";
 import { ROLES } from "../../lib/contants";
-import SlashCommand, { OptionType, PermissionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType, PermissionType } from "../../structures/SlashCommand";
 
 export default new SlashCommand({
     name: "ban",

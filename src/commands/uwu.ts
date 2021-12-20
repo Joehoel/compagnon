@@ -1,4 +1,4 @@
-import Command from "../modules/Command";
+import Command from "../structures/Command";
 import Uwuifier from "uwuifier";
 
 const uwu = new Uwuifier();

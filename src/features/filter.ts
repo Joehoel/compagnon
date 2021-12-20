@@ -1,11 +1,12 @@
 import Filter from "bad-words";
-import { Client, Message } from "discord.js";
+import { Message } from "discord.js";
 import { readFileSync } from "fs";
 import { Swear } from "../entity/Swear";
+import Bot from "../structures/Bot";
 
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (client: Bot, message: Message) => {
     if (message.channel.type == "DM") return;
     const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 

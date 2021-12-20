@@ -1,5 +1,5 @@
 import { sendQuestion } from "../../lib/helpers";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 
 export default new Command({
     name: "question",

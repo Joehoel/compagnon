@@ -1,5 +1,5 @@
 import { chunk, embed } from "../../lib/helpers";
-import SlashCommand, { OptionType } from "../../modules/SlashCommand";
+import SlashCommand, { OptionType } from "../../structures/SlashCommand";
 import { GuildMember, MessageEmbed, VoiceChannel } from "discord.js";
 import { sendPaginatedEmbeds } from "discord.js-embed-pagination";
 

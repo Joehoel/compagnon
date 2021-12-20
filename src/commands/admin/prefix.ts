@@ -1,6 +1,6 @@
 import { Config } from "../../entity/Config";
 import { createGuildConfig } from "../../lib/helpers";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 
 export default new Command({
     name: "prefix",

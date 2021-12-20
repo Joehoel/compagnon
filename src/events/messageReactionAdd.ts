@@ -1,7 +1,6 @@
 import { checkAnswers, reactionrole } from "../features";
 import { EVENTS } from "../lib/contants";
-import { Client, MessageReaction, PartialUser, User } from "discord.js";
-import Event from "../modules/Event";
+import Event from "../structures/Event";
 
 export default new Event({
     name: "messageReactionAdd",

@@ -1,5 +1,5 @@
 import { gif } from "../../lib/helpers";
-import SlashCommand from "../../modules/SlashCommand";
+import SlashCommand from "../../structures/SlashCommand";
 
 export default new SlashCommand({
     name: "dab",

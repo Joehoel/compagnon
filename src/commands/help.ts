@@ -1,4 +1,4 @@
-import Command from "../modules/Command";
+import Command from "../structures/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
 import { canExecute, embed, formatCommand, isAllowed } from "../lib/helpers";

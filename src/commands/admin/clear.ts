@@ -1,5 +1,5 @@
 import { TextChannel } from "discord.js";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 
 export default new Command({
     name: "clear",

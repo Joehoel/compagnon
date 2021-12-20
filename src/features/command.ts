@@ -1,10 +1,11 @@
+import { Message } from "discord.js";
 import { NotInVoice } from "../lib/errors";
-import logger from "../lib/logger";
-import { Client, Message } from "discord.js";
 import { embed, isAllowed } from "../lib/helpers";
+import logger from "../lib/logger";
+import Bot from "../structures/Bot";
 const { PREFIX } = process.env;
 
-export default async (client: Client, message: Message) => {
+export default async (client: Bot, message: Message) => {
     if (message.channel.type == "DM") return;
     const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
@@ -21,7 +22,7 @@ export default async (client: Client, message: Message) => {
 
     // Check if command exists
     if (!client.commands.has(commandName) && !client.aliases.has(commandName)) {
-        await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
+        await message.reply(`that command doesn't exist`);
         return;
     }
 
@@ -29,25 +30,25 @@ export default async (client: Client, message: Message) => {
     const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
 
     if (!isAllowed(command, message.guild!.id)) {
-        await message.channel.send(`Sorry, ${message.author}! that command doesn't exist`);
+        await message.reply(`that command doesn't exist`);
         return;
     }
 
     // Check if user is admin for command
     if (command.admin && !message.member!.permissions.has("ADMINISTRATOR")) {
-        await message.channel.send(`Sorry, ${message.author}! You must be an admin to execute this command.`);
+        await message.reply(`You must be an admin to execute this command.`);
         return;
     }
 
     // Check if user has the correct roles te execute command
     if (command.roles.some((role) => !message.member!.roles.cache.find((_role) => _role.id === role))) {
-        await message.channel.send(`Sorry, ${message.author}! You are not allowed to execute that command.`);
+        await message.reply(`You are not allowed to execute that command.`);
         return;
     }
 
     // Check if user has the correct permissions te execute command
     if (command.permissions.some((permission) => !message.member!.permissions.has(permission))) {
-        await message.channel.send(`Sorry, ${message.author}! You are not allowed to execute that command.`);
+        await message.reply(`You are not allowed to execute that command.`);
         return;
     }
 

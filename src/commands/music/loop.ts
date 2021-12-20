@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import Command from "../../modules/Command";
+import Command from "../../structures/Command";
 import { status } from "../../lib/helpers";
 
 export default new Command({

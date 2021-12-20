@@ -1,10 +1,11 @@
-import logger from "../lib/logger";
-import { Client, MessageReaction, PartialMessageReaction, PartialUser, User } from "discord.js";
-import { EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, EMOJIS, ROLES } from "../lib/contants";
+import { MessageReaction, PartialMessageReaction, PartialUser, User } from "discord.js";
+import { EMOJIS, EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, ROLES } from "../lib/contants";
 import { giveRole, removeRole } from "../lib/helpers";
+import logger from "../lib/logger";
+import Bot from "../structures/Bot";
 
 export default async (
-    client: Client,
+    client: Bot,
     reaction: MessageReaction | PartialMessageReaction,
     user: User | PartialUser,
     event: EVENTS
