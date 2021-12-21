@@ -1,6 +1,7 @@
 # Misc
 compagnon/
 ecosystem.json
+.vscode/
 
 # Logs
 logs

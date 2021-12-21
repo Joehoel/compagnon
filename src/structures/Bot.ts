@@ -1,8 +1,7 @@
-import { ROOT } from "../lib/contants";
 import { REST } from "@discordjs/rest";
 import SpotifyPlugin from "@distube/spotify";
 import { Routes } from "discord-api-types/v9";
-import { BitFieldResolvable, Client, ClientOptions, Collection, IntentsString, PartialTypes } from "discord.js";
+import { Client, ClientOptions, Collection } from "discord.js";
 import DisTube from "distube";
 import { Config } from "../entity/Config";
 import { music, playground, quiz } from "../features";
@@ -11,8 +10,8 @@ import { read } from "../lib/read";
 import { Snipe } from "../typings";
 import Command from "./Command";
 import Event from "./Event";
-import SlashCommand from "./SlashCommand";
 import Module from "./Module";
+import SlashCommand from "./SlashCommand";
 
 type SlashCommandResponse = {
     id: string;
