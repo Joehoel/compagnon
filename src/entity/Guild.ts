@@ -1,4 +1,12 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    PrimaryColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @Entity("guilds")
 export class Guild extends BaseEntity {

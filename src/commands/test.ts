@@ -1,1 +1,1 @@
-templates/command.hbs
+templates / command.hbs;

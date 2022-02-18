@@ -14,7 +14,9 @@ export default new Command({
         const member = await message.mentions.members!.first()!.ban({ days, reason });
 
         return message.channel.send(
-            `:wave: ${member.displayName} has successfully been banned for ${+args[1]} and reason: ${reason}.`
+            `:wave: ${
+                member.displayName
+            } has successfully been banned for ${+args[1]} and reason: ${reason}.`
         );
     },
 });

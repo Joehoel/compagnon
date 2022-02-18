@@ -33,7 +33,9 @@ export default new SlashCommand({
 
         const member = interaction.member as GuildMember;
         if (!member.permissions.has("MANAGE_MESSAGES")) {
-            return interaction.reply({ content: "Sorry, you are not allowed to execute that command!" });
+            return interaction.reply({
+                content: "Sorry, you are not allowed to execute that command!",
+            });
         }
         const user = interaction.options.getUser("user")!;
         const value = interaction.options.getNumber("value")!;

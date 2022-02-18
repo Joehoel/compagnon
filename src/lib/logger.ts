@@ -4,7 +4,12 @@ import { consoleFormat } from "winston-console-format";
 
 const logger = createLogger({
     level: "silly",
-    format: format.combine(format.timestamp(), format.errors({ stack: true }), format.splat(), format.json()),
+    format: format.combine(
+        format.timestamp(),
+        format.errors({ stack: true }),
+        format.splat(),
+        format.json()
+    ),
     defaultMeta: { service: "Compagnon" },
     transports: [
         new transports.Console({

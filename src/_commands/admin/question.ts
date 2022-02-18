@@ -15,6 +15,9 @@ export default new SlashCommand({
     async execute(interaction) {
         sendAnswer(interaction.client);
         sendQuestion(interaction.client);
-        return interaction.reply({ ephemeral: true, content: "Successfully send answer and question" });
+        return interaction.reply({
+            ephemeral: true,
+            content: "Successfully send answer and question",
+        });
     },
 });

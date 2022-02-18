@@ -141,9 +141,14 @@ export default new Command({
                 if (gameName == "ranks") {
                     const rawLeaderboard = await Levels.fetchLeaderboard(GUILD_ID, 10); // We grab top 10 users with most xp in the current server.
 
-                    if (rawLeaderboard.length < 1) return message.reply("Nobody's in leaderboard yet.");
+                    if (rawLeaderboard.length < 1)
+                        return message.reply("Nobody's in leaderboard yet.");
 
-                    const leaderboard = await Levels.computeLeaderboard(client, rawLeaderboard, true); // We process the leaderboard.
+                    const leaderboard = await Levels.computeLeaderboard(
+                        client,
+                        rawLeaderboard,
+                        true
+                    ); // We process the leaderboard.
 
                     message.channel.send({
                         embeds: [
@@ -152,9 +157,9 @@ export default new Command({
                                 fields: leaderboard?.map((user: LeaderboardUser) => {
                                     return {
                                         name: user.position + ".",
-                                        value: `User: <@${user.userID}>\nLevel: \`${user.level}\`\nXP: \`${
-                                            user.xp
-                                        }/${Levels.xpFor(user.level + 1)}\``,
+                                        value: `User: <@${user.userID}>\nLevel: \`${
+                                            user.level
+                                        }\`\nXP: \`${user.xp}/${Levels.xpFor(user.level + 1)}\``,
                                     };
                                 }),
                             }),

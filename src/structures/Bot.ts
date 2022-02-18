@@ -123,9 +123,12 @@ export default class Bot extends Client {
             const command = commands.find(({ name }) => name == slashCommand.name);
 
             if (slashCommand.permissions?.length && command?.id) {
-                await this.app.put(Routes.applicationCommandPermissions(this.clientId, this.guildId, command.id), {
-                    body: { permissions: slashCommand.permissions },
-                });
+                await this.app.put(
+                    Routes.applicationCommandPermissions(this.clientId, this.guildId, command.id),
+                    {
+                        body: { permissions: slashCommand.permissions },
+                    }
+                );
             }
         }
 

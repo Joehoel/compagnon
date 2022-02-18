@@ -15,7 +15,9 @@ export default new Command({
         const [commandName] = args.map((arg) => arg.toLowerCase());
 
         if (commandName) {
-            const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
+            const command =
+                client.commands.get(commandName)! ||
+                client.commands.get(client.aliases.get(commandName)!);
 
             if (command && isAllowed(command, message.guild!.id)) {
                 return message.channel.send({
@@ -53,7 +55,9 @@ export default new Command({
 
         const commands = client.commands
             .filter((command) => {
-                return canExecute(message.member!, command) && isAllowed(command, message.guild!.id);
+                return (
+                    canExecute(message.member!, command) && isAllowed(command, message.guild!.id)
+                );
             })
             .map(formatCommand);
 

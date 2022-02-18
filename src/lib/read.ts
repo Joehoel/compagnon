@@ -26,7 +26,9 @@ export async function read<T>(dir: string): Promise<T[]> {
         } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
             // console.log(`Importing command ${join(__dirname, dir, file)}`);
             try {
-                const command: T = await import(join(process.cwd(), ROOT, dir, file)).then((value) => value.default);
+                const command: T = await import(join(process.cwd(), ROOT, dir, file)).then(
+                    (value) => value.default
+                );
                 // table.addRow(file, "✅");
                 commands.push(command);
             } catch (error) {

@@ -30,7 +30,9 @@ export default new Command({
                     embeds: [
                         embed({
                             title: "Level",
-                            description: `Successfully updated ${target}'s level to **${Math.floor(parseInt(lvl))}**`,
+                            description: `Successfully updated ${target}'s level to **${Math.floor(
+                                parseInt(lvl)
+                            )}**`,
                             timestamp: Date.now(),
                         }),
                     ],
