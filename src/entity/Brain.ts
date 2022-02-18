@@ -1,4 +1,12 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 
 @Entity("brains")
 export class Brain extends BaseEntity {

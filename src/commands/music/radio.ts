@@ -1,5 +1,7 @@
 import axios from "axios";
 import Command from "../../structures/Command";
+import { stations } from "../../data/stations.json";
+import { MessageActionRow, MessageSelectMenu } from "discord.js";
 
 interface Station {
     id: number;
@@ -10,22 +12,24 @@ interface Station {
 export default new Command({
     name: "radio",
     description: "Play a radio station to your liking",
-    usage: "<station>",
     exclusive: true,
     async execute(client, message, args) {
-        let id = 66;
-        if (args.length) {
-            const [station] = args.map((x) => x.toLowerCase());
-            switch (station) {
-                case "qmusic":
-                    id = 73;
-                    break;
+        const row = new MessageActionRow({
+            type: "SELECT_MENU",
+            components: [
+                new MessageSelectMenu({
+                    customId: "radio-select",
+                    placeholder: "Radio stations",
+                    options: stations
+                        .sort((a, b) => (a.name < b.name ? -1 : 1))
+                        .slice(0, 24)
+                        .map((station) => ({ label: station.name, value: station.url })),
+                }),
+            ],
+        });
 
-                default:
-                    break;
-            }
-        }
-        const { data } = await axios.get<Station>(`https://stations-api.herokuapp.com/stations/${id}`);
-        await client.music.play(message, data.url);
+        await message.reply({ content: "Kies een radio station", components: [row] });
+
+        // await client.music.play(message, data.url);
     },
 });

@@ -8,7 +8,12 @@ const { PREFIX } = process.env;
 export default async (client: Bot, message: Message) => {
     // const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
-    if (message.content.startsWith(PREFIX) || message.channel.id != CHANNELS.ANTWOORDEN || message.author.bot) return;
+    if (
+        message.content.startsWith(PREFIX) ||
+        message.channel.id != CHANNELS.ANTWOORDEN ||
+        message.author.bot
+    )
+        return;
 
     const member = await client.users.fetch(USERS.JESSE);
     const msg = await member.send({

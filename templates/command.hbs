@@ -1,0 +1,9 @@
+import Command from "../structures/Command";
+
+export default new Command({
+    name: "{{name}}",
+    description: "{{description}}",
+    execute(client, message) {
+        message.channel.send("{{name}}: {{description}}");
+    },
+});

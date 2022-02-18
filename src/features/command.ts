@@ -27,7 +27,8 @@ export default async (client: Bot, message: Message) => {
     }
 
     // Get command from collection
-    const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
+    const command =
+        client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
 
     if (!isAllowed(command, message.guild!.id)) {
         await message.reply(`that command doesn't exist`);
@@ -41,7 +42,11 @@ export default async (client: Bot, message: Message) => {
     }
 
     // Check if user has the correct roles te execute command
-    if (command.roles.some((role) => !message.member!.roles.cache.find((_role) => _role.id === role))) {
+    if (
+        command.roles.some(
+            (role) => !message.member!.roles.cache.find((_role) => _role.id === role)
+        )
+    ) {
         await message.reply(`You are not allowed to execute that command.`);
         return;
     }
@@ -72,13 +77,18 @@ export default async (client: Bot, message: Message) => {
         if (error instanceof NotInVoice && error.message === "NotInVoice") {
             return message.channel.send({
                 embeds: [
-                    embed({ title: "Error", description: "You must be in a voice channel to execute that command!" }),
+                    embed({
+                        title: "Error",
+                        description: "You must be in a voice channel to execute that command!",
+                    }),
                 ],
             });
         }
         logger.error(error);
         await message.reply("There was an error trying to execute that command!");
     } finally {
-        logger.info(`${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`);
+        logger.info(
+            `${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`
+        );
     }
 };

@@ -14,7 +14,9 @@ export default new Command({
 
         if (!user)
             return message.channel.send({
-                embeds: [embed({ description: "Seems like this user has not earned any xp so far" })],
+                embeds: [
+                    embed({ description: "Seems like this user has not earned any xp so far" }),
+                ],
             }); // If there isnt such user in the database, we send a message in general.
 
         return message.channel.send({

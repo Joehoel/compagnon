@@ -27,7 +27,9 @@ export default new Module({
         }
 
         // Get command from collection
-        const command = client.commands.get(commandName)! || client.commands.get(client.aliases.get(commandName)!);
+        const command =
+            client.commands.get(commandName)! ||
+            client.commands.get(client.aliases.get(commandName)!);
 
         if (!isAllowed(command, message.guild!.id)) {
             return await message.reply(`That command doesn't exist`);
@@ -39,12 +41,18 @@ export default new Module({
         }
 
         // Check if user has the correct roles te execute command
-        if (command.roles.some((role) => !message.member!.roles.cache.find((_role) => _role.id === role))) {
+        if (
+            command.roles.some(
+                (role) => !message.member!.roles.cache.find((_role) => _role.id === role)
+            )
+        ) {
             return await message.reply(`You are not allowed to execute that command.`);
         }
 
         // Check if user has the correct permissions te execute command
-        if (command.permissions.some((permission) => !message.member!.permissions.has(permission))) {
+        if (
+            command.permissions.some((permission) => !message.member!.permissions.has(permission))
+        ) {
             return await message.reply(`You are not allowed to execute that command.`);
         }
 
@@ -76,7 +84,9 @@ export default new Module({
             logger.error(error);
             await message.reply("There was an error trying to execute that command!");
         } finally {
-            logger.info(`${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`);
+            logger.info(
+                `${message.author.tag} (${message.author.id}) ran a command: '${command.name}'`
+            );
         }
     },
 });

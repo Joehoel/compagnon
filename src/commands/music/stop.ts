@@ -5,7 +5,14 @@ import { status } from "../../lib/helpers";
 export default new Command({
     name: "stop",
     description: "Stops the current playing music",
-    aliases: ["leave", "fuckoff", "krijgdetering", "optyfen", "opgetyfet", "getthefuckoutofmyroomimplayingminecraft"],
+    aliases: [
+        "leave",
+        "fuckoff",
+        "krijgdetering",
+        "optyfen",
+        "opgetyfet",
+        "getthefuckoutofmyroomimplayingminecraft",
+    ],
     exclusive: true,
     execute(client, message) {
         const embed = new MessageEmbed({

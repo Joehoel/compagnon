@@ -1,0 +1,100 @@
+{
+    "stations": [
+        {
+            "id": 4,
+            "name": "NPO Radio 1",
+            "url": "http://icecast.omroep.nl/radio1-bb-mp3"
+        },
+        {
+            "id": 5,
+            "name": "NPO Radio 2",
+            "url": "http://icecast.omroep.nl/radio2-bb-mp3"
+        },
+        {
+            "id": 6,
+            "name": "NPO 3 FM",
+            "url": "http://icecast.omroep.nl/3fm-bb-mp3"
+        },
+        {
+            "id": 7,
+            "name": "NPO Radio 4",
+            "url": "http://icecast.omroep.nl/radio4-bb-mp3"
+        },
+        {
+            "id": 8,
+            "name": "NPO Radio 5",
+            "url": "http://icecast.omroep.nl/radio5-bb-mp3"
+        },
+        {
+            "id": 9,
+            "name": "NPO FunX NL",
+            "url": "http://icecast.omroep.nl/funx-bb-mp3"
+        },
+        {
+            "id": 25,
+            "name": "100% NL",
+            "url": "http://stream.100p.nl/100pctnl.mp3.m3u"
+        },
+        {
+            "id": 30,
+            "name": "GrootnieuwsRadio",
+            "url": "http://media02.streampartner.nl:8000/live.m3u"
+        },
+        {
+            "id": 35,
+            "name": "Q-Music",
+            "url": "https://stream.qmusic.nl/qmusic/mp3"
+        },
+        {
+            "id": 36,
+            "name": "Radio 10",
+            "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO10.mp3"
+        },
+        {
+            "id": 37,
+            "name": "Radio 538",
+            "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538.mp3"
+        },
+
+        {
+            "id": 39,
+            "name": "Radio Veronica",
+            "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/VERONICA.mp3"
+        },
+        {
+            "id": 40,
+            "name": "Sky Radio",
+            "url": "http://www.skyradio.nl/player/skyradio.pls"
+        },
+        {
+            "id": 41,
+            "name": "Slam!",
+            "url": "http://stream.slam.nl/slam.m3u"
+        },
+        {
+            "id": 76,
+            "name": "Q-Music Non-Stop",
+            "url": "https://stream.qmusic.nl/nonstop/mp3"
+        },
+        {
+            "id": 77,
+            "name": "Q-Music Top 40",
+            "url": "https://stream.qmusic.nl/top40/mp3"
+        },
+        {
+            "id": 78,
+            "name": "Q Music Top1000/XMAS/Summer",
+            "url": "https://stream.qmusic.nl/thema/mp3"
+        },
+        {
+            "id": 79,
+            "name": "Q Music Nederlandstalig",
+            "url": "https://23903.live.streamtheworld.com/QMUSICNL_NEDERLANDSTALIG.mp3"
+        },
+        {
+            "id": 85,
+            "name": "Sky Radio Hits",
+            "url": "http://playerservices.streamtheworld.com/api/livestream-redirect/SRGSTR01.mp3"
+        }
+    ]
+}

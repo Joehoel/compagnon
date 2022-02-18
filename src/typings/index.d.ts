@@ -13,6 +13,7 @@ export interface MemeResponse {
     author: string;
     sub: string;
     post: string;
+    isVideo: boolean;
 }
 
 export type GIFResponse = string;

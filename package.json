@@ -56,6 +56,7 @@
         "jest-fetch-mock": "^3.0.3",
         "lint-staged": "11.1.2",
         "nodemon": "^2.0.12",
+        "plop": "^3.0.5",
         "pm2": "^5.1.1",
         "prettier": "2.3.2",
         "ts-jest": "^27.0.5",
@@ -72,7 +73,8 @@
         "typeorm": "ts-node ./node_modules/typeorm/cli.js",
         "lint": "eslint --fix \"./src/**/*.ts\"",
         "prepare": "husky install",
-        "gen-env-types": "gen-env-types .env -o src/typings/env.d.ts -e ."
+        "gen-env-types": "gen-env-types .env -o src/typings/env.d.ts -e .",
+        "gen": "plop"
     },
     "husky": {
         "hooks": {

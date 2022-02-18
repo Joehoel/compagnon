@@ -12,7 +12,9 @@ export function init(apiKey?: string, force?: boolean) {
 function search(query: string) {
     return new Promise<LyricsData>((resolve, reject) => {
         if (typeof query !== "string")
-            return reject(new TypeError(`Expected search query to be a string, received "${typeof query}"!`));
+            return reject(
+                new TypeError(`Expected search query to be a string, received "${typeof query}"!`)
+            );
 
         client.songs
             .search(query)

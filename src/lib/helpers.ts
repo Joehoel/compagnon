@@ -17,7 +17,7 @@ import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
 import Command from "../structures/Command";
-import { GIFResponse, MemeResponse } from "../typings";
+import { GIFResponse, MemeResponse, RedditResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
 import { Queue } from "distube";
@@ -45,13 +45,21 @@ export async function meme(subName = "dankmemes"): Promise<MemeResponse> {
         limit: "1",
     });
     const res = await fetch(`${api}${params}`);
-    const data = await res.json();
-    const { title, url, created_utc, author, subreddit_name_prefixed: sub, permalink } = data[0].data.children[0].data;
+    const data: RedditResponse[] = await res.json();
+    const {
+        title,
+        url,
+        created_utc,
+        author,
+        subreddit_name_prefixed: sub,
+        permalink,
+        is_video,
+    } = data[0].data.children[0].data;
 
     const date = new Date(created_utc * 1000);
     const post = `https://reddit.com${permalink}`;
 
-    return { title, url, date, author, sub, post };
+    return { title, url, date, author, sub, post, isVideo: is_video };
 }
 
 /**
@@ -107,7 +115,9 @@ export function capitalize(string: string): string {
  * @return {*}  {T[][]}
  */
 export function chunk<T>(arr: T[], size: number): T[][] {
-    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) => arr.slice(i * size, i * size + size));
+    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+        arr.slice(i * size, i * size + size)
+    );
 }
 
 export const status = (queue: Queue) =>
@@ -195,7 +205,11 @@ export function random<T>(array: T[]): T;
  */
 export function random<T>(array: T[], count: number): T[];
 
-export function random<T>(arrOrMin: number | T[], countOrMax?: number, float?: true): T[] | T | number {
+export function random<T>(
+    arrOrMin: number | T[],
+    countOrMax?: number,
+    float?: true
+): T[] | T | number {
     if (Array.isArray(arrOrMin)) {
         if (countOrMax == undefined) return arrOrMin[Math.floor(Math.random() * arrOrMin.length)];
 
@@ -281,7 +295,15 @@ const getQuestionDate = () => {
 };
 const getAnswerDate = () => {
     const now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 11, 0, 0, 0).toUTCString();
+    return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() - 1,
+        11,
+        0,
+        0,
+        0
+    ).toUTCString();
 };
 
 export const sendQuestion = async (client: Client) => {

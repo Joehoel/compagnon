@@ -8,6 +8,8 @@ export default new Command({
     description: "Make sentence UwU",
     async execute(_, message, args) {
         await message.delete();
-        return message.channel.send({ content: `<@${message.author.id}> zegt: ${uwu.uwuifySentence(args.join(" "))}` });
+        return message.channel.send({
+            content: `<@${message.author.id}> zegt: ${uwu.uwuifySentence(args.join(" "))}`,
+        });
     },
 });

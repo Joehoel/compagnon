@@ -1,5 +1,12 @@
 import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "../lib/contants";
-import { Client, MessageReaction, PartialMessageReaction, PartialUser, TextChannel, User } from "discord.js";
+import {
+    Client,
+    MessageReaction,
+    PartialMessageReaction,
+    PartialUser,
+    TextChannel,
+    User,
+} from "discord.js";
 import { Brain } from "../entity/Brain";
 import { getQuestion, scoreboard } from "../lib/helpers";
 
@@ -14,7 +21,9 @@ export default async (
     if (user.bot || reaction.message.channel.type != "DM") return;
 
     const author = reaction.message.embeds[0].author;
-    const member = client.guilds.cache.get(GUILD_ID)!.members.cache.find((m) => m.user.username == author?.name);
+    const member = client.guilds.cache
+        .get(GUILD_ID)!
+        .members.cache.find((m) => m.user.username == author?.name);
 
     const score = await Brain.findOne({ where: { user: member?.id } });
     const question = await getQuestion();
@@ -35,17 +44,23 @@ export default async (
             }
 
             await answersChannel.send({
-                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
-                    dateStyle: "medium",
-                }).format(question?.date)} is goedgekeurd!`,
+                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat(
+                    "nl-NL",
+                    {
+                        dateStyle: "medium",
+                    }
+                ).format(question?.date)} is goedgekeurd!`,
             });
         } else {
             const newScore = new Brain({ score: score!.score - 1 });
             await Brain.update({ user: member?.id }, newScore);
             await answersChannel.send({
-                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat("nl-NL", {
-                    dateStyle: "medium",
-                }).format(question?.date)} is bij nader inzien afgekeurd!`,
+                content: `<@${member?.user.id}> Je antwoord op de vraag van ${Intl.DateTimeFormat(
+                    "nl-NL",
+                    {
+                        dateStyle: "medium",
+                    }
+                ).format(question?.date)} is bij nader inzien afgekeurd!`,
             });
         }
 

@@ -25,7 +25,9 @@ export default async (_: Bot, message: Message) => {
                 embed({
                     title: "Congratulations",
                     description: `You have reached \`42069\` xp\nYou now have one of the biggest dicks in this server! 🍆 \nAs a reward you have been promoted to <@&${ROLES.CHAD}>`,
-                    thumbnail: { url: "https://media.tenor.com/images/111a73396501d1621a54bd26e4db5ed8/tenor.gif" },
+                    thumbnail: {
+                        url: "https://media.tenor.com/images/111a73396501d1621a54bd26e4db5ed8/tenor.gif",
+                    },
                 }),
             ],
         });
@@ -36,10 +38,16 @@ export default async (_: Bot, message: Message) => {
     }
 
     const randomAmountOfXp = Math.floor(Math.random() * 29) + 1;
-    const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomAmountOfXp);
+    const hasLeveledUp = await Levels.appendXp(
+        message.author.id,
+        message.guild.id,
+        randomAmountOfXp
+    );
     if (hasLeveledUp) {
         message.channel.send(
-            `${message.author}, congratulations! You have leveled up to **${user.level + 1}**. :tada:`
+            `${message.author}, congratulations! You have leveled up to **${
+                user.level + 1
+            }**. :tada:`
         );
     }
 };

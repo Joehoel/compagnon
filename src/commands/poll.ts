@@ -53,7 +53,9 @@ export default new Command({
     async execute(client, message) {
         let args = message.content.match(/"(.+?)"/g)!;
         if (!canSendPoll(message.author.id) && !message.member!.permissions.has("ADMINISTRATOR")) {
-            return message.channel.send(`${message.author} please wait before sending another poll.`);
+            return message.channel.send(
+                `${message.author} please wait before sending another poll.`
+            );
         } else if (args.length === 1) {
             // yes no unsure question
             const question = args[0].replace(/"/g, "");
@@ -103,7 +105,9 @@ export default new Command({
                                 .setColor("#ffc600")
                                 .setTitle(`${question} ${id}`)
                                 .setDescription(
-                                    `${questionOptions.map((option, i) => `${options[i]} - ${option}`).join("\n")}`
+                                    `${questionOptions
+                                        .map((option, i) => `${options[i]} - ${option}`)
+                                        .join("\n")}`
                                 )
                                 .setFooter(
                                     `Poll started by: ${message.author.username}`,

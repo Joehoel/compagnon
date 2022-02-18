@@ -53,7 +53,10 @@ export default new SlashCommand({
         const filter = ({ customId, user }: MessageComponentInteraction) =>
             customId.includes("ban") && user.id === interaction.member?.user.id;
 
-        const collector = interaction.channel?.createMessageComponentCollector({ filter, time: 15000 });
+        const collector = interaction.channel?.createMessageComponentCollector({
+            filter,
+            time: 15000,
+        });
 
         collector?.on("collect", async ({ customId }) => {
             if (customId === "ban-yes") {

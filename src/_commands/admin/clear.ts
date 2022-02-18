@@ -24,17 +24,25 @@ export default new SlashCommand({
     async execute(interaction) {
         const member = interaction.member as GuildMember;
         if (!member.permissions.has("MANAGE_MESSAGES")) {
-            return interaction.reply({ content: "Sorry, you are not allowed to execute that command!" });
+            return interaction.reply({
+                content: "Sorry, you are not allowed to execute that command!",
+            });
         }
 
         const amount = interaction.options.getNumber("amount")!;
 
         if (amount > 101) {
-            return interaction.reply({ content: "You can`t delete more than 100 messages at once!", ephemeral: true });
+            return interaction.reply({
+                content: "You can`t delete more than 100 messages at once!",
+                ephemeral: true,
+            });
         }
 
         if (amount < 1) {
-            return interaction.reply({ content: "You have to delete at least 1 message!", ephemeral: true });
+            return interaction.reply({
+                content: "You have to delete at least 1 message!",
+                ephemeral: true,
+            });
         }
 
         await interaction.channel!.messages.fetch({ limit: amount }).then((messages) => {
