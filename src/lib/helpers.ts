@@ -17,7 +17,7 @@ import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
 import Command from "../structures/Command";
-import { GIFResponse, MemeResponse } from "../typings";
+import { GIFResponse, MemeResponse, RedditResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./contants";
 import redis from "./redis";
 import { Queue } from "distube";
@@ -45,13 +45,21 @@ export async function meme(subName = "dankmemes"): Promise<MemeResponse> {
         limit: "1",
     });
     const res = await fetch(`${api}${params}`);
-    const data = await res.json();
-    const { title, url, created_utc, author, subreddit_name_prefixed: sub, permalink } = data[0].data.children[0].data;
+    const data: RedditResponse[] = await res.json();
+    const {
+        title,
+        url,
+        created_utc,
+        author,
+        subreddit_name_prefixed: sub,
+        permalink,
+        is_video,
+    } = data[0].data.children[0].data;
 
     const date = new Date(created_utc * 1000);
     const post = `https://reddit.com${permalink}`;
 
-    return { title, url, date, author, sub, post };
+    return { title, url, date, author, sub, post, isVideo: is_video };
 }
 
 /**

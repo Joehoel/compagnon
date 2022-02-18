@@ -1,0 +1,9 @@
+import SlashCommand from "../structures/SlashCommand";
+
+export default new SlashCommand({
+    name: "{{name}}",
+    description: "{{description}}",
+    execute(interaction) {
+        return interaction.reply("{{name}}: {{description}}");
+    },
+});
