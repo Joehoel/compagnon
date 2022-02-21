@@ -8,8 +8,9 @@ export default new Command({
     aliases: ["p"],
     exclusive: true,
     execute(client, message, args) {
-        if (!message.member?.voice.channel) throw new Error("NotInVoice");
+        const voiceChannel = message.member?.voice.channel;
+        if (!voiceChannel) throw new Error("NotInVoice");
 
-        client.music.play(message, args.join(" "));
+        client.music.play(voiceChannel, args.join(" "));
     },
 });

@@ -1,7 +1,7 @@
-import redis, { RedisClient } from "redis";
+import redis from "redis";
 const { REDIS_PATH } = process.env;
 
-export default async (): Promise<RedisClient> => {
+export default async function (): Promise<ReturnType<typeof redis.createClient>> {
     return await new Promise((resolve, reject) => {
         const client = redis.createClient({
             url: REDIS_PATH,
@@ -16,7 +16,7 @@ export default async (): Promise<RedisClient> => {
             resolve(client);
         });
     });
-};
+}
 
 export const expire = (callback: any) => {
     const expired = () => {

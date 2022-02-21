@@ -1,7 +1,6 @@
+import { Message } from "discord.js";
 import { embed } from "../lib/helpers";
 import SlashCommand, { OptionType } from "../structures/SlashCommand";
-import { SlashCommandOptionBase } from "@discordjs/builders/dist/interactions/slashCommands/mixins/CommandOptionBase";
-import { Interaction, Message } from "discord.js";
 
 const options = [
     "🇦",

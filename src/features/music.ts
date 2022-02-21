@@ -69,7 +69,6 @@ export default (music: DisTube) => {
 
             queue.textChannel?.send({ embeds: [embed] });
         })
-
         .on("error", (channel, e) => {
             console.error(e);
 

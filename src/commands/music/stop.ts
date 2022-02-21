@@ -1,6 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import Command from "../../structures/Command";
 import { status } from "../../lib/helpers";
+import { getVoiceConnection } from "@discordjs/voice";
 
 export default new Command({
     name: "stop",
@@ -30,6 +31,10 @@ export default new Command({
             ],
         });
         message.channel.send({ embeds: [embed] });
-        return client.music.stop(message);
+
+        client.music.stop(message);
+
+        const connection = getVoiceConnection(message.guild!.id);
+        return connection?.disconnect();
     },
 });

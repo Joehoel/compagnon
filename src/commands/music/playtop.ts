@@ -7,12 +7,11 @@ export default new Command({
     aliases: ["playskip", "pt"],
     exclusive: true,
     async execute(client, message, args) {
-        if (!message.member?.voice.channel) throw new Error("NotInVoice");
-        await client.music.play(message, args.join(" "), {
-            unshift: true,
+        const voiceChannel = message.member?.voice.channel;
+        if (!voiceChannel) throw new Error("NotInVoice");
+
+        await client.music.play(voiceChannel, args.join(" "), {
+            position: 0,
         });
-        // const from = client.music.getQueue(message)!.songs.length;
-        // move.execute(client, message, [from.toString(), "1"]);
-        // console.log(`Moving ${from} to 1`);
     },
 });

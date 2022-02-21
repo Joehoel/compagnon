@@ -1,1 +1,0 @@
-templates / command.hbs;

@@ -162,24 +162,24 @@ export function removeRole(member: GuildMember, roleId: string) {
     }
 }
 
-export async function onJoin(member: GuildMember) {
-    const { id, guild } = member;
+// export async function onJoin(member: GuildMember) {
+//     const { id, guild } = member;
 
-    const redisClient = await redis();
-    try {
-        redisClient.get(`${REDIS_KEY_PREFIX}${id}-${guild.id}`, (err, result) => {
-            if (err) {
-                console.error("Redis GET error:", err);
-            } else if (result) {
-                giveRole(member, ROLES.MUTED);
-            } else {
-                console.log("The user is not muted");
-            }
-        });
-    } finally {
-        redisClient.quit();
-    }
-}
+//     const redisClient = await redis();
+//     try {
+//         redisClient.get(`${REDIS_KEY_PREFIX}${id}-${guild.id}`, (err, result) => {
+//             if (err) {
+//                 console.error("Redis GET error:", err);
+//             } else if (result) {
+//                 giveRole(member, ROLES.MUTED);
+//             } else {
+//                 console.log("The user is not muted");
+//             }
+//         });
+//     } finally {
+//         redisClient.quit();
+//     }
+// }
 
 /**
  * Get a random number between min and max (inclusive)

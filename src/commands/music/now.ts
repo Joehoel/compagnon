@@ -9,30 +9,33 @@ export default new Command({
     exclusive: true,
     execute(client, message) {
         if (!message.member?.voice.channel) throw new Error("NotInVoice");
-        const queue = client.music.getQueue(message)!;
-        const song = queue.songs[0];
-        if (song && queue)
-            return message.channel.send({
-                embeds: [
-                    new MessageEmbed({
-                        title: "Music",
-                        color: "#ffc600",
-                        fields: [
-                            {
-                                name: "Playing",
-                                value: `\`${song.name}\` - \`${song.formattedDuration}\``,
-                            },
-                            {
-                                name: "Requested by",
-                                value: song.user!.username,
-                            },
-                            {
-                                name: "Status",
-                                value: status(queue),
-                            },
-                        ],
-                    }),
-                ],
-            });
+        const queue = client.music.getQueue(message);
+        const song = queue?.songs[0];
+
+        if (!song || !queue) {
+            return message.reply("Nothing playing...");
+        }
+        return message.channel.send({
+            embeds: [
+                new MessageEmbed({
+                    title: "Music",
+                    color: "#ffc600",
+                    fields: [
+                        {
+                            name: "Playing",
+                            value: `\`${song.name}\` - \`${song.formattedDuration}\``,
+                        },
+                        {
+                            name: "Requested by",
+                            value: song.user!.username,
+                        },
+                        {
+                            name: "Status",
+                            value: status(queue),
+                        },
+                    ],
+                }),
+            ],
+        });
     },
 });

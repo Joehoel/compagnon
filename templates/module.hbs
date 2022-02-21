@@ -3,7 +3,7 @@ import Module from "../structures/Module";
 export default new Module({
     name: "{{name}}",
     event: "{{event}}",
-    run(client, interaction) {
+    async run(client, interaction) {
         console.log("{{name}} on {{event}}");
 
         return;

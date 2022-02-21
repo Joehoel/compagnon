@@ -31,8 +31,12 @@ export default new Module({
             client.commands.get(commandName)! ||
             client.commands.get(client.aliases.get(commandName)!);
 
+        if (!command.enabled) {
+            return await message.reply("That command is disabled.");
+        }
+
         if (!isAllowed(command, message.guild!.id)) {
-            return await message.reply(`That command doesn't exist`);
+            return await message.reply(`That command doesn't exist.`);
         }
 
         // Check if user is admin for command

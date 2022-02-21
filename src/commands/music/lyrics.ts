@@ -25,6 +25,7 @@ export default new Command({
         }
 
         const { lyrics, title, artist, thumbnail, url } = await search(song);
+
         if (lyrics?.trim().length) {
             return await message.channel.send({
                 embeds: [
