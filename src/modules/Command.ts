@@ -1,3 +1,5 @@
+import { TextChannel } from "discord.js";
+import { CHANNELS } from "lib/constants";
 import { NotInVoice } from "../lib/errors";
 import { embed, isAllowed } from "../lib/helpers";
 import logger from "../lib/logger";
@@ -86,6 +88,19 @@ export default new Module({
                 });
             }
             logger.error(error);
+            const channel = client.channels.cache.get(CHANNELS.LOGS) as TextChannel;
+
+            await channel?.send({
+                embeds: [
+                    embed({
+                        color: "#ff0000",
+                        title: "Error",
+                        description:
+                            error instanceof Error ? error.message : "Something went wrong!",
+                    }),
+                ],
+            });
+
             await message.reply("There was an error trying to execute that command!");
         } finally {
             logger.info(
