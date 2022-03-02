@@ -1,5 +1,5 @@
 import { embed } from "../../lib/helpers";
-import { EMOJIS } from "../../lib/contants";
+import { EMOJIS } from "../../lib/constants";
 import Command from "../../structures/Command";
 
 export default new Command({

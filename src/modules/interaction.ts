@@ -5,9 +5,9 @@ export default new Module({
     name: "interaction",
     event: "interactionCreate",
     async run(_, interaction) {
-        if (interaction.isButton()) {
-            return console.log(interaction.customId);
-        }
+        // if (interaction.isButton()) {
+        //     return console.log(interaction.customId);
+        // }
 
         if (!interaction.isCommand()) return;
 

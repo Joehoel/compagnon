@@ -1,11 +1,12 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "lib": ["esnext", "esnext.array"],
+        "module": "CommonJS",
+        "lib": ["ESNext"],
         "target": "ES2015",
         "sourceMap": true,
-        "outDir": "./dist",
-        "baseUrl": "./src",
+        "outDir": "dist",
+        "baseUrl": "src",
+        "rootDir": "src",
         "moduleResolution": "node",
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
@@ -21,7 +22,7 @@
         "experimentalDecorators": true,
         "resolveJsonModule": true,
         "paths": {
-            "@/*": ["./*"]
+            "helpers": ["./lib/helpers.ts"]
         }
     },
     "exclude": ["node_modules"]

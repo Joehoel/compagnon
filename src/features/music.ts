@@ -5,6 +5,7 @@ import DisTube from "distube";
 export default (music: DisTube) => {
     music
         .on("playSong", (queue, song) => {
+            // queue.textChannel?.send(`🎵 | Now playing **${song?.name}**`);
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -26,6 +27,7 @@ export default (music: DisTube) => {
             queue.textChannel?.send({ embeds: [embed] });
         })
         .on("addSong", (queue, song) => {
+            // queue.textChannel?.send(`➕ | Added **${song?.name}** to the queue.`);
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -47,6 +49,8 @@ export default (music: DisTube) => {
             queue.textChannel?.send({ embeds: [embed] });
         })
         .on("addList", (queue, playlist) => {
+            // queue.textChannel?.send(`📋 | Added **${playlist?.name}** to the queue.`);
+
             const embed = new MessageEmbed({
                 title: "Music",
                 color: "#ffc600",
@@ -69,19 +73,7 @@ export default (music: DisTube) => {
 
             queue.textChannel?.send({ embeds: [embed] });
         })
-        .on("error", (channel, e) => {
-            console.error(e);
-
-            const embed = new MessageEmbed({
-                title: "Error",
-                color: "#FF0000",
-                fields: [
-                    {
-                        name: "An error encountered",
-                        value: e.message,
-                    },
-                ],
-            });
-            channel.send({ embeds: [embed] });
+        .on("error", (_, e) => {
+            throw e;
         });
 };

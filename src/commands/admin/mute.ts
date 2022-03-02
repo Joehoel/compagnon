@@ -1,4 +1,4 @@
-import { ROLES } from "../../lib/contants";
+import { ROLES } from "../../lib/constants";
 import Command from "../../structures/Command";
 import redis, { expire } from "../../lib/redis";
 import { removeRole, giveRole } from "../../lib/helpers";
@@ -13,8 +13,35 @@ export default new Command({
     permissions: ["MUTE_MEMBERS"],
     usage: "<@> <duration> <m, h, d or life>",
     exclusive: true,
-    enabled: false,
+    // enabled: false,
     async execute(client, message, args) {
+        if (args.length !== 3) {
+            return message.channel.send(`Please use the correct syntax: \`${this.usage}\``);
+        }
+        const [_, duration, type] = args;
+
+        if (isNaN(parseInt(duration))) return;
+
+        const durations: Record<string, number> = {
+            m: 60,
+            h: 60 * 60,
+            d: 60 * 60 * 24,
+            life: -1,
+        };
+
+        if (!durations[type]) return;
+
+        const milliseconds = (+duration * durations[type]) / 1000;
+
+        const target = message.mentions.members!.first()! || message.author;
+
+        if (!target) {
+            return message.channel.send(`Please tag a user to mute`);
+        }
+        const { id } = target;
+        const targetMember = message.member?.guild.members.cache.get(id);
+
+        return await targetMember?.timeout(milliseconds);
         //     expire((message: string) => {
         //         if (message.startsWith(redisKeyPrefix)) {
         //             const split = message.split("-");
@@ -26,25 +53,6 @@ export default new Command({
         //             giveRole(member!, ROLES.MEMBER);
         //         }
         //     });
-        //     if (args.length !== 3) {
-        //         return message.channel.send(`Please use the correct syntax: \`${this.usage}\``);
-        //     }
-        //     const [_, duration, type] = args;
-        //     if (isNaN(parseInt(duration))) return;
-        //     const durations: Record<string, number> = {
-        //         m: 60,
-        //         h: 60 * 60,
-        //         d: 60 * 60 * 24,
-        //         life: -1,
-        //     };
-        //     if (!durations[type]) return;
-        //     const seconds = +duration * durations[type];
-        //     const target = message.mentions.members!.first()! || message.author;
-        //     if (!target) {
-        //         return message.channel.send(`Please tag a user to mute`);
-        //     }
-        //     const { id } = target;
-        //     const targetMember = message.member?.guild.members.cache.get(id);
         //     if (targetMember) {
         //         giveRole(targetMember, ROLES.MUTED);
         //         removeRole(targetMember, ROLES.MEMBER);

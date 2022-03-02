@@ -1,10 +1,12 @@
 import { REST } from "@discordjs/rest";
+import { getVoiceConnections } from "@discordjs/voice";
 import SpotifyPlugin from "@distube/spotify";
+import { YtDlpPlugin } from "@distube/yt-dlp";
 import { Routes } from "discord-api-types/v9";
 import { Client, ClientOptions, Collection } from "discord.js";
 import DisTube from "distube";
 import { Config } from "../entity/Config";
-import { music, playground, quiz } from "../features";
+import { music, quiz } from "../features";
 import logger from "../lib/logger";
 import { read } from "../lib/read";
 import { Snipe } from "../typings";
@@ -89,8 +91,10 @@ export default class Bot extends Client {
         this.music = new DisTube(this, {
             emitNewSongOnly: true,
             leaveOnEmpty: true,
+            leaveOnStop: true,
             searchSongs: 0,
-            plugins: [new SpotifyPlugin()],
+            youtubeDL: false,
+            plugins: [new SpotifyPlugin(), new YtDlpPlugin()],
         });
 
         try {
@@ -101,13 +105,21 @@ export default class Bot extends Client {
 
             music(this.music);
             quiz(this);
-            playground(this);
 
             this.login(token);
         } catch (error) {
             logger.error(error);
         }
     }
+
+    public leaveVoiceChannels() {
+        const connections = getVoiceConnections();
+
+        for (const connection of connections.values()) {
+            connection.disconnect();
+        }
+    }
+
     private async registerSlashCommands(dir: string) {
         const slashCommands = await read<SlashCommand>(dir);
 

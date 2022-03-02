@@ -1,9 +1,9 @@
-import { Client, Message, PartialMessage } from "discord.js";
-import Event from "../structures/Event";
+import Module from "../structures/Module";
 
-export default new Event({
-    name: "messageDelete",
-    async run(client: Client, message: Message | PartialMessage) {
+export default new Module({
+    name: "snipes",
+    event: "messageDelete",
+    async run(client, message) {
         if (message?.author?.bot) return;
         client.snipes.set(message.channel.id, {
             content: message.content,

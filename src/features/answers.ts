@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { CHANNELS, USERS } from "../lib/contants";
+import { CHANNELS, USERS } from "../lib/constants";
 import { embed } from "../lib/helpers";
 import Bot from "../structures/Bot";
 

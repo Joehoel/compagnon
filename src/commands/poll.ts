@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { ROLES } from "../lib/contants";
+import { ROLES } from "../lib/constants";
 import Command from "../structures/Command";
 
 const options = [

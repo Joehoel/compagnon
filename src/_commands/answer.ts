@@ -1,4 +1,4 @@
-import { USERS } from "../lib/contants";
+import { USERS } from "../lib/constants";
 import { embed } from "../lib/helpers";
 import SlashCommand, { OptionType } from "../structures/SlashCommand";
 

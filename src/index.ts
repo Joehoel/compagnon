@@ -1,5 +1,10 @@
-import "dotenv/config";
 import "module-alias/register";
+import "dotenv/config";
+import { register } from "typescript-paths";
+
+// Register typescript paths
+register();
+
 import { Intents } from "discord.js";
 import { createConnection } from "typeorm";
 import logger from "./lib/logger";
@@ -17,7 +22,7 @@ try {
 }
 
 // Create instance of bot
-new Bot({
+const bot = new Bot({
     intents: [
         Intents.FLAGS.DIRECT_MESSAGES,
         Intents.FLAGS.GUILDS,
@@ -36,4 +41,13 @@ new Bot({
 // Catch all errors and log to the console using custom logger
 process.on("uncaughtException", (error) => logger.error(error));
 process.on("unhandledRejection", (error) => logger.error(error));
-process.on("warning", (warning) => logger.warn(warning));
+process.on("warning", (warning) => {
+    if (warning.message.includes("NODE_TLS_REJECT_UNAUTHORIZED")) return;
+    logger.warn(warning);
+});
+process.on("message", (message) => logger.info(message));
+process.on("SIGINT", () => {
+    bot.emit("warn", "Shutting down");
+    bot.destroy();
+    process.exit();
+});

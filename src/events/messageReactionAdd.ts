@@ -1,5 +1,5 @@
 import { checkAnswers, reactionrole } from "../features";
-import { EVENTS } from "../lib/contants";
+import { EVENTS } from "../lib/constants";
 import Event from "../structures/Event";
 
 export default new Event({

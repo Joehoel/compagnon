@@ -42,6 +42,7 @@
         "winston-console-format": "^1.0.8"
     },
     "devDependencies": {
+        "@distube/yt-dlp": "^1.0.2",
         "@types/bad-words": "^3.0.1",
         "@types/colors": "^1.2.1",
         "@types/cron": "^1.7.3",
@@ -67,7 +68,8 @@
         "ts-jest": "^27.1.3",
         "ts-node": "^10.5.0",
         "ts-node-dev": "^1.1.8",
-        "typescript": "4.5.5"
+        "typescript": "4",
+        "typescript-paths": "^1.3.1"
     },
     "scripts": {
         "dev": "nodemon --files src/index.ts",
@@ -91,9 +93,6 @@
             "eslint --fix",
             "git add"
         ]
-    },
-    "_moduleAliases": {
-        "@": "dist"
     },
     "keywords": [],
     "author": "Joël Kuijper",

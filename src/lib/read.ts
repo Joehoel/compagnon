@@ -1,6 +1,6 @@
 import fs from "fs";
 import { join } from "path";
-import { ROOT } from "./contants";
+import { ROOT } from "./constants";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type

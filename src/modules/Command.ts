@@ -19,7 +19,7 @@ export default new Module({
         const commandName = args.shift()!.toLowerCase();
 
         // Check if the message is just '.'
-        if (commandName === prefix) return;
+        if (args[0] === prefix) return;
 
         // Check if command exists
         if (!client.commands.has(commandName) && !client.aliases.has(commandName)) {
@@ -36,28 +36,28 @@ export default new Module({
         }
 
         if (!isAllowed(command, message.guild!.id)) {
-            return await message.reply(`That command doesn't exist.`);
+            return await message.reply("That command doesn't exist.");
         }
 
         // Check if user is admin for command
-        if (command.admin && !message.member!.permissions.has("ADMINISTRATOR")) {
-            return await message.reply(`You must be an admin to execute this command.`);
+        if (command.admin && !message.member?.permissions.has("ADMINISTRATOR")) {
+            return await message.reply("You must be an admin to execute this command.");
         }
 
         // Check if user has the correct roles te execute command
         if (
             command.roles.some(
-                (role) => !message.member!.roles.cache.find((_role) => _role.id === role)
+                (role) => !message.member?.roles.cache.find((_role) => _role.id === role)
             )
         ) {
-            return await message.reply(`You are not allowed to execute that command.`);
+            return await message.reply("You are not allowed to execute that command.");
         }
 
         // Check if user has the correct permissions te execute command
         if (
             command.permissions.some((permission) => !message.member!.permissions.has(permission))
         ) {
-            return await message.reply(`You are not allowed to execute that command.`);
+            return await message.reply("You are not allowed to execute that command.");
         }
 
         // Check if user provided argument for the command

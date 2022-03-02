@@ -8,6 +8,7 @@ export default new Command({
         const send = embed({
             description: `**Pong!**`,
         });
+
         return message.channel.send({ embeds: [send] }).then((m) => {
             const ping = m.createdTimestamp - message.createdTimestamp;
             m.edit({

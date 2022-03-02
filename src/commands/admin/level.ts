@@ -1,5 +1,5 @@
 import Levels from "discord-xp";
-import { GUILD_ID } from "../../lib/contants";
+import { GUILD_ID } from "../../lib/constants";
 import Command from "../../structures/Command";
 import { embed } from "../../lib/helpers";
 

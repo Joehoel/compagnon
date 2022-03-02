@@ -1,4 +1,4 @@
-import { ROLES } from "../../lib/contants";
+import { ROLES } from "../../lib/constants";
 import { scoreboard } from "../../lib/helpers";
 import SlashCommand, { PermissionType } from "../../structures/SlashCommand";
 

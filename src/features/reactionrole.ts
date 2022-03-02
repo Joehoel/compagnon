@@ -1,5 +1,5 @@
 import { MessageReaction, PartialMessageReaction, PartialUser, User } from "discord.js";
-import { EMOJIS, EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, ROLES } from "../lib/contants";
+import { EMOJIS, EVENTS, GUILD_ID, REACTION_ROLE_CHANNEL, ROLES } from "../lib/constants";
 import { giveRole, removeRole } from "../lib/helpers";
 import logger from "../lib/logger";
 import Bot from "../structures/Bot";

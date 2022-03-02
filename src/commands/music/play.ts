@@ -1,3 +1,5 @@
+import { GuildMember, GuildTextBasedChannel } from "discord.js";
+import interaction from "modules/interaction";
 import Command from "../../structures/Command";
 
 export default new Command({
@@ -11,6 +13,9 @@ export default new Command({
         const voiceChannel = message.member?.voice.channel;
         if (!voiceChannel) throw new Error("NotInVoice");
 
-        client.music.play(voiceChannel, args.join(" "));
+        return client.music.play(voiceChannel, args.join(" "), {
+            textChannel: message.channel as GuildTextBasedChannel,
+            member: message.member as GuildMember,
+        });
     },
 });

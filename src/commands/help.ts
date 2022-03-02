@@ -1,9 +1,9 @@
-import Command from "../structures/Command";
 import { FieldsEmbed } from "discord-paginationembed";
 import { TextChannel } from "discord.js";
 import { canExecute, embed, formatCommand, isAllowed } from "../lib/helpers";
-import { GUILD_ID } from "../lib/contants";
+import Command from "../structures/Command";
 
+// TODO: Fix this!
 export default new Command({
     name: "help",
     description: "Show all possible commands",

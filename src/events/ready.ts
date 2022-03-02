@@ -1,7 +1,7 @@
 import colors from "colors";
 import { TextChannel } from "discord.js";
 import { Config } from "../entity/Config";
-import { CHANNELS } from "../lib/contants";
+import { CHANNELS } from "../lib/constants";
 import logger from "../lib/logger";
 import Event from "../structures/Event";
 

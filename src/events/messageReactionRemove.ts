@@ -1,4 +1,4 @@
-import { EVENTS } from "../lib/contants";
+import { EVENTS } from "../lib/constants";
 import Event from "../structures/Event";
 import { checkAnswers, reactionrole } from "../features";
 

@@ -1,16 +1,6 @@
+import { Interaction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { chunk } from "../../lib/helpers";
 import Command from "../../structures/Command";
-import {
-    Interaction,
-    Message,
-    MessageActionRow,
-    MessageButton,
-    MessageEmbed,
-    TextChannel,
-} from "discord.js";
-import { chunk, embed } from "../../lib/helpers";
-import { Embeds } from "discord-paginationembed/typings";
-import { userInfo } from "os";
-import interaction from "@/modules/interaction";
 
 export default new Command({
     name: "queue",

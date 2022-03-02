@@ -1,4 +1,4 @@
-import { ROLES } from "../../lib/contants";
+import { ROLES } from "../../lib/constants";
 import { sendAnswer, sendQuestion } from "../../lib/helpers";
 import SlashCommand, { PermissionType } from "../../structures/SlashCommand";
 

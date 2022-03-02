@@ -1,4 +1,3 @@
-import { Answer } from "../entity/Answer";
 import "cross-fetch";
 import fetch from "cross-fetch";
 import {
@@ -10,17 +9,17 @@ import {
     MessageEmbedOptions,
     TextChannel,
 } from "discord.js";
+import { Queue } from "distube";
 import { URLSearchParams } from "url";
 import { promisify } from "util";
+import { Answer } from "../entity/Answer";
 import { Brain } from "../entity/Brain";
 import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
 import Command from "../structures/Command";
 import { GIFResponse, MemeResponse, RedditResponse } from "../typings";
-import { CHANNELS, GUILD_ID, ROLES } from "./contants";
-import redis from "./redis";
-import { Queue } from "distube";
+import { CHANNELS, GUILD_ID, ROLES } from "./constants";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;
 
@@ -256,11 +255,7 @@ export async function createGuildConfig(guild: Server): Promise<Config> {
  * @return {boolean}
  */
 export function isAllowed(command: Command, guildId: string): boolean {
-    if (command.exclusive) {
-        return guildId === GUILD_ID;
-    } else {
-        return true;
-    }
+    return command.exclusive ? guildId === GUILD_ID : true;
 }
 
 export const wait = promisify(setTimeout);

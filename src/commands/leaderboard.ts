@@ -5,7 +5,7 @@ import Command from "../structures/Command";
 import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
 import Levels, { LeaderboardUser } from "discord-xp";
 import { MessageEmbed } from "discord.js";
-import { GUILD_ID } from "../lib/contants";
+import { GUILD_ID } from "../lib/constants";
 
 export default new Command({
     name: "leaderboard",

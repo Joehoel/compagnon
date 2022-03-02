@@ -1,5 +1,5 @@
 import { MessageActionRow, MessageComponentInteraction } from "discord.js";
-import { ROLES } from "../../lib/contants";
+import { ROLES } from "../../lib/constants";
 import SlashCommand, { OptionType, PermissionType } from "../../structures/SlashCommand";
 
 export default new SlashCommand({

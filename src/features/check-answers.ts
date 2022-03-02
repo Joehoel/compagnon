@@ -1,4 +1,4 @@
-import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "../lib/contants";
+import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "../lib/constants";
 import {
     Client,
     MessageReaction,

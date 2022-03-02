@@ -1,4 +1,4 @@
-import { CHANNELS, GUILD_ID, ROLES, SCOREBOARD_MESSAGE_ID } from "../../lib/contants";
+import { CHANNELS, GUILD_ID, ROLES, SCOREBOARD_MESSAGE_ID } from "../../lib/constants";
 import { scoreboard } from "../../lib/helpers";
 import { GuildMember, TextChannel } from "discord.js";
 import { Brain } from "../../entity/Brain";

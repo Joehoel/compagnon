@@ -1,4 +1,4 @@
-import { CHANNELS } from "../lib/contants";
+import { CHANNELS } from "../lib/constants";
 import Module from "../structures/Module";
 
 export default new Module({

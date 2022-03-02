@@ -1,5 +1,5 @@
 import Levels from "discord-xp";
-import { ROLES } from "../lib/contants";
+import { ROLES } from "../lib/constants";
 import { embed, giveRole } from "../lib/helpers";
 import Module from "../structures/Module";
 
