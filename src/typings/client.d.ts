@@ -1,12 +1,11 @@
 import SlashCommand from "../structures/SlashCommand";
-import { SlashCommandBuilder } from "@discordjs/builders";
 import { Consola } from "consola";
 import { Player } from "discord-player";
 import "discord.js";
 import { Collection } from "discord.js";
 import DisTube from "distube";
 import { Config } from "../entity/Config";
-import Command from "../structures/Commandand";
+import Command from "../structures/Command";
 import Event from "../structures/Event";
 import { Snipe } from "./";
 

@@ -3,6 +3,8 @@ import { TextChannel } from "discord.js";
 import { canExecute, embed, formatCommand, isAllowed } from "../lib/helpers";
 import Command from "../structures/Command";
 
+const { PREFIX } = process.env;
+
 // TODO: Fix this!
 export default new Command({
     name: "help",
@@ -10,7 +12,7 @@ export default new Command({
     usage: "<command>",
     aliases: ["h", "?"],
     async execute(client, message, args) {
-        const prefix = client.config.get(message.guild!.id)?.prefix;
+        const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
 
         const [commandName] = args.map((arg) => arg.toLowerCase());
 

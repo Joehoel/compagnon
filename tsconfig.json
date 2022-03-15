@@ -22,7 +22,9 @@
         "experimentalDecorators": true,
         "resolveJsonModule": true,
         "paths": {
-            "helpers": ["./lib/helpers.ts"]
+            "@helpers": ["./lib/helpers.ts"],
+            "@constants": ["./lib/constants.ts"],
+            "@structures": ["./structures/*.ts"]
         }
     },
     "exclude": ["node_modules"]
