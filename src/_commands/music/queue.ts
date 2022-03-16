@@ -1,5 +1,5 @@
 import { Interaction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
-import { chunk } from "helpers";
+import { chunk } from "../../lib/helpers";
 import SlashCommand from "../../structures/SlashCommand";
 
 export default new SlashCommand({
