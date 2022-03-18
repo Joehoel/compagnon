@@ -38,12 +38,11 @@ export interface InAppUse {
 export default new Command({
     name: "bible",
     description: "Bible command to satisfy al your christian needs",
-    async execute(client, message) {
+    async execute(_, message) {
         const res = await fetch("https://feed.dagelijkswoord.nl/api/json/1.0/", {
             method: "GET",
             headers: {
-                Authorization:
-                    "Basic am1rdWlqcGVyQG91dGxvb2suY29tOmM2MTE1MGEzMDZjODk1NTVmYWJjZWZhNGZlNTQ0N2RiYTUyMjhjMGY=",
+                Authorization: `Basic ${process.env.VOTD_API_KEY}`,
             },
         });
 
