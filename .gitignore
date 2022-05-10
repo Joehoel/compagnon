@@ -2,7 +2,7 @@
 compagnon/
 ecosystem.json
 .vscode/
-
+/**/*/.DS_Store
 # Logs
 logs
 *.log
