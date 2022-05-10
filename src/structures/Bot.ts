@@ -132,16 +132,16 @@ export default class Bot extends Client {
 
         for (const slashCommand of slashCommands) {
             this.slashCommands.set(slashCommand.name, slashCommand);
-            const command = commands.find(({ name }) => name == slashCommand.name);
+            // const command = commands.find(({ name }) => name == slashCommand.name);
 
-            if (slashCommand.permissions?.length && command?.id) {
-                await this.app.put(
-                    Routes.applicationCommandPermissions(this.clientId, this.guildId, command.id),
-                    {
-                        body: { permissions: slashCommand.permissions },
-                    }
-                );
-            }
+            // if (slashCommand.permissions?.length && command?.id) {
+            //     await this.app.put(
+            //         Routes.applicationCommandPermissions(this.clientId, this.guildId, command.id),
+            //         {
+            //             body: { permissions: slashCommand.permissions },
+            //         }
+            //     );
+            // }
         }
 
         logger.info(`Loaded ${slashCommands.length} [/] commands`);

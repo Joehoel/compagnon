@@ -1,10 +1,4 @@
-import { ROLES } from "../../lib/constants";
 import Command from "../../structures/Command";
-import redis, { expire } from "../../lib/redis";
-import { removeRole, giveRole } from "../../lib/helpers";
-import logger from "../../lib/logger";
-
-const redisKeyPrefix = process.env.REDIS_KEY_PREFIX;
 
 export default new Command({
     name: "mute",

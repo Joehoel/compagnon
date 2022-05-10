@@ -1,6 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import { ROOT } from "./constants";
+import logger from "./logger";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type
@@ -16,6 +17,7 @@ export async function read<T>(dir: string): Promise<T[]> {
     const commands: T[] = [];
 
     const files = fs.readdirSync(join(process.cwd(), ROOT, dir));
+
     for (const file of files) {
         const stat = fs.lstatSync(join(process.cwd(), ROOT, dir, file));
 
@@ -32,7 +34,7 @@ export async function read<T>(dir: string): Promise<T[]> {
                 // table.addRow(file, "✅");
                 commands.push(command);
             } catch (error) {
-                console.error(error);
+                logger.error(error);
                 // table.addRow(file, `❌ - ${error}`);
             }
         }
