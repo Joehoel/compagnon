@@ -14,6 +14,7 @@
         "@discordjs/voice": "^0.8.0",
         "@distube/spotify": "^1.2.1",
         "@jbreeze/spongebobify": "^1.0.1",
+        "@notionhq/client": "^1.0.4",
         "axios": "^0.26.0",
         "bad-words": "^3.0.4",
         "consola": "^2.15.3",
