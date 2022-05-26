@@ -1,5 +1,5 @@
 import { FieldsEmbed } from "discord-paginationembed";
-import { TextChannel } from "discord.js";
+import type { TextChannel } from "discord.js";
 import { canExecute, embed, formatCommand, isAllowed } from "../lib/helpers";
 import Command from "../structures/Command";
 

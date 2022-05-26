@@ -1,7 +1,7 @@
 import { ROLES } from "../../lib/constants";
 import { wait } from "../../lib/helpers";
 import SlashCommand, { OptionType, PermissionType } from "../../structures/SlashCommand";
-import { GuildMember, Message, TextChannel } from "discord.js";
+import type { GuildMember, Message, TextChannel } from "discord.js";
 
 export default new SlashCommand({
     name: "clear",

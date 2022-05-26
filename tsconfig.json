@@ -24,7 +24,7 @@
         "paths": {
             "@helpers": ["./lib/helpers.ts"],
             "@constants": ["./lib/constants.ts"],
-            "@structures": ["./structures/*.ts"]
+            "@structures/*": ["./structures/*"]
         }
     },
     "exclude": ["node_modules"]

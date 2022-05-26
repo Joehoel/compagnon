@@ -1,15 +1,15 @@
 import "cross-fetch";
 import fetch from "cross-fetch";
-import {
+import type {
     Client,
     EmbedFieldData,
     Guild as Server,
     GuildMember,
-    MessageEmbed,
     MessageEmbedOptions,
     TextChannel,
 } from "discord.js";
-import { Queue } from "distube";
+import { MessageEmbed } from "discord.js";
+import type { Queue } from "distube";
 import { URLSearchParams } from "url";
 import { promisify } from "util";
 import { Answer } from "../entity/Answer";
@@ -17,8 +17,8 @@ import { Brain } from "../entity/Brain";
 import { Config } from "../entity/Config";
 import { Guild } from "../entity/Guild";
 import { Question } from "../entity/Question";
-import Command from "../structures/Command";
-import { GIFResponse, MemeResponse, RedditResponse } from "../typings";
+import type Command from "../structures/Command";
+import type { GIFResponse, MemeResponse, RedditResponse } from "../typings";
 import { CHANNELS, GUILD_ID, ROLES } from "./constants";
 
 const { API_KEY, REDIS_KEY_PREFIX } = process.env;

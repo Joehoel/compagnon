@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RedditResponse } from "../typings";
+import type { RedditResponse } from "../typings";
 
 interface RedditPost {
     id: string;

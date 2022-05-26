@@ -1,5 +1,5 @@
-import { ClientEvents } from "discord.js";
-import Bot from "./Bot";
+import type { ClientEvents } from "discord.js";
+import type Bot from "./Bot";
 
 export default class Event<T extends keyof ClientEvents> {
     public name: T;

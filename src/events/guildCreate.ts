@@ -1,4 +1,4 @@
-import { Guild as Server } from "discord.js";
+import type { Guild as Server } from "discord.js";
 import { createGuildConfig } from "../lib/helpers";
 import Event from "../structures/Event";
 

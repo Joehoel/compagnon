@@ -1,6 +1,6 @@
-import { TextChannel } from "discord.js";
+import type { TextChannel } from "discord.js";
 import logger from "../lib/logger";
-import Bot from "../structures/Bot";
+import type Bot from "../structures/Bot";
 
 export default async (client: Bot) => {
     const player = client.player;

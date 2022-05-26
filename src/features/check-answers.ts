@@ -1,5 +1,5 @@
 import { CHANNELS, EVENTS, GUILD_ID, SCOREBOARD_MESSAGE_ID } from "../lib/constants";
-import {
+import type {
     Client,
     MessageReaction,
     PartialMessageReaction,

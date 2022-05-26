@@ -1,6 +1,6 @@
 import { embed } from "../lib/helpers";
 import SlashCommand from "../structures/SlashCommand";
-import { Message } from "discord.js";
+import type { Message } from "discord.js";
 
 export default new SlashCommand({
     name: "ping",

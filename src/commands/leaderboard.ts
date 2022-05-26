@@ -3,7 +3,8 @@ import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
 import Command from "../structures/Command";
 import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
-import Levels, { LeaderboardUser } from "discord-xp";
+import type { LeaderboardUser } from "discord-xp";
+import Levels from "discord-xp";
 import { MessageEmbed } from "discord.js";
 import { GUILD_ID } from "../lib/constants";
 

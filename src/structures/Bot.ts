@@ -3,17 +3,18 @@ import { getVoiceConnections } from "@discordjs/voice";
 import SpotifyPlugin from "@distube/spotify";
 import { YtDlpPlugin } from "@distube/yt-dlp";
 import { Routes } from "discord-api-types/v9";
-import { Client, ClientOptions, Collection } from "discord.js";
+import type { ClientOptions } from "discord.js";
+import { Client, Collection } from "discord.js";
 import DisTube from "distube";
-import { Config } from "../entity/Config";
+import type { Config } from "../entity/Config";
 import { music, quiz } from "../features";
 import logger from "../lib/logger";
 import { read } from "../lib/read";
-import { Snipe } from "../typings";
-import Command from "./Command";
-import Event from "./Event";
-import Module from "./Module";
-import SlashCommand from "./SlashCommand";
+import type { Snipe } from "../typings";
+import type Command from "./Command";
+import type Event from "./Event";
+import type Module from "./Module";
+import type SlashCommand from "./SlashCommand";
 
 type SlashCommandResponse = {
     id: string;

@@ -1,13 +1,13 @@
-import SlashCommand from "../structures/SlashCommand";
-import { Consola } from "consola";
-import { Player } from "discord-player";
+import type SlashCommand from "../structures/SlashCommand";
+import type { Consola } from "consola";
+import type { Player } from "discord-player";
 import "discord.js";
-import { Collection } from "discord.js";
-import DisTube from "distube";
-import { Config } from "../entity/Config";
-import Command from "../structures/Command";
-import Event from "../structures/Event";
-import { Snipe } from "./";
+import type { Collection } from "discord.js";
+import type DisTube from "distube";
+import type { Config } from "../entity/Config";
+import type Command from "../structures/Command";
+import type Event from "../structures/Event";
+import type { Snipe } from "./";
 
 declare module "discord.js" {
     interface Client {

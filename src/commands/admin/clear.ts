@@ -1,4 +1,4 @@
-import { TextChannel } from "discord.js";
+import type { TextChannel } from "discord.js";
 import Command from "../../structures/Command";
 
 export default new Command({

@@ -1,4 +1,4 @@
-import { TextChannel } from "discord.js";
+import type { TextChannel } from "discord.js";
 import { CHANNELS } from "../lib/constants";
 import { NotInVoice } from "../lib/errors";
 import { embed, isAllowed } from "../lib/helpers";

@@ -96,7 +96,11 @@
             "git add"
         ]
     },
-    "keywords": [],
+    "keywords": [
+        "discord.js",
+        "bot",
+        "discord"
+    ],
     "author": "Joël Kuijper",
     "license": "ISC"
 }

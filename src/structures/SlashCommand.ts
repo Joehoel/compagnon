@@ -1,5 +1,5 @@
-import { APIApplicationCommandOptionChoice } from "discord-api-types/v9";
-import { CommandInteraction } from "discord.js";
+import type { APIApplicationCommandOptionChoice } from "discord-api-types/v9";
+import type { CommandInteraction } from "discord.js";
 
 export enum OptionType {
     SUB_COMMAND = 1,

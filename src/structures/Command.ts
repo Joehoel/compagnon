@@ -1,4 +1,4 @@
-import { Client, Message, PermissionString } from "discord.js";
+import type { Client, Message, PermissionString } from "discord.js";
 
 export default class Command {
     public name: string;

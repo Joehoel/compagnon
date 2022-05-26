@@ -1,5 +1,5 @@
 import logger from "../lib/logger";
-import { Interaction } from "discord.js";
+import type { Interaction } from "discord.js";
 
 export default async (interaction: Interaction) => {
     if (interaction.isButton()) {

@@ -1,4 +1,4 @@
-import { GuildMember, GuildTextBasedChannel } from "discord.js";
+import type { GuildMember, GuildTextBasedChannel } from "discord.js";
 import interaction from "modules/interaction";
 import Command from "../../structures/Command";
 

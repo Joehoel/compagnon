@@ -1,7 +1,7 @@
-import { Message } from "discord.js";
+import type { Message } from "discord.js";
 import { CHANNELS, USERS } from "../lib/constants";
 import { embed } from "../lib/helpers";
-import Bot from "../structures/Bot";
+import type Bot from "../structures/Bot";
 
 const { PREFIX } = process.env;
 

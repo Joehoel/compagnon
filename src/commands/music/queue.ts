@@ -1,4 +1,5 @@
-import { Interaction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import type { Interaction } from "discord.js";
+import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { chunk } from "../../lib/helpers";
 import Command from "../../structures/Command";
 

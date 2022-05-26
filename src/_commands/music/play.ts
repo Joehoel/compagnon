@@ -1,4 +1,4 @@
-import { GuildMember, GuildTextBasedChannel } from "discord.js";
+import type { GuildMember, GuildTextBasedChannel } from "discord.js";
 import SlashCommand, { OptionType } from "../../structures/SlashCommand";
 
 export default new SlashCommand({

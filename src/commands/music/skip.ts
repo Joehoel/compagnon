@@ -1,5 +1,5 @@
 import Command from "../../structures/Command";
-import { MessageReaction, User } from "discord.js";
+import type { MessageReaction, User } from "discord.js";
 import { embed } from "../../lib/helpers";
 import logger from "../../lib/logger";
 

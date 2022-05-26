@@ -1,7 +1,8 @@
 import { Leaderboard } from "../entity/Leaderboard";
 import { Score } from "../entity/Score";
 import SlashCommand, { OptionType } from "../structures/SlashCommand";
-import Levels, { LeaderboardUser } from "discord-xp";
+import type { LeaderboardUser } from "discord-xp";
+import Levels from "discord-xp";
 import { MessageEmbed } from "discord.js";
 import { Game } from "../entity/Game";
 import { capitalize, distinctArrayByKey, embed } from "../lib/helpers";
