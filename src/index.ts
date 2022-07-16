@@ -1,53 +1,44 @@
-import "module-alias/register";
-import "dotenv/config";
-import { register } from "typescript-paths";
-
-// Register typescript paths
-register();
-
 import { Intents } from "discord.js";
-import { createConnection } from "typeorm";
-import logger from "./lib/logger";
-import Bot from "./structures/Bot";
+import "dotenv/config";
 
-// Environment variables
-const { TOKEN, CLIENT_ID, GUILD_ID, PREFIX } = process.env;
+import Bot from "./bot";
 
-// Connect to PostgreSQL using `ormconfig.js` file
-try {
-    createConnection();
-    logger.info("Connected to database");
-} catch (error) {
-    logger.error(error);
-}
+const { TOKEN, GUILD_ID, CLIENT_ID } = process.env;
 
-// Create instance of bot
 const bot = new Bot({
-    intents: [
-        Intents.FLAGS.DIRECT_MESSAGES,
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_VOICE_STATES,
-    ],
-    partials: ["MESSAGE", "CHANNEL", "REACTION"],
-    clientId: CLIENT_ID,
-    guildId: GUILD_ID,
-    prefix: PREFIX,
-    token: TOKEN,
+  token: TOKEN,
+  clientId: CLIENT_ID,
+  guildId: GUILD_ID,
+  intents: [
+    Intents.FLAGS.DIRECT_MESSAGES,
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+    Intents.FLAGS.GUILD_VOICE_STATES,
+  ],
+  partials: ["MESSAGE", "CHANNEL", "REACTION"],
 });
 
-// Catch all errors and log to the console using custom logger
-process.on("uncaughtException", (error) => logger.error(error));
-process.on("unhandledRejection", (error) => logger.error(error));
-process.on("warning", (warning) => {
-    if (warning.message.includes("NODE_TLS_REJECT_UNAUTHORIZED")) return;
-    logger.warn(warning);
+bot.on("ready", () => {
+  console.log("sup!");
 });
-process.on("message", (message) => logger.info(message));
-process.on("SIGINT", () => {
-    bot.emit("warn", "Shutting down");
-    bot.destroy();
-    process.exit();
+
+bot.on("interactionCreate", (interaction) => {
+  if (!interaction.isCommand()) return;
+
+  const command = interaction.client.commands.get(interaction.commandName);
+
+  try {
+    command?.execute(interaction);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    const author = interaction.user;
+    console.info(`${author.tag} (${author.id}) ran a (/) command: '${command?.name}'`);
+  }
+});
+
+bot.on("messageCreate", (message) => {
+  console.log(message.content);
 });
