@@ -1,6 +1,6 @@
 import { lstat, readdir } from "node:fs/promises";
-import { here } from "@/helpers";
 import { join } from "node:path";
+import { here } from "./helpers";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type
@@ -11,35 +11,26 @@ import { join } from "node:path";
  * @return {Promise<T[]>} Array of instances of T read from the given directory
  */
 export async function read<T>(dir: string): Promise<T[]> {
-  // console.log(`Loading commands \`${dir}\``);
-
   const commands: T[] = [];
 
-  const files = await readdir(here(dir));
+  const files = await readdir(join(process.cwd(), "src", dir));
 
   for (const file of files) {
-    const stat = await lstat(here(dir, file));
+    const stat = await lstat(join(process.cwd(), "src", dir, file));
 
     if (stat.isDirectory()) {
-      //   const nestedCommands = await read<T>(here(dir, file));
-      //   commands.push(...nestedCommands);
+      const nestedCommands = await read<T>(join(process.cwd(), "src", dir, file));
+      commands.push(...nestedCommands);
     } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
-      // console.log(`Importing command ${join(__dirname, dir, file)}`);
       try {
-        const location = here(dir, file);
-
-        console.log(location);
+        const location = join(process.cwd(), "src", dir, file);
 
         const command = await import(`${location}`).then((m) => m.default);
-        // // table.addRow(file, "✅");
         commands.push(command);
       } catch (error) {
-        // logger.error(error);
         console.error(error);
-        // table.addRow(file, `❌ - ${error}`);
       }
     }
   }
-  // console.log(table.toString());
   return commands;
 }

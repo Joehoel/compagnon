@@ -1,4 +1,4 @@
-import Command from "@/Command";
+import { Command, Module } from "@/lib";
 import { Collection } from "discord.js";
 
 declare module "discord.js" {

@@ -3,19 +3,7 @@ import Command from "./Command";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import { read } from "./read";
-
-type SlashCommandResponse = {
-  id: string;
-  application_id: string;
-  name: string;
-  description: string;
-  version: string;
-  default_permission: boolean;
-  type: number;
-  guild_id: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  options: Object[];
-}[];
+import Module from "./Module";
 
 /**
  * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
@@ -24,8 +12,10 @@ type SlashCommandResponse = {
  */
 export default class Bot extends Client {
   public commands = new Collection<string, Command>();
+  public modules = new Collection<string, Module<never>>();
 
   private commandsFolder: string;
+  private modulesFolder: string;
 
   public prefix: string;
 
@@ -36,8 +26,6 @@ export default class Bot extends Client {
   constructor({
     token,
     commandsFolder,
-    slashCommandsFolder,
-    eventsFolder,
     modulesFolder,
     prefix,
     clientId,
@@ -46,8 +34,6 @@ export default class Bot extends Client {
   }: ClientOptions & {
     token: string;
     commandsFolder?: string;
-    eventsFolder?: string;
-    slashCommandsFolder?: string;
     modulesFolder?: string;
     prefix?: string;
     clientId: string;
@@ -61,45 +47,47 @@ export default class Bot extends Client {
     this.prefix = prefix ?? "!";
 
     this.commandsFolder = commandsFolder ?? "commands";
+    this.modulesFolder = modulesFolder ?? "modules";
 
     this.app.setToken(token);
 
     try {
       this.registerCommands(this.commandsFolder);
+      this.registerModules(this.modulesFolder);
 
       this.login(token);
     } catch (error) {
       console.error(error);
-      //   logger.error(error);
     }
   }
 
   private async registerCommands(dir: string) {
-    const slashCommands = await read<Command>(dir);
+    const commands = await read<Command>(dir);
 
     await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
-      body: slashCommands,
+      body: commands,
     });
 
-    const commands = (await this.app.get(
-      Routes.applicationGuildCommands(this.clientId, this.guildId)
-    )) as SlashCommandResponse;
-
-    for (const slashCommand of slashCommands) {
-      this.commands.set(slashCommand.name, slashCommand);
-      // const command = commands.find(({ name }) => name == slashCommand.name);
-
-      // if (slashCommand.permissions?.length && command?.id) {
-      //     await this.app.put(
-      //         Routes.applicationCommandPermissions(this.clientId, this.guildId, command.id),
-      //         {
-      //             body: { permissions: slashCommand.permissions },
-      //         }
-      //     );
-      // }
+    for (const command of commands) {
+      this.commands.set(command.name, command);
     }
 
-    console.log("registred commands");
-    // logger.info(`Loaded ${slashCommands.length} [/] commands`);
+    console.info(`Loaded ${commands.length} commands`);
+  }
+
+  private async registerModules(dir: string) {
+    const modules = await read<Module<never>>(dir);
+
+    for (const module of modules) {
+      this.modules.set(module.name, module);
+
+      try {
+        this.on(module.event, module.run.bind(module, this));
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    console.info(`Loaded ${modules.length} modules`);
   }
 }

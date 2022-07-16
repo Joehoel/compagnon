@@ -1,4 +1,4 @@
-import Command from "@/Command";
+import { Command } from "@/lib";
 import { Message, MessageEmbed } from "discord.js";
 
 export default new Command({

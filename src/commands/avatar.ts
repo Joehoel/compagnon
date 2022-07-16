@@ -1,4 +1,4 @@
-import Command from "@/Command";
+import { Command } from "@/lib";
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 
 export default new Command({
