@@ -11,7 +11,7 @@ export default new Command({
       type: ApplicationCommandOptionType.User,
     },
   ],
-  execute(interaction) {
+  execute(client, interaction) {
     const user = interaction.options.getUser("user")!;
 
     if (user) {

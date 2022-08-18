@@ -4,7 +4,7 @@ import { Message, MessageEmbed } from "discord.js";
 export default new Command({
   name: "ping",
   description: "Pong!!!",
-  async execute(interaction) {
+  async execute(client, interaction) {
     const message = (await interaction.reply({
       embeds: [
         new MessageEmbed({

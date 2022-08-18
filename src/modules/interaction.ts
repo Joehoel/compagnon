@@ -3,13 +3,13 @@ import { Module } from "@/lib";
 export default new Module({
   name: "interaction",
   event: "interactionCreate",
-  async run(_, interaction) {
+  async run(client, interaction) {
     if (!interaction.isCommand()) return;
 
-    const command = interaction.client.commands.get(interaction.commandName);
+    const command = client.commands.get(interaction.commandName);
 
     try {
-      command?.execute(interaction);
+      await command?.execute(client, interaction);
     } catch (error) {
       console.error(error);
     } finally {

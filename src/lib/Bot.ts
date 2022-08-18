@@ -4,6 +4,9 @@ import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import { read } from "./read";
 import Module from "./Module";
+import { Player } from "discord-player";
+import { join } from "node:path";
+import "discord-player/smoothVolume";
 
 /**
  * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
@@ -20,6 +23,9 @@ export default class Bot extends Client {
   public prefix: string;
 
   private app = new REST({ version: "9" });
+
+  public player = new Player(this);
+
   private clientId: string;
   private guildId: string;
 
@@ -62,7 +68,7 @@ export default class Bot extends Client {
   }
 
   private async registerCommands(dir: string) {
-    const commands = await read<Command>(dir);
+    const commands = await read<Command>(join(process.cwd(), "src", dir));
 
     await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
       body: commands,
@@ -76,7 +82,7 @@ export default class Bot extends Client {
   }
 
   private async registerModules(dir: string) {
-    const modules = await read<Module<never>>(dir);
+    const modules = await read<Module<never>>(join(process.cwd(), "src", dir));
 
     for (const module of modules) {
       this.modules.set(module.name, module);

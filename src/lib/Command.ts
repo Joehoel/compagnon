@@ -3,6 +3,7 @@ import type {
   ApplicationCommandOptionType,
 } from "discord-api-types/v9";
 import type { CommandInteraction } from "discord.js";
+import Bot from "./Bot";
 
 interface Option {
   type: ApplicationCommandOptionType;
@@ -16,7 +17,7 @@ export default class Command {
   public readonly name: string;
   public readonly description: string;
   public readonly options: Option[];
-  public execute: (interaction: CommandInteraction) => void;
+  public execute: (client: Bot, interaction: CommandInteraction) => Promise<void>;
   constructor({
     name,
     description,
@@ -26,7 +27,7 @@ export default class Command {
     name: string;
     description: string;
     options?: Option[];
-    execute: (interaction: CommandInteraction) => void;
+    execute: (client: Bot, interaction: CommandInteraction) => Promise<void>;
   }) {
     this.name = name;
     this.description = description;
