@@ -20,6 +20,7 @@ model Swears {
 model Level {
   discordId String   @id @default(cuid())
   level     Int      @default(0)
+  xp        Float    @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
