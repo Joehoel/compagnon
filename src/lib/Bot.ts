@@ -8,6 +8,7 @@ import { Player } from "discord-player";
 import { join, resolve } from "node:path";
 import "discord-player/smoothVolume";
 import chalk from "chalk";
+import { name, version } from "../../package.json";
 
 /**
  * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
@@ -64,7 +65,11 @@ export default class Bot extends Client {
         this.registerModules(this.modulesFolder),
       ]).then(() => {
         this.login(token);
-        console.log(`✅ Bot is ${chalk.green.bold("online")}!`);
+        console.log(
+          `✅ ${chalk.yellow(name)} - ${chalk.gray(`v${version}`)} is ${chalk.green.bold(
+            "online"
+          )}!`
+        );
       });
     } catch (error) {
       console.error(error);
