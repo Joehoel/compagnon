@@ -1,6 +1,6 @@
 import { Intents } from "discord.js";
-import "dotenv/config";
 import { Bot } from "./lib";
+import "dotenv/config";
 
 const { TOKEN, GUILD_ID, CLIENT_ID } = process.env;
 
