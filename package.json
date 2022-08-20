@@ -4,7 +4,7 @@
   "description": "discord bot!",
   "main": "index.ts",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --clear-screen=false src/index.ts",
     "gen-env": "gen-env-types .env -o src/typings/env.d.ts -e ."
   },
   "keywords": [],
@@ -12,7 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bad-words": "^3.0.1",
-    "@types/date-fns": "^2.6.0",
     "@types/node": "^18.7.6",
     "dotenv": "^16.0.1",
     "esm": "link:@types/date-fns/esm",
@@ -28,6 +27,7 @@
     "@jbreeze/spongebobify": "^1.0.1",
     "@prisma/client": "^4.2.1",
     "bad-words": "^3.0.4",
+    "chalk": "^5.0.1",
     "date-fns": "^2.29.1",
     "discord-api-types": "^0.36.2",
     "discord-player": "^5.2.2",

@@ -7,9 +7,9 @@ specifiers:
   '@jbreeze/spongebobify': ^1.0.1
   '@prisma/client': ^4.2.1
   '@types/bad-words': ^3.0.1
-  '@types/date-fns': ^2.6.0
   '@types/node': ^18.7.6
   bad-words: ^3.0.4
+  chalk: ^5.0.1
   date-fns: ^2.29.1
   discord-api-types: ^0.36.2
   discord-player: ^5.2.2
@@ -29,6 +29,7 @@ dependencies:
   '@jbreeze/spongebobify': 1.0.1
   '@prisma/client': 4.2.1_prisma@4.2.1
   bad-words: 3.0.4
+  chalk: 5.0.1
   date-fns: 2.29.1
   discord-api-types: 0.36.2
   discord-player: 5.2.2_2bpuud27k56orizxpgp4t3teli
@@ -37,7 +38,6 @@ dependencies:
 
 devDependencies:
   '@types/bad-words': 3.0.1
-  '@types/date-fns': 2.6.0
   '@types/node': 18.7.6
   dotenv: 16.0.1
   esm: link:@types/date-fns/esm
@@ -249,13 +249,6 @@ packages:
       '@types/responselike': 1.0.0
     dev: false
 
-  /@types/date-fns/2.6.0:
-    resolution: {integrity: sha512-9DSw2ZRzV0Tmpa6PHHJbMcZn79HHus+BBBohcOaDzkK/G3zMjDUDYjJIWBFLbkh+1+/IOS0A59BpQfdr37hASg==}
-    deprecated: This is a stub types definition for date-fns (https://github.com/date-fns/date-fns). date-fns provides its own type definitions, so you don't need @types/date-fns installed!
-    dependencies:
-      date-fns: 2.29.1
-    dev: true
-
   /@types/http-cache-semantics/4.0.1:
     resolution: {integrity: sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ==}
     dev: false
@@ -445,6 +438,11 @@ packages:
       supports-color: 7.2.0
     dev: true
 
+  /chalk/5.0.1:
+    resolution: {integrity: sha512-Fo07WOYGqMfCWHOzSXOt2CxDbC6skS/jO9ynEcmpANMoPrD+W1r1K6Vx7iNm+AQmETU1Xr2t+n8nzkV9t6xh3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
+
   /cheerio-select/2.1.0:
     resolution: {integrity: sha512-9v9kG0LvzrlcungtnJtpGNxY+fzECQKhK4EGJX2vByejiMX84MFNQw4UxPJl3bFbTMw+Dfs37XaIkCwTZfLh4g==}
     dependencies:
@@ -597,6 +595,7 @@ packages:
   /date-fns/2.29.1:
     resolution: {integrity: sha512-dlLD5rKaKxpFdnjrs+5azHDFOPEu4ANy/LTh04A1DTzMM7qoajmKCBc8pkKRFT41CNzw+4gQh79X5C+Jq27HAw==}
     engines: {node: '>=0.11'}
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
