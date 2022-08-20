@@ -31,3 +31,14 @@ export async function gif(tag: string): Promise<string> {
 
   return url;
 }
+
+/**
+ * Capitalize a string
+ *
+ * @export
+ * @param {string} string
+ * @return {string} capitalized string
+ */
+export function capitalize(string: string): string {
+  return string.charAt(0).toLocaleUpperCase() + string.slice(1);
+}

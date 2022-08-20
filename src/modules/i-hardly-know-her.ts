@@ -1,4 +1,4 @@
-import { Module } from "@/lib";
+import { capitalize, Module } from "@/lib";
 
 const { PREFIX } = process.env;
 
@@ -18,9 +18,7 @@ export default new Module({
 
     if (word.length >= 4) {
       // Comedy is dead
-      return message.reply(
-        `${word.charAt(0).toLocaleUpperCase()}${word.slice(1)}? I hardly know her!`
-      );
+      return message.reply(`${capitalize(word)}? I hardly know her!`);
     }
   },
 });

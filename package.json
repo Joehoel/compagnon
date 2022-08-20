@@ -4,17 +4,16 @@
   "description": "discord bot!",
   "main": "index.ts",
   "scripts": {
-    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "gen-env": "gen-env-types .env -o src/typings/env.d.ts -e ."
   },
   "keywords": [],
-  "author": "",
+  "author": "Joël Kuijper",
   "license": "ISC",
   "devDependencies": {
     "@types/bad-words": "^3.0.1",
     "@types/node": "^18.7.6",
     "dotenv": "^16.0.1",
-    "esm": "link:@types/date-fns/esm",
     "gen-env-types": "^1.3.4",
     "prisma": "^4.2.1",
     "tsx": "^3.8.0",
