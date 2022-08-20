@@ -13,6 +13,11 @@ Clone the repository
 git clone https://github.com/Joehoel/compagnon.git
 ```
 
+Generate the prisma client
+```bash
+pnpm dlx prisma generate
+```
+
 Install dependencies
 ```bash
 pnpm install
