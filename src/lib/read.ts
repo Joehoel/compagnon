@@ -1,5 +1,6 @@
 import { lstat, readdir } from "node:fs/promises";
 import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type
@@ -19,10 +20,11 @@ export async function read<T>(dir: string): Promise<T[]> {
 
     if (stat.isDirectory()) {
       const nestedCommands = await read<T>(join(dir, file));
+
       commands.push(...nestedCommands);
     } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
       try {
-        const location = join(dir, file);
+        const location = pathToFileURL(join(dir, file)).href;
 
         const command = await import(`${location}`).then((m) => m.default);
         commands.push(command);

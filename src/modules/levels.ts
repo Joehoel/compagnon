@@ -43,8 +43,8 @@ export default new Module({
       }
     });
 
-    client.on("voiceStateUpdate", async (oldState, newState) => {
-      // TODO: implement
-    }
+    // client.on("voiceStateUpdate", async (oldState, newState) => {
+    //   // TODO: implement
+    // }
   },
 });

@@ -5,7 +5,7 @@ import { Routes } from "discord-api-types/v9";
 import { read } from "./read";
 import Module from "./Module";
 import { Player } from "discord-player";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import "discord-player/smoothVolume";
 
 /**
@@ -68,7 +68,7 @@ export default class Bot extends Client {
   }
 
   private async registerCommands(dir: string) {
-    const commands = await read<Command>(join(process.cwd(), "src", dir));
+    const commands = await read<Command>(join("src", dir));
 
     await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
       body: commands,
@@ -82,7 +82,7 @@ export default class Bot extends Client {
   }
 
   private async registerModules(dir: string) {
-    const modules = await read<Module<never>>(join(process.cwd(), "src", dir));
+    const modules = await read<Module<never>>(join("src", dir));
 
     for (const module of modules) {
       this.modules.set(module.name, module);
