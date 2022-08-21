@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
     "gen-env": "gen-env-types .env -o src/typings/env.d.ts -e ."
   },
   "keywords": [],

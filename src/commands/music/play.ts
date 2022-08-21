@@ -21,19 +21,24 @@ export default new Command({
     const query = interaction.options.getString("query")!;
     const member = interaction.member as GuildMember;
 
-    if (!member.voice.channelId)
-      return await interaction.reply({
+    if (!member.voice.channelId) {
+      await interaction.reply({
         content: "You are not in a voice channel!",
         ephemeral: true,
       });
+      return;
+    }
+
     if (
       interaction.guild?.me?.voice.channelId &&
       member.voice.channelId !== interaction.guild.me.voice.channelId
-    )
-      return await interaction.reply({
+    ) {
+      await interaction.reply({
         content: "You are not in my voice channel!",
         ephemeral: true,
       });
+      return;
+    }
     const queue = player.createQueue(interaction.guild!, {
       metadata: {
         channel: interaction.channel,
@@ -45,10 +50,11 @@ export default new Command({
       if (!queue.connection) await queue.connect(member.voice.channel!);
     } catch {
       queue.destroy();
-      return await interaction.reply({
+      await interaction.reply({
         content: "Could not join your voice channel!",
         ephemeral: true,
       });
+      return;
     }
 
     await interaction.deferReply();
@@ -57,11 +63,14 @@ export default new Command({
         requestedBy: interaction.user,
       })
       .then((x) => x.tracks[0]);
-    if (!track)
-      return await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
+    if (!track) {
+      await interaction.followUp({ content: `❌ | Track **${query}** not found!` });
+      return;
+    }
 
     queue.play(track);
 
-    return await interaction.followUp({ content: `⏱️ | Loading track **${track.title}**!` });
+    await interaction.followUp({ content: `⏱️ | Loading track **${track.title}**!` });
+    return;
   },
 });
