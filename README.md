@@ -14,6 +14,14 @@ Clone the repository
 
 ```bash
 git clone https://github.com/Joehoel/compagnon.git
+
+cd compagnon
+```
+
+Add environment variables
+
+```bash
+cp .env.example .env
 ```
 
 Generate the prisma client
