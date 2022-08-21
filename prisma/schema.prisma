@@ -11,16 +11,22 @@ datasource db {
 }
 
 model Swears {
-  discordId String   @id @default(cuid())
+  discordId String
+  guildId   String
   count     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@id([discordId, guildId])
 }
 
 model Level {
-  discordId String   @id @default(cuid())
+  discordId String
+  guildId   String
   level     Int      @default(0)
   xp        Float    @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@id([discordId, guildId])
 }

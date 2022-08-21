@@ -42,3 +42,7 @@ export async function gif(tag: string): Promise<string> {
 export function capitalize(string: string): string {
   return string.charAt(0).toLocaleUpperCase() + string.slice(1);
 }
+
+export function nameof<T>(key: keyof T, instance?: T): keyof T {
+  return key;
+}

@@ -22,20 +22,17 @@ export default class Bot extends Client {
   private commandsFolder: string;
   private modulesFolder: string;
 
-  public prefix: string;
-
   private app = new REST({ version: "9" });
 
   public player = new Player(this);
 
   private clientId: string;
-  private guildId: string;
+  private guildId?: string;
 
   constructor({
     token,
     commandsFolder,
     modulesFolder,
-    prefix,
     clientId,
     guildId,
     ...options
@@ -43,16 +40,14 @@ export default class Bot extends Client {
     token: string;
     commandsFolder?: string;
     modulesFolder?: string;
-    prefix?: string;
     clientId: string;
-    guildId: string;
+    guildId?: string;
   }) {
     super(options);
 
     this.token = token;
     this.clientId = clientId;
     this.guildId = guildId;
-    this.prefix = prefix ?? "!";
 
     this.commandsFolder = commandsFolder ?? "commands";
     this.modulesFolder = modulesFolder ?? "modules";
@@ -79,9 +74,13 @@ export default class Bot extends Client {
   private async registerCommands(dir: string) {
     const commands = await read<Command>(join("src", dir));
 
-    await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
-      body: commands,
-    });
+    if (this.guildId) {
+      await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
+        body: commands,
+      });
+    }
+
+    this.app.put(Routes.applicationCommands(this.clientId), { body: commands });
 
     for (const command of commands) {
       this.commands.set(command.name, command);

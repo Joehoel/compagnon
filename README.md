@@ -24,6 +24,19 @@ Add environment variables
 cp .env.example .env
 ```
 
+Fill in the variables
+
+```env
+<!-- Required! -->
+TOKEN=
+CLIENT_ID=
+DATABASE_URL=
+
+<!-- Not required -->
+GUILD_ID=
+GIPHY_API_KEY=
+```
+
 Generate the prisma client
 
 ```bash

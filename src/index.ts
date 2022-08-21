@@ -8,7 +8,6 @@ export const bot = new Bot({
   token: TOKEN,
   clientId: CLIENT_ID,
   guildId: GUILD_ID,
-  prefix: process.env.PREFIX,
   intents: [
     Intents.FLAGS.DIRECT_MESSAGES,
     Intents.FLAGS.GUILDS,

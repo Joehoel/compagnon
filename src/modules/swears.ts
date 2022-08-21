@@ -3,15 +3,13 @@ import { db } from "@/lib/db";
 import Filter from "bad-words";
 import { readFileSync } from "node:fs";
 
-const { PREFIX } = process.env;
-
 export default new Module({
   name: "swears",
   event: "messageCreate",
   async run(client, message) {
     if (message.channel.type == "DM") return;
+    if (message.author.bot) return;
 
-    if (message.content.startsWith(PREFIX) || message.author.bot) return;
     const text = message.content.toLowerCase();
 
     const filter = new Filter();
@@ -30,18 +28,31 @@ export default new Module({
 
     filter.removeWords("lol", "hoe", "hoor", "kunt", "hardcore", "kaas");
     if (filter.isProfane(text)) {
-      const user = message.author.toString();
+      const guildId = message.guild?.id;
+
+      if (!guildId) {
+        console.error("Could't find 'guildId' for message.");
+
+        return;
+      }
       // client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
 
-      const swear = await db.swears.findFirst({ where: { discordId: message.author.id } });
+      const swear = await db.swears.findFirst({
+        where: { discordId: message.author.id, guildId },
+      });
       if (swear) {
         await db.swears.update({
-          where: { discordId: message.author.id },
+          where: {
+            discordId_guildId: {
+              discordId: message.author.id,
+              guildId,
+            },
+          },
           data: { count: swear.count + 1 },
         });
       } else {
         await db.swears.create({
-          data: { discordId: message.author.id, count: 1 },
+          data: { discordId: message.author.id, guildId, count: 1 },
         });
       }
 

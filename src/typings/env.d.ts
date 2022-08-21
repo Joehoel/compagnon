@@ -5,7 +5,6 @@ declare global {
       CLIENT_ID: string;
       GUILD_ID: string;
       DATABASE_URL: string;
-      PREFIX: string;
       GIPHY_API_KEY: string;
     }
   }
