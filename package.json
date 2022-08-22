@@ -32,6 +32,7 @@
     "discord-api-types": "^0.36.2",
     "discord-player": "^5.2.2",
     "discord.js": "^13.8.1",
-    "ffmpeg-static": "^5.0.2"
+    "ffmpeg-static": "^5.0.2",
+    "magic-regexp": "^0.4.1"
   }
 }

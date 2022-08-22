@@ -75,7 +75,7 @@ export default class Bot extends Client {
     const commands = await read<Command>(join("src", dir));
 
     if (this.guildId) {
-      await this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
+      this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
         body: commands,
       });
     }
