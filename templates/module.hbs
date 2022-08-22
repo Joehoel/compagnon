@@ -1,0 +1,11 @@
+import Module from "../lib/Module";
+
+export default new Module({
+    name: "{{name}}",
+    event: "{{event}}",
+    async run(client, message) {
+        console.log("{{name}} on {{event}}");
+
+        return;
+    },
+});
