@@ -1,13 +1,19 @@
 import { capitalize, Module } from "@/lib";
+import DetectLanguage from "detectlanguage";
 
-const { PREFIX } = process.env;
+const d = new DetectLanguage(process.env.DETECT_LANGUAGE_API_KEY);
 
 export default new Module({
   name: "i-hardly-know-her",
   event: "messageCreate",
   async run(_, message) {
     if (message.channel.type == "DM") return;
-    if (message.content.startsWith(PREFIX) || message.author.bot) return;
+    if (message.author.bot) return;
+
+    const results = await d.detect(message.content);
+    const result = results.find((r) => r.isReliable);
+
+    if (result?.language !== "en" || !result) return;
 
     const text = message.content.toLowerCase();
 
