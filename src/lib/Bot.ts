@@ -22,9 +22,9 @@ export default class Bot extends Client {
   private commandsFolder: string;
   private modulesFolder: string;
 
-  private app = new REST({ version: "9" });
+  public player: Player;
 
-  public player = new Player(this);
+  private app = new REST({ version: "9" });
 
   private clientId: string;
   private guildId?: string;
@@ -33,6 +33,7 @@ export default class Bot extends Client {
     token,
     commandsFolder,
     modulesFolder,
+    player,
     clientId,
     guildId,
     ...options
@@ -40,6 +41,7 @@ export default class Bot extends Client {
     token: string;
     commandsFolder?: string;
     modulesFolder?: string;
+    player?: (player: Player) => void;
     clientId: string;
     guildId?: string;
   }) {
@@ -53,6 +55,12 @@ export default class Bot extends Client {
     this.modulesFolder = modulesFolder ?? "modules";
 
     this.app.setToken(token);
+
+    this.player = new Player(this);
+
+    if (player) {
+      player(this.player);
+    }
 
     try {
       Promise.allSettled([

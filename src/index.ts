@@ -1,6 +1,7 @@
 import { Intents } from "discord.js";
 import { Bot } from "./lib";
 import "dotenv/config";
+import player from "./lib/music-player";
 
 const { TOKEN, GUILD_ID, CLIENT_ID } = process.env;
 
@@ -8,6 +9,7 @@ export const bot = new Bot({
   token: TOKEN,
   clientId: CLIENT_ID,
   guildId: GUILD_ID,
+  player,
   intents: [
     Intents.FLAGS.DIRECT_MESSAGES,
     Intents.FLAGS.GUILDS,
