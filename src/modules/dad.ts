@@ -1,22 +1,10 @@
 import { capitalize, Module } from "@/lib";
-import assert from "assert";
-import {
-  anyOf,
-  caseInsensitive,
-  char,
-  createRegExp,
-  exactly,
-  global,
-  oneOrMore,
-  word,
-  wordBoundary,
-  wordChar,
-} from "magic-regexp";
+import { caseInsensitive, char, createRegExp, exactly, global, oneOrMore } from "magic-regexp";
 
 export default new Module({
   name: "dad",
   event: "messageCreate",
-  async run(client, message) {
+  async run(_, message) {
     if (message.channel.type == "DM" || message.author.bot) return;
 
     // a message contains "ik ben" and return the part after "ik ben" regex
