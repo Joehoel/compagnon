@@ -9,18 +9,17 @@ export default new Module({
   async run(_, message) {
     if (message.channel.type == "DM") return;
     if (message.author.bot) return;
-
-    const results = await detect(message.content);
-    const result = results.find((r) => r.isReliable);
-
-    if (result?.language !== "en" || !result) return;
-
     const text = message.content.toLowerCase();
 
     const words = text.split(" ");
     const word = words.find((word) => word.endsWith("er"));
 
     if (!word) return;
+
+    const results = await detect(message.content);
+    const result = results.find((r) => r.isReliable);
+
+    if (result?.language !== "en" || !result) return;
 
     if (word.length >= 4) {
       // Comedy is dead
