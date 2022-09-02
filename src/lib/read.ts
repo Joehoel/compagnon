@@ -1,44 +1,37 @@
-import fs from "fs";
-import { join } from "path";
-import { ROOT } from "./constants";
-import logger from "./logger";
+import { lstat, readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 /**
  * Given a directory read all the files in that directory and give them the correct type
  *
  * @export
  * @template T Class that all files are an instance of
- * @param {string} dir Directory relative to 'utils/read.ts'
+ * @param {string} dir absolute path to the directory
  * @return {Promise<T[]>} Array of instances of T read from the given directory
  */
 export async function read<T>(dir: string): Promise<T[]> {
-    // console.log(`Loading commands \`${dir}\``);
+  const commands: T[] = [];
 
-    const commands: T[] = [];
+  const files = await readdir(dir);
 
-    const files = fs.readdirSync(join(process.cwd(), ROOT, dir));
+  for (const file of files) {
+    const stat = await lstat(join(dir, file));
 
-    for (const file of files) {
-        const stat = fs.lstatSync(join(process.cwd(), ROOT, dir, file));
+    if (stat.isDirectory()) {
+      const nestedCommands = await read<T>(join(dir, file));
 
-        if (stat.isDirectory()) {
-            const nestedCommands = await read<T>(join(dir, file));
+      commands.push(...nestedCommands);
+    } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
+      try {
+        const location = pathToFileURL(join(dir, file)).href;
 
-            commands.push(...nestedCommands);
-        } else if (file !== "index.ts" && file !== "index.js" && !file.endsWith(".map")) {
-            // console.log(`Importing command ${join(__dirname, dir, file)}`);
-            try {
-                const command: T = await import(join(process.cwd(), ROOT, dir, file)).then(
-                    (value) => value.default
-                );
-                // table.addRow(file, "✅");
-                commands.push(command);
-            } catch (error) {
-                logger.error(error);
-                // table.addRow(file, `❌ - ${error}`);
-            }
-        }
+        const command = await import(`${location}`).then((m) => m.default);
+        commands.push(command);
+      } catch (error) {
+        console.error(error);
+      }
     }
-    // console.log(table.toString());
-    return commands;
+  }
+  return commands;
 }

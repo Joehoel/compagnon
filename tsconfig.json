@@ -1,31 +1,23 @@
 {
-    "compilerOptions": {
-        "module": "CommonJS",
-        "lib": ["ESNext"],
-        "target": "ES2015",
-        "sourceMap": true,
-        "outDir": "dist",
-        "baseUrl": "src",
-        "rootDir": "src",
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "alwaysStrict": true,
-        "strictFunctionTypes": true,
-        "downlevelIteration": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "typeRoots": ["./src/typings", "node_modules/@types"],
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "resolveJsonModule": true,
-        "paths": {
-            "@helpers": ["./lib/helpers.ts"],
-            "@constants": ["./lib/constants.ts"],
-            "@structures/*": ["./structures/*"]
-        }
-    },
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "esnext",
+    "target": "esnext",
+    "strictNullChecks": true,
+    "alwaysStrict": true,
+    "strictFunctionTypes": true,
+    "downlevelIteration": true,
+    "strict": true,
+    "typeRoots": ["./src/typings", "node_modules/@types"],
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "outDir": "./dist",
+    "importHelpers": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules"]
 }

@@ -1,28 +1,24 @@
-import { CHANNELS } from "../lib/constants";
-import Module from "../structures/Module";
-
-const { PREFIX } = process.env;
+import { capitalize, Module } from "@/lib";
+import { caseInsensitive, char, createRegExp, exactly, global, oneOrMore } from "magic-regexp";
 
 export default new Module({
-    name: "dad",
-    event: "messageCreate",
-    async run(client, message) {
-        if (message.channel.type == "DM" || message.channel.id === CHANNELS.ANTWOORDEN) return;
-        const prefix = client.config.get(message.guild!.id)?.prefix || PREFIX;
+  name: "dad",
+  event: "messageCreate",
+  async run(_, message) {
+    if (message.channel.type == "DM" || message.author.bot) return;
 
-        if (message.content.startsWith(prefix) || message.author.bot) return;
-        const text = message.content.toLowerCase();
+    // a message contains "ik ben" and return the part after "ik ben" regex
+    const regex = createRegExp(exactly("ik ben ").before(oneOrMore(char).as("sentence")), [
+      caseInsensitive,
+      global,
+    ]);
 
-        const tests = ["ik ben", "i am"];
-        const regex = new RegExp(`${tests.join("|")}`, "gi");
-        const match = text.match(regex);
+    const sentence = regex.exec(message.content)?.at(-1);
 
-        if (match) {
-            const words = text.split(" ");
-            const index = words.indexOf(match[match.length - 1].split(" ")[1]) + 1;
-            const name = words.slice(index).join(" ");
+    if (sentence) {
+      message.reply(`Hallo ${capitalize(sentence)}, ik ben Compagnon :wave:`);
 
-            return message.reply(`Hallo ${name}, ik ben compagnon :wave:`);
-        }
-    },
+      return;
+    }
+  },
 });

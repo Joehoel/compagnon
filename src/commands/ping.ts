@@ -1,24 +1,27 @@
-import { embed } from "../lib/helpers";
-import Command from "../structures/Command";
+import { Command } from "@/lib";
+import { Message, MessageEmbed } from "discord.js";
 
 export default new Command({
-    name: "ping",
-    description: "Pong!",
-    async execute(_, message) {
-        const send = embed({
-            description: `**Pong!**`,
-        });
+  name: "ping",
+  description: "Pong!!!",
+  async execute(client, interaction) {
+    const message = (await interaction.reply({
+      embeds: [
+        new MessageEmbed({
+          description: `**Pong!**`,
+        }),
+      ],
+      fetchReply: true,
+    })) as Message;
 
-        return message.channel.send({ embeds: [send] }).then((m) => {
-            const ping = m.createdTimestamp - message.createdTimestamp;
-            m.edit({
-                embeds: [
-                    embed({
-                        description: `**Pong!** \`${ping}ms\``,
-                    }),
-                ],
-            });
-        });
-    },
+    const ping = message.createdTimestamp - interaction.createdTimestamp!;
+
+    await message.edit({
+      embeds: [
+        new MessageEmbed({
+          description: `**Pong!** \`${ping}ms\``,
+        }),
+      ],
+    });
+  },
 });
-// Command that send a random cat picture from the internet to the user

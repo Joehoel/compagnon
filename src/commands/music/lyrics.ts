@@ -1,42 +1,37 @@
-import Command from "../../structures/Command";
-import { embed } from "../../lib/helpers";
-import { init } from "../../lib/lyrics";
-
-const { GENIUS_TOKEN } = process.env;
+import { Command } from "@/lib";
+import { lyricsClient } from "@/lib/lyrics";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
+import { MessageEmbed } from "discord.js";
 
 export default new Command({
-    name: "lyrics",
-    description: "Search for the song lyrics",
-    usage: "<song - artist>",
-    exclusive: true,
-    async execute(client, message, args) {
-        const { search } = init(GENIUS_TOKEN);
-        let song = "";
-        const queue = client.music.getQueue(message);
-
-        if (queue?.songs) {
-            song = queue.songs[0].name!;
-        }
-
-        if (args.length >= 1) {
-            song = args.join(" ").toLowerCase();
-        } else if (song.includes("(")) {
-            song = song.split("(")[0];
-        }
-
-        const { lyrics, title, artist, thumbnail, url } = await search(song);
-
-        if (lyrics?.trim().length) {
-            return await message.channel.send({
-                embeds: [
-                    embed({
-                        title: `${title} - ${artist.name}`,
-                        description: lyrics,
-                        thumbnail: { url: thumbnail },
-                        url,
-                    }),
-                ],
-            });
-        }
+  name: "lyrics",
+  description: "Get the lyrics of a song",
+  options: [
+    {
+      name: "query",
+      type: ApplicationCommandOptionType.String,
+      description: "The song you want to get the lyrics of",
+      required: true,
     },
+  ],
+
+  async execute({ player }, interaction) {
+    const query = interaction.options.getString("query")!;
+    const { lyrics, title, artist, image, thumbnail, url } = await lyricsClient.search(query);
+    if (!lyrics) {
+      return await interaction.reply({
+        content: "Could not find any lyrics for that song!",
+        ephemeral: true,
+      });
+    }
+
+    const embed = new MessageEmbed({
+      title: `${title} - ${artist.name}`,
+      description: lyrics,
+      thumbnail: { url: image },
+      url,
+    });
+
+    await interaction.reply({ embeds: [embed] });
+  },
 });

@@ -1,25 +1,20 @@
-import logger from "../lib/logger";
-import Module from "../structures/Module";
+import { Module } from "@/lib";
 
 export default new Module({
-    name: "interaction",
-    event: "interactionCreate",
-    async run(_, interaction) {
-        // if (interaction.isButton()) {
-        //     return console.log(interaction.customId);
-        // }
+  name: "interaction",
+  event: "interactionCreate",
+  async run(client, interaction) {
+    if (!interaction.isCommand()) return;
 
-        if (!interaction.isCommand()) return;
+    const command = client.commands.get(interaction.commandName);
 
-        const command = interaction.client.slashCommands.get(interaction.commandName);
-
-        try {
-            command?.execute(interaction);
-        } catch (error) {
-            logger.error(error);
-        } finally {
-            const author = interaction.user;
-            logger.info(`${author.tag} (${author.id}) ran a (/) command: '${command?.name}'`);
-        }
-    },
+    try {
+      await command?.execute(client, interaction);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      const author = interaction.user;
+      console.info(`${author.tag} (${author.id}) ran a (/) command: '${command?.name}'`);
+    }
+  },
 });
