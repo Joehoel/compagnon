@@ -1,7 +1,7 @@
 import { capitalize, Module } from "@/lib";
 import DetectLanguage from "detectlanguage";
 
-const { detect } = new DetectLanguage(process.env.DETECT_LANGUAGE_API_KEY);
+const dl = new DetectLanguage(process.env.DETECT_LANGUAGE_API_KEY);
 
 export default new Module({
   name: "i-hardly-know-her",
@@ -15,7 +15,7 @@ export default new Module({
 
     if (!word) return;
 
-    const results = await detect(message.content);
+    const results = await dl.detect(message.content);
     const result = results.find((r) => r.isReliable);
 
     if (result?.language !== "en" || !result) return;
