@@ -7,8 +7,7 @@ export default new Module({
   name: "i-hardly-know-her",
   event: "messageCreate",
   async run(_, message) {
-    if (message.channel.type == "DM") return;
-    if (message.author.bot) return;
+    if (message.channel.type == "DM" || message.author.bot) return;
     const text = message.content.toLowerCase();
 
     const words = text.split(" ");
