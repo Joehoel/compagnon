@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import fetch from "node-fetch";
 
 export const here = (...p: string[]) => join(__dirname, ...p);
 
@@ -26,7 +27,7 @@ export async function gif(tag: string): Promise<string> {
   });
 
   const res = await fetch(`${api}${params}`);
-  const { data } = await res.json();
+  const { data } = (await res.json()) as { data: { url: string } };
   const { url } = data;
 
   return url;

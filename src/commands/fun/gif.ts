@@ -15,6 +15,7 @@ export default new Command({
   async execute(_, interaction) {
     const tag = interaction.options.getString("tag")!;
     const url = await gif(tag);
-    interaction.reply(url);
+    interaction.reply({ content: url, ephemeral: false });
+    return;
   },
 });
