@@ -1,8 +1,8 @@
 import { Command } from "@/lib";
 import { db } from "@/lib/db";
-import { Swears } from "@prisma/client";
 import { ApplicationCommandOptionType } from "discord-api-types/v9";
 import { MessageEmbed } from "discord.js";
+import invariant from "tiny-invariant";
 
 export default new Command({
   name: "swears",
@@ -12,7 +12,13 @@ export default new Command({
   ],
   async execute(_, interaction) {
     const user = interaction.options.getUser("user") || interaction.user;
-    const swear = await db.swears.findFirst({ where: { discordId: user.id } });
+    const guildId = interaction.guildId;
+
+    invariant(guildId, "Could't find 'guildId' for message.");
+
+    const swear = await db.swears.findFirst({
+      where: { discordId: user.id, guildId },
+    });
 
     if (!swear) {
       return interaction.reply(`${user.username} has no swear count`);
