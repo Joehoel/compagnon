@@ -25,6 +25,7 @@ specifiers:
   tiny-invariant: ^1.2.0
   tsx: ^3.8.0
   typescript: ^4.7.4
+  uwuifier: ^4.0.5
 
 dependencies:
   '@discord-player/extractor': 3.0.2
@@ -44,6 +45,7 @@ dependencies:
   node-fetch: 3.2.10
   plop: 3.1.1
   tiny-invariant: 1.2.0
+  uwuifier: 4.0.5
 
 devDependencies:
   '@types/bad-words': 3.0.1
@@ -3047,6 +3049,10 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: false
+
+  /uwuifier/4.0.5:
+    resolution: {integrity: sha512-aY94c/5dRXEpJb12H/8DeLbCFfkIjqkLLJz0Ogj46WXsVkvq+CYUmCxs3S4sJGtb78cI8x/PQN6ZXe4QApcIYw==}
     dev: false
 
   /v8flags/4.0.0:
