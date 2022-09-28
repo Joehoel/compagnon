@@ -17,7 +17,7 @@ export default class Command {
   public readonly name: string;
   public readonly description: string;
   public readonly options: Option[];
-  public execute: (client: Bot, interaction: CommandInteraction) => Promise<void>;
+  public execute: (client: Bot, interaction: CommandInteraction) => Promise<void> | void;
   constructor({
     name,
     description,
@@ -27,7 +27,7 @@ export default class Command {
     name: string;
     description: string;
     options?: Option[];
-    execute: (client: Bot, interaction: CommandInteraction) => Promise<void>;
+    execute: (client: Bot, interaction: CommandInteraction) => Promise<void> | void;
   }) {
     this.name = name;
     this.description = description;
