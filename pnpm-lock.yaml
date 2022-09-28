@@ -8,6 +8,7 @@ specifiers:
   '@prisma/client': ^4.2.1
   '@types/bad-words': ^3.0.1
   '@types/node': ^18.7.6
+  axios: ^0.27.2
   bad-words: ^3.0.4
   chalk: ^5.0.1
   date-fns: ^2.29.1
@@ -33,6 +34,7 @@ dependencies:
   '@discordjs/rest': 0.5.0
   '@jbreeze/spongebobify': 1.0.1
   '@prisma/client': 4.2.1_prisma@4.2.1
+  axios: 0.27.2
   bad-words: 3.0.4
   chalk: 5.0.1
   date-fns: 2.29.1
@@ -476,6 +478,15 @@ packages:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
       follow-redirects: 1.15.1
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.1
+      form-data: 4.0.0
     transitivePeerDependencies:
       - debug
     dev: false
