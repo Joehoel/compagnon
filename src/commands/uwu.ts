@@ -16,6 +16,9 @@ export default new Command({
     },
   ],
   execute(_, interaction) {
-    return interaction.reply(uwu.uwuifySentence(interaction.options.getString("sentence")!));
+    return interaction.reply({
+      content: uwu.uwuifySentence(interaction.options.getString("sentence")!),
+      ephemeral: true,
+    });
   },
 });
