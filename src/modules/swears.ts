@@ -6,13 +6,13 @@ import { readFileSync } from "node:fs";
 export default new Module({
   name: "swears",
   event: "messageCreate",
-  async run(client, message) {
+  async run(_, message) {
     if (message.channel.type == "DM") return;
     if (message.author.bot) return;
 
     const text = message.content.toLowerCase();
 
-    const filter = new Filter();
+    const filter = new Filter({ emptyList: true });
 
     const lists = {
       nl: here("../../data/scheldwoorden-nl.txt"),
@@ -22,11 +22,13 @@ export default new Module({
 
     Object.values(lists).forEach((path) => {
       const file = readFileSync(path, { encoding: "utf-8" });
-      const words = file.split(", ").map((word) => word.toLowerCase().trim());
+      const words = file
+        .trim()
+        .split("\n")
+        .map((word) => word.toLowerCase().trim());
       filter.addWords(...words);
     });
 
-    filter.removeWords("lol", "hoe", "hoor", "kunt", "hardcore", "kaas");
     if (filter.isProfane(text)) {
       const guildId = message.guild?.id;
 
@@ -35,7 +37,6 @@ export default new Module({
 
         return;
       }
-      // client.commands.get("mute")?.execute(client, message, [user, "1", "m"]);
 
       const swear = await db.swears.findFirst({
         where: { discordId: message.author.id, guildId },
