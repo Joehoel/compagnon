@@ -15,6 +15,6 @@ export default new Command({
   ],
   async execute(_, interaction) {
     const text = interaction.options.getString("text")!;
-    return interaction.reply({ ephemeral: true, content: mock()(text) });
+    return interaction.reply({ content: mock()(text) });
   },
 });
