@@ -1,4 +1,4 @@
-<h1><img src="https://cdn.discordapp.com/avatars/568087167637651458/6fa2c24fd871f2c2b18b8794fa9a646f.webp" height="100px"/>Compagnon</h1>
+<h1 style="align-items: center"><img style="border-radius: 100%" src="https://cdn.discordapp.com/avatars/568087167637651458/6fa2c24fd871f2c2b18b8794fa9a646f.webp" height="100px"/>Compagnon</h1>
 
 Discord bot built with Discord.js, Typescript, Node.js, TypeORM and MongoDB. Mainly used in a private server with friends
 
