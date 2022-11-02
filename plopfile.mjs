@@ -29,7 +29,7 @@ export default function (
   plop.setGenerator("module", {
     description: "Bot module",
     prompts: [
-      { type: "input", message: "Event", name: "name" },
+      { type: "input", message: "Name", name: "name" },
       {
         type: "autocomplete",
         message: "Event",
