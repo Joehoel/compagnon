@@ -1,10 +1,6 @@
 import { Command } from "@/lib";
-import {
-  APIInteraction,
-  APIInteractionGuildMember,
-  ApplicationCommandOptionType,
-} from "discord-api-types/v9";
-import { Guild, GuildMember } from "discord.js";
+import { ApplicationCommandOptionType } from "discord-api-types/v9";
+import { GuildMember } from "discord.js";
 
 export default new Command({
   name: "play",
