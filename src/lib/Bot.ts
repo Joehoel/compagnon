@@ -1,14 +1,12 @@
-import { Client, ClientOptions, Collection } from "discord.js";
-import Command from "./Command";
 import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v9";
-import { read } from "./read";
-import Module from "./Module";
-import { Player } from "discord-player";
-import { join, resolve } from "node:path";
-import "discord-player/smoothVolume";
 import chalk from "chalk";
+import { Routes } from "discord-api-types/v9";
+import { Client, ClientOptions, Collection } from "discord.js";
+import { join } from "node:path";
 import { name, version } from "../../package.json";
+import Command from "./Command";
+import Module from "./Module";
+import { read } from "./read";
 
 /**
  * Wrapper around Discord Client that provides automatic loading of commands, slash-commands & events. Support for aliases and has music functionality
@@ -22,8 +20,6 @@ export default class Bot extends Client {
   private commandsFolder: string;
   private modulesFolder: string;
 
-  public player: Player;
-
   private app = new REST({ version: "9" });
 
   private clientId: string;
@@ -33,7 +29,6 @@ export default class Bot extends Client {
     token,
     commandsFolder,
     modulesFolder,
-    player,
     clientId,
     guildId,
     ...options
@@ -41,7 +36,6 @@ export default class Bot extends Client {
     token: string;
     commandsFolder?: string;
     modulesFolder?: string;
-    player?: (player: Player) => void;
     clientId: string;
     guildId?: string;
   }) {
@@ -55,12 +49,6 @@ export default class Bot extends Client {
     this.modulesFolder = modulesFolder ?? "modules";
 
     this.app.setToken(token);
-
-    this.player = new Player(this);
-
-    if (player) {
-      player(this.player);
-    }
 
     try {
       Promise.allSettled([
