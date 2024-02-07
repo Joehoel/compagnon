@@ -3,5 +3,4 @@ export { default as Command } from "./Command";
 export { default as Module } from "./Module";
 export * from "./db";
 export * from "./helpers";
-export * from "./lyrics";
 export * from "./read";

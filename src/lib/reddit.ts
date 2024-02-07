@@ -1,4 +1,3 @@
-import { RedditResponse } from "@/typings";
 import axios from "axios";
 
 interface RedditPost {
@@ -17,9 +16,9 @@ export class Reddit {
   public async getHot() {
     const url = `https://www.reddit.com/r/${this.sub}/hot.json?`;
 
-    const { data: response } = await axios.get<RedditResponse>(url);
+    const { data: response } = await axios.get(url);
 
-    const data = response.data.children.map(({ data }) => {
+    const data = response.data.children.map(({ data }: any) => {
       return {
         id: data.id,
         title: data.title,
