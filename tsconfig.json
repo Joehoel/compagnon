@@ -1,20 +1,14 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "module": "esnext",
-    "target": "esnext",
+    "moduleResolution": "Bundler",
+    "module": "ESNext",
+    "target": "ESNext",
     "strictNullChecks": true,
     "alwaysStrict": true,
-    "strictFunctionTypes": true,
-    "downlevelIteration": true,
     "strict": true,
     "typeRoots": ["./src/typings", "node_modules/@types"],
-    "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
     "outDir": "./dist",
-    "importHelpers": true,
     "paths": {
       "@/*": ["./src/*"]
     }

@@ -1,6 +1,8 @@
 import { join } from "node:path";
 import fetch from "node-fetch";
 
+const __dirname = new URL(".", import.meta.url).pathname;
+
 export const here = (...p: string[]) => join(__dirname, ...p);
 
 /**

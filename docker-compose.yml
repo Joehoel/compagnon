@@ -4,16 +4,15 @@ version: "3.1"
 
 services:
   database:
-    image: mysql
-    container_name: mysql
+    image: postgres:16.1-alpine
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USER}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     ports:
-      - "${DATABASE_PORT}:3306"
+      - "${DATABASE_PORT}:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
 volumes:
-  mysql_data:
+  postgres-data:
