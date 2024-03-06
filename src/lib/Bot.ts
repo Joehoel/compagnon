@@ -23,27 +23,23 @@ export default class Bot extends Client {
   private app = new REST({ version: "9" });
 
   private clientId: string;
-  private guildId?: string;
 
   constructor({
     token,
     commandsFolder,
     modulesFolder,
     clientId,
-    guildId,
     ...options
   }: ClientOptions & {
     token: string;
     commandsFolder?: string;
     modulesFolder?: string;
     clientId: string;
-    guildId?: string;
   }) {
     super(options);
 
     this.token = token;
     this.clientId = clientId;
-    this.guildId = guildId;
 
     this.commandsFolder = commandsFolder ?? "commands";
     this.modulesFolder = modulesFolder ?? "modules";
