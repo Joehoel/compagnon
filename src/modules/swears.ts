@@ -1,5 +1,4 @@
 import { here, Module } from "@/lib";
-import { db } from "@/lib/db";
 import Filter from "bad-words";
 import { readFileSync } from "node:fs";
 
@@ -38,24 +37,24 @@ export default new Module({
         return;
       }
 
-      const swear = await db.swears.findFirst({
-        where: { discordId: message.author.id, guildId },
-      });
-      if (swear) {
-        await db.swears.update({
-          where: {
-            discordId_guildId: {
-              discordId: message.author.id,
-              guildId,
-            },
-          },
-          data: { count: swear.count + 1 },
-        });
-      } else {
-        await db.swears.create({
-          data: { discordId: message.author.id, guildId, count: 1 },
-        });
-      }
+      // const swear = await db.swears.findFirst({
+      //   where: { discordId: message.author.id, guildId },
+      // });
+      // if (swear) {
+      //   await db.swears.update({
+      //     where: {
+      //       discordId_guildId: {
+      //         discordId: message.author.id,
+      //         guildId,
+      //       },
+      //     },
+      //     data: { count: swear.count + 1 },
+      //   });
+      // } else {
+      //   await db.swears.create({
+      //     data: { discordId: message.author.id, guildId, count: 1 },
+      //   });
+      // }
 
       return message.reply("Ga je mond wassen! 🧼");
     }
