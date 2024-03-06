@@ -70,11 +70,11 @@ export default class Bot extends Client {
   private async registerCommands(dir: string) {
     const commands = await read<Command>(join("src", dir));
 
-    if (this.guildId) {
-      this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
-        body: commands,
-      });
-    }
+    // if (this.guildId) {
+    //   this.app.put(Routes.applicationGuildCommands(this.clientId, this.guildId), {
+    //     body: commands,
+    //   });
+    // }
 
     this.app.put(Routes.applicationCommands(this.clientId), { body: commands });
 
